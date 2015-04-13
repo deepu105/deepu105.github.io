@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
   <meta charset="UTF-8">
   <title>Angular-Clock</title>
@@ -9,6 +10,7 @@
   <link href="bootstrap.css" rel="stylesheet">
   <link href="app.css" rel="stylesheet">
 </head>
+
 <body ng-app="examples" id="top">
   <div class="navbar navbar-default navbar-fixed-top">
     <div class="container" ng-controller="MenuCtrl">
@@ -28,40 +30,50 @@
               Angular Clock
             </a>
           </li>
-          <li class="dropdown">
+          <!--<li class="dropdown">
             <a role="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
               Directives <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li ng-repeat="chart in charts"><a ng-href="#{{chart | lowercase }}-chart">{{chart}}</a></li>
+              <li><a ng-href="#widget-clock">ds-widget-clock</a>
+              </li>
             </ul>
+          </li>-->
+          <li><a href="#getting_started">Getting started</a>
           </li>
-          <li><a href="#getting_started">Getting started</a></li>
-          <li><a href="#reactive">Reactive</a></li>
+          <li><a href="#directive">Directive</a>
+          </li>
+          <li><a href="#style">Styling</a>
+          </li>
         </ul>
       </nav>
       <nav class="collapse" collapse="isCollapsed" style="height: 0px;">
         <ul class="nav navbar-nav">
-          <li><a href="#getting_started" ng-click="isCollapsed = !isCollapsed">Getting started</a></li>
-          <li><a href="#directives" ng-click="isCollapsed = !isCollapsed">Directives</a></li>
+          <li><a href="#getting_started" ng-click="isCollapsed = !isCollapsed">Getting started</a>
+          </li>
+          <li><a href="#directive" ng-click="isCollapsed = !isCollapsed">Directives</a>
+          </li>
         </ul>
       </nav>
     </div>
   </div>
   <div class="container-fluid">
-    <div class="text-center aspect-ratio" id="container" ng-controller="TicksCtrl">
-      <canvas width='1200' height='300' id="hero-bar" class="chart chart-line chart-xl" data="data" options="options" labels="labels"></canvas>
+    <div class="text-center aspect-ratio" id="container" ng-controller="HeadCtrl">
+      <div style="width:200px;margin:0 auto;">
+        <ds-widget-clock theme="dark" show-secs="true" show-am-pm></ds-widget-clock>
+      </div>
       <div class="header">
         <h1>
-          Angular Chart
+          Angular Clock Widget
         </h1>
 
-        <p>Reactive, responsive, beautiful charts for <a href="http://angularjs.org">AngularJS</a> based on <a href="http://www.chartjs.org">Chart.js</a></p>
+        <p>Responsive, beautiful clocks for <a href="http://angularjs.org">AngularJS</a> built using <a href="https://developer.mozilla.org/en/docs/Web/SVG">SVG</a>
+        </p>
 
         <p>
-          <a class="btn btn-default btn-lg" href="https://github.com/jtblin/angular-chart"><i class="icon-github"></i>Code on Github</a>
-          <a class="btn btn-success btn-lg" href="../dist/angular-chart.js.tar.gz" download="angular-chart.js.tar.gz">
-            <i class="fa fa-download"></i> Download <small>(0.6.0)</small>
+          <a class="btn btn-default btn-lg" href="https://github.com/deepu105/angular-clock"><i class="icon-github"></i>Code on Github</a>
+          <a class="btn btn-success btn-lg" href="../dist/angular-clock.js.tar.gz" download="angular-clock.js.tar.gz">
+            <i class="fa fa-download"></i> Download <small>(0.1.0)</small>
           </a>
         </p>
       </div>
@@ -74,41 +86,36 @@
       </div>
       <h3>Dependencies</h3>
       <p>
-        This repository contains a set of <strong>native AngularJS directives</strong> for Chart.js. The <strong>only required dependencies</strong> are:
+        This repository contains <strong>native AngularJS directives</strong> to render a clock face. The <strong>only required dependencies</strong> are:
       </p>
       <ul>
-        <li><a href="http://angularjs.org" target="_blank">AngularJS</a> (tested with 1.2.20 and 1.3.10 although it probably works with older versions)</li>
-        <li><a href="http://chartjs.org" target="_blank">Chart.js</a> (requires Chart.js 1.0, tested with version 1.0.1-beta.2, 1.0.1-beta.4, and and 1.0.1).</li>
+        <li><a href="http://angularjs.org" target="_blank">AngularJS</a> (tested with 1.3.14 although it probably works with older versions)</li>
       </ul>
       <h3>Files to download</h3>
-      <p>
-        The easiest is to download with <strong>bower</strong>:
-        <pre>bower install angular-chart.js --save</pre>
-        Alternatively files can be downloaded <a href="https://github.com/jtblin/angular-chart.js">downloaded from Github</a>.
+      <p>The easiest is to download with <strong>bower</strong>:</p>
+      <pre>bower install angular-ui-clock --save </pre>
+      <p>Alternatively files can be downloaded <a href="https://github.com/deepu105/angular-clock">downloaded from Github</a>.
       </p>
-      <p>Whichever method you choose the good news is that the overall size is very small:
-        &lt;5kb for all directives (~1kb with gzip compression!)</p>
+      <p>Whichever method you choose the good news is that the overall size is very small: &lt;4kb for all directives (~1kb with gzip compression!)</p>
       <h3>Installation</h3>
-      </p><pre><code>&lt;script src=&quot;bower_components/dist/angular-chart.js&quot;&gt;&lt;/script&gt;</code></pre>
-      <p>As soon as you've got all the files downloaded and included in your page you just need to declare
-        a dependency on the <code>chart.js</code> <a href="http://docs.angularjs.org/guide/module">module</a>:<br>
-      </p><pre><code>angular.module('myModule', ['chart.js']);</code></pre>
+      <pre><code>&lt;script src=&quot;bower_components/dist/angular-clock.js&quot;&gt;&lt;/script&gt;</code></pre>
+      <p>As soon as you've got all the files downloaded and included in your page you just need to declare a dependency on the <code>ds.clock</code>  <a href="http://docs.angularjs.org/guide/module">module</a>:
+        <br>
+      </p><pre><code>angular.module('myModule', ['ds.clock']);</code></pre>
       <p></p>
       <h3>CSS</h3>
       <p>You need to include a link to the css file in your page.</p>
-      </p><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/dist/angular-chart.css&quot;&gt;</code></pre>
-      <p></p>
-      <h3>Colours</h3>
-      <p>Series have beautiful pre-sets colours (to a maximum of 7 series, after that colours will be randomly generated).
-        They can be overwritten using <code>Chart.defaults.global.colours</code>.</p>
+      <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/dist/angular-clock.css&quot;&gt;</code></pre>
+      <h3>Options</h3>
+      <p>There are several options that you can set as attributes on the directive element</p>
       <ol class="chart-legend">
-        <li><span style="background-color: rgba(151,187,205,1)"></span> Blue</li>
-        <li><span style="background-color: rgba(220,220,220,1)"></span>Light grey</li>
-        <li><span style="background-color: rgba(247,70,74,1)"></span>Red</li>
-        <li><span style="background-color: rgba(70,191,189,1)"></span>Green</li>
-        <li><span style="background-color: rgba(253,180,92,1)"></span>Yellow</li>
-        <li><span style="background-color: rgba(148,159,177,1)"></span>Grey</li>
-        <li><span style="background-color: rgba(77,83,96,1)"></span>Dark Grey</li>
+        <li><code>show-secs</code> : shows second in digital clock, (default: <code>true</code>)</li>
+        <li><code>show-am-pm</code> : shows am/pm in digital clock, (default: <code>false</code>)</li>
+        <li><code>gmt-offset</code> : shows time for the given <a href="http://en.wikipedia.org/wiki/List_of_UTC_time_offsets">GMT offset</a> in clock, (default: <code>false</code>, shows local time) example: India -> 5.30, Singapore -> 8 , venezula -> -4.30, Nepal -> 5.45</li>
+        <li><code>show-digital</code>: shows digital clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
+        <li><code>show-analog</code> : shows analog clock, (default: <code>true</code> if both show-analog &amp;show-digital are not set)</li>
+        <li><code>show-gmt-info</code> : shows GMT offset value, (default: <code>false</code>)</li>
+        <li><code>theme</code> : analog clockface theme, (default: <code>light</code>)</li>
       </ol>
     </section>
     <section id="directives">
@@ -116,16 +123,116 @@
         <h1>Directives</h1>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="LineCtrl">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
           <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
-            <div class="panel-body">
-              <canvas id="line" class="chart chart-line chart-xl" data="data" labels="labels" legend="true"
-                      click="onClick" series="series"></canvas>
+            <div class="panel-heading">Default Clock</div>
+            <div class="panel-body text-center">
+              <div class="">
+                <ds-widget-clock></ds-widget-clock>
+              </div>
+
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12 code">
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
+          <tabset>
+            <tab heading="Markup">
+              <pre><code data-language="xml">&lt;ds-widget-clock&gt;&lt;/ds-widget-clock&gt;</code></pre>
+            </tab>
+            <tab heading="Javascript">
+              <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Clock with Timezone Offset</div>
+            <div class="panel-body text-center">
+              <div>
+                <label>GMT Offset <small>In HH.MM format</small>
+                </label>
+                <select class="form-control" ng-model="gmtValue" placeholder="Select GMT offset value here">
+                  <option value="-12.00">−12.00</option>
+                  <option value="-11.00">−11.00</option>
+                  <option value="-10.00">−10.00</option>
+                  <option value="-9.30">−09.30</option>
+                  <option value="-9">−09.00</option>
+                  <option value="-8">−08.00</option>
+                  <option value="-7">−07.00</option>
+                  <option value="-6">−06.00</option>
+                  <option value="-5">−05.00</option>
+                  <option value="-4.3">−04.30</option>
+                  <option value="-4">−04.00</option>
+                  <option value="-3.3">−03.30</option>
+                  <option value="-3">−03.00</option>
+                  <option value="-2">−02.00</option>
+                  <option value='-1'>−01.00</option>
+                  <option value="0">GMT (00.00)</option>
+                  <option value="1">+01.00</option>
+                  <option value="2">+02.00</option>
+                  <option value="3">+03.00</option>
+                  <option value="3.30">+03.30</option>
+                  <option value="4">+04.00</option>
+                  <option value="4.30">+04.30</option>
+                  <option value="5">+05.00</option>
+                  <option value="5.30">+05.30</option>
+                  <option value="5.45">+05.45</option>
+                  <option value="6.00">+06.00</option>
+                  <option value="6.30">+06.30</option>
+                  <option value="7">+07.00</option>
+                  <option value="8">+08.00</option>
+                  <option value="8.45">+08.45</option>
+                  <option value="9">+09.00</option>
+                  <option value="9.30">+09.30</option>
+                  <option value="10">+10.00</option>
+                  <option value="10.30">+10.30</option>
+                  <option value="11">+11.00</option>
+                  <option value="11.30">+11.30</option>
+                  <option value="12">+12.00</option>
+                  <option value="12.45">+12.45</option>
+                  <option value="13">+13.00</option>
+                  <option value="14">+14.00</option>
+                </select>
+              </div>
+              <div class="">
+                <ds-widget-clock gmt-offset="gmtValue" show-gmt-info></ds-widget-clock>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
+          <tabset>
+            <tab heading="Markup">
+              <pre><code data-language="xml">&lt;ds-widget-clock&gt;&lt;/ds-widget-clock&gt;</code></pre>
+            </tab>
+            <tab heading="Javascript">
+              <pre><code data-language="javascript">angular.module("app", ["ds.clock"]).controller("AppCtrl", function ($scope) {
+
+});
+              </code></pre>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12" id="line-chart" ng-controller="BaseCtrl">
+          <div class="panel panel-default">
+            <div class="panel-heading">Default Clock</div>
+            <div class="panel-body text-center">
+              <div class="">
+                <ds-widget-clock data-theme="dark" data-gmt-offset="8.5" data-show-gmt-info data-show-secs data-show-am-pm></ds-widget-clock>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 code">
           <tabset>
             <tab heading="Settings" class="settings">
               <div class="settings">
@@ -165,254 +272,14 @@
           </tabset>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-bar</code>
-                <ul>
-                  <li><code>data</code>: series data</li>
-                  <li><code>labels</code>: x axis labels</li>
-                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
-                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
-                  <li><code>series</code> (default: <code>[]</code>): series labels</li>
-                  <li><code>colours</code> (default to global colours): colours for the chart</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;bar&quot; class=&quot;chart chart-bar&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("BarCtrl", function ($scope) {
-  $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  $scope.series = ['Series A', 'Series B'];
-
-  $scope.data = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-        <div class="col-lg-6 col-sm-12" id="bar-chart" ng-controller="BarCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Bar Chart</div>
-            <div class="panel-body">
-              <canvas id="bar" class="chart chart-bar" data="data" labels="labels" series="series"
-                      options="options"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12" id="doughnut-chart" ng-controller="DoughnutCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Doughnut Chart</div>
-            <div class="panel-body">
-              <canvas id="doughnut" class="chart chart-doughnut chart-xs" data="data" labels="labels" legend="false"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-doughnut</code>
-                <ul>
-                  <li><code>data</code>: series data</li>
-                  <li><code>labels</code>: series labels</li>
-                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
-                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
-                  <li><code>colours</code> (default to global colours): colours for the chart</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;doughnut&quot; class=&quot;chart chart-doughnut&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("DoughnutCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 100];
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-radar</code>
-                <ul>
-                  <li><code>data</code>: series data</li>
-                  <li><code>labels</code>: series labels</li>
-                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
-                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
-                  <li><code>series</code> (default: <code>[]</code>): series labels</li>
-                  <li><code>click</code> (optional): onclick event handler</li>
-                  <li><code>colours</code> (default to global colours): colours for the chart</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;radar&quot; class=&quot;chart chart-radar&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
-  $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
-
-  $scope.data = [
-    [65, 59, 90, 81, 56, 55, 40],
-    [28, 48, 40, 19, 96, 27, 100]
-  ];
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-        <div class="col-lg-6 col-sm-12" id="radar-chart" ng-controller="RadarCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Radar Chart</div>
-            <div class="panel-body">
-              <canvas id="area" class="chart chart-radar" data="data" labels="labels" click="onClick"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12" id="pie-chart" ng-controller="PieCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Pie Chart</div>
-            <div class="panel-body">
-              <canvas id="pie" class="chart chart-pie chart-xs" data="data" labels="labels"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-pie</code>
-                <ul>
-                  <li><code>data</code>: series data</li>
-                  <li><code>labels</code>: series labels</li>
-                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
-                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
-                  <li><code>colours</code> (default to global colours): colours for the chart</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;pie&quot; class=&quot;chart chart-pie&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("PieCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  $scope.data = [300, 500, 100];
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-polar-area</code>
-                <ul>
-                  <li><code>data</code>: series data</li>
-                  <li><code>labels</code>: series labels</li>
-                  <li><code>legend</code> (default: <code>false</code>): show legend below the chart</li>
-                  <li><code>options</code> (default: <code>{}</code>): Chart.js options</li>
-                  <li><code>colours</code> (default to global colours): colours for the chart</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;polar-area&quot; class=&quot;chart chart-polar-area&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("PolarAreaCtrl", function ($scope) {
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"];
-  $scope.data = [300, 500, 100, 40, 120];
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-        <div class="col-lg-6 col-sm-12" id="polar area-chart" ng-controller="PolarAreaCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Polar Area Chart</div>
-            <div class="panel-body">
-              <canvas id="polar" class="chart chart-polar-area" data="data" labels="labels"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12" id="base-chart" ng-controller="BaseCtrl">
-          <div class="panel panel-default">
-            <div class="panel-heading">Dynamic Chart</div>
-            <div class="panel-body">
-              <canvas id="base" class="chart chart-base" chart-type="type" data="data" labels="labels" legend="true"></canvas>
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary pull-right" ng-click="toggle()">Toggle</button>
-        </div>
-        <div class="col-lg-6 col-sm-12 code">
-          <tabset>
-            <tab heading="Settings" class="settings">
-              <div class="settings">
-                <code>.chart-base</code>
-                <ul>
-                  <li><code>chart-type</code>: chart type e.g. Bar, PolarArea, etc. or other plugins</li>
-                  <li>other options according to chart type</li>
-                </ul>
-              </div>
-            </tab>
-            <tab heading="Markup">
-              <pre><code data-language="html">&lt;canvas id=&quot;base&quot; class=&quot;chart-base&quot; chart-type=&quot;type&quot; data=&quot;data&quot;
-  labels=&quot;labels&quot; legend=&quot;true&quot;&gt;&lt;/canvas&gt; </code></pre>
-            </tab>
-            <tab heading="Javascript">
-              <pre><code data-language="javascript">angular.module("app", ["chart.js"]).controller("BaseCtrl",
-  function ($scope) {
-    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales", "Tele Sales", "Corporate Sales"];
-    $scope.data = [300, 500, 100, 40, 120];
-    $scope.type = 'PolarArea';
-
-    $scope.toggle = function () {
-      $scope.type = $scope.type === 'PolarArea' ?
-        'Pie' : 'PolarArea';
-    };
-});
-              </code></pre>
-            </tab>
-          </tabset>
-        </div>
-      </div>
     </section>
-    <section id="reactive">
+    <section id="style">
       <div class="page-header">
         <h1>Reactive</h1>
         <p>All charts are reactive and will update automatically when data changes.</p>
       </div>
-      <div class="row" ng-controller="DataTablesCtrl">
-        <div class="col-lg-6 col-sm-12">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">Chart Data</div>
             <div class="panel-body">
@@ -421,14 +288,15 @@
                   <th ng-repeat="label in labels">{{label}}</th>
                 </tr>
                 <tr ng-repeat="dataSet in data">
-                  <td ng-repeat="set in dataSet track by $index"><span style="text-align: right;">{{data[$parent.$index][$index]}}</span></td>
+                  <td ng-repeat="set in dataSet track by $index"><span style="text-align: right;">{{data[$parent.$index][$index]}}</span>
+                  </td>
                 </tr>
               </table>
               <button type="button" class="btn btn-primary pull-right" ng-click="randomize()">Randomize</button>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12">
+        <div class="col-lg-8 col-md-6 col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">Reactive Chart</div>
             <div class="panel-body">
@@ -441,10 +309,11 @@
   </div>
   <footer class="footer">
     <div class="container">
-      <p>Designed and built by <a href="https://github.com/jtblin" target="_blank">Jerome Touffe-Blin</a></p>
-      <p>Code licensed under <a href="https://github.com/jtblin/angular-chart.js/blob/master/LICENSE">BSD License</a>.</p>
-      <p><a href="https://github.com/jtblin/angular-chart.js/issues?state=open">Issues</a></p>
-      <p><strong>Credits</strong>: <a href="http://www.chartjs.org/">Chart.js</a> and <a href="https://angularjs.org/">AngularJS</a></p>
+      <p>Designed and built by <a href="https://github.com/jtblin" target="_blank">Deepu K Sasidharan</a>
+      </p>
+      <p>Code licensed under <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+      <p><a href="https://github.com/deepu105/angular-clock/issues?state=open">Issues</a>
+      </p>
     </div>
   </footer>
 
@@ -454,8 +323,10 @@
   <script src="../bower_components/rainbow/js/language/generic.js"></script>
   <script src="../bower_components/rainbow/js/language/html.js"></script>
   <script src="../bower_components/rainbow/js/language/javascript.js"></script>
-  <script src="../angular-clock.js"></script>
+  <script src="../dist/angular-clock.min.js"></script>
   <script src="smoothscroll.min.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
+
