@@ -201,3 +201,22 @@ function(scope, $window, rnd, default_definition, post_script_functions){
     scope.download(ps)
   }
 }])
+/*
+
+function importSVG(sourceSVG, targetCanvas) {
+    // https://developer.mozilla.org/en/XMLSerializer
+    svg_xml = (new XMLSerializer()).serializeToString(sourceSVG);
+    var ctx = targetCanvas.getContext('2d');
+
+    // this is just a JavaScript (HTML) image
+    var img = new Image();
+    // http://en.wikipedia.org/wiki/SVG#Native_support
+    // https://developer.mozilla.org/en/DOM/window.btoa
+    img.src = "data:image/svg+xml;base64," + btoa(svg_xml);
+
+    img.onload = function() {
+        // after this, Canvas’ origin-clean is DIRTY
+        ctx.drawImage(img, 0, 0);
+    }
+
+}*/

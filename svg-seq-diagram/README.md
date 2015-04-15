@@ -1,3 +1,3 @@
 SVG Sequence Diagram Drawer
 
-Demo: [http://sullerandras.github.com/SVG-Sequence-Diagram/](http://sullerandras.github.com/SVG-Sequence-Diagram/)
+Demo: [http://deepu105.github.io/svg-seq-diagram/](http://deepu105.github.io/svg-seq-diagram/)
