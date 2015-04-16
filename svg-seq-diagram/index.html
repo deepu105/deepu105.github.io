@@ -22,7 +22,7 @@
         }
         textarea.form-control {
             width: 100%;
-            height: 80%;
+            height:75%;
         }
         svg {
             width: 100%;
@@ -105,8 +105,9 @@
         <bg-splitter orientation="horizontal" class="row">
             <bg-pane min-size="100" class="col-md-4">
                 <div class="definition fullH">
-                    <h3 style="margin:5px" class="label label-success">Enter your definition:</h3>
+                    <h3 style="margin:5px" class="badge label-success">Enter your definition:</h3>
                     <textarea ng-model="$parent.$parent.definition" class="form-control"></textarea>
+                    <hr>
                     <label>
                         <input type="checkbox" ng-model="$parent.$parent.wantHandDraw" />Make it look like a hand drawn diagram</label>
                     <!-- <button type="button" ng-click="draw()">Draw</button>-->

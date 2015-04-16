@@ -22,7 +22,7 @@
         }
         textarea.form-control {
             width: 100%;
-            height: 80%;
+            height: 75%;
         }
         svg {
             width: 100%;
@@ -105,13 +105,13 @@
         <bg-splitter orientation="horizontal" class="row">
             <bg-pane min-size="100" class="col-md-4">
                 <div class="definition fullH">
-                    <h3 style="margin:5px" class="label label-success">Enter your definition:</h3>
+                    <h3 style="margin:5px" class="badge bg-success">Enter your definition:</h3>
                     <textarea ng-model="$parent.$parent.definition" ng-blur="compress()" class="form-control"></textarea>
-                    <button class="btn btn-primary" type="button" ng-click="compress()">Render</button>
-                    <br>Download diagram as
-                    <select ng-options="s for s in pageSizes" ng-model="$parent.$parent.pageSize"></select>Image.
+                    <button class="btn btn-primary" style="width:100%" type="button" ng-click="compress()">Render</button>
+                    <hr>Download diagram as
+                    <!--<select ng-options="s for s in pageSizes" ng-model="$parent.$parent.pageSize"></select>-->Image.
                     <button class="btn btn-primary" type="button" ng-click="print()">Download</button>
-                    <a class="btn btn-default" href="http://plantuml.sourceforge.net/PlantUML_Language_Reference_Guide.pdf" target="_blank">Lang Ref</a>
+                    <a class="btn btn-warning" href="http://plantuml.sourceforge.net/PlantUML_Language_Reference_Guide.pdf" target="_blank">Lang Ref</a>
                     <a class="btn btn-default" href="index.html">Simple Sequence Diagram</a>
                 </div>
             </bg-pane>
