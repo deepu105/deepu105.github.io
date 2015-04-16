@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sequence flow</title>
+    <title>PLANT UML</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <style>
         ng-cloak {
@@ -101,54 +101,30 @@
 </head>
 
 <body ng-app="myApp">
-    <div ng-controller="AppController">
+    <div ng-controller="AppControllerPlant">
         <bg-splitter orientation="horizontal" class="row">
             <bg-pane min-size="100" class="col-md-4">
                 <div class="definition fullH">
                     <h3 style="margin:5px" class="label label-success">Enter your definition:</h3>
-                    <textarea ng-model="$parent.$parent.definition" class="form-control"></textarea>
-                    <label>
-                        <input type="checkbox" ng-model="$parent.$parent.wantHandDraw" />Make it look like a hand drawn diagram</label>
-                    <!-- <button type="button" ng-click="draw()">Draw</button>-->
+                    <textarea ng-model="$parent.$parent.definition" ng-blur="compress()" class="form-control"></textarea>
+                    <button class="btn btn-primary" type="button" ng-click="compress()">Render</button>
                     <br>Download diagram as
                     <select ng-options="s for s in pageSizes" ng-model="$parent.$parent.pageSize"></select>Image.
                     <button class="btn btn-primary" type="button" ng-click="print()">Download</button>
-                    <a class="btn btn-default" href="plantUML.html">Plant UML</a>
+                    <a class="btn btn-default" href="http://plantuml.sourceforge.net/PlantUML_Language_Reference_Guide.pdf" target="_blank">Lang Ref</a>
+                    <a class="btn btn-default" href="index.html">Simple Sequence Diagram</a>
                 </div>
             </bg-pane>
             <bg-pane min-size="300" class="col-md-8">
                 <div ng-cloak>
-                    <svg version="1.1" vbox="{{-margin}} {{-margin}} {{width+2*margin}} {{height+2*margin}}">
-                        <desc>Hand drawn sequence diagram</desc>
-                        <g stroke="black" font-family="Arial" text-anchor="middle">
-                            <!-- draw user boxes and the vertical lines -->
-                            <g class="user" ng-repeat="user in users" transform="translate({{user.x}}, {{user.y}})" font-size="20">
-                                <polyline ng-attr-points="{{rectByHand(0,0,100,50)}}" fill="#D8D8D8" stroke-width="2" />
-                                <text ng-bind="user.name" x="50" y="25" stroke-width="0" dominant-baseline="middle"></text>
-                            </g>
-                            <g class="line" ng-repeat="line in lines" transform="translate({{line.x}}, {{line.y}})" stroke-width="2">
-                                <polyline ng-attr-points="{{byHand(0,0,line.dx,line.dy)}}" fill="none" />
-                            </g>
-                            <!-- draw arrows between users -->
-                            <g class="arrow" ng-repeat="arrow in arrows" stroke-width="2" transform="translate({{arrow.x}}, {{arrow.y}})">
-                                <rect ng-attr-x="{{Math.min(3, arrow.length*arrow.direction+3)}}" y="-16" ng-attr-width="{{Math.abs((arrow.length-6)*arrow.direction)}}" height="19" fill="white" stroke-width="0" stroke="white" />
-                                <polyline ng-attr-points="{{byHand(0,0,arrow.length*arrow.direction,0)}}" fill="none" style="stroke-dasharray: {{arrow.dashed &amp;&amp; '9, 4' || '0'}}" />
-                                <polyline ng-attr-points="{{byHand((arrow.length-11)*arrow.direction, -10*arrow.direction, (arrow.length-1)*arrow.direction, 0)+&quot; &quot;+byHand((arrow.length-1)*arrow.direction, 0, (arrow.length-11)*arrow.direction, 10*arrow.direction)}}" fill="none" />
-                                <text ng-bind="arrow.text" ng-attr-x="{{arrow.length*arrow.direction/2}}" y="-8" stroke-width="0" dominant-baseline="middle" font-size="14"></text>
-                            </g>
-                            <!-- draw note boxes -->
-                            <g class="note" ng-repeat="note in notes" stroke-width="1" transform="translate({{note.x}}, {{note.y}})">
-                                <polyline ng-attr-points="{{rectByHand(0,0,note_width,note_height)}}" fill="white" />
-                                <text ng-bind="note.text" ng-attr-x="{{note_width/2}}" ng-attr-y="{{note_height/2}}" stroke-width="0" dominant-baseline="middle" font-size="10"></text>
-                            </g>
-                        </g>
-                    </svg>
+                    <img ng-src="http://www.plantuml.com/plantuml/img/{{umlImg}}" alt="rendered UML" />
                 </div>
             </bg-pane>
         </bg-splitter>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
     <script type="text/javascript" src="splitter.js"></script>
+    <script src="rawdeflate.js"></script>
     <script type="text/javascript">
         angular.module('myApp', ['bgDirectives'])
     </script>

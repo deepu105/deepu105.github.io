@@ -25,6 +25,19 @@ note left of B: hmm.. it was fast\n\
 B->A: RequestCreated\n\
 A->User: Done')
 
+    .value('default_definition_plant',
+           '@startuml\n\
+class Student {\n\
+Name\n\
+}\n\
+Student "0..*" -- "1..*" Course\n\
+(Student , Course) . Enrollment\n\
+class Enrollment {\n\
+drop()\n\
+cancel()\n\
+}\n\
+@enduml')
+
 .value('post_script_functions',
 '/SEED 120 def\n\
 /MOD {\n\
