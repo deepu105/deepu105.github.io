@@ -12,8 +12,9 @@ angular.module('myApp').service('rnd', function(){
 })
 
 .value('default_definition',
-'participant: Alice as A\n\
-participant: B\n\
+'participant User\n\
+participant Alice as A\n\
+participant B\n\
 \n\
 User->A: DoWork\n\
 A-->B: <<createRequest>>\n\

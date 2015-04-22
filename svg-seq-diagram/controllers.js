@@ -78,11 +78,11 @@ angular.module('myApp')
                             dashed: (arrow == '-->')
                         })
                         scope.height += 50
-                    } else if (/^participant:(.*) as (.*)$/.exec(line) != null) {
+                    } else if (/^participant (.*) as (.*)$/.exec(line) != null) {
                         var who = RegExp.$1.trim()
                         var alias = RegExp.$2.trim()
                         scope.getUser(who, alias)
-                    } else if (/^participant:(.*)$/.exec(line) != null) {
+                    } else if (/^participant (.*)$/.exec(line) != null) {
                         var who = RegExp.$1.trim()
                         scope.getUser(who)
                     } else if (/^note (left of|right of|over) (.*):(.*)$/.exec(line) != null) {
