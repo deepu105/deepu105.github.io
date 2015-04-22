@@ -30,15 +30,6 @@
             /*border: 1px solid black;*/
             box-sizing: border-box;
         }
-        svg .user {
-            stroke: steelBlue;
-        }
-        svg .line {
-            stroke: steelBlue;
-        }
-        svg .arrow {
-            stroke: steelBlue;
-        }
         .fullH {
             height: 100%;
         }
@@ -119,12 +110,19 @@
             </bg-pane>
             <bg-pane min-size="300" class="col-md-8">
                 <div ng-cloak>
-                    <svg version="1.1" vbox="{{-margin}} {{-margin}} {{width+2*margin}} {{height+2*margin}}">
-                        <desc>Hand drawn sequence diagram</desc>
-                        <g stroke="black" font-family="Arial" text-anchor="middle">
+                    <svg version="1.1" vbox="{{-margin}} {{-margin}} {{width+2*margin}} {{height+2*margin}}" id="svg_out" style="width:100%; height:100%;box-sizing: border-box;"> 
+                        <filter id="dropshadow" height="130%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <!-- stdDeviation is how much to blur -->
+                            <feOffset dx="3" dy="3" result="offsetblur"/> <!-- how much to offset -->
+                            <feMerge> 
+                                <feMergeNode/> <!-- this contains the offset blurred image -->
+                                <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
+                            </feMerge>
+                        </filter>
+                        <g stroke="#990033" font-family="Arial" text-anchor="middle">
                             <!-- draw user boxes and the vertical lines -->
-                            <g class="user" ng-repeat="user in users" transform="translate({{user.x}}, {{user.y}})" font-size="20">
-                                <polyline ng-attr-points="{{rectByHand(0,0,100,50)}}" fill="#D8D8D8" stroke-width="2" />
+                            <g ng-repeat="user in users" transform="translate({{user.x}}, {{user.y}})" font-size="20">
+                                <polyline ng-attr-points="{{rectByHand(0,0,100,50)}}" fill="#ffffcc" stroke-width="2" style="filter:url(#dropshadow)" width="100%"/>
                                 <text ng-bind="user.name" x="50" y="25" stroke-width="0" dominant-baseline="middle"></text>
                             </g>
                             <g class="line" ng-repeat="line in lines" transform="translate({{line.x}}, {{line.y}})" stroke-width="2">
@@ -139,11 +137,14 @@
                             </g>
                             <!-- draw note boxes -->
                             <g class="note" ng-repeat="note in notes" stroke-width="1" transform="translate({{note.x}}, {{note.y}})">
-                                <polyline ng-attr-points="{{rectByHand(0,0,note_width,note_height)}}" fill="white" />
+                                <polyline ng-attr-points="{{rectByHand(0,0,note_width,note_height)}}" fill="#ffff66" style="filter:url(#dropshadow)"/>
                                 <text ng-bind="note.text" ng-attr-x="{{note_width/2}}" ng-attr-y="{{note_height/2}}" stroke-width="0" dominant-baseline="middle" font-size="10"></text>
                             </g>
                         </g>
                     </svg>
+                </div>
+                <div style="display:none">
+                    <canvas id="canvas_out"></canvas>
                 </div>
             </bg-pane>
         </bg-splitter>

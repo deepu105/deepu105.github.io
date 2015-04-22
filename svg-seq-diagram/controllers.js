@@ -175,7 +175,7 @@ angular.module('myApp')
             }
             scope.print = function() {
                 // PostScript reference: http://www.ugrad.math.ubc.ca/Flat/
-                var page = scope.paperSizes[scope.pageSize]
+                /*var page = scope.paperSizes[scope.pageSize]
                 var sw = (page.width - 2 * scope.margin) / scope.width
                 var sh = (page.height - 2 * scope.margin) / scope.height
                 var rotate = false
@@ -216,7 +216,39 @@ angular.module('myApp')
                 }
                 ps += 'showpage\n'
                 // console.log(ps)
-                scope.download(ps)
+                scope.download(ps)*/
+
+
+                // https://developer.mozilla.org/en/XMLSerializer
+                var svg = document.getElementById("svg_out");
+
+                svg_xml = (new XMLSerializer()).serializeToString(svg);
+                var s = scope.paperSizes[scope.pageSize];
+                var canvas = document.getElementById("canvas_out");
+                canvas.height = svg.offsetHeight;
+                canvas.width = svg.offsetWidth;
+                var ctx = canvas.getContext('2d');
+
+                // this is just a JavaScript (HTML) image
+                var img = new Image();
+                img.height = svg.offsetHeight;
+                img.width = svg.offsetHeight;
+                // http://en.wikipedia.org/wiki/SVG#Native_support
+                // https://developer.mozilla.org/en/DOM/window.btoa
+                img.src = "data:image/svg+xml;base64," + btoa(svg_xml);
+
+                img.onload = function() {
+                    //after this, Canvas’ origin-clean is DIRTY
+                    ctx.drawImage(img, 0, 0, svg.offsetWidth, svg.offsetHeight);
+                    var dataURL = canvas.toDataURL("image/png");
+                    var win = $window.open();
+                    win.document.write('<img height="100%" src="' + dataURL + '"/>');
+
+                    /* $('a.my-link').click(function(){
+            open().document.write('<img src="'+dataURL+'"/>');
+            return false;
+        });*/
+                }
             }
         }
     ])
@@ -316,23 +348,4 @@ angular.module('myApp')
             scope.compress();
 
         }
-    ])
-/*
-
-function importSVG(sourceSVG, targetCanvas) {
-    // https://developer.mozilla.org/en/XMLSerializer
-    svg_xml = (new XMLSerializer()).serializeToString(sourceSVG);
-    var ctx = targetCanvas.getContext('2d');
-
-    // this is just a JavaScript (HTML) image
-    var img = new Image();
-    // http://en.wikipedia.org/wiki/SVG#Native_support
-    // https://developer.mozilla.org/en/DOM/window.btoa
-    img.src = "data:image/svg+xml;base64," + btoa(svg_xml);
-
-    img.onload = function() {
-        // after this, Canvas’ origin-clean is DIRTY
-        ctx.drawImage(img, 0, 0);
-    }
-
-}*/
+    ]);
