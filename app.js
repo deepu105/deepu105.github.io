@@ -31,6 +31,7 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
         for (var i = 0; i < $scope.modules.length; i++) {
             var module = $scope.modules[i];
             module.downloads = data[module.npmPackageName].downloads;
+            console.log(module);
         }
     });
 });
