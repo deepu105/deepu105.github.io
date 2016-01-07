@@ -24,8 +24,8 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
         }
     ];
     var modulesList= '';
-    for (var i = 0; i < data.length; i++) {
-        modulesList += data[i].npmPackageName + ',';
+    for (var i = 0; i < modules.length; i++) {
+        modulesList += modules[i].npmPackageName + ',';
     }
     $http.get('https://api.npmjs.org/downloads/point/last-month/' + modulesList).success(function(data) {
         for (var i = 0; i < $scope.modules.length; i++) {
