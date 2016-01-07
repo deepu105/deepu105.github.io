@@ -28,21 +28,19 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
         },
     ];
     var modulesList= '';
-    for (var i = 0; i < $scope.modules.length; i++) {
-        modulesList += $scope.modules[i].npmPackageName + ',';
-    }
+    $scope.modules.forEach (function(mod) {
+        modulesList += mod.npmPackageName + ',';
+    });
     $http.get('https://api.npmjs.org/downloads/point/last-month/' + modulesList).success(function(data) {
-        for (var i = 0; i < $scope.modules.length; i++) {
-            var module = $scope.modules[i];
-            module.downloads = data[module.npmPackageName].downloads;
-        }
+        $scope.modules.forEach (function(mod) {
+            mod.downloads = data[mod.npmPackageName].downloads;
+        });
     });
 
-    for (var i = 0; i < $scope.modules.length; i++) {
-        var module = $scope.modules[i];
-        $http.get('https://api.github.com/repos/deepu105/' + module.npmPackageName).success(function(data) {
-            module.stars = data.stargazers_count;
+    $scope.modules.forEach (function(mod) {
+        $http.get('https://api.github.com/repos/deepu105/' + mod.npmPackageName).success(function(data) {
+            mod.stars = data.stargazers_count;
         });
-    }
+    });
 
 });
