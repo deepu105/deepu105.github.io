@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,7 +18,7 @@
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-        
+
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -28,7 +27,7 @@
 <![endif]-->
     </head>
 
-    <body>
+    <body ng-app="indexApp">
 
         <div class="container">
 
@@ -52,7 +51,7 @@ Multiple lines will require custom code not provided by Bootstrap. -->
             <div class="jumbotron">
                 <h2>Just an index Page for projects I work on!</h2>
                 <p class="lead">Too lazy to beautify this page.</p>
-               <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>-->
+                <p ng-repeat="module in modules">Repo: {(module.name)}, downloads last month : {(module.download)}</p>
             </div>
 
             <!-- Example row of columns -->
@@ -69,13 +68,25 @@ Multiple lines will require custom code not provided by Bootstrap. -->
                     <p><a class="btn btn-primary" href="/jh-slides/#/" role="button">Presentation &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">
+                    <h2>JHipster Entity Audit Generator</h2>
+                    <p>A cool yeoman generator to enable entity audit in Jhipster generated apps</p>
+                    <p><a class="btn btn-primary" href="https://github.com/deepu105/generator-jhipster-entity-audit" role="button">View Site &raquo;</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>JHipster Bootswatch Theme Generator</h2>
+                    <p>A cool yeoman generator to enable bootswatch themes in Jhipster generated apps</p>
+                    <p><a class="btn btn-primary" href="https://github.com/deepu105/generator-jhipster-bootswatch" role="button">View Site &raquo;</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Angular Object Diff</h2>
+                    <p>An AngularJS plugin to generate and view object diff</p>
+                    <p><a class="btn btn-primary" href="https://github.com/deepu105/angular-object-diff" role="button">View Site &raquo;</a></p>
+                </div>
+                <div class="col-lg-4">
                     <h2>Sequence Diagram Generator</h2>
                     <p>A sequence Diagram Generator from simple Markdown language. Experimental</p>
                     <p><a class="btn btn-primary" href="/svg-seq-diagram" role="button">View Site &raquo;</a></p>
                 </div>
-                
-            </div>
-            <div class="row">
                 <div class="col-lg-4">
                     <h2>UML Diagram Generator</h2>
                     <p>An UML Diagram Generator based on PlantUML, You can generate Class Diagrams, Sequence Diagrams, Flowcharts, Packages etc., from simple Markdown language. Experimental.</p>
@@ -91,7 +102,7 @@ Multiple lines will require custom code not provided by Bootstrap. -->
                     <p>A Jquery plugin to generate Tabs and Accordions. Not Maintained Anymore </p>
                     <p><a class="btn btn-primary" href="https://sites.google.com/site/jqpanel/home" role="button">View Site &raquo;</a></p>
                 </div>
-                
+
             </div>
 
             <!-- Site footer -->
@@ -103,6 +114,8 @@ Multiple lines will require custom code not provided by Bootstrap. -->
 
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="app.js"></script>
     </body>
 </html>
