@@ -24,14 +24,13 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
         }
     ];
     var modulesList= '';
-    for (var i = 0; i < modules.length; i++) {
-        modulesList += modules[i].npmPackageName + ',';
+    for (var i = 0; i < $scope.modules.length; i++) {
+        modulesList += $scope.modules[i].npmPackageName + ',';
     }
     $http.get('https://api.npmjs.org/downloads/point/last-month/' + modulesList).success(function(data) {
         for (var i = 0; i < $scope.modules.length; i++) {
             var module = $scope.modules[i];
             module.downloads = data[module.npmPackageName].downloads;
-            console.log(module);
         }
     });
 });
