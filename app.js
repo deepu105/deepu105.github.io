@@ -12,19 +12,23 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
     $scope.modules = [
         {
             name: 'Jhipster Generator',
-            npmPackageName: 'generator-jhipster'
+            npmPackageName: 'generator-jhipster',
+            author: 'jhipster'
         },
         {
             name: 'Jhipster Entity Audit Generator',
-            npmPackageName: 'generator-jhipster-entity-audit'
+            npmPackageName: 'generator-jhipster-entity-audit',
+            author: 'deepu105'
         },
         {
             name: 'Jhipster Bootswatch Theme Generator',
-            npmPackageName: 'generator-jhipster-bootswatch'
+            npmPackageName: 'generator-jhipster-bootswatch',
+            author: 'deepu105'
         },
         {
             name: 'Angular Clock',
-            npmPackageName: 'angular-clock'
+            npmPackageName: 'angular-clock',
+            author: 'deepu105'
         },
     ];
     var modulesList= '';
@@ -38,7 +42,7 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
     });
 
     $scope.modules.forEach (function(mod) {
-        $http.get('https://api.github.com/repos/deepu105/' + mod.npmPackageName).success(function(data) {
+        $http.get('https://api.github.com/repos/'+ mod.author +'/' + mod.npmPackageName).success(function(data) {
             mod.stars = data.stargazers_count;
         });
     });
