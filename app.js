@@ -21,7 +21,11 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
         {
             name: 'Jhipster Bootswatch Theme Generator',
             npmPackageName: 'generator-jhipster-bootswatch'
-        }
+        },
+        {
+            name: 'Angular Clock',
+            npmPackageName: 'angular-clock'
+        },
     ];
     var modulesList= '';
     for (var i = 0; i < $scope.modules.length; i++) {
