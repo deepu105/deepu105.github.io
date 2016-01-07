@@ -37,4 +37,12 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
             module.downloads = data[module.npmPackageName].downloads;
         }
     });
+
+    for (var i = 0; i < $scope.modules.length; i++) {
+        var module = $scope.modules[i];
+        $http.get('https://api.github.com/repos/deepu105/' + module.npmPackageName).success(function(data) {
+            module.stars = data.stargazers_count;
+        });
+    }
+
 });
