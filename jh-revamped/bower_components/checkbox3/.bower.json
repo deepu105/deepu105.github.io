@@ -1,0 +1,46 @@
+{
+  "name": "checkbox3",
+  "description": "CSS3 Style for Checkbox and Radio Button",
+  "main": [
+    "checkbox3.sass",
+    "dist/checkbox3.css",
+    "dist/checkbox3.min.css"
+  ],
+  "keywords": [
+    "checkbox",
+    "radio",
+    "css"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "fontawesome": "^4.1.0"
+  },
+  "license": "MIT",
+  "authors": [
+    "Tui2Tone <tui2tone@gmail.com> (http://www.tui2tone.com)"
+  ],
+  "ignore": [
+    "gulpfile.js",
+    "package.json",
+    "bower.json",
+    ".gitignore",
+    "node_modules",
+    "bower_components",
+    "public"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tui2tone/checkbox3.git"
+  },
+  "homepage": "https://github.com/tui2tone/checkbox3",
+  "version": "0.1.1",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.1",
+    "commit": "3099d42668e73346e28fd668f493a93b3710a856"
+  },
+  "_source": "git://github.com/tui2tone/checkbox3.git",
+  "_target": "~0.1.1",
+  "_originalSource": "checkbox3"
+}
