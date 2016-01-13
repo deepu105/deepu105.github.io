@@ -9,11 +9,11 @@ $(function() {
   });
 });
 
-$(function() {
+/*$(function() {
   return $('.datatable').DataTable({
     "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>'
   });
-});
+});*/
 
 
 $(function() {
