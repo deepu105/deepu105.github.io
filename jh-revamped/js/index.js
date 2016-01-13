@@ -47,9 +47,9 @@ $('.navbar-collapse ul li a').click(function () {
         HomeService.getNpmDownloadsLastMonth('generator-jhipster').success(function (data) {
             $scope.npmDownloads = data.downloads;
         });
-        
+
     }
-    
+
     function ModuleController($scope, HomeService) {
         HomeService.getModules().success(function (data) {
             $scope.modules = data;
@@ -74,7 +74,7 @@ $('.navbar-collapse ul li a').click(function () {
             $location.path('/details/' + npmPackageName);
         };*/
     }
-    
+
     function HomeService($http) {
         return {
             getNpmDownloadsLastMonth: function (name) {
@@ -87,7 +87,7 @@ $('.navbar-collapse ul li a').click(function () {
                     return resp;
                 });
             },
-            getModules: function(){
+            getModules: function () {
                 return $http.get('modules.json').success(function (resp) {
                     return resp;
                 });
