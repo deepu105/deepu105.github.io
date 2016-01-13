@@ -138,6 +138,9 @@ header {
 .navbar-inverse {
   border: 0; }
 
+input.search-text {
+  color: #fff; }
+
 section {
   padding: 100px 0; }
   section h2 {

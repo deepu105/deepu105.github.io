@@ -548,7 +548,7 @@
                                     <div class="row control-group">
                                         <div class="form-group col-xs-12 floating-label-form-group controls">
                                             <label>Module Name</label>
-                                            <input type="text" ng-model="searchText" class="form-control" placeholder="Search" id="name" required data-validation-required-message="Please enter your name.">
+                                            <input type="text" ng-model="searchText" class="form-control search-text" placeholder="Search" id="name" required data-validation-required-message="Please enter your name.">
                                             <p class="help-block text-danger"></p>
                                         </div>
                                     </div>
@@ -556,8 +556,11 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="text-center">
+                            <p>Top trending modules</p><br>
+                        </div>
                         <div class="row">
-                            <div ng-repeat="module in modules | filter: searchText">
+                            <div ng-repeat="module in modules | filter: searchText | orderBy: '-downloads' | limitTo:16">
                                 <div class="clearfix" ng-if="$index % 4 == 0"></div>
                                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                                     <a ng-href="https://jhipster.github.io/modules/marketplace.html#/details/{(module.npmPackageName)}">
@@ -647,18 +650,6 @@
             <!-- Javascript -->
             <script type="text/javascript" src="js/app.js"></script>
             <script type="text/javascript" src="js/index.js"></script>
-            <script>
-                ! function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0],
-                        p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = p + '://platform.twitter.com/widgets.js';
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, 'script', 'twitter-wjs');
-            </script>
 </body>
 
 </html>
