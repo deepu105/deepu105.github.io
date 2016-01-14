@@ -9,27 +9,22 @@ var gulp = require("gulp"),
 
 gulp.task('build', function(cb) {
     // HTML
-    gulp.src('./html/**/*.html')
+    gulp.src('index.html')
       .pipe(replace('bower_components/bootstrap/dist/css/bootstrap.min.css', 'lib/css/bootstrap.min.css'))
       .pipe(replace('bower_components/font-awesome/css/font-awesome.min.css', 'lib/css/font-awesome.min.css'))
       .pipe(replace('bower_components/animate.css/animate.min.css', 'lib/css/animate.min.css'))
-      .pipe(replace('bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css', 'lib/css/bootstrap-switch.min.css'))
-      .pipe(replace('bower_components/checkbox3/dist/checkbox3.min.css', 'lib/css/checkbox3.min.css'))
-      .pipe(replace('bower_components/DataTables/media/css/jquery.dataTables.min.css', 'lib/css/jquery.dataTables.min.css'))
+      .pipe(replace('bower_components/datatables/media/css/jquery.dataTables.min.css', 'lib/css/jquery.dataTables.min.css'))
       .pipe(replace('bower_components/datatables/media/css/dataTables.bootstrap.css', 'lib/css/dataTables.bootstrap.css'))
-      .pipe(replace('bower_components/select2/dist/css/select2.min.css', 'lib/css/select2.min.css'))
       .pipe(replace('bower_components/jquery/dist/jquery.min.js', 'lib/js/jquery.min.js'))
       .pipe(replace('bower_components/bootstrap/dist/js/bootstrap.min.js', 'lib/js/bootstrap.min.js'))
       .pipe(replace('bower_components/Chart.js/Chart.min.js', 'lib/js/Chart.min.js'))
-      .pipe(replace('bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js', 'lib/js/bootstrap-switch.min.js'))
-      .pipe(replace('bower_components/iCheck/icheck.min.js', 'lib/js/icheck.min.js'))
-      .pipe(replace('bower_components/matchHeight/jquery.matchHeight-min.js', 'lib/js/jquery.matchHeight-min.js'))
-      .pipe(replace('bower_components/DataTables/media/js/jquery.dataTables.min.js', 'lib/js/jquery.dataTables.min.js'))
-      .pipe(replace('bower_components/DataTables/media/js/dataTables.bootstrap.min.js', 'lib/js/dataTables.bootstrap.min.js'))
-      .pipe(replace('bower_components/select2/dist/js/select2.full.min.js', 'lib/js/select2.full.min.js'))
+      .pipe(replace('bower_components/datatables/media/js/jquery.dataTables.min.js', 'lib/js/jquery.dataTables.min.js'))
+      .pipe(replace('bower_components/datatables/media/js/dataTables.bootstrap.min.js', 'lib/js/dataTables.bootstrap.min.js'))
       .pipe(replace('bower_components/ace-builds/src/ace.js', 'lib/js/ace/ace.js'))
       .pipe(replace('bower_components/ace-builds/src/mode-html.js', 'lib/js/ace/mode-html.js'))
       .pipe(replace('bower_components/ace-builds/src/theme-github.js', 'lib/js/ace/theme-github.js'))
+      .pipe(replace('bower_components/jquery.easing/js/jquery.easing.min.js', 'lib/js/jquery.easing.min.js'))
+      .pipe(replace('bower_components/angular/angular.min.js', 'lib/js/angular.min.js'))
       .pipe(gulp.dest('./dist/html'));
 
     // lib
@@ -60,7 +55,7 @@ gulp.task('build', function(cb) {
     gulp.src(acejs_lib).pipe(gulp.dest('./dist/lib/js/ace'));
     gulp.src(css_lib).pipe(gulp.dest('./dist/lib/css'));
     gulp.src(fonts_lib).pipe(gulp.dest('./dist/lib/fonts'));
-    gulp.src("./dist/lib/css/_all.css").pipe(rename("./dist/lib/css/icheck.css")).pipe(gulp.dest("./"));
+    gulp.src("./dist/lib/css/_all.css").pipe(gulp.dest("./"));
 });
 
 gulp.task("sass", function() {

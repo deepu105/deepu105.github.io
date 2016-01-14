@@ -1,134 +1,99 @@
-$(function() {
-  var ctx, data, myLineChart, options;
-  Chart.defaults.global.responsive = true;
-  ctx = $('#jumbotron-line-chart').get(0).getContext('2d');
-  options = {
-    showScale: false,
-    scaleShowGridLines: false,
-    scaleGridLineColor: "rgba(0,0,0,.05)",
-    scaleGridLineWidth: 0,
-    scaleShowHorizontalLines: false,
-    scaleShowVerticalLines: false,
-    bezierCurve: false,
-    bezierCurveTension: 0.4,
-    pointDot: false,
-    pointDotRadius: 0,
-    pointDotStrokeWidth: 2,
-    pointHitDetectionRadius: 20,
-    datasetStroke: true,
-    datasetStrokeWidth: 4,
-    datasetFill: true,
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-  };
-  data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-    datasets: [
-      {
-        label: "My Second dataset",
-        fillColor: "rgba(34, 167, 240,0.2)",
-        strokeColor: "#22A7F0",
-        pointColor: "#22A7F0",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#22A7F0",
-        data: [28, 48, 40, 45, 76, 65, 90]
-      }
-    ]
-  };
-  myLineChart = new Chart(ctx).Line(data, options);
+// jQuery for page scrolling feature - requires jQuery Easing plugin
+$(function () {
+    $('body').on('click', '.page-scroll a', function (event) {
+        var $anchor = $($(this).attr('href')).offset().top;
+        $('html, body').stop().animate({
+            scrollTop: $anchor
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
 });
 
-$(function() {
-  var ctx, data, myBarChart, option_bars;
-  Chart.defaults.global.responsive = true;
-  ctx = $('#jumbotron-bar-chart').get(0).getContext('2d');
-  option_bars = {
-    showScale: false,
-    scaleShowGridLines: false,
-    scaleBeginAtZero: true,
-    scaleShowGridLines: true,
-    scaleGridLineColor: "rgba(0,0,0,.05)",
-    scaleGridLineWidth: 1,
-    scaleShowHorizontalLines: false,
-    scaleShowVerticalLines: false,
-    barShowStroke: true,
-    barStrokeWidth: 1,
-    barValueSpacing: 7,
-    barDatasetSpacing: 3,
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-  };
-  data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-    datasets: [
-      {
-        label: "My First dataset",
-        fillColor: "rgba(26, 188, 156,0.6)",
-        strokeColor: "#1ABC9C",
-        pointColor: "#1ABC9C",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#1ABC9C",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }, {
-        label: "My Second dataset",
-        fillColor: "rgba(34, 167, 240,0.6)",
-        strokeColor: "#22A7F0",
-        pointColor: "#22A7F0",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#22A7F0",
-        data: [28, 48, 40, 19, 86, 27, 90]
-      }
-    ]
-  };
-  myBarChart = new Chart(ctx).Bar(data, option_bars);
+// Highlight the top nav as scrolling occurs
+$('body').scrollspy({
+    target: '.navbar-fixed-top'
+})
+
+// Closes the Responsive Menu on Menu Item Click
+$('.navbar-collapse ul li a').click(function () {
+    $('.navbar-toggle:visible').click();
 });
 
-$(function() {
-  var ctx, data, myLineChart, options;
-  Chart.defaults.global.responsive = true;
-  ctx = $('#jumbotron-line-2-chart').get(0).getContext('2d');
-  options = {
-    showScale: false,
-    scaleShowGridLines: false,
-    scaleGridLineColor: "rgba(0,0,0,.05)",
-    scaleGridLineWidth: 0,
-    scaleShowHorizontalLines: false,
-    scaleShowVerticalLines: false,
-    bezierCurve: false,
-    bezierCurveTension: 0.4,
-    pointDot: false,
-    pointDotRadius: 0,
-    pointDotStrokeWidth: 2,
-    pointHitDetectionRadius: 20,
-    datasetStroke: true,
-    datasetStrokeWidth: 3,
-    datasetFill: true,
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-  };
-  data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-    datasets: [
-      {
-        label: "My First dataset",
-        fillColor: "rgba(26, 188, 156,0.2)",
-        strokeColor: "#1ABC9C",
-        pointColor: "#1ABC9C",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#1ABC9C",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }, {
-        label: "My Second dataset",
-        fillColor: "rgba(34, 167, 240,0.2)",
-        strokeColor: "#22A7F0",
-        pointColor: "#22A7F0",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#22A7F0",
-        data: [28, 48, 40, 19, 86, 27, 90]
+(function () {
+    'use-strict';
+
+    var homeApp = angular.module('homeApp', []);
+
+    homeApp.config([
+      '$interpolateProvider',
+        function ($interpolateProvider) {
+            return $interpolateProvider.startSymbol('{(').endSymbol(')}');
       }
-    ]
-  };
-  myLineChart = new Chart(ctx).Line(data, options);
-});
+    ]);
+
+    homeApp.controller('HomeController', HomeController)
+    homeApp.controller('ModuleController', ModuleController)
+    homeApp.factory('HomeService', HomeService);
+
+    HomeService.$inject = ['$http'];
+    HomeController.$inject = ['$scope', 'HomeService'];
+    ModuleController.$inject = ['$scope', 'HomeService'];
+
+    function HomeController($scope, HomeService) {
+        HomeService.getGithubConfig('jhipster', 'generator-jhipster').success(function (data) {
+            $scope.gitConfig = data;
+        });
+
+        HomeService.getNpmDownloadsLastMonth('generator-jhipster').success(function (data) {
+            $scope.npmDownloads = data.downloads;
+        });
+
+    }
+
+    function ModuleController($scope, HomeService) {
+        HomeService.getModules().success(function (data) {
+            $scope.modules = data;
+            var modulesList = '';
+            for (var i = 0; i < data.length; i++) {
+                modulesList += data[i].npmPackageName + ',';
+            }
+            HomeService.getNpmDownloadsLastMonth(modulesList).success(function (data) {
+                for (var i = 0; i < $scope.modules.length; i++) {
+                    var module = $scope.modules[i];
+                    var npmstats = data[module.npmPackageName];
+                    if (npmstats != undefined) {
+                        module.downloads = npmstats.downloads;
+                    } else {
+                        module.downloads = 0;
+                    }
+                }
+            });
+        });
+
+        /*$scope.details = function (npmPackageName) {
+            $location.path('/details/' + npmPackageName);
+        };*/
+    }
+
+    function HomeService($http) {
+        return {
+            getNpmDownloadsLastMonth: function (name) {
+                return $http.get('https://api.npmjs.org/downloads/point/last-month/' + name).success(function (resp) {
+                    return resp;
+                });
+            },
+            getGithubConfig: function (author, name) {
+                return $http.get('https://api.github.com/repos/' + author + '/' + name).success(function (resp) {
+                    return resp;
+                });
+            },
+            getModules: function () {
+                return $http.get('modules.json').success(function (resp) {
+                    return resp;
+                });
+            }
+        }
+    }
+
+
+})();

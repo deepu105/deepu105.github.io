@@ -2,36 +2,37 @@
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>JHipster</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../lib/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
     <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../css/themes/flat-blue.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
 <body class="flat-blue">
-    <div class="app-container">
+    <div class="app-container home">
         <div class="row content-container">
-            <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+            <nav class="navbar navbar-inverse navbar-fixed-top navbar-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-expand-toggle">
                             <i class="fa fa-bars icon"></i>
                         </button>
                         <ol class="breadcrumb navbar-breadcrumb">
-                            <li class="active">Dashboard</li>
+                            <li class="active"></li>
                         </ol>
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-th icon"></i>
@@ -41,68 +42,24 @@
                         <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                             <i class="fa fa-times icon"></i>
                         </button>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
-                            <ul class="dropdown-menu animated fadeInDown">
-                                <li class="title">
-                                    Notification <span class="badge pull-right">0</span>
-                                </li>
-                                <li class="message">
-                                    No new notification
-                                </li>
-                            </ul>
+
+                        <li class="page-scroll">
+                            <a href="#about">About</a>
                         </li>
-                        <li class="dropdown danger">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
-                            <ul class="dropdown-menu danger  animated fadeInDown">
-                                <li class="title">
-                                    Notification <span class="badge pull-right">4</span>
-                                </li>
-                                <li>
-                                    <ul class="list-group notifications">
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> new registration
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge success">1</span> <i class="fa fa-check icon"></i> new orders
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item">
-                                                <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> customers messages
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li class="list-group-item message">
-                                                view all
-                                            </li>
-                                        </a>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class="page-scroll">
+                            <a href="#opts">Options</a>
                         </li>
-                        <li class="dropdown profile">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily Hart <span class="caret"></span></a>
-                            <ul class="dropdown-menu animated fadeInDown">
-                                <li class="profile-img">
-                                    <img src="../img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
-                                </li>
-                                <li>
-                                    <div class="profile-info">
-                                        <h4 class="username">Emily Hart</h4>
-                                        <p>emily_hart@email.com</p>
-                                        <div class="btn-group margin-bottom-2x" role="group">
-                                            <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
-                                            <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li class="page-scroll">
+                            <a href="#quick">Quick Start</a>
+                        </li>
+                        <li class="page-scroll">
+                            <a href="#modules">Modules</a>
+                        </li>
+                        <li class="">
+                            <a href="https://github.com/jhipster/generator-jhipster" class="dropdown-toggle" target="_blank" role="button"><i class="fa fa-github fa-2x"></i></a>
                         </li>
                     </ul>
+
                 </div>
             </nav>
             <div class="side-menu sidebar-inverse">
@@ -110,8 +67,8 @@
                     <div class="side-menu-container">
                         <div class="navbar-header">
                             <a class="navbar-brand" href="#">
-                                <div class="icon fa fa-paper-plane"></div>
-                                <div class="title">Flat Admin V.2</div>
+                                <div class="icon"><img src="img/logo-jhipster2x.png" height="50px"></div>
+                                <div class="title brand">JHipster</div>
                             </a>
                             <button type="button" class="navbar-expand-toggle pull-right visible-xs">
                                 <i class="fa fa-times icon"></i>
@@ -120,342 +77,579 @@
                         <ul class="nav navbar-nav">
                             <li class="active">
                                 <a href="index.html">
-                                    <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
+                                    <span class="icon fa fa-home"></span><span class="title">Home</span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#">
+                                    <span class="icon fa fa-file-text-o"></span><span class="title">Release notes</span>
                                 </a>
                             </li>
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-element">
-                                    <span class="icon fa fa-desktop"></span><span class="title">UI Kits</span>
+                                <a data-toggle="collapse" href="#dropdown-1">
+                                    <span class="icon fa fa-road"></span><span class="title">JHipster in a few minutes</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
-                                <div id="dropdown-element" class="panel-collapse collapse">
+                                <div id="dropdown-1" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="ui-kits/theming.html">Theming</a>
+                                            <li><a href="#"><i class="fa fa-stack-overflow"></i> Technology stack</a>
                                             </li>
-                                            <li><a href="ui-kits/grid.html">Grid</a>
+                                            <li><a href="#"><i class="fa fa-desktop"></i> Official JHipster slides</a>
                                             </li>
-                                            <li><a href="ui-kits/button.html">Buttons</a>
+                                            <li><a href="#"><i class="fa fa-picture-o"></i> JHipster in 5 screenshots</a>
                                             </li>
-                                            <li><a href="ui-kits/card.html">Cards</a>
-                                            </li>
-                                            <li><a href="ui-kits/list.html">Lists</a>
-                                            </li>
-                                            <li><a href="ui-kits/modal.html">Modals</a>
-                                            </li>
-                                            <li><a href="ui-kits/alert.html">Alerts & Toasts</a>
-                                            </li>
-                                            <li><a href="ui-kits/panel.html">Panels</a>
-                                            </li>
-                                            <li><a href="ui-kits/loader.html">Loaders</a>
-                                            </li>
-                                            <li><a href="ui-kits/step.html">Tabs & Steps</a>
-                                            </li>
-                                            <li><a href="ui-kits/other.html">Other</a>
+                                            <li><a href="#"><i class="fa fa-film"></i> Video tutorial (20 minutes)</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-table">
-                                    <span class="icon fa fa-table"></span><span class="title">Table</span>
+                                <a data-toggle="collapse" href="#dropdown-2">
+                                    <span class="icon fa fa-wrench"></span><span class="title">Setting up your environment</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
-                                <div id="dropdown-table" class="panel-collapse collapse">
+                                <div id="dropdown-2" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="table/table.html">Table</a>
+                                            <li><a href="#"><i class="fa fa-cloud-download"></i> Installing JHipster</a>
                                             </li>
-                                            <li><a href="table/datatable.html">Datatable</a>
+                                            <li><a href="#"><i class="fa fa-keyboard-o"></i> Configuring Eclipse/IntelliJ</a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-music"></i> Docker Compose</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-form">
-                                    <span class="icon fa fa-file-text-o"></span><span class="title">Form</span>
-                                </a>
-                                <!-- Dropdown level 1 -->
-                                <div id="dropdown-form" class="panel-collapse collapse">
+                                <a data-toggle="collapse" href="#dropdown-3"><span class="icon fa fa-list-ol"></span><span class="title">Core JHipster tasks</span></a>
+                                <div id="dropdown-3" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="form/ui-kits.html">Form UI Kits</a>
-                                            </li>
+                                            <li><a href="/creating_an_app.html"><i class="fa fa-rocket"></i> Creating an application</a></li>
+                                            <li><a href="/creating_an_entity.html"><i class="fa fa-bolt"></i> Creating an entity</a></li>
+                                            <li><a href="/creating_a_service.html"><i class="fa fa-bolt"></i> Creating a service</a></li>
+                                            <li><a href="/using_dtos.html"><i class="fa fa-briefcase"></i> Creating DTOs</a></li>
+                                            <li><a href="/managing_relationships.html"><i class="fa fa-sitemap"></i> Managing relationships</a></li>
+                                            <li><a href="/installing_new_languages.html"><i class="fa fa-flag"></i> Internationalization</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <!-- Dropdown-->
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#component-example">
-                                    <span class="icon fa fa-cubes"></span><span class="title">Components</span>
-                                </a>
-                                <!-- Dropdown level 1 -->
-                                <div id="component-example" class="panel-collapse collapse">
+                                <a data-toggle="collapse" href="#dropdown-4"><span class="icon fa fa-puzzle-piece"></span><span class="title">Options</span></a>
+                                <div id="dropdown-4" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="components/pricing-table.html">Pricing Table</a>
-                                            </li>
-                                            <li><a href="components/chartjs.html">Chart.JS</a>
-                                            </li>
+                                            <li><a href="/security.html"><i class="fa fa-lock"></i> Securing your app</a></li>
+                                            <li><a href="/using_elasticsearch.html"><i class="fa fa-search"></i> Using Elasticsearch</a></li>
+                                            <li><a href="/using_websockets.html"><i class="fa fa-envelope"></i> Using Websockets</a></li>
+                                            <li><a href="/using_oracle.html"><i class="fa fa-archive"></i> Using Oracle</a></li>
+                                            <li><a href="/using_mongodb.html"><i class="fa fa-leaf"></i> Using MongoDB</a></li>
+                                            <li><a href="/using_cassandra.html"><i class="fa fa-eye"></i> Using Cassandra</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <!-- Dropdown-->
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-example">
-                                    <span class="icon fa fa-slack"></span><span class="title">Page Example</span>
-                                </a>
-                                <!-- Dropdown level 1 -->
-                                <div id="dropdown-example" class="panel-collapse collapse">
+                                <a data-toggle="collapse" href="#dropdown-5"><span class="icon fa fa-code"></span><span class="title">Development</span></a>
+                                <div id="dropdown-5" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="pages/login.html">Login</a>
-                                            </li>
-                                            <li><a href="pages/index.html">Landing Page</a>
-                                            </li>
+                                            <li><a href="/development.html"><i class="fa fa-code"></i> Using in development</a></li>
+                                            <li><a href="/profiles.html"><i class="fa fa-group"></i> Managing profiles</a></li>
+                                            <li><a href="/using_angularjs.html"><i class="fa fa-html5"></i> Using AngularJS</a></li>
+                                            <li><a href="/customizing_bootstrap.html"><i class="fa fa-css3"></i> Customizing Bootstrap</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <!-- Dropdown-->
                             <li class="panel panel-default dropdown">
-                                <a data-toggle="collapse" href="#dropdown-icon">
-                                    <span class="icon fa fa-archive"></span><span class="title">Icons</span>
-                                </a>
-                                <!-- Dropdown level 1 -->
-                                <div id="dropdown-icon" class="panel-collapse collapse">
+                                <a data-toggle="collapse" href="#dropdown-6"><span class="icon fa fa-umbrella"></span><span class="title">Test</span></a>
+                                <div id="dropdown-6" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="icons/glyphicons.html">Glyphicons</a>
-                                            </li>
-                                            <li><a href="icons/font-awesome.html">Font Awesomes</a>
-                                            </li>
+                                            <li><a href="/running_tests.html"><i class="fa fa-shield"></i> Running tests</a></li>
+                                            <li><a href="/setting_up_ci.html"><i class="fa fa-check"></i> Continuous Integration</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
+                            <li class="panel panel-default dropdown">
+                                <a data-toggle="collapse" href="#dropdown-7"><span class="icon fa fa-cloud"></span><span class="title">Production</span></a>
+                                <div id="dropdown-7" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="/production.html"><i class="fa fa-play-circle"></i> Using in production</a></li>
+                                            <li><a href="/cloudfoundry.html"><i class="fa fa-cloud-upload"></i> Deploying to Cloud Foundry</a></li>
+                                            <li><a href="/heroku.html"><i class="fa fa-cloud-upload"></i> Deploying to Heroku</a></li>
+                                            <li><a href="/openshift.html"><i class="fa fa-cloud-upload"></i> Deploying to Openshift</a></li>
+                                            <li><a href="/aws.html"><i class="fa fa-cloud-upload"></i> Deploying to AWS</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="panel panel-default dropdown">
+                                <a data-toggle="collapse" href="#dropdown-8"><span class="icon fa fa-cubes"></span><span class="title">Modules</span></a>
+                                <div id="dropdown-8" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a href="/modules/marketplace.html"><i class="fa fa-shopping-cart"></i> Marketplace</a></li>
+                                            <li><a href="/modules/creating_a_module.html"><i class="fa fa-cube"></i> Creating a module</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="/tips.html"><span class="icon fa fa-cogs"></span><span class="title">Tips'n tricks</span></a></li>
                             <li>
-                                <a href="license.html">
-                                    <span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
-                                </a>
+                                <a href="/jhipster_uml.html"><span class="icon fa fa-magic"></span><span class="title">JHipster-UML</span></a>
                             </li>
+                            <li class="panel panel-default dropdown">
+                                <a data-toggle="collapse" href="#dropdown-9"><span class="icon fa fa-question"></span><span class="title">Help and bugs</span></a>
+                                <div id="dropdown-9" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="/help.html"><i class="fa fa-group"></i> Community help</a></li>
+                                            <li><a href="/consulting.html"><i class="fa fa-user-md"></i> Professional help</a></li>
+                                            <li><a href="/training.html"><i class="fa fa-graduation-cap "></i> Training</a></li>
+                                            <li><a href="https://github.com/jhipster/generator-jhipster/issues" target="_blank"><i class="fa fa-bug"></i> Bug tracker</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="panel panel-default dropdown">
+                                <a data-toggle="collapse" href="#dropdown-10"><span class="icon fa fa-star"></span><span class="title">About</span></a>
+                                <div id="dropdown-10" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="/team.html"><i class="fa fa-coffee"></i> Team</a></li>
+                                            <li><a href="/policies.html"><i class="fa fa-gavel"></i> Policies</a></li>
+                                            <li><a href="https://github.com/jhipster/generator-jhipster" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+                                            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank"><i class="fa fa-comments"></i> Chat</a></li>
+                                            <li><a href="https://twitter.com/java_hipster" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                            <li>
+                                            </li>
+                                            <li><a href="/artwork.html"><i class="fa fa-pencil"></i> Artwork</a></li>
+                                            <li><a href="/thanks.html"><i class="fa fa-gift"></i> Thanks</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
                 </nav>
             </div>
             <!-- Main Content -->
-            <div class="container-fluid">
-                <div class="side-body padding-top">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a href="#">
-                                <div class="card red summary-inline">
-                                    <div class="card-body">
-                                        <i class="icon fa fa-inbox fa-4x"></i>
-                                        <div class="content">
-                                            <div class="title">50</div>
-                                            <div class="sub-title">New Mails</div>
+
+            <div ng-app="homeApp" ng-controller="HomeController">
+                <!-- Header -->
+                <header id="page-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="logo-big"><img class="img-responsive" src="img/logo-jhipster-drink-coffee.png" alt=""></div>
+                                <div class="intro-text">
+                                    <span class="brand">Greetings, Java Hipster!</span>
+                                    <hr class="star-light">
+                                    <div class="row stats">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <a href="#">
+                                                <div class="card dark summary-inline">
+                                                    <div class="card-body">
+                                                        <i class="icon fa fa-download fa-3x"></i>
+                                                        <div class="content">
+                                                            <div class="title">{(npmDownloads)}</div>
+                                                            <div class="sub-title">Downloads in last 30 days</div>
+                                                        </div>
+                                                        <div class="clear-both"></div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="clear-both"></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a href="#">
-                                <div class="card yellow summary-inline">
-                                    <div class="card-body">
-                                        <i class="icon fa fa-comments fa-4x"></i>
-                                        <div class="content">
-                                            <div class="title">23</div>
-                                            <div class="sub-title">New Message</div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <a href="https://github.com/jhipster/generator-jhipster">
+                                                <div class="card dark summary-inline">
+                                                    <div class="card-body">
+                                                        <i class="icon fa fa-github fa-3x"></i>
+                                                        <div class="content">
+                                                            <div class="title">{(gitConfig.stargazers_count)}</div>
+                                                            <div class="sub-title">Stars</div>
+                                                        </div>
+                                                        <div class="clear-both"></div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="clear-both"></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a href="#">
-                                <div class="card green summary-inline">
-                                    <div class="card-body">
-                                        <i class="icon fa fa-tags fa-4x"></i>
-                                        <div class="content">
-                                            <div class="title">280</div>
-                                            <div class="sub-title">Product View</div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <a href="https://github.com/jhipster/generator-jhipster/fork">
+                                                <div class="card dark summary-inline">
+                                                    <div class="card-body">
+                                                        <i class="icon fa fa-github fa-3x"></i>
+                                                        <div class="content">
+                                                            <div class="title">{(gitConfig.network_count)}</div>
+                                                            <div class="sub-title">Forks</div>
+                                                        </div>
+                                                        <div class="clear-both"></div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="clear-both"></div>
                                     </div>
+
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                            <a href="#">
-                                <div class="card blue summary-inline">
-                                    <div class="card-body">
-                                        <i class="icon fa fa-share-alt fa-4x"></i>
-                                        <div class="content">
-                                            <div class="title">16</div>
-                                            <div class="sub-title">Share</div>
-                                        </div>
-                                        <div class="clear-both"></div>
-                                    </div>
-                                </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row  no-margin-bottom">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="card primary">
-                                        <div class="card-jumbotron no-padding">
-                                            <canvas id="jumbotron-line-chart" class="chart no-padding"></canvas>
-                                        </div>
-                                        <div class="card-body half-padding">
-                                            <h4 class="float-left no-margin font-weight-300">Profits</h4>
-                                            <h2 class="float-right no-margin font-weight-300">$3200</h2>
-                                            <div class="clear-both"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                </header>
+
+                <!-- About Section -->
+                <section id="about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="brand">What is JHipster?</h2>
+                                <hr class="star-primary">
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="thumbnail no-margin-bottom">
-                                        <img src="../img/thumbnails/picjumbo.com_IMG_4566.jpg" class="img-responsive">
-                                        <div class="caption">
-                                            <h3 id="thumbnail-label">Thumbnail label<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
-                                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <span class="title text-center">
+                                        
+                                <div class="head-icons">
+                                    <a href="http://yeoman.io/" target="_blank"><img src="img/logo-yeoman.png" class="project-icon"></a> <i class="fa fa-4x">=</i>
+                                    <a href="http://projects.spring.io/spring-boot/" target="_blank"><img src="img/logo-spring-boot.png" class="project-icon"></a> <i class="fa fa-4x">+</i> <a href="https://angularjs.org/" target="_blank"><img src="img/logo-angularjs.png" class="project-icon"></a>
+
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="thumbnail no-margin-bottom">
-                                        <img src="../img/thumbnails/picjumbo.com_IMG_3241.jpg" class="img-responsive">
-                                        <div class="caption">
-                                            <h3 id="thumbnail-label">Thumbnail label<a class="anchorjs-link" href="#thumbnail-label"><span class="anchorjs-icon"></span></a></h3>
-                                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                            <p><a href="#" class="btn btn-success" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                <p class="lead">
+                                    JHipster is a
+                                    <a href="http://yeoman.io/" target="_blank">Yeoman generator</a>,
+                                    used to create a
+                                    <a href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a> + <a href="https://angularjs.org/" target="_blank">AngularJS</a>
+                                    project. <br>
+                                </p>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="hipster-font brand">Goal</h2>
+
+                                <p>
+                                    Our goal is to generate for you a complete and modern Web app, unifying:
+                                </p>
+                                <ul>
+                                    <li>A high-performance and robust Java stack on the server side with Spring Boot</li>
+                                    <li>A sleek, modern, mobile-first front-end with AngularJS and Bootstrap</li>
+                                    <li>A powerful workflow to build your application with Yeoman, Bower, Grunt and Maven</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="hipster-font brand">Sample &amp; Sources</h2>
+
+                                <p>
+                                    You can checkout a sample generated application
+                                    <a href="https://github.com/jhipster/jhipster-sample-app" target="_blank">here</a>.
+                                </p>
+
+                                <p>
+                                    JHipster is Open Source, and all development is done on
+                                    <a href="https://github.com/jhipster/generator-jhipster" target="_blank">GitHub</a>
+                                </p>
+                                <ul>
+                                    <li> If you want to code with us, feel free to join!</li>
+                                    <li> If you like the project, please give us a star on GitHub</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Stack Section -->
+                <section class="success" id="opts">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="brand">Client side options</h2>
+                            <hr class="star-light">
+                        </div>
+                    </div>
+                    <div class="row stack-container">
+                        <ul class="text-center stacks">
+                            <li class="clip img-circle">
+                                <i class="fa fa-html5"></i>
+                                <span class="title_sub_tech">HTML5</span>
+                            </li>
+                            <li class="clip img-circle">
+                                <i class="fa fa-css3"></i>
+                                <span class="title_sub_tech">CSS3</span>
+                            </li>
+
+                            <li class="clip img-circle new">
+                                <img src="img/icons/angular.png" />
+                                <span class="title_sub_tech">AngularJS</span>
+                            </li>
+                            <li class="clip img-circle">
+                                <i class="fa fa-twitter"></i>
+                                <span class="title_sub_tech">Bootstrap</span>
+                            </li>
+                            <li class="clip img-circle">
+                                <img src="img/icons/jquery.png" />
+                                <span class="title_sub_tech">JQuery</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/bower.png" class="white" />
+                                <span class="title_sub_tech">Bower</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/grunt.png" class="white" />
+                                <span class="title_sub_tech">Grunt</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/gulp.png" class="height" />
+                                <span class="title_sub_tech">Gulp</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/sass.png" class="height" />
+                                <span class="title_sub_tech">Sass</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/websocket.png" />
+                                <span class="title_sub_tech">Websockets</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/karma.png" class="white" />
+                                <span class="title_sub_tech">Karma</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/protarctor.png" class="white" />
+                                <span class="title_sub_tech">Protractor</span>
+                            </li>
+
+
+                            <li class="clear"></li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="brand">Server side options</h2>
+                            <hr class="star-light">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="text-center stacks">
+                            <li class="clip img-circle">
+                                <img src="img/icons/spring-boot.png" class="white" />
+                                <span class="title_sub_tech">Spring Boot</span>
+                            </li>
+                            <li class="clip img-circle">
+                                <img src="img/icons/spring.png" class="white" />
+                                <span class="title_sub_tech">Spring Security</span>
+                            </li>
+
+                            <li class="clip img-circle new">
+                                <img src="img/icons/gradle.png" class="white" />
+                                <span class="title_sub_tech">Gradle</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/maven.png" class="white-inv width" />
+                                <span class="title_sub_tech">Maven</span>
+                            </li>
+                            <li class="clip img-circle">
+                                <img src="img/icons/hibernate.gif" class="white" />
+                                <span class="title_sub_tech">Hibernate</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/liquibase.gif" class="white width" />
+                                <span class="title_sub_tech">Liquibase</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/mysql.png" class="white" />
+                                <span class="title_sub_tech">MySql</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/postgresql.png" class="height" />
+                                <span class="title_sub_tech">Posgres</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/oracle.png" class="white width" />
+                                <span class="title_sub_tech">Oracle</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/mongo.png" />
+                                <span class="title_sub_tech">MongoDB</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/cassandra.png" class="white-inv" />
+                                <span class="title_sub_tech">Cassandra</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/ehcache.png" class="white" />
+                                <span class="title_sub_tech">EhCache</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/Hazelcast.png" class="white-inv" />
+                                <span class="title_sub_tech">Hazelcast</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/thymeleaf.png" class="white" />
+                                <span class="title_sub_tech">Thymeleaf</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/gatling.png" class="white" />
+                                <span class="title_sub_tech">Gatling</span>
+                            </li>
+                            <li class="clip img-circle new">
+                                <img src="img/icons/cucumber.png" class="white" />
+                                <span class="title_sub_tech">Cucumber</span>
+                            </li>
+
+                            <li class="clear"></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- quick start Section -->
+                <section class="" id="quick">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="brand">Quick Start</h2>
+                                <hr class="star-primary">
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-12">
+                                <p>Install JHipster <code>npm install -g generator-jhipster</code></p>
+                                <p>Create a new directory and go into it <code>mkdir myApp && cd myApp</code></p>
+                                <p>Run JHipster and follow instructions on screen <code>yo jhipster</code></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p><small>* Assuming you have already installed <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">Java</a>, <a href="http://git-scm.com/" target="_blank">Git</a>, <a href="http://nodejs.org/" target="_blank">Node.js</a>, <a href="http://bower.io/#install-bower" target="_blank">Bower</a>, <a href="http://yeoman.io/learning/index.html" target="_blank">Yeoman</a> and <a href="http://gruntjs.com/getting-started" target="_blank">Grunt</a> or <a href="https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md" target="_blank">Gulp</a></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section class="success" id="modules" ng-controller="ModuleController">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="brand">Modules</h2>
+                                <hr class="star-light">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-offset-2">
+                                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                                <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                                <form name="sentMessage" id="contactForm" novalidate>
+                                    <div class="row control-group">
+                                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                                            <label>Module Name</label>
+                                            <input type="text" ng-model="searchText" class="form-control search-text" placeholder="Search" id="name" required data-validation-required-message="Please enter your name.">
+                                            <p class="help-block text-danger"></p>
                                         </div>
                                     </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p>Top trending modules</p><br>
+                        </div>
+                        <div class="row">
+                            <div ng-repeat="module in modules | filter: searchText | orderBy: '-downloads' | limitTo:16">
+                                <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                    <a ng-href="https://jhipster.github.io/modules/marketplace.html#/details/{(module.npmPackageName)}">
+                                        <div class="card dark module summary-inline">
+                                            <div class="card-body">
+                                                <i class="icon fa fa-cube fa-4x"></i>
+                                                <div class="content">
+                                                    <div class="title">{(module.name)}</div>
+                                                    <div class="sub-title">by {(module.author)}</div>
+                                                    <div class="sub-title">{(module.downloads)} downloads last month</div>
+                                                </div>
+                                                <div class="clear-both"></div>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-xs-12">
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="text-center">
+                    <div class="footer-above">
+                        <div class="container">
                             <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="card primary">
-                                        <div class="card-jumbotron no-padding">
-                                            <canvas id="jumbotron-bar-chart" class="chart no-padding"></canvas>
-                                        </div>
-                                        <div class="card-body half-padding">
-                                            <h4 class="float-left no-margin font-weight-300">Orders</h4>
-                                            <div class="clear-both"></div>
-                                        </div>
-                                    </div>
+                                <div class="footer-col col-md-4">
+                                    <h4 class="text-left"><i class="fa fa-coffee fa-fw"></i> <a class="link" href="https://jhipster.github.io/team.html">Team</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-graduation-cap fa-fw"></i> <a class="link" href="#">Training</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-gavel fa-fw"></i> <a class="link" href="#">Policies</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-pencil fa-fw"></i> <a class="link" target="_blank" href="#">Artwork</a></h4>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="card primary">
-                                        <div class="card-jumbotron no-padding">
-                                            <canvas id="jumbotron-line-2-chart" class="chart no-padding"></canvas>
-                                        </div>
-                                        <div class="card-body half-padding">
-                                            <h4 class="float-left no-margin font-weight-300">Pages view</h4>
-                                            <div class="clear-both"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <div class="title"><i class="fa fa-comments-o"></i> Last Message</div>
-                                    </div>
-                                    <div class="clear-both"></div>
-                                </div>
-                                <div class="card-body no-padding">
-                                    <ul class="message-list">
-                                        <a href="#">
-                                            <li>
-                                                <img src="../img/profile/profile-1.jpg" class="profile-img pull-left">
-                                                <div class="message-block">
-                                                    <div><span class="username">Tui2Tone</span> <span class="message-datetime">12 min ago</span>
-                                                    </div>
-                                                    <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.</div>
-                                                </div>
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li>
-                                                <img src="../img/profile/profile-1.jpg" class="profile-img pull-left">
-                                                <div class="message-block">
-                                                    <div><span class="username">Tui2Tone</span> <span class="message-datetime">15 min ago</span>
-                                                    </div>
-                                                    <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.</div>
-                                                </div>
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li>
-                                                <img src="../img/profile/profile-1.jpg" class="profile-img pull-left">
-                                                <div class="message-block">
-                                                    <div><span class="username">Tui2Tone</span> <span class="message-datetime">2 hour ago</span>
-                                                    </div>
-                                                    <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.</div>
-                                                </div>
-                                            </li>
-                                        </a>
-                                        <a href="#">
-                                            <li>
-                                                <img src="../img/profile/profile-1.jpg" class="profile-img pull-left">
-                                                <div class="message-block">
-                                                    <div><span class="username">Tui2Tone</span> <span class="message-datetime">1 day ago</span>
-                                                    </div>
-                                                    <div class="message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.</div>
-                                                </div>
-                                            </li>
-                                        </a>
-                                        <a href="#" id="message-load-more">
-                                            <li class="text-center load-more">
-                                                <i class="fa fa-refresh"></i> load more..
-                                            </li>
-                                        </a>
+                                <div class="footer-col col-md-4">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a href="https://twitter.com/java_hipster" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://github.com/jhipster/generator-jhipster" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://gitter.im/jhipster/generator-jhipster" class="btn-social btn-outline"><i class="fa fa-fw fa-comments"></i></a>
+                                        </li>
                                     </ul>
                                 </div>
+                                <div class="footer-col col-md-4">
+                                    <h4 class="text-left"><i class="fa fa-bug fa-fw"></i> <a class="link" target="_blank" href="https://github.com/jhipster/generator-jhipster/issues">Issues</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-users fa-fw"></i> <a class="link" href="#">Community help</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-user-md fa-fw"></i> <a class="link" href="#">Professional help</a></h4>
+                                    <h4 class="text-left"><i class="fa fa-gift fa-fw"></i> <a class="link" href="#">Thanks</a></h4>
+
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="footer-below">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    Copyright &copy; JHipster 2016 | Theme based on <a href="https://github.com/IronSummitMedia/startbootstrap-freelancer" target="_blank">Freelancer</a> and <a href="https://github.com/tui2tone/flat-admin-bootstrap-templates" target="_blank">Flat admin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+                <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+                <div class="scroll-top page-scroll visible-xs visible-sm">
+                    <a class="btn btn-primary" href="#page-top">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
                 </div>
             </div>
         </div>
-        <footer class="app-footer">
-            <div class="wrapper">
-                <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
-            </div>
-        </footer>
         <div>
             <!-- Javascript Libs -->
-            <script type="text/javascript" src="../lib/js/jquery.min.js"></script>
-            <script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="../lib/js/Chart.min.js"></script>
-            <script type="text/javascript" src="../lib/js/bootstrap-switch.min.js"></script>
-            <script type="text/javascript" src="../lib/js/jquery.matchHeight-min.js"></script>
-            <script type="text/javascript" src="../lib/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="../lib/js/dataTables.bootstrap.min.js"></script>
-            <script type="text/javascript" src="../lib/js/select2.full.min.js"></script>
-            <script type="text/javascript" src="../lib/js/ace/ace.js"></script>
-            <script type="text/javascript" src="../lib/js/ace/mode-html.js"></script>
-            <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
+            <script type="text/javascript" src="lib/js/jquery.min.js"></script>
+            <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="lib/js/Chart.min.js"></script>
+            <script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
+            <script type="text/javascript" src="lib/js/ace/ace.js"></script>
+            <script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
+            <script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
+            <script type="text/javascript" src="lib/js/jquery.easing.min.js"></script>
+            <script type="text/javascript" src="lib/js/angular.min.js"></script>
             <!-- Javascript -->
-            <script type="text/javascript" src="../js/app.js"></script>
-            <script type="text/javascript" src="../js/index.js"></script>
+            <script type="text/javascript" src="js/app.js"></script>
+            <script type="text/javascript" src="js/index.js"></script>
 </body>
 
 </html>

@@ -56,6 +56,9 @@ a:hover {
 .text-indent {
   text-indent: 1em; }
 
+.brand {
+  font-family: 'Pacifico', cursive; }
+
 .navbar {
   z-index: 10001;
   padding-left: 60px;
@@ -276,7 +279,7 @@ a:hover {
       .app-container .content-container .side-menu .navbar-nav .panel-collapse.in {
         display: none; }
     .app-container .content-container .side-menu:hover {
-      width: 250px; }
+      width: 300px; }
       .app-container .content-container .side-menu:hover .navbar-header .navbar-brand .title {
         display: inline-block; }
       .app-container .content-container .side-menu:hover .navbar-nav li a .title {
@@ -295,15 +298,15 @@ a:hover {
       padding-top: 84px; }
 
 .app-container.expanded .app-footer {
-  left: 250px; }
+  left: 300px; }
   .app-container.expanded .app-footer .wrapper {
     padding-left: 25px; }
 
 .app-container.expanded .content-container .navbar-top {
-  padding-left: 250px; }
+  padding-left: 300px; }
 
 .app-container.expanded .content-container .side-menu {
-  width: 250px; }
+  width: 300px; }
   .app-container.expanded .content-container .side-menu .navbar-header .navbar-brand .title {
     display: inline-block; }
   .app-container.expanded .content-container .side-menu .navbar-nav li a .title {
@@ -385,7 +388,7 @@ a:hover {
   .app-container .navbar-top {
     min-width: 300px; }
   .app-container .content-container .side-menu {
-    margin-left: -250px;
+    margin-left: -300px;
     width: 0px; }
   .app-container .content-container .side-body {
     margin-left: 10px; }
@@ -394,7 +397,7 @@ a:hover {
     padding-left: 0px; }
   .app-container.expanded .side-menu {
     margin-left: 0px;
-    width: 250px; }
+    width: 300px; }
   .app-container.expanded .side-body {
     margin-left: 10px; }
   .app-container .app-footer .wrapper, .app-container.expanded .app-footer .wrapper {
@@ -1232,3 +1235,6 @@ body.login-page {
   .featurette-heading {
     margin-top: 100px;
     margin-bottom: 20px; } }
+
+.app-container.home {
+  padding-bottom: 0; }
