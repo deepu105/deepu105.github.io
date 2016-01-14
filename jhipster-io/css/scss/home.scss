@@ -8,7 +8,6 @@ $primary-color: #3E8ACC;
 $color-clear-blue: #91d5fb;
 $color-blue: #3E8ACC;
 $dark-blue: #09486b;
-
 body {
     overflow-x: hidden;
 }
@@ -197,9 +196,11 @@ header {
 .navbar-inverse {
     border: 0;
 }
-input.search-text{
+
+input.search-text {
     color: #fff;
 }
+
 section {
     padding: 100px 0;
     h2 {
@@ -251,7 +252,7 @@ section {
                         font-size: 1.5em;
                     }
                     .sub-title {
-                        margin:10px 0;
+                        margin: 10px 0;
                     }
                 }
             }
@@ -286,66 +287,85 @@ section {
         color: white;
         float: left;
         text-align: center;
-    }
-    .img-circle {
-        webkit-border-radius: 500px;
-        -moz-border-radius: 500px;
-        border-radius: 500px;
-    }
-    .clip i {
-        display: block;
-        padding-top: 25px;
-        font-size: 4.8em;
-    }
-    .clip img {
-        padding-top: 25px;
-        display: block;
-        margin: 0 auto;
-        width: 75px;
-        &.height {
+        &.img-circle {
+            webkit-border-radius: 500px;
+            -moz-border-radius: 500px;
+            border-radius: 500px;
+        }
+        i {
+            display: block;
+            padding-top: 25px;
+            font-size: 4.8em;
+        }
+        img {
+            padding-top: 25px;
+            display: block;
+            margin: 0 auto;
             height: 100px;
-            width: auto;
-        }
-        &.width {
-            height: auto;
-            width: 100px;
-            margin: 22px auto;
-        }
-        &.white {
             -webkit-filter: grayscale(100%) brightness(1.5);
             filter: grayscale(100%) brightness(1.5);
+            &.height {
+                height: 100px;
+                width: auto;
+            }
+            &.width {
+                height: auto;
+                width: 100px;
+                margin: 28px auto;
+            }
+            &.white {
+                -webkit-filter: grayscale(100%) brightness(1.5);
+                filter: grayscale(100%) brightness(1.5);
+            }
+            &.white-inv {
+                -webkit-filter: grayscale(100%) brightness(1.5) invert(100%);
+                filter: grayscale(100%) brightness(1.5) invert(100%);
+            }
+            &.invert {
+                -webkit-filter: invert(100%);
+                filter: invert(100%);
+            }
+            &.saturate {
+                -webkit-filter: saturate(3);
+                filter: saturate(3);
+            }
+            &.grayscale {
+                -webkit-filter: grayscale(100%);
+                filter: grayscale(100%);
+            }
+            &.brightness {
+                -webkit-filter: brightness(0.25);
+                filter: brightness(0.25);
+            }
+            &.contrast {
+                -webkit-filter: contrast(160%);
+                filter: contrast(160%);
+            }
         }
-        &.white-inv {
-            -webkit-filter: grayscale(100%) brightness(1.5) invert(100%);
-            filter: grayscale(100%) brightness(1.5) invert(100%);
+        .title_sub_tech {
+            margin-top: 5px;
+            font-size: 13px;
+            color: white;
+            display: block;
+            text-align: center;
         }
-        &.invert {
-            -webkit-filter: invert(100%);
-            filter: invert(100%);
+        &:hover {
+            background-color: white;
+            border: 1px solid white;
+            
+            img {
+                -webkit-filter: none;
+                filter: none;
+                &.invert-hover{
+                    -webkit-filter: invert(100%);
+                    filter: invert(100%);
+                }
+            }
+            .title_sub_tech {
+                color: $dark-blue;
+            }
         }
-        &.saturate {
-            -webkit-filter: saturate(3);
-            filter: saturate(3);
-        }
-        &.grayscale {
-            -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-        }
-        &.brightness {
-            -webkit-filter: brightness(0.25);
-            filter: brightness(0.25);
-        }
-        &.contrast {
-            -webkit-filter: contrast(160%);
-            filter: contrast(160%);
-        }
-    }
-    .title_sub_tech {
-        margin-top: 5px;
-        font-size: 13px;
-        color: white;
-        display: block;
-        text-align: center;
+        
     }
 }
 
