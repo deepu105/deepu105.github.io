@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<style type="text/css">
+	.test{
+		display: block;
+		height:100px;
+		width:100px;
+		background: red;
+	}
+	.small{
+		display: none;
+	}
+	@media only screen and (max-width: 500px){
+		.test{
+			width:200px;
+			background: green;
+		}
+		.small{
+			display: block;
+		}
+		.big{
+			display: none;
+		}
+	}
+	@media only screen and (max-height: 500px){
+		.test{
+			height:200px;
+			background: blue;
+		}
+		
+	}
+	
+	</style>
+	<body>
+		<div class="test"></div>
+		<p class="small">Im shown in small devices</p>
+		<p class="big">Im shown in big devices</p>
+	</body>
+</html>
