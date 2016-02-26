@@ -110,11 +110,11 @@
             </bg-pane>
             <bg-pane min-size="300" class="col-md-8">
                 <div ng-cloak>
-                    <svg version="1.1" vbox="{{-margin}} {{-margin}} {{width+2*margin}} {{height+2*margin}}" id="svg_out" style="width:100%; height:100%;box-sizing: border-box;"> 
+                    <svg version="1.1" vbox="{{-margin}} {{-margin}} {{width+2*margin}} {{height+2*margin}}" id="svg_out" style="width:100%; height:100%;box-sizing: border-box;">
                         <filter id="dropshadow" height="130%">
                             <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> <!-- stdDeviation is how much to blur -->
                             <feOffset dx="3" dy="3" result="offsetblur"/> <!-- how much to offset -->
-                            <feMerge> 
+                            <feMerge>
                                 <feMergeNode/> <!-- this contains the offset blurred image -->
                                 <feMergeNode in="SourceGraphic"/> <!-- this contains the element that the filter is applied to -->
                             </feMerge>
@@ -157,6 +157,16 @@
     <script type="text/javascript" src="directives.js"></script>
     <script type="text/javascript" src="services.js"></script>
     <script type="text/javascript" src="controllers.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-74370272-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 </body>
 
 </html>
