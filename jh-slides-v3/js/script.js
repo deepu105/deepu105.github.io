@@ -94,6 +94,9 @@ $(function() {
 	window.addEventListener('impress:stepenter', function() {
 	  $('#website.active p.title').addClass('animated bounceInDown');
 	});
+    window.addEventListener('impress:stepenter', function() {
+	  $('#features.active p.title').addClass('animated bounceInDown');
+	});
 	window.addEventListener('impress:stepenter', function() {
 	  $('#website.past p.title').removeClass('animated bounceInDown');
 	});

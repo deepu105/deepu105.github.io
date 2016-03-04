@@ -45,7 +45,12 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
+.jh {
+    font-family: 'Pacifico', cursive;
+}
+.dark {
+    color: #333;
+}
 /*
     Now here is when interesting things start to appear.
 
@@ -494,6 +499,18 @@ a:focus {
     cursor: pointer;
 }
 
+.text-features .title_sub_tech{
+    font-size: 18px;
+    font-weight: 600;
+    margin: auto;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.text-features .clip {
+    display: table;
+}
 .hint {
 
 display: none;
@@ -620,12 +637,17 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform:    scale(0);
     -ms-transform:     scale(0);
     -o-transform:      scale(0);
-    transform:         scale(0);       
+    transform:         scale(0);
+
+}
+.title-static {
+    font-size: 60px;
+    text-align: center;
 
 }
 .content-view {
     font-size: 40px;
-    text-align: center;    
+    text-align: center;
 }
 .icon-x4 {
     font-size: 130px
@@ -635,7 +657,7 @@ transition: opacity 1s, transform 0.5s 1s;
 }
 .standGem {
     -webkit-transform: rotateY(0deg) rotateZ(0deg) translateY(-10000px);
-    transition:1s !important;    
+    transition:1s !important;
 }
 
 .tech-size {
@@ -679,7 +701,7 @@ transition: opacity 1s, transform 0.5s 1s;
 }
 .compass {
     width: 65px;
-    height: 65px;  
+    height: 65px;
 }
 .text-center {
     text-align: center;
@@ -694,7 +716,7 @@ transition: opacity 1s, transform 0.5s 1s;
 .img-routed {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
-    border-radius: 6px;    
+    border-radius: 6px;
 }
 .clients-logos {
     width: 150px;
@@ -709,7 +731,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform:    scale(0.1);
     -ms-transform:     scale(0.1);
     -o-transform:      scale(0.1);
-    transform:         scale(0.1);       
+    transform:         scale(0.1);
 }
 #mobile_map .map_bg .clients-logos img {
     width: 60%;
@@ -753,7 +775,7 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform: translateY(220px) translateX(-30px) scale(0.1);
     -ms-transform: translateY(220px) translateX(-30px) scale(0.1);
     -o-transform: translateY(220px) translateX(-30px) scale(0.1);
-    transform: translateY(220px) translateX(-30px) scale(0.1);  
+    transform: translateY(220px) translateX(-30px) scale(0.1);
 }
 .atlantaMove {
     -webkit-transform: translateY(270px) translateX(110px) scale(1);
@@ -841,21 +863,21 @@ transition: opacity 1s, transform 0.5s 1s;
     -moz-transform:    scale(0);
     -ms-transform:     scale(0);
     -o-transform:      scale(0);
-    transform:         scale(0);    
+    transform:         scale(0);
 }
 .scaleZero {
     -webkit-transform: scale(0);
     -moz-transform:    scale(0);
     -ms-transform:     scale(0);
     -o-transform:      scale(0);
-    transform:         scale(0);        
+    transform:         scale(0);
 }
 .upLine, .downLine {
     -webkit-transform: scale(0);
     -moz-transform:    scale(0);
     -ms-transform:     scale(0);
     -o-transform:      scale(0);
-    transform:         scale(0);     
+    transform:         scale(0);
 }
 .hint p.mouse {
 background:url('../img/arrow.png') 30px 30px no-repeat;
@@ -1024,6 +1046,17 @@ transition: opacity 1s, transform 0.5s 1s;
 	background-color: rgb(236, 73, 73);
 	border: 1px solid rgb(236, 73, 73);
 }
+
+.white .new{
+	background-color: rgb(244, 233, 233);
+	border: 1px solid rgb(247, 241, 241);
+    color: #333;
+}
+
+.white .new .title_sub_tech{
+    color: #333;
+}
+
 .show{
 display:block;
 }
