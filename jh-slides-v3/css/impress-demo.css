@@ -26,7 +26,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
-    color: #323639;
+    color: #fff;
 
 }
 ol, ul {
@@ -61,14 +61,14 @@ table {
 body {
     font-family: Antipasto;
     min-height: 740px;
-
-    background: rgb(255, 255, 238);
+    background: #3E8ACC;
+    /*background: rgb(255, 255, 238);
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(255, 250, 242)), to(239(1213 1172 190)));
     background: -webkit-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
     background:    -moz-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
     background:     -ms-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
     background:      -o-radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
-    background:         radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));
+    background:         radial-gradient(rgb(255, 250, 242), rgb(239, 213, 172));*/
 }
 
 /*
@@ -498,7 +498,9 @@ a:focus {
     opacity: 1;
     cursor: pointer;
 }
-
+small {
+    font-size: 0.7em;
+}
 .text-features .title_sub_tech{
     font-size: 18px;
     font-weight: 600;
@@ -510,6 +512,9 @@ a:focus {
 
 .text-features .clip {
     display: table;
+}
+.text-features .clip i.center{
+    line-height : 100px
 }
 .hint {
 
@@ -615,8 +620,36 @@ transition: opacity 1s, transform 0.5s 1s;
     position: relative;
     z-index: 2;
 }
-.red {
-    color: #f85d5d;
+.hipster {
+    font-size: 0.4em;
+    text-align: left;
+}
+.hipster span{
+    display: block;
+}
+.fa-1x {
+    font-size: 1.5em !important;
+}
+.round-box {
+    background: white;
+    height: 350px;
+    width: 350px;
+    margin: 0 auto;
+    border-radius: 200px;
+    padding: 10px;
+}
+.animate {
+    -webkit-transform: scale(0);
+    -moz-transform:    scale(0);
+    -ms-transform:     scale(0);
+    -o-transform:      scale(0);
+    transform:         scale(0);
+}
+.round-box img{
+    height: 300px;
+}
+.dark-blue {
+    color: #09486b;
 }
 .dark {
     color: #323639;
@@ -669,8 +702,8 @@ transition: opacity 1s, transform 0.5s 1s;
     margin: 5px;
     width: 150px;
     height: 150px;
-    background-color: #323639;
-    border: 1px solid #1f2224;
+    background-color: #09486b;
+    border: 1px solid #09486b;
     color: white;
     float: left;
     text-align: center;
@@ -1043,18 +1076,19 @@ transition: opacity 1s, transform 0.5s 1s;
 }
 
 .new{
-	background-color: rgb(236, 73, 73);
-	border: 1px solid rgb(236, 73, 73);
+	background-color: #09486b;
+	border: 1px solid #09486b;
 }
 
 .white .new{
-	background-color: rgb(244, 233, 233);
-	border: 1px solid rgb(247, 241, 241);
+	background-color: #C6C6C6;
+	border: 1px solid #C6C6C6;
     color: #333;
 }
 
 .white .new .title_sub_tech{
     color: #333;
+    font-weight: 600;
 }
 
 .show{

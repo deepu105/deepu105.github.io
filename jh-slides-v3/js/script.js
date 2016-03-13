@@ -26,85 +26,29 @@ $(function() {
 	  $('.ruby.past p img').removeClass('animated bounceInDown');
 	});
 
-	//what we do
-
-	window.addEventListener('impress:stepenter', function() {
-	  $('#what_content.active p.text-center').addClass('animated tada');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#what_content.past p.text-center').removeClass('animated tada');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#what_content.future p.text-center').removeClass('animated tada');
-	});
-
-
-	//how we do
-
-	window.addEventListener('impress:stepenter', function() {
-	  $('#robotics.active p.title').addClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#robotics.past p.title').removeClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#robotics.future p.title').removeClass('animated bounceInDown');
-	});
-	
-	window.addEventListener('impress:stepenter', function() {
-	  $('#server_db.active p.title').addClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#server_db.past p.title').removeClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#server_db.future p.title').removeClass('animated bounceInDown');
-	});
-	
-	window.addEventListener('impress:stepenter', function() {
-	  $('#desktop.active p.title').addClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#desktop.past p.title').removeClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#desktop.future p.title').removeClass('animated bounceInDown');
-	});
-	
-	window.addEventListener('impress:stepenter', function() {
-	  $('#mob_app.active p.title').addClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#mob_app.past p.title').removeClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#mob_app.future p.title').removeClass('animated bounceInDown');
-	});
-
-	window.addEventListener('impress:stepenter', function() {
-	  $('#web_app.active p.title').addClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#web_app.past p.title').removeClass('animated bounceInDown');
-	});
-	window.addEventListener('impress:stepenter', function() {
-	  $('#web_app.future p.title').removeClass('animated bounceInDown');
-	});
-	
-	window.addEventListener('impress:stepenter', function() {
-	  $('#website.active p.title').addClass('animated bounceInDown');
-	});
     window.addEventListener('impress:stepenter', function() {
-	  $('#features.active p.title').addClass('animated bounceInDown');
+	  $('#lets-build.active p.icon').addClass('animated tada');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#website.past p.title').removeClass('animated bounceInDown');
+	  $('#lets-build.past p.icon').removeClass('animated tada');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#website.future p.title').removeClass('animated bounceInDown');
+	  $('#lets-build.future p.icon').removeClass('animated tada');
 	});
-	//lets chet
+    
+    window.addEventListener('impress:stepenter', function() {
+        setTimeout(function(){
+            $('#jhipster-about.active .animate').addClass('animated bounceInUp');
+        },3500)
+	});
+	window.addEventListener('impress:stepenter', function() {
+	  $('#jhipster-about.past .animate').removeClass('animated bounceInUp');
+	});
+	window.addEventListener('impress:stepenter', function() {
+	  $('#jhipster-about.future .animate').removeClass('animated bounceInUp');
+	});
 
+	
 	window.addEventListener('impress:stepenter', function() {
 	  $('#first.active p.title').addClass('animated bounceInRight');
 	});
@@ -206,48 +150,57 @@ $(function() {
 	//lines 
 
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.active p.upLine').addClass('animated bounceInDown');
+	  $('#sub-features.active p.upLine').addClass('animated bounceInDown');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.past p.upLine').removeClass('animated bounceInDown');
+	  $('#sub-features.past p.upLine').removeClass('animated bounceInDown');
 	});	
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.future p.upLine').removeClass('animated bounceInDown');
+	  $('#sub-features.future p.upLine').removeClass('animated bounceInDown');
 	});	
 
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.active p.downLine').addClass('animated bounceInUp');
+	  $('#sub-features.active p.downLine').addClass('animated bounceInUp');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.past p.downLine').removeClass('animated bounceInUp');
+	  $('#sub-features.past p.downLine').removeClass('animated bounceInUp');
 	});	
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.future p.downLine').removeClass('animated bounceInUp');
+	  $('#sub-features.future p.downLine').removeClass('animated bounceInUp');
 	});	
 
 	//stacks list
 
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.active p.scaleZero').addClass('animated bounceIn');
+	  $('#sub-features.active p.scaleZero').addClass('animated bounceIn');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.past p.scaleZero').removeClass('animated bounceIn');
+	  $('#sub-features.past p.scaleZero').removeClass('animated bounceIn');
 	});	
 	window.addEventListener('impress:stepenter', function() {
-	  $('#stacks_tags.future p.scaleZero').removeClass('animated bounceIn');
+	  $('#sub-features.future p.scaleZero').removeClass('animated bounceIn');
 	});	
-
-	//mobile LOGOs
-
-	window.addEventListener('impress:stepenter', function() {
-	  $('#mobile_map.active div.map_bg').addClass('animated pulse');
+    
+    window.addEventListener('impress:stepenter', function() {
+	  $('#microservice-jh-2.active p.animate').addClass('animated fadeInDown');
 	});
 	window.addEventListener('impress:stepenter', function() {
-	  $('#mobile_map.past div.map_bg').removeClass('animated pulse');
+	  $('#microservice-jh-2.past p.animate').removeClass('animated fadeInDown');
 	});	
 	window.addEventListener('impress:stepenter', function() {
-	  $('#mobile_map.future div.map_bg').removeClass('animated pulse');
+	  $('#microservice-jh-2.future p.animate').removeClass('animated fadeInDown');
 	});	
+    
+    window.addEventListener('impress:stepenter', function() {
+	  $('#microservice.active p.animate').addClass('animated lightSpeedIn');
+	});
+	window.addEventListener('impress:stepenter', function() {
+	  $('#microservice.past p.animate').removeClass('animated lightSpeedIn');
+	});	
+	window.addEventListener('impress:stepenter', function() {
+	  $('#microservice.future p.animate').removeClass('animated lightSpeedIn');
+	});	
+
 
 	// START mobile EXTRICT 
 
