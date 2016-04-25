@@ -2,49 +2,107 @@
 
 var indexApp = angular.module('indexApp', []);
 
-indexApp.config([
-  '$interpolateProvider', function($interpolateProvider) {
-    return $interpolateProvider.startSymbol('{(').endSymbol(')}');
-  }
-]);
-
 indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filter) {
     $scope.modules = [
         {
-            name: 'Jhipster Generator',
+            name: 'JHipster Generator',
+            desc: 'A cool yeoman generator for AngularJS + Spring stack',
             npmPackageName: 'generator-jhipster',
-            author: 'jhipster'
-        },
-        {
-            name: 'Jhipster Entity Audit Generator',
-            npmPackageName: 'generator-jhipster-entity-audit',
-            author: 'deepu105'
-        },
-        {
-            name: 'Jhipster Bootswatch Theme Generator',
-            npmPackageName: 'generator-jhipster-bootswatch',
-            author: 'deepu105'
+            author: 'jhipster',
+            href: 'http://jhipster.github.io/',
+            img: 'home/assets/img/logo-jhipster.png',
+            icon: 'img'
         },
         {
             name: 'Angular Clock',
+            desc: 'A beautiful responsive clock face and clock widget for angular JS. Built in SVG',
             npmPackageName: 'angular-clock',
-            author: 'deepu105'
+            author: 'deepu105',
+            href: '/angular-clock',
+            icon: 'fa-clock-o fa-2x'
         },
+        {
+            name: 'Jhipster React Generator',
+            desc: 'A cool yeoman generator to create spring + react apps',
+            npmPackageName: 'generator-jhipster-react',
+            author: 'hipster-labs',
+            href: 'https://github.com/hipster-labs/generator-jhipster-react',
+            img: 'home/assets/img/logo-jhipster-react.png',
+            icon: 'img'
+        },
+        {
+            name: 'Jhipster Entity Audit Generator',
+            desc: 'A yeoman generator to enable entity audit in Jhipster generated apps',
+            npmPackageName: 'generator-jhipster-entity-audit',
+            author: 'hipster-labs',
+            href: 'https://github.com/hipster-labs/generator-jhipster-entity-audit',
+            img: 'home/assets/img/logo-jhipster.png',
+            icon: 'img'
+        },
+        {
+            name: 'JDL Studio',
+            desc: 'An awesome online JDL editor and visualizer',
+            npmPackageName: 'jdl-studio',
+            author: 'jhipster',
+            href: 'http://jhipster.github.io/jdl-studio/',
+            img: 'home/assets/img/logo-jhipster.png',
+            icon: 'img'
+        },
+        {
+            name: 'Jhipster Bootswatch Theme Generator',
+            desc: 'A yeoman generator to enable bootswatch themes in Jhipster generated apps',
+            npmPackageName: 'generator-jhipster-bootswatch',
+            author: 'hipster-labs',
+            href: 'https://github.com/hipster-labs/generator-jhipster-bootswatch',
+            img: 'home/assets/img/logo-jhipster.png',
+            icon: 'img'
+        },
+        {
+            name: 'Angular Object Diff',
+            desc: 'An AngularJS plugin to generate and view object difference',
+            npmPackageName: 'angular-object-diff',
+            author: 'deepu105',
+            href: 'https://github.com/deepu105/angular-object-diff',
+            icon: 'fa-2x fa-file-code-o'
+        },
+        {
+            name: 'UML and Sequence Diagram Generator',
+            desc: 'A sequence diagram generator using angularJS and an UML Diagram Generator based on PlantUML. Experimental.',
+            author: 'deepu105',
+            href: '/svg-seq-diagram',
+            icon: 'fa-2x fa-code'
+        },
+
     ];
     var modulesList= '';
     $scope.modules.forEach (function(mod) {
-        modulesList += mod.npmPackageName + ',';
+        if (mod.npmPackageName) {
+            modulesList += mod.npmPackageName + ',';
+        }
     });
     $http.get('https://api.npmjs.org/downloads/point/last-month/' + modulesList).success(function(data) {
         $scope.modules.forEach (function(mod) {
-            mod.downloads = data[mod.npmPackageName].downloads;
+            if(data && data[mod.npmPackageName]) mod.downloads = data[mod.npmPackageName].downloads;
         });
     });
 
     $scope.modules.forEach (function(mod) {
-        $http.get('https://api.github.com/repos/'+ mod.author +'/' + mod.npmPackageName).success(function(data) {
-            mod.stars = data.stargazers_count;
-        });
+        if (mod.npmPackageName) {
+            $http.get('https://api.github.com/repos/'+ mod.author +'/' + mod.npmPackageName).success(function(data) {
+                if (data) mod.stars = data.stargazers_count;
+            });
+        }
     });
 
+});
+
+$(document).ready(function() {
+    appMaster.smoothScroll();
+    appMaster.reviewsCarousel();
+    appMaster.screensCarousel();
+    appMaster.animateScript();
+    appMaster.revSlider();
+    appMaster.scrollMenu();
+    appMaster.placeHold();
+    appMaster.preLoader();
 });
