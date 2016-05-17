@@ -1,0 +1,319 @@
+{
+  "basics": {
+    "name": "Deepu K Sasidharan",
+    "label": "Software Solution Architect, UX Expert, JS Evangelist, Airline Consultant, OSS Developer",
+    "picture": "https://avatars2.githubusercontent.com/u/1107223?v=3&s=460",
+    "email": "deepu.k.sasidharan@gmail.com",
+    "phone": "+65 86476303",
+    "website": "http://deepu.js.org",
+    "summary": "Software Solution Designer and Airline Business Consultant hailing from Chennai, India.  Experienced in solution ideation, visualization/prototyping and proposal writing. Passionate about emerging technologies. Hands on expert in Enterprise Architecture, UX design, rich web  development and hybrid mobile application design. Open Source contributor and JavaScript Evangelist, core contributor for JHipster",
+    "location": {
+      "address": "04-464, Blk 292, Tampines",
+      "postalCode": "Singapore 520292",
+      "city": "Singapore",
+      "countryCode": "SG",
+      "region": "Singapore"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "deepu105",
+        "url": "twitter.com/deepu105"
+      },
+      {
+        "network": "Linkedin",
+        "username": "deepu05",
+        "url": "linkedin.com/in/deepu05"
+      },
+      {
+        "network": "Github",
+        "username": "deepu105",
+        "url": "deepu.js.org"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Tata Consultancy Services",
+      "position": "Software Solution Designer",
+      "website": "https://tcs.com",
+      "startDate": "2013-02-01",
+      "endDate": "",
+      "summary": "Working as a Software Solution Designer and Airline Consultant for a large Airline Client of Tata Consultancy Services. Part of an enterprise solutions and pre-sales team.",
+      "highlights": [
+        "Involved in multiple winning proposals for Travel domain, including RFPs, RFQs",
+        "Acted as solution owner for multiple winning proposals for Travel domain. Responsibilities included proposal writing, submission and presentation.",
+        "Provided Technical architecture, Functional design and Solution architecture for multiple enterprise applications.",
+        "Provided solution visualization and prototypes for multiple large web application proposals.",
+        "Have written RFP, RFQ, RFI and Sales proposals for multiple Airline application/solutions.",
+        "Involved in multiple product offering solution design, UX design and development.",
+        "Ideation, Prototype design and development for new products and solutions.",
+        "New opportunity identification and solution placement.",
+        "Emerging technology identification, adoption and evangelization."
+      ]
+    },
+    {
+      "company": "Community",
+      "position": "Open Source Developer",
+      "website": "deepu.js.org",
+      "startDate": "2010-01-01",
+      "endDate": "",
+      "summary": "An ardent supporter, developer, evangelist and user of Open source software. Have contributed to various OSS projects. Hosts Open Source plugins and utilities on Github.",
+      "highlights": [
+        "Core team member and one of the main contributor of JHipster, a well known application scaffolding tool (http://jhipster.github.io/)",
+        "Creator of Angular Clock Plugin, Angular object diff plugin and various Jhipster plugin modules (http://deepu105.github.io) "
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "position": "Technical Lead",
+      "website": "https://tcs.com",
+      "startDate": "2015-02-01",
+      "endDate": "2015-12-31",
+      "summary": "Technical lead and architect for a multitier enterprise web application for a  critical airline business case.",
+      "highlights": [
+        "Involved in ideation, requirement gathering, design, architecture and execution of the web application.",
+        "Acted as solution designer and technical lead for the project.",
+        "Involved in identification, adoption and evangelization of new age technology stack.",
+        "Responsible for prototyping and architecture of the project.",
+        "Involved in client management and scope management .",
+        "Involved in planning and full life cycle execution of the project.",
+        "Solution architecture using JHipster (spring framework full suite, angular js, gradle, scala/gatling, Oracle sql,  hibernate, liquibase, jackson, grunt, yeoman and java8).",
+        "Lead a team of 8+"
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "position": "Project Manager ",
+      "website": "https://tcs.com",
+      "startDate": "2013-02-01",
+      "endDate": "2013-12-30",
+      "summary": "Managed a large scale migration to EMD from paper receipts and other forms of MCO in Amadeus platform.",
+      "highlights": [
+        "Involved in project planning, tracking and coordination between multiple GDS, Amadeus, Business units  and application teams.",
+        " Involved in driving the migration project along with business unit and Airline IT reps."
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services/Singapore Airlines",
+      "position": "Business unit support/Business Analyst",
+      "website": "https://tcs.com",
+      "startDate": "2011-11-01",
+      "endDate": "2013-01-31",
+      "summary": "Part of the Team from TCS supporting the SIA business units in the transformation journey from In-house PSS to Amadeus. ",
+      "highlights": [
+        "Involved in large PSS migration from existing TPF platform to Amadeus PSS platform.",
+        "Business owner of Hotel reservation platform supporting the PSS platform.",
+        "Involved in business process testing, change management, process tuning and improvements."
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "position": "J2EE Web developer",
+      "website": "https://tcs.com",
+      "startDate": "2010-09-01",
+      "endDate": "2011-11-31",
+      "summary": "J2EE web application developer for multiple large scale applications for large Airline client.",
+      "highlights": [
+        "Experience in full life cycle application development.",
+        "UX designer and developer for multiple web applications."
+      ]
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "position": "Trainee",
+      "website": "https://tcs.com",
+      "startDate": "2010-03-01",
+      "endDate": "2010-09-01",
+      "summary": "Software engineering trainee at dedicated TCS training facility. Obtained exposure to various software engineering practices and technology.",
+      "highlights": []
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "Anna University",
+      "area": "Electrical and Electronics Engineering",
+      "studyType": "Bachelor",
+      "startDate": "2006-08-01",
+      "endDate": "2009-06-01",
+      "gpa": "",
+      "courses": []
+    },
+    {
+      "institution": "St. Joseph Hr. Secondary",
+      "area": "Science",
+      "studyType": "Higher Secondary",
+      "startDate": "2004-06-01",
+      "endDate": "2006-04-01",
+      "gpa": "",
+      "courses": []
+    }
+  ],
+  "awards": [
+    {
+      "title": "ILP Kudos",
+      "date": "2010-07-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Top Performer Award for exceptional performance in ILP ( TCS training program )"
+    },
+    {
+      "title": "Best Team",
+      "date": "2013-02-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Award for Best performing sales proposal team in TCS"
+    },
+    {
+      "title": "Star Team",
+      "date": "2013-07-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Award for the Team involved in the most successful Amadeus PSS migration for a large Airline."
+    },
+    {
+      "title": "Service & Commitment Award",
+      "date": "2013-03-01",
+      "awarder": "Tata Consultancy Sevices",
+      "summary": "Service & Commitment Award from TCS."
+    },
+    {
+      "title": "Star Team",
+      "date": "2013-01-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Award for the Team involved in the successful phase one Amadeus PSS migration for a large Airline."
+    },
+    {
+      "title": "Best UX designer-On the spot award",
+      "date": "2011-09-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "On the spot award for best UX designer for multiple internal web applications for a large Airline client."
+    },
+    {
+      "title": "Best Team",
+      "date": "2011-04-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Award for the Best development team."
+    },
+    {
+      "title": "Star of the month",
+      "date": "2011-04-01",
+      "awarder": "Tata Consultancy Services",
+      "summary": "Award for best performer of the month."
+    }
+  ],
+  "publications": [
+    {
+      "name": "JHipster presentation",
+      "publisher": "Spring User Group -Singapore",
+      "releaseDate": "2016-03-16",
+      "website": "https://www.youtube.com/watch?v=nKRpVkba4Ck&feature=youtu.be",
+      "summary": "A presentation and hands on demo of JHipster 3.0 for the Spring user group, Singapore."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Web Development",
+      "level": "Advanced",
+      "keywords": [
+        "HTML/HTML5",
+        "CSS2/3",
+        "Javascript",
+        "AngularJS",
+        "Jquery",
+        "React",
+        "Sass/Less",
+        "Bower",
+        "AJAX/REST",
+        "JSON",
+        "RWD(Bootstrap)",
+        "UX Design",
+        "Photoshop"
+      ]
+    },
+    {
+      "name": "Javascript",
+      "level": "Advanced",
+      "keywords": [
+        "NodeJS",
+        "Yeoman",
+        "AngularJS/React",
+        "Protractor/Jasmine/Mocha",
+        "Gulp/Grunt",
+        "NPM"
+      ]
+    },
+    {
+      "name": "Java/JEE",
+      "level": "Advanced",
+      "keywords": [
+        "Spring (Core, Boot, MVC, Security, Data, Batch, Webservice)",
+        "Gatling",
+        "Netflix (Eureka, Zuul, Hyterix, ribbon)",
+        "Spring Cloud",
+        "Struts",
+        "Hibernate/MyBatis",
+        "SOAP",
+        "Gradle/Maven",
+        "JHipster"
+      ]
+    },
+    {
+      "name": "Database",
+      "level": "Medium",
+      "keywords": [
+        "Oracle",
+        "MySQL",
+        "MongoDB"
+      ]
+    },
+    {
+      "name": "Other",
+      "level": "medium",
+      "keywords": [
+        "Docker",
+        "Shell",
+        "Scala",
+        "Hadoop",
+        "ELK",
+        "Big data",
+        "C/C++",
+        "GIT/SVN",
+        "Travis, Jenkins"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Full Professional Proficiency"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Full Professional Proficiency"
+    },
+    {
+      "language": "Tamil",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Malayalam",
+      "fluency": "Native speaker"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Astronomy",
+      "keywords": [
+        "Astrophotography",
+        "Telescopes"
+      ]
+    },
+    {
+      "name": "Robotics",
+      "keywords": [
+        "AI",
+        "Drones and Quad-copters"
+      ]
+    }
+  ],
+  "references": []
+}
