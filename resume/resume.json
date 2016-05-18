@@ -250,10 +250,12 @@
         "Netflix (Eureka, Zuul, Hyterix, ribbon)",
         "Spring Cloud",
         "Struts",
-        "Hibernate/MyBatis",
+        "JPA/Hibernate/MyBatis",
         "SOAP",
         "Gradle/Maven",
-        "JHipster"
+        "JHipster",
+        "JUnit",
+        "Android SDK"
       ]
     },
     {
@@ -277,6 +279,8 @@
         "Big data",
         "C/C++",
         "GIT/SVN",
+        "Cordova",
+        "Hybrid mobile apps",
         "Travis, Jenkins"
       ]
     }
