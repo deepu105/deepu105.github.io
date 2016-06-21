@@ -18,17 +18,17 @@
       {
         "network": "Twitter",
         "username": "deepu105",
-        "url": "twitter.com/deepu105"
+        "url": "https://twitter.com/deepu105"
       },
       {
         "network": "Linkedin",
         "username": "deepu05",
-        "url": "linkedin.com/in/deepu05"
+        "url": "https://linkedin.com/in/deepu05"
       },
       {
         "network": "Github",
         "username": "deepu105",
-        "url": "deepu.js.org"
+        "url": "https://github.com/deepu105"
       }
     ]
   },
@@ -218,12 +218,14 @@
         "CSS2/3",
         "Javascript",
         "AngularJS",
+	"Typescript",
         "Jquery",
         "React",
         "Sass/Less",
         "Bower",
         "AJAX/REST",
         "JSON",
+	"Webpack",
         "RWD(Bootstrap)",
         "UX Design",
         "Photoshop"
@@ -234,6 +236,8 @@
       "level": "Advanced",
       "keywords": [
         "NodeJS",
+	"Typescript",
+	"Webpack",
         "Yeoman",
         "AngularJS/React",
         "Protractor/Jasmine/Mocha",
@@ -247,6 +251,7 @@
       "keywords": [
         "Spring (Core, Boot, MVC, Security, Data, Batch, Webservice)",
         "Gatling",
+	"Scala/Groovy",
         "Netflix (Eureka, Zuul, Hyterix, ribbon)",
         "Spring Cloud",
         "Struts",
@@ -273,13 +278,13 @@
       "keywords": [
         "Docker",
         "Shell",
-        "Scala",
         "Hadoop",
         "ELK",
         "Big data",
         "C/C++",
         "GIT/SVN",
         "Cordova",
+	"Intel XDK",
         "Hybrid mobile apps",
         "Travis, Jenkins"
       ]
