@@ -24,7 +24,7 @@
 		<div class="navigate"><span class="font doodle-nav"></span></div>
 		<div id="impress">
 			<!-- ---------------------------- intro -------------------------------------------->
-			<div data-x="0" data-y="0" data-z="0" data-rotate="0" data-rotate-x="90" data-rotate-y="0" data-rotate-z="0" data-scale="10000000" id="intro" class="step" style="padding:0">
+			<div data-x="0" data-y="0" data-z="0" data-rotate="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="10000000" id="intro" class="step" style="padding:0">
 				<center>
 					<img id="title-slide-img" src="imgs/springio.png" title="cover" style="padding:0">
 				</center>
@@ -73,7 +73,7 @@
                     <p class="lead">
                         JHipster is a development platform to generate, develop and deploy
                         <a class="dark" target="_blank" href="http://projects.spring.io/spring-boot/" target="_blank">Spring Boot</a> + <a class="dark" target="_blank" href="https://angularjs.org/" target="_blank">Angular</a>
-                        web applications and <span class="dark">microservices</span>. <br>
+                        web applications and <span class="dark">Microservices</span>. <br>
                     </p>
                 </span>
 			</div>
@@ -234,12 +234,20 @@
 						<span class="title_sub_tech">MySQL</span>
 					</li>
 					<li class="clip img-circle new">
-						<img src="imgs/logo/svg/postgresql.svg" class="height">
+						<img src="imgs/logo/svg/mariadb.svg" />
+						<span class="title_sub_tech">MariaDB</span>
+					</li>
+					<li class="clip img-circle new">
+						<img src="imgs/logo/svg/postgresql.svg" class="height" />
 						<span class="title_sub_tech">PostgreSQL</span>
 					</li>
 					<li class="clip img-circle new">
-						<img src="imgs/logo/svg/oracle.svg" class="width">
+						<img src="imgs/logo/svg/oracle.svg" class="width" />
 						<span class="title_sub_tech">Oracle</span>
+					</li>
+					<li class="clip img-circle new">
+						<img src="imgs/logo/icons/mssql.png"/>
+						<span class="title_sub_tech">MS SQL</span>
 					</li>
 					<li class="clip img-circle new">
 						<img src="imgs/logo/icons/mongo.png">
@@ -285,10 +293,10 @@
 						<img src="imgs/logo/icons/gatling.png">
 						<span class="title_sub_tech">Gatling</span>
 					</li>
-					<li class="clip img-circle new">
+					<!--<li class="clip img-circle new">
 						<img src="imgs/logo/svg/cucumber.svg">
 						<span class="title_sub_tech">Cucumber</span>
-					</li>
+					</li>-->
 					<li class="clear"></li>
 				</ul>
 			</div>
@@ -337,30 +345,37 @@
 					<p style="color: yellow">or</p>
 					<p>yarn global add generator-jhipster</p>
 				</div>
+				<p>* Java 8, Git, Node.js, Yarn/NPM, Yeoman(yo)</p>
 			</div>
 			<div data-x="4000" data-y="13000" data-z="0" data-scale="1" id="demo-build" class="step">
                 <p class="font text-center font-x1">JHipster Magic </p>
-                <p class="font text-center font-x0">Lets build a book store</p>
+                <p class="font text-center font-x0">Lets build a product store</p>
 				<div class="code">
-					<p>mkdir springIoBooks && cd springIoBooks</p>
+					<p>mkdir springIoStore && cd springIoStore</p>
 					<p>yo jhipster <span style="color: yellow">(will be just `jhipster` from next version)</span></p>
 				</div>
 			</div>
 			<div data-x="4000" data-y="14000" data-z="0" data-scale="1" id="demo-jdl" class="step">
                 <p class="font text-center font-x1">JDL Magic</p>
                 <p class="font text-center font-x0"><a class="dark" target="_blank" href="https://jhipster.github.io/jdl-studio/">https://jhipster.github.io/jdl-studio</a></p>
-                <p class="font text-center font-x0">Model entities and download the jhipster-jdl.jh file</p>
+                <p class="font text-center font-x0">Model entities and download the JDL file</p>
 				<div class="code">
 					<p>yo jhipster:import-jdl jhipster-jdl.jh</p>
 					<p><span style="color: yellow">(will be `jhipster import-jdl` from next version)</span></p>
 				</div>
 			</div>
+			<div data-x="4000" data-y="15000" data-z="0" data-scale="1" id="demo-deply" class="step">
+                <p class="font text-center font-x0">Lets deploy it </p>
+				<div class="code">
+					<p>yo jhipster:heroku <span style="color: yellow">(will be `jhipster heroku` from next version)</span></p>
+				</div>
+			</div>
             <!------------------------------ lets build -------------------------------------------->
-			<div data-x="6000" data-y="14000" data-z="0" data-rotate="0" data-scale="1" id="lets-build" class="step">
+			<div data-x="6000" data-y="15000" data-z="0" data-rotate="0" data-scale="1" id="lets-build" class="step">
 				<p class="font text-center font-x0">Lets see how much it will cost to build this the <span class="dark">traditional</span> way with a rockstar team.</p>
 				<p class="font text-center"><img src="https://s3.amazonaws.com/media-p.slid.es/uploads/413114/images/2009357/ugly.gif"></p>
 			</div>
-            <div data-x="6000" data-y="15000" data-z="0" data-rotate="0" data-scale="1" id="features-est" class="step animate">
+            <div data-x="6000" data-y="16000" data-z="0" data-rotate="0" data-scale="1" id="features-est" class="step animate">
 				<ul class="text-center text-features" style="width:650px; margin:0 auto;">
 					<li class="clip img-circle new">
 						<span class="title_sub_tech">Bootstrap<br>4 hrs</span>
@@ -410,7 +425,7 @@
 					<li class="clear"></li>
 				</ul>
 			</div>
-			<div data-x="6000" data-y="16000" data-z="0" data-rotate="0" data-scale="1" id="features-est-plus" class="step animate">
+			<div data-x="6000" data-y="17000" data-z="0" data-rotate="0" data-scale="1" id="features-est-plus" class="step animate">
 				<ul class="text-center text-features" style="width:160px; margin:0 30px 0 auto; float: left">
 					<li class="clip img-circle new">
 						<span class="title_sub_tech">Total <br>17 days</span>
@@ -446,22 +461,22 @@
 				</ul>
 
 			</div>
-            <div data-x="6000" data-y="17000" data-z="0" data-scale="1" id="tot-est" class="step">
+            <div data-x="6000" data-y="18000" data-z="0" data-scale="1" id="tot-est" class="step">
                 <p class="font text-center font-x1"><span class="dark">21</span> days <span class="dark-blue">|</span> <span class="dark">4</span> weeks</p>
                 <p class="font content-view">Thats without <span class="dark">velocity</span>, which would add another <span class="dark">2</span> weeks</p>
 			</div>
-            <div data-x="6000" data-y="18000" data-z="0" data-scale="1" id="jhipster-save" class="step">
+            <div data-x="6000" data-y="19000" data-z="0" data-scale="1" id="jhipster-save" class="step">
                 <p class="text-center"><i class="fa fa-smile-o"></i></p>
                 <p class="font"><span class="dark"></span> Thats <span class="dark">167</span> hours more for gameplay!</p>
                 <p class="font"><span class="dark"></span> Thats <span class="dark">83</span> cups of coffee saved!</p>
                 <p class="font"><span class="dark"></span> Thats <span class="dark">20</span> more days spent on vacation!</p>
 			</div>
             <!-- -------------------------------------- more about JH --------------------------------- -->
-            <div data-x="8000" data-y="18000" data-z="0" data-scale="1" id="wow-wait" class="step">
+            <div data-x="8000" data-y="19000" data-z="0" data-scale="1" id="wow-wait" class="step">
 				<p class="font text-center"><img src="imgs/shutup.gif"></p>
                 <p class="font text-center font-x1"><span class="dark"></span> Thats a lot! But wait.. </p>
 			</div>
-            <div data-x="8000" data-y="19000" data-z="0" data-rotate="0" data-scale="1" id="sub-features" class="step animate">
+            <div data-x="8000" data-y="20000" data-z="0" data-rotate="0" data-scale="1" id="sub-features" class="step animate">
 				<p class="title-static font">
 					Sub generators
 				</p>
@@ -477,7 +492,7 @@
 					Service - <small class="dark">Create a spring service bean</small><br />
 				</p>
 			</div>
-            <div data-x="8000" data-y="20000" data-z="0" data-rotate="0" data-scale="1" id="dep-features" class="step animate">
+            <div data-x="8000" data-y="21000" data-z="0" data-rotate="0" data-scale="1" id="dep-features" class="step animate">
 				<p class="title-static font">
 					Deployment Sub generators
 				</p>
@@ -491,26 +506,26 @@
 					Openshift - <small class="dark">Build and deploy to Openshift (Coming in next)</small><br />
 				</p>
 			</div>
-            <div data-x="8000" data-y="21000" data-z="0" data-scale="1" id="even-more" class="step">
+            <div data-x="8000" data-y="22000" data-z="0" data-scale="1" id="even-more" class="step">
                 <p class="font text-center font-x1"><span class="dark"></span> If you want even more!! </p>
 			</div>
-            <div data-x="8000" data-y="22000" data-z="0" data-scale="1" id="modules" class="step">
+            <div data-x="8000" data-y="23000" data-z="0" data-scale="1" id="modules" class="step">
                 <p class="font text-center font-x1"><span class="dark">JHipster</span> Modules </p>
                 <p class="text-center"><a class="dark" target="_blank" href="https://jhipster.github.io/modules/marketplace/#/list">jhipster.github.io/modules/marketplace</a></p>
 			</div>
 
 			<!------------------------------- Microservice -------------------------------------------->
-            <div data-x="8000" data-y="22000" data-z="0" data-rotate-x="0" data-rotate-y="90" data-rotate-z="0" data-scale="1" id="microservice" class="step">
+            <div data-x="8000" data-y="23000" data-z="0" data-rotate-x="0" data-rotate-y="90" data-rotate-z="0" data-scale="1" id="microservice" class="step">
                 <p class="font text-center font-x1"><span class="dark"></span> Say "Microservice" one more time! </p>
                 <p class="text-center animate"><img src="imgs/say-one-more.png"></p>
                 <p class="text-center">I dare you! I double dare you! </p>
 			</div>
-            <div data-x="8000" data-y="23000" data-z="0" data-rotate-x="0" data-rotate-y="90" data-rotate-z="0" data-scale="1" id="microservice-jh" class="step">
+            <div data-x="8000" data-y="24000" data-z="0" data-rotate-x="0" data-rotate-y="90" data-rotate-z="0" data-scale="1" id="microservice-jh" class="step">
                 <p class="font text-center font-x1"><a class="dark" target="_blank" href="http://lanyrd.com/2017/spring-io/sfqttc/">Tomorrow 2:30 PM, Room 2 (Track 4)</a></p>
                 <p class="text-center"><img src="https://s3.amazonaws.com/media-p.slid.es/uploads/413114/images/2013965/cry.gif"></p>
 			</div>
             <!-- thank you -->
-			<div data-x="10000" data-y="23000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="roadmap" class="step">
+			<div data-x="10000" data-y="24000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="roadmap" class="step">
 				<p class="text-center icon"><i class="fa fa-road"></i></p>
 				<p class="font text-center font-x1">Roadmap</p>
                 <p class="font">JHipster CLI</p>
@@ -518,7 +533,7 @@
                 <p class="font">Spring 5 &amp; Spring boot 2</p>
                 <p class="font">Extensible architecture</p>
 			</div>
-            <div data-x="12000" data-y="23000" data-z="0" data-rotate="0" data-scale="1" id="intro-finish" class="step">
+            <div data-x="12000" data-y="24000" data-z="0" data-rotate="0" data-scale="1" id="intro-finish" class="step">
                 <p class="text-center"><img style="width: 600px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/413114/images/2164684/giphy.gif"></p>
 				<center>
 					<div class="drop_box" >
