@@ -354,13 +354,23 @@
 				<p class="title-static font">
 					Microservice projects
 				</p>
+				<p>Generated:</p>
 				<p class="font">
-                    <a href="https://github.com/jhipster/jhipster-registry" class="dark">JHipster Registry</a> - <small class="">Eureka + spring config server</small><br />
-                    <a href="https://github.com/jhipster/jhipster-console" class="dark">JHipster Console</a>  - <small class="">Monitoring and Alerting with ELK</small><br />
+                    <a href="https://github.com/jhipster/jhipster-registry" class="dark">JHipster Gateway</a> - <small class="">Angular + Spring boot + Spring cloud + Zuul</small><br />
+                    <a href="https://github.com/jhipster/jhipster-console" class="dark">JHipster UAA</a>  - <small class="">Oauth2 Authentication & Authorization server</small><br />
+                    <a href="https://github.com/jhipster/jhipster-console" class="dark">JHipster Microservice</a>  - <small class="">Spring boot microservice app</small><br />
+				</p>
+				<p>Runtime:</p>
+				<p class="font">
+					<a href="https://github.com/jhipster/jhipster-registry" class="dark">JHipster Registry</a> - <small class="">Eureka + spring config server</small><br />
+                    <a href="https://github.com/jhipster/jhipster-console" class="dark">JHipster Console</a>  - <small class="">Monitoring and Alerting with ELK + Zipkin</small><br />
 				</p>
 			</div>
 			<!-- -------------------------------------- MS --------------------------------- -->
-			<div data-x="2000" data-y="14000" data-z="0" data-scale="1" id="demo-install" class="step">
+			<div data-x="2000" data-y="14000" data-z="0" data-scale="1" id="microservice-demo" class="step">
+                <p class=""><img src="imgs/ms-arch-today.png" style="width:1100px"></p>
+			</div>
+			<div data-x="2000" data-y="15000" data-z="0" data-scale="1" id="demo-install" class="step">
                 <p class="font text-center font-x1">Install JHipster </p>
 				<div class="code">
 					<p>npm install -g generator-jhipster</p>
@@ -369,7 +379,7 @@
 				</div>
 				<p>* Java 8, Git, Node.js, Yarn/NPM, Yeoman(yo), Docker, Docker-compose</p>
 			</div>
-			<div data-x="2000" data-y="15000" data-z="0" data-scale="1" id="demo-build" class="step">
+			<div data-x="2000" data-y="16000" data-z="0" data-scale="1" id="demo-build" class="step">
                 <p class="font text-center font-x1">JHipster Magic </p>
                 <p class="font text-center font-x0">Lets build our API gateway</p>
 				<div class="code">
@@ -378,7 +388,7 @@
 					<p>yo jhipster <span style="color: yellow">(will be just `jhipster` from next version)</span></p>
 				</div>
 			</div>
-			<div data-x="2000" data-y="16000" data-z="0" data-scale="1" id="demo-build2" class="step">
+			<div data-x="2000" data-y="17000" data-z="0" data-scale="1" id="demo-build2" class="step">
                 <p class="font text-center font-x0">Lets build our CMS microservice</p>
 				<div class="code">
 					<p>mkdir cms && cd cms</p>
@@ -390,7 +400,7 @@
 					<p>yo jhipster:entity catalog</p>
 				</div>
 			</div>
-			<div data-x="2000" data-y="17000" data-z="0" data-scale="1" id="demo-build3" class="step">
+			<div data-x="2000" data-y="18000" data-z="0" data-scale="1" id="demo-build3" class="step">
                 <p class="font text-center font-x0">Lets build our Store microservice</p>
 				<div class="code">
 					<p>mkdir store && cd store</p>
@@ -405,7 +415,7 @@
 					<p>yo jhipster:import-jdl jhipster-jdl.jh</p>
 				</div>
 			</div>
-			<div data-x="2000" data-y="18000" data-z="0" data-scale="1" id="demo-build4" class="step">
+			<div data-x="2000" data-y="19000" data-z="0" data-scale="1" id="demo-build4" class="step">
                 <p class="font text-center font-x0">Lets deploy our microservices</p>
 				<div class="code">
 					<p>mkdir docker && cd docker</p>
@@ -418,11 +428,11 @@
 			</div>
 			
             <!-- -------------------------------------- more about JH --------------------------------- -->
-            <div data-x="4000" data-y="18000" data-z="0" data-scale="1" id="wow-wait" class="step">
+            <div data-x="4000" data-y="19000" data-z="0" data-scale="1" id="wow-wait" class="step">
 				<p class="font text-center"><img src="imgs/shutup.gif"></p>
                 <p class="font text-center font-x1"><span class="dark"></span> Thats a lot! But wait.. </p>
 			</div>
-            <div data-x="4000" data-y="19000" data-z="0" data-rotate="0" data-scale="1" id="sub-features" class="step animate">
+            <div data-x="4000" data-y="20000" data-z="0" data-rotate="0" data-scale="1" id="sub-features" class="step animate">
 				<p class="title-static font">
 					Sub generators
 				</p>
@@ -438,7 +448,7 @@
 					Service - <small class="dark">Create a spring service bean</small><br />
 				</p>
 			</div>
-            <div data-x="4000" data-y="20000" data-z="0" data-rotate="0" data-scale="1" id="dep-features" class="step animate">
+            <div data-x="4000" data-y="21000" data-z="0" data-rotate="0" data-scale="1" id="dep-features" class="step animate">
 				<p class="title-static font">
 					Deployment Sub generators
 				</p>
@@ -452,16 +462,16 @@
 					Openshift - <small class="dark">Build and deploy to Openshift (Coming in next)</small><br />
 				</p>
 			</div>
-            <div data-x="4000" data-y="21000" data-z="0" data-scale="1" id="even-more" class="step">
+            <div data-x="4000" data-y="22000" data-z="0" data-scale="1" id="even-more" class="step">
                 <p class="font text-center font-x1"><span class="dark"></span> If you want even more!! </p>
 			</div>
-            <div data-x="4000" data-y="22000" data-z="0" data-scale="1" id="modules" class="step">
+            <div data-x="4000" data-y="23000" data-z="0" data-scale="1" id="modules" class="step">
                 <p class="font text-center font-x1"><span class="dark">JHipster</span> Modules </p>
                 <p class="text-center"><a class="dark" target="_blank" href="https://jhipster.github.io/modules/marketplace/#/list">jhipster.github.io/modules/marketplace</a></p>
 			</div>
 
             <!-- thank you -->
-			<div data-x="6000" data-y="22000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="roadmap" class="step">
+			<div data-x="6000" data-y="23000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="roadmap" class="step">
 				<p class="text-center icon"><i class="fa fa-road"></i></p>
 				<p class="font text-center font-x1">Roadmap</p>
                 <p class="font">JHipster CLI</p>
@@ -469,7 +479,7 @@
                 <p class="font">Spring 5 &amp; Spring boot 2</p>
                 <p class="font">Extensible architecture</p>
 			</div>
-            <div data-x="8000" data-y="22000" data-z="0" data-rotate="0" data-scale="1" id="intro-finish" class="step">
+            <div data-x="8000" data-y="23000" data-z="0" data-rotate="0" data-scale="1" id="intro-finish" class="step">
                 <p class="text-center"><img style="width: 600px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/413114/images/2164684/giphy.gif"></p>
 				<center>
 					<div class="drop_box" >
@@ -478,7 +488,7 @@
 					</div>
 				</center>
 			</div>
-			<div data-x="14000" data-y="24000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="links" class="step">
+			<div data-x="10000" data-y="23000" data-z="0" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" id="links" class="step">
 				<p class="text-center icon"><i class="fa fa-link"></i></p>
 				<p class="font">Slide : <a class="dark" target="_blank" href="https://deepu.js.org/jh-slides-springio-2017">deepu.js.org/jh-slides-springio-2017</a></p>
 				<p class="font">Code: <a class="dark" target="_blank" href="https://github.com/deepu105/spring-io">github.com/deepu105/spring-io</a></p>
@@ -495,7 +505,7 @@
 			    <li><a href="#intro"  class="font">Intro <i class="fa fa-home"></i></a></li>
 			    <li><a href="#about-jh" class="font">JHipster <i class="fa fa-star"></i></a></li>
 			    <li><a href="#microservice" class="font">Microservice <i class="fa fa-sitemap"></i></a></li>
-			    <li><a href="#demo-install"  class="font">Demo <i class="fa fa-code"></i></a></li>
+			    <li><a href="#microservice-demo"  class="font">Demo <i class="fa fa-code"></i></a></li>
 			    <li><a href="#sub-features" class="font">More features <i class="fa-hand-spock-o"></i></a></li>
 			</ul>
 		</div>
