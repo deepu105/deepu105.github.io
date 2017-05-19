@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "node_modules": "explorerExcludedFiles",
+    ".idea": "explorerExcludedFiles",
+    "*.iml": "explorerExcludedFiles",
+    "atlassian-ide-plugin.xml": "explorerExcludedFiles",
+    ".project": "explorerExcludedFiles",
+    "test/temp/": "explorerExcludedFiles",
+    "npm-debug.log": "explorerExcludedFiles"
+  }
+}
