@@ -1,21 +1,18 @@
 {
   "basics": {
     "name": "Deepu K Sasidharan",
-    "label": "Software Solution Architect, UX Expert, JS Evangelist, Airline Consultant, OSS Developer",
+    "label": "JHipster co-lead, Software Solution Architect, UX Implementation Expert, JS Evangelist, Airline Consultant, OSS Developer",
     "picture": "https://avatars2.githubusercontent.com/u/1107223?v=3&s=460",
     "email": "deepu.k.sasidharan@gmail.com",
-    "phone": "+65 86476303",
+    "phone": "+31 657635007",
     "website": "http://deepu.js.org",
-    "summary": "Software Solution Designer and Airline Business Consultant hailing from Chennai, India.  Experienced in solution ideation, visualization/prototyping and proposal writing. Passionate about emerging technologies. Hands on expert in Enterprise Architecture, UX design, rich web  development and hybrid mobile application design. Open Source contributor and JavaScript Evangelist, core contributor for JHipster",
+    "summary": "Software Solution Designer and Airline Business Consultant hailing from Chennai, India.  Experienced in solution ideation, visualization/prototyping and proposal writing. Passionate about emerging technologies. Hands on expert in Enterprise Architecture, UX development, rich web  development and hybrid mobile application design. Open Source contributor and JavaScript Evangelist, co-lead of JHipster",
     "location": {
-      "address": "04-464, Blk 292, Tampines",
-      "postalCode": "Singapore 520292",
-      "city": "Singapore",
-      "countryCode": "SG",
-      "region": "Singapore"
+      "city": "Hilversum",
+      "countryCode": "NL",
+      "region": "Netherlands"
     },
-    "profiles": [
-      {
+    "profiles": [{
         "network": "Twitter",
         "username": "deepu105",
         "url": "https://twitter.com/deepu105"
@@ -32,7 +29,17 @@
       }
     ]
   },
-  "work": [
+  "work": [{
+      "company": "Xebialabs",
+      "position": "Senior Product Developer",
+      "website": "https://xebialabs.com/",
+      "startDate": "2016-11-01",
+      "endDate": "",
+      "summary": "Working as a Full stack Senior Product Developer for one of the Leaders in Enterprise DevOps",
+      "highlights": [
+
+      ]
+    },
     {
       "company": "Tata Consultancy Services",
       "position": "Software Solution Designer",
@@ -130,8 +137,7 @@
     }
   ],
   "volunteer": [],
-  "education": [
-    {
+  "education": [{
       "institution": "Anna University",
       "area": "Electrical and Electronics Engineering",
       "studyType": "Bachelor",
@@ -150,8 +156,7 @@
       "courses": []
     }
   ],
-  "awards": [
-    {
+  "awards": [{
       "title": "ILP Kudos",
       "date": "2010-07-01",
       "awarder": "Tata Consultancy Services",
@@ -200,17 +205,14 @@
       "summary": "Award for best performer of the month."
     }
   ],
-  "publications": [
-    {
-      "name": "JHipster presentation",
-      "publisher": "Spring User Group -Singapore",
-      "releaseDate": "2016-03-16",
-      "website": "https://www.youtube.com/watch?v=nKRpVkba4Ck&feature=youtu.be",
-      "summary": "A presentation and hands on demo of JHipster 3.0 for the Spring user group, Singapore."
-    }
-  ],
-  "skills": [
-    {
+  "publications": [{
+    "name": "Full Stack Development with JHipster",
+    "publisher": "Packt",
+    "releaseDate": "2018-05-01",
+    "website": "https://www.packtpub.com/application-development/full-stack-development-jhipster",
+    "summary": ""
+  }],
+  "skills": [{
       "name": "Web Development",
       "level": "Advanced",
       "keywords": [
@@ -218,16 +220,17 @@
         "CSS2/3",
         "Javascript",
         "AngularJS",
-	"Typescript",
-        "Jquery",
+        "Angular",
         "React",
+        "Typescript",
+        "Jquery",
         "Sass/Less",
         "Bower",
         "AJAX/REST",
         "JSON",
-	"Webpack",
+        "Webpack",
         "RWD(Bootstrap)",
-        "UX Design",
+        "UX Development",
         "Photoshop"
       ]
     },
@@ -236,31 +239,31 @@
       "level": "Advanced",
       "keywords": [
         "NodeJS",
-	"Typescript",
-	"Webpack",
+        "Typescript",
+        "Webpack",
         "Yeoman",
-        "AngularJS/React",
-        "Protractor/Jasmine/Mocha",
+        "AngularJS/Angular/React",
+        "Protractor/Jasmine/Mocha/Karma/Chai",
         "Gulp/Grunt",
-        "NPM"
+        "NPM/Yarn",
+        "D3",
+        "ECharts"
       ]
     },
     {
       "name": "Java/JEE",
       "level": "Advanced",
       "keywords": [
+        "JHipster",
         "Spring (Core, Boot, MVC, Security, Data, Batch, Webservice)",
         "Gatling",
-	"Scala/Groovy",
-        "Netflix (Eureka, Zuul, Hyterix, ribbon)",
+        "Netflix OSS(Eureka, Zuul, Hyterix, ribbon)",
         "Spring Cloud",
         "Struts",
         "JPA/Hibernate/MyBatis",
         "SOAP",
-        "Gradle/Maven",
-        "JHipster",
-        "JUnit",
-        "Android SDK"
+        "Gradle/Maven/Ant",
+        "JUnit/Mockito"
       ]
     },
     {
@@ -268,7 +271,7 @@
       "level": "Medium",
       "keywords": [
         "Oracle",
-        "MySQL",
+        "MySQL", "PostGres",
         "MongoDB"
       ]
     },
@@ -276,22 +279,23 @@
       "name": "Other",
       "level": "medium",
       "keywords": [
-        "Docker",
+        "Docker", "Kubernetes",
+        "Scala/Groovy/Kotlin",
         "Shell",
-        "Hadoop",
         "ELK",
         "Big data",
         "C/C++",
         "GIT/SVN",
         "Cordova",
-	"Intel XDK",
+        "Intel XDK",
+        "Android SDK",
         "Hybrid mobile apps",
-        "Travis, Jenkins"
+        "Travis, Jenkins",
+        "Consul, Keycloak, Prometheus"
       ]
     }
   ],
-  "languages": [
-    {
+  "languages": [{
       "language": "English",
       "fluency": "Full Professional Proficiency"
     },
@@ -308,8 +312,7 @@
       "fluency": "Native speaker"
     }
   ],
-  "interests": [
-    {
+  "interests": [{
       "name": "Astronomy",
       "keywords": [
         "Astrophotography",
