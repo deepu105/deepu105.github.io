@@ -22,12 +22,12 @@ indexApp.controller('ModuleListCtrl', function ($scope, $http, $location, $filte
             icon: 'fa-clock-o fa-2x'
         },
         {
-            name: 'Jhipster React Generator',
-            desc: 'A cool yeoman generator to create spring + react apps',
-            npmPackageName: 'generator-jhipster-react',
-            author: 'hipster-labs',
-            href: 'https://github.com/hipster-labs/generator-jhipster-react',
-            img: 'home/assets/img/logo-jhipster-react.png',
+            name: 'Jhipster Registry',
+            desc: 'Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config',
+            npmPackageName: 'jhipster-registry',
+            author: 'jhipster',
+            href: 'https://github.com/jhipster/jhipster-registry',
+            img: 'home/assets/img/logo-jhipster.png',
             icon: 'img'
         },
         {
