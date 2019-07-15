@@ -1,7 +1,8 @@
 module Jekyll
-  # A simple stub for the Dev.to link tag
-  class LinkTag < Liquid::Tag
+  # A simple stub for the Dev.to CodeSandBox tag
+  class CodeSandBoxTag < Liquid::Tag
     def initialize(_tag_name, url, _tokens)
+      super
       @article = url
     end
   
@@ -11,4 +12,4 @@ module Jekyll
   end
 end
   
-  Liquid::Template.register_tag("link", Jekyll::LinkTag)
+  Liquid::Template.register_tag("codesandbox", Jekyll::CodeSandBoxTag)

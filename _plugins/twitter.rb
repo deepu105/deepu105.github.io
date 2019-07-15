@@ -10,7 +10,7 @@ require "digest"
 # A Liquid tag plugin for Jekyll that renders Tweets from Twitter API.
 # Adapted from https://github.com/rob-murray/jekyll-twitter-plugin
 #
-module TwitterJekyll
+module Jekyll
   VERSION = "2.0.0".freeze
   LIBRARY_VERSION   = "jekyll-twitter-plugin-v#{VERSION}".freeze
   REQUEST_HEADERS   = { "User-Agent" => LIBRARY_VERSION }.freeze
@@ -147,4 +147,4 @@ module TwitterJekyll
   end
 end
 
-Liquid::Template.register_tag("twitter", TwitterJekyll::TwitterTag)
+Liquid::Template.register_tag("twitter", Jekyll::TwitterTag)

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: My reflections on Golang
 published: true
 description: After using Go for more than 9 months, here is what I think of it
