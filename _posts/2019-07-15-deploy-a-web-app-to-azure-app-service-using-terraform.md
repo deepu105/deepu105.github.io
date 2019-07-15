@@ -1,4 +1,11 @@
-# Deploy a web app to Azure App Service using Terraform
+---
+title: Deploy a web app to Azure App Service using Terraform
+description: Deploy a web app to Azure App Service using Terraform
+tags: java, jhipster, azure, terraform
+published: true
+image: https://thepracticaldev.s3.amazonaws.com/i/8mb4tyleqthxsvl1yxy6.png
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/8mb4tyleqthxsvl1yxy6.png
+---
 
 Deploying Java web applications to Azure is easy and has been tried, tested and explained many times by many people. My friend [Julien Dubois](https://dev.to/jdubois) has a nice series on it [here](https://dev.to/azure/creating-a-spring-boot-and-angular-application-for-azure-1-7-2mb8). Azure makes it really easy to use its [App Service](https://azure.microsoft.com/en-gb/services/app-service/) as it provides many different ways of deploying a web app.
 

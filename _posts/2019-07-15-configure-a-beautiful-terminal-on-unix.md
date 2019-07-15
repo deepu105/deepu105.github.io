@@ -3,6 +3,7 @@ title: Configure a beautiful terminal on Unix with Zsh
 published: true
 description: See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh
 tags: linux, terminal, oh-my-zsh, zsh
+image: https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png
 series: Linux environment for developers
 ---
