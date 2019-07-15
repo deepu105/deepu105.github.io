@@ -10,3 +10,9 @@ atlassian-ide-plugin.xml
 test/temp/
 npm-debug.log
 .vscode
+mediumish-theme-jekyll
+_site
+.DS_Store
+*.swp
+.sass-cache
+*~
