@@ -1,4 +1,5 @@
 ---
+layout: post
 title: My reflections on Golang
 published: true
 description: After using Go for more than 9 months, here is what I think of it
@@ -183,7 +184,7 @@ The interface concept in Go is weird. These are the only implicit construct in G
 
 Another interface Gotcha is nil value checks, in Go, an interface is made up of two parts a type and a value, so an interface is `nil` only when both type and value are nil, this means you can't just simply do nil checks on interfaces. This is so confusing the Go has a specific [FAQ](https://golang.org/doc/faq#nil_error) for this. Below article explains this in more detail
 
-
+{% link https://dev.to/pauljlucas/go-tcha-when-nil--nil-hic %}
 
 ### Single GC algorithm
 
