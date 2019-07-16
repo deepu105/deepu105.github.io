@@ -3,27 +3,26 @@
 rm -rf _site
 
 if [ -z "$(git status --porcelain)" ]; then
-    # Working directory clean
+    echo ">>> Working directory clean"
     setopt extended_glob
     TMP_LOC=/tmp/deepu.github.io
 
     /bin/rm -rf _site
     /bin/rm -rf $TMP_LOC
-    # Build site
+
+    echo ">> Building site"
     bundle update listen
     bundle exec jekyll build
 
-    # Move to temp
+    echo ">> Move site to temp folder"
     mkdir --parents $TMP_LOC
     mv _site/* $TMP_LOC
 
-    #  Clean directory
+    echo ">> Checkout and clean master"
     git checkout master
-    sleep 5
     /bin/rm -rf ^*vendor*
-    sleep 5
 
-    # Move site form temp & publish
+    echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* .
     now=$(date)
     git add --all
