@@ -18,8 +18,9 @@ if [ -z "$(git status --porcelain)" ]; then
 
     #  CLean directory
     git checkout master
+    sleep 5
     /bin/rm -rf ^*vendor*
-
+    sleep 5
     # Move site form temp & publish
     mv $TMP_LOC/* .
     now=$(date)
