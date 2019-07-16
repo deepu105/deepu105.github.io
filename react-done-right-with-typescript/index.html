@@ -21,7 +21,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-07-13T00:00:00+02:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"deepu"},"description":"Learn how to write efficient and concise react components using TypeScript.","@type":"BlogPosting","headline":"React components done right with TypeScript mapped and conditional types","dateModified":"2019-07-13T00:00:00+02:00","datePublished":"2019-07-13T00:00:00+02:00","url":"https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79"},"image":"https://thepracticaldev.s3.amazonaws.com/i/4eaahfl09brz9ozacdg1.jpeg","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"Learn how to write efficient and concise react components using TypeScript.","headline":"React components done right with TypeScript mapped and conditional types","dateModified":"2019-07-13T00:00:00+02:00","datePublished":"2019-07-13T00:00:00+02:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79"},"url":"https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79","image":"https://thepracticaldev.s3.amazonaws.com/i/4eaahfl09brz9ozacdg1.jpeg","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -447,7 +447,11 @@
 
 <p>Let see a simple React component with a reducer written in ES6. Take a look at <strong><em>index.jsx</em></strong> in the below code sandbox:</p>
 
-<p><a href="40n3y52qlx runonclick=1 ">40n3y52qlx runonclick=1 </a></p>
+<p>
+            <div class="embed-video-container">
+                <iframe src="https://codesandbox.io/embed/40n3y52qlx?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            </div>
+        </p>
 
 <p>As you can see, we use the prop-types library to define the component props. It is not the most efficient way, as it includes considerable overhead during development. It doesn’t provide full type safety anyway.</p>
 
@@ -455,7 +459,11 @@
 
 <p>Now let us convert this simple example to TypeScript so that it is type safe. Take a look at <strong><em>index.tsx</em></strong> in the below code sandbox:</p>
 
-<p><a href="znv36k09op runonclick=1 ">znv36k09op runonclick=1 </a></p>
+<p>
+            <div class="embed-video-container">
+                <iframe src="https://codesandbox.io/embed/znv36k09op?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            </div>
+        </p>
 
 <p>As you can see, the code is more type-safe now. It is also much more verbose even without PropTypes library and all the type inference.</p>
 
@@ -463,7 +471,11 @@
 
 <p>Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at <strong><em>index.tsx</em></strong> in the below code sandbox:</p>
 
-<p><a href="zq7w69p57x runonclick=1 ">zq7w69p57x runonclick=1 </a></p>
+<p>
+            <div class="embed-video-container">
+                <iframe src="https://codesandbox.io/embed/zq7w69p57x?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+            </div>
+        </p>
 
 <p>As you can see, we used <code class="highlighter-rouge">Readonly</code> and <code class="highlighter-rouge">ReturnType</code> mapping along with some other type inference techniques to write a more type-safe but less verbose version of the component.</p>
 
@@ -473,14 +485,17 @@
 
 <p>I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slides if you like here.</p>
 
-<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
-<div class="embed-container">    <iframe title="YouTube video player" width="640" height="390" src="//www.youtube.com/embed/" frameborder="0" allowfullscreen=""></iframe></div>
+<p>
+            <div class="embed-video-container">
+                <iframe width="710" height="399" src="http://www.youtube.com/embed/SBwGH4kbkms " allowfullscreen=""></iframe>
+            </div>
+        </p>
 
 <p>
-            &lt;script async="async" class="speakerdeck-embed" data-id=ffe22480dbfd4c1f83f66c380bba2283  data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"&gt; &lt;/script&gt;
+            <script async="" class="speakerdeck-embed" data-id="ffe22480dbfd4c1f83f66c380bba2283" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
             <noscript>
                 <a href="//speakerdeck.com/player/ffe22480dbfd4c1f83f66c380bba2283">
-                <img alt="Folien bei Speakerdeck" src="//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg" />
+                <img alt="Speakerdeck" src="//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg" />
                 </a>
             </noscript>
           </p>
