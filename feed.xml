@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Jul 2019 20:27:55 +0200</pubDate>
-    <lastBuildDate>Tue, 16 Jul 2019 20:27:55 +0200</lastBuildDate>
+    <pubDate>Tue, 16 Jul 2019 21:48:31 +0200</pubDate>
+    <lastBuildDate>Tue, 16 Jul 2019 21:48:31 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -445,7 +445,7 @@
 
 &lt;h3 id=&quot;doesnt-need-a-runtime&quot;&gt;Doesn’t need a runtime&lt;/h3&gt;
 
-&lt;p&gt;Go doesn’t need a runtime like JVM or NodeJS, Go applications can be compiled into an executable cross-platform binary using the &lt;a href=&quot;https://golang.org/pkg/go/build/&quot;&gt;standard Go tooling&lt;/a&gt;. This makes Go applications portable and platform independent.&lt;/p&gt;
+&lt;p&gt;Go doesn’t need a runtime like JVM or NodeJS, Go applications can be compiled into an executable cross-platform binary using the &lt;a href=&quot;https://golang.org/pkg/go/build/&quot;&gt;standard Go tooling&lt;/a&gt;. This makes Go applications portable and platform-independent.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-i-dont-like-about-go&quot;&gt;What I don’t like about Go&lt;/h2&gt;
 
@@ -469,7 +469,7 @@ These problems are similar to the issues with dependency range in Node package m
 
 &lt;h3 id=&quot;source-code-in-gopath&quot;&gt;Source code in GOPATH&lt;/h3&gt;
 
-&lt;p&gt;Go recommends you to create your Go projects under the GOPATH. Maybe it is just me, but I hate this as I would normally like to organize my code. For example, I have a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/workspace/&lt;/code&gt; folder where I organize my projects by the organization. If I follow the Go recommendation I have to put the project under &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/deepu/go/src&lt;/code&gt; along with all the library source code that is downloaded. If you don’t follow this then most of the Go tooling just doesn’t work. Currently, I have a specific Gradle task that copies over all vendor libs to my local Gopath inside &lt;code class=&quot;highlighter-rouge&quot;&gt;~/workspace/XL/&amp;lt;project&amp;gt;&lt;/code&gt; to workaround this.&lt;/p&gt;
+&lt;p&gt;Go recommends you to create your Go projects under the GOPATH. Maybe it is just me, but I hate this as I would normally like to organize my code. For example, I have a &lt;code class=&quot;highlighter-rouge&quot;&gt;~/workspace/&lt;/code&gt; folder where I organize my projects by the organization. If I follow the Go recommendation I have to put the project under &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/deepu/go/src&lt;/code&gt; along with all the library source code that is downloaded. If you don’t follow this then most of the Go tooling just doesn’t work. Currently, I have a specific Gradle task that copies over all the vendor libs to my local Gopath inside &lt;code class=&quot;highlighter-rouge&quot;&gt;~/workspace/XL/&amp;lt;project&amp;gt;&lt;/code&gt; to workaround this.&lt;/p&gt;
 
 &lt;h3 id=&quot;confusing-pointer-behaviors&quot;&gt;Confusing pointer behaviors&lt;/h3&gt;
 
@@ -581,7 +581,7 @@ These problems are similar to the issues with dependency range in Node package m
 &lt;h3 id=&quot;so-where-would-i-use-go&quot;&gt;So where would I use Go?&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;I would definitely use Go when the use case requires a lot of parallel processing and/or concurrency(both are not the same thing but are closer to each other) as you can make use of Goroutines for this and is much simpler and efficient than managing threads like in a Java application or working around it in JavaScript using callback hell since JS is actually single threaded. &lt;a href=&quot;http://tleyden.github.io/blog/2014/10/30/goroutines-vs-threads/&quot;&gt;Here&lt;/a&gt; is a nice article explaining the advantage of Goroutines.&lt;/li&gt;
+  &lt;li&gt;I would definitely use Go when the use case requires a lot of parallel processing and/or concurrency(both are not the same thing but are closer to each other) as you can make use of Goroutines for this and is much simpler and efficient than managing threads like in a Java application or working around it in JavaScript using callback hell since JS is actually single-threaded. &lt;a href=&quot;http://tleyden.github.io/blog/2014/10/30/goroutines-vs-threads/&quot;&gt;Here&lt;/a&gt; is a nice article explaining the advantage of Goroutines.&lt;/li&gt;
   &lt;li&gt;Simple microservices where boilerplate is not a concern&lt;/li&gt;
   &lt;li&gt;Networking applications or web servers, especially with async workloads, can greatly benefit from Go. But to be fair you can do these in Java, Python, JS, etc as well but Go in the end will provide better efficiency and would be easier to implement.&lt;/li&gt;
   &lt;li&gt;System programming. While Rust or C is a much better choice for this but if those are not in your arsenal then Go is the next best thing. With decent support for pointers and its standard library its easier for system programs than other mainstream languages. Many popular system tools like Docker, Kubernetes, etc are indeed written in Go.&lt;/li&gt;
@@ -594,7 +594,7 @@ These problems are similar to the issues with dependency range in Node package m
   &lt;li&gt;After writing a high-level CLI tool in Go, I hate the experience, I kept thinking that doing it in JavaScript would have been 10 times more productive and a nicer experience. SO I would choose JavaScript or TypeScript running on NodeJS for CLI tool any day. Mainly due to the ecosystem and the sheer joy and speed of getting things done without spending all your time writing boilerplate code. But this wouldn’t be applicable if the CLI in question a system tool or a networking tool, in those cases Go could be a good option.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I do hope Go evolves into a general purpose language over time and many of these concerns are solved. In the meantime, I’ll try to follow this mantra.&lt;/p&gt;
+&lt;p&gt;I do hope Go evolves into a general-purpose language over time and many of these concerns are solved. In the meantime, I’ll try to follow this mantra.&lt;/p&gt;
 
 &lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Remember this manthra &amp;quot;right tools for the right job, right pattern for the use-case&amp;quot;  &lt;a href=&quot;https://twitter.com/hashtag/engineering?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#engineering&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/development?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#development&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/architecture?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#architecture&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/microservices?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#microservices&lt;/a&gt; &lt;a href=&quot;https://t.co/SA42jQ5TLH&quot;&gt;https://t.co/SA42jQ5TLH&lt;/a&gt;&lt;/p&gt;&amp;mdash; 𝔻𝕖𝕖𝕡𝕦 𝕂 𝕊𝕒𝕤𝕚𝕕𝕙𝕒𝕣𝕒𝕟 (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1146138541765906432?ref_src=twsrc%5Etfw&quot;&gt;July 2, 2019&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
@@ -1063,7 +1063,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 
 &lt;h2 id=&quot;gnome-extensions&quot;&gt;Gnome extensions&lt;/h2&gt;
 
-&lt;p&gt;You can install below extensions by visiting the link in the title of extension below and by clicking on the &lt;strong&gt;on&lt;/strong&gt; switch on the top right corner. On Chrome, you would need the &lt;a href=&quot;https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep&quot;&gt;GNOME Shell integration&lt;/a&gt; plugin to enable the switch. On Firefox, it will prompt you to install the plugin if it doesn’t exist.&lt;/p&gt;
+&lt;p&gt;You can install below extensions by visiting the link in the title of the extension below and by clicking on the &lt;strong&gt;on&lt;/strong&gt; switch on the top right corner. On Chrome, you would need the &lt;a href=&quot;https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep&quot;&gt;GNOME Shell integration&lt;/a&gt; plugin to enable the switch. On Firefox, it will prompt you to install the plugin if it doesn’t exist.&lt;/p&gt;
 
 &lt;h4 id=&quot;dash-to-dock&quot;&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/307/dash-to-dock/&quot;&gt;Dash to Dock&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;GNOME without this plugin almost feels annoying. IMO this plugin also should be the default GNOME setting. This one moves your GNOME dash into a highly configurable dock which can be placed on the sides or top/bottom of the screen. I find it perfect on the left side of the screen in GNOME. It can be a floating dock or fixed to look like those on Mint or KDE.&lt;/p&gt;
@@ -1079,7 +1079,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 &lt;p&gt;This is another default in GNOME that is annoying. When something needs focus these plugins brings the window up instead of the default notification. You can use any one of the plugins as both do the same thing.&lt;/p&gt;
 
 &lt;h4 id=&quot;alternatetab&quot;&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/15/alternatetab/&quot;&gt;AlternateTab&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;This replaces the default Alt+Tab with a more classical window based switcher which IMO is more user-friendly as the default requires more keyboard navigation using the arrow keys.&lt;/p&gt;
+&lt;p&gt;This replaces the default Alt+Tab with a more classical window-based switcher which IMO is more user-friendly as the default requires more keyboard navigation using the arrow keys.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/bjt36nvje3640e3h92dq.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -1087,7 +1087,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 &lt;p&gt;This is a classic plugin that adds the window list to the bottom of the screen and is a must if you use multiple monitors as the windows are grouped and placed in the right monitor screen.&lt;/p&gt;
 
 &lt;h4 id=&quot;caffeine&quot;&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/517/caffeine/&quot;&gt;Caffeine&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;This one adds the ability to temporarily disable screensaver/auto-suspend and automatically activates when you go full-screen. A must have if you are using your computer for watching videos, presentations, screencast and so on.&lt;/p&gt;
+&lt;p&gt;This one adds the ability to temporarily disable screensaver/auto-suspend and automatically activates when you go full-screen. A must-have if you are using your computer for watching videos, presentations, screencast and so on.&lt;/p&gt;
 
 &lt;h4 id=&quot;clipboard-indicator&quot;&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/779/clipboard-indicator/&quot;&gt;Clipboard Indicator&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;This is one my favorite. It adds a nifty clipboard manager to the top bar and provides shortcuts to cycle through clipboard entries. A real time saver.&lt;/p&gt;
