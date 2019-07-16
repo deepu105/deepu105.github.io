@@ -15,13 +15,14 @@ if [ -z "$(git status --porcelain)" ]; then
 
     #  CLean directory
     git checkout master
-    rm -rf *
+    /bin/rm -rf *
 
     # Move site form temp & publish
     mv $TMP_LOC/* .
+    now=$(date)
     git add --all
     git commit -am "Updated site on $now"
-    git push origin master
+    git push origin master --force
 
     echo "$now: Published changes to GitHub"
 
