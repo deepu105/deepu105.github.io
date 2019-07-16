@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>Configure a beautiful terminal on Unix with Zsh | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Configure a beautiful terminal on Unix with Zsh | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="Configure a beautiful terminal on Unix with Zsh" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh" />
+<meta property="og:description" content="See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh" />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:image" content="https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-15T00:00:00+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"description":"See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh","@type":"BlogPosting","headline":"Configure a beautiful terminal on Unix with Zsh","dateModified":"2019-07-15T00:00:00+02:00","datePublished":"2019-07-15T00:00:00+02:00","url":"/configure-a-beautiful-terminal-on-unix/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"mainEntityOfPage":{"@type":"WebPage","@id":"/configure-a-beautiful-terminal-on-unix/"},"image":"https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+            
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.packtpub.com/eu/application-development/full-stack-development-jhipster"><i class="fas fa-book"></i> Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Configure a beautiful terminal on Unix with Zsh&url=/configure-a-beautiful-terminal-on-unix/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=/configure-a-beautiful-terminal-on-unix/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/configure-a-beautiful-terminal-on-unix/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Configure a beautiful terminal on Unix with Zsh</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png" alt="Configure a beautiful terminal on Unix with Zsh">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>I was a long time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I’m not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup <a href="https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc">here</a></p>
+
+<p>As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.</p>
+
+<p>Let’s see how to configure a powerful and productive terminal experience. The setup is based on what I have configured on my Fedora machine. The same setup can be recreated on any other Linux distribution, BSD or Mac as well. You just need to use the installation instruction from the tools for the given platform.</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/fhwstp9251al105hp899.gif" alt="" /></p>
+
+<p>Below are the tools we would need for this.</p>
+
+<h2 id="zsh">Zsh</h2>
+
+<p><a href="https://www.zsh.org/">Zsh</a> is one of the most feature-rich shells for Unix. It works on Linux, Mac, <a href="https://docs.microsoft.com/en-us/windows/wsl/about">WSL</a>, and BSD. There are alternatives like <a href="https://fishshell.com/">Fish</a> which also offers similar features but I personally like Zsh.</p>
+
+<ol>
+  <li>Check if Zsh is already installed by running <code class="highlighter-rouge">zsh --version</code> on your terminal. If not found, install it using your package manager.
+    <ul>
+      <li>Fedora: <code class="highlighter-rouge">sudo dnf install zsh</code></li>
+      <li>Mac: <code class="highlighter-rouge">brew install zsh zsh-completions</code></li>
+      <li>RHEL/CentOS: <code class="highlighter-rouge">sudo yum update &amp;&amp; sudo yum -y install zsh</code></li>
+      <li>Ubuntu/Debian: <code class="highlighter-rouge">sudo apt install zsh</code></li>
+      <li>For other platform refer <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH#how-to-install-zsh-in-many-platforms">this</a></li>
+    </ul>
+  </li>
+  <li>Now make Zsh your default shell by running <code class="highlighter-rouge">chsh -s $(which zsh)</code>.</li>
+  <li>Log out and log in back again to use your new default shell.</li>
+  <li>Test that it worked with echo <code class="highlighter-rouge">$SHELL</code>. Expected result: <code class="highlighter-rouge">/bin/zsh</code> or similar.</li>
+  <li>Test with <code class="highlighter-rouge">$SHELL --version</code>. Expected result: <code class="highlighter-rouge">zsh 5.6.2</code> or similar</li>
+</ol>
+
+<p>Note: If you have installed Zsh for the first time and launch the shell it would prompt you to configure some settings. You can choose to ignore that by hitting <code class="highlighter-rouge">q</code> as we will configure it later on.</p>
+
+<h2 id="oh-my-zsh">Oh-My-Zsh</h2>
+
+<p><a href="https://ohmyz.sh/">Oh-My-Zsh</a> gives the Zsh shell superpowers. Its a framework to manage Zsh configuration. It has plugins and themes for Zsh(A lot of them).</p>
+
+<p>From their Github page:</p>
+
+<blockquote>
+  <p>Once installed, your terminal shell will become the talk of the town or your money back! With each keystroke in your command prompt, you’ll take advantage of the hundreds of powerful plugins and beautiful themes. Strangers will come up to you in cafés and ask you, “that is amazing! are you some sort of genius?”</p>
+</blockquote>
+
+<p>Just install it. You need it :)</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sh <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh<span class="si">)</span><span class="s2">"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="terminal-emulatormultiplexer">Terminal emulator/multiplexer</h2>
+
+<p>Optionally you can use a Terminal emulator that can manage windows and panes for you.</p>
+
+<p>For Linux I would recommend using <a href="https://gnunn1.github.io/tilix-web/">Tilix</a>, I have been using it for 3 years and its just amazing.</p>
+
+<p>For Mac, you can use <a href="https://iterm2.com/index.html">iTerm2</a> which is very popular.</p>
+
+<p>Alternatively, you can also use <a href="https://github.com/tmux/tmux">tmux</a> if you want something lighter on your existing Terminal app on Linux, BSD or Mac.</p>
+
+<h2 id="configuring-zsh">Configuring Zsh</h2>
+
+<p>This is the fun part. Let us make the terminal awesome.</p>
+
+<h3 id="install-plugins">Install plugins</h3>
+<p>First, let us install some additional plugins that are not bundled with Oh-My-Zsh.</p>
+
+<h4 id="zsh-autosuggestions"><a href="https://github.com/zsh-users/zsh-autosuggestions">zsh-autosuggestions</a></h4>
+<p>Provides auto completion for shell commands.</p>
+
+<p>Run <code class="highlighter-rouge">git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions</code> to install</p>
+<h4 id="zsh-syntax-highlighting"><a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
+<p>Provides syntax highlighting on the shell.</p>
+
+<p>Run <code class="highlighter-rouge">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code> to install</p>
+
+<h4 id="autojump"><a href="https://github.com/wting/autojump">autojump</a></h4>
+<p>Provides a smarter directory navigation system.
+Install autojump for your OS following instructions <a href="https://github.com/wting/autojump#automatic">here</a>.</p>
+
+<p>Now let us configure the <code class="highlighter-rouge">~/.zshrc</code> file with some settings. <a href="https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a">Here</a> is my full <code class="highlighter-rouge">.zshrc</code> file. Your mileage may vary.</p>
+
+<h3 id="add-exports">Add exports</h3>
+<p>We will start with some exports.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span><span class="s2">"xterm-256color"</span> <span class="c"># This sets up colors properly</span>
+
+<span class="c"># set shell</span>
+<span class="nb">export </span><span class="nv">SHELL</span><span class="o">=</span>/usr/bin/zsh
+
+<span class="c"># If you come from bash you might have to change your $PATH.</span>
+<span class="nb">export </span><span class="nv">NODE_PATH</span><span class="o">=</span><span class="nv">$NODE_PATH</span>:<span class="nv">$HOME</span>/.npm-global/lib/node_modules
+<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/java/latest
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/bin:~/.npm-global/bin:<span class="nv">$HOME</span>/bin:/usr/local/bin:<span class="nv">$PATH</span>
+
+<span class="c"># Add exports from your profile</span>
+<span class="nb">source</span> ~/.profile
+<span class="c"># Path to your oh-my-zsh installation.</span>
+<span class="nb">export </span><span class="nv">ZSH</span><span class="o">=</span><span class="nv">$HOME</span>/.oh-my-zsh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="zsh-settings">Zsh settings</h3>
+
+<p>Now we can configure some Zsh specific settings</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">DISABLE_MAGIC_FUNCTIONS</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">ZSH_AUTOSUGGEST_MANUAL_REBIND</span><span class="o">=</span>1
+<span class="nv">COMPLETION_WAITING_DOTS</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">DISABLE_UNTRACKED_FILES_DIRTY</span><span class="o">=</span><span class="nb">true</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="zsh-theme">Zsh theme</h3>
+
+<p>Now, Let’s set up a nice theme. I’m using <a href="https://github.com/romkatv/powerlevel10k"><strong>powerlevel10k</strong></a> as my current theme and it’s fast and looks great. You can use the default or you can choose any theme you like from the list <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">here</a>. If you like my theme then follow these instructions. Thanks to <a href="https://github.com/romkatv">Roman Perepelitsa</a> for some <a href="https://github.com/romkatv/powerlevel10k/issues/90#issuecomment-503599702">cool tips</a></p>
+
+<p>Run <code class="highlighter-rouge">git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k</code> to install the theme.</p>
+
+<p>Install a <a href="https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font">Powerline font</a>. I use <a href="https://github.com/adobe-fonts/source-code-pro">Adobe Source Code Pro</a></p>
+
+<p>Add the below configuration to the <code class="highlighter-rouge">~/.zshrc</code> file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+</pre></td><td class="rouge-code"><pre><span class="c"># Set name of the theme to load. Optionally, if you set this to "random"</span>
+<span class="c"># it'll load a random theme each time that oh-my-zsh is loaded.</span>
+<span class="c"># See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</span>
+<span class="nv">ZSH_THEME</span><span class="o">=</span><span class="s2">"powerlevel10k/powerlevel10k"</span>
+
+<span class="c">############ POWERLEVEL THEME SETTINGS ##############</span>
+<span class="nv">POWERLEVEL9K_MODE</span><span class="o">=</span><span class="s1">'awesome-fontconfig'</span>
+
+<span class="nv">POWERLEVEL9K_LEFT_PROMPT_ELEMENTS</span><span class="o">=(</span><span class="nb">dir </span>vcs nvm<span class="o">)</span>
+<span class="nv">POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS</span><span class="o">=(</span>disk_usage <span class="nb">time</span><span class="o">)</span>
+
+<span class="nv">POWERLEVEL9K_PROMPT_ADD_NEWLINE</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">POWERLEVEL9K_PROMPT_ON_NEWLINE</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">POWERLEVEL9K_SHOW_RULER</span><span class="o">=</span><span class="nb">true
+</span><span class="nv">POWERLEVEL9K_RULER_CHAR</span><span class="o">=</span><span class="s1">'─'</span>
+<span class="nv">POWERLEVEL9K_RULER_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_RULER_FOREGROUND</span><span class="o">=</span>237
+
+<span class="nv">POWERLEVEL9K_LEFT_SEGMENT_END_SEPARATOR</span><span class="o">=</span>
+<span class="nv">POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR</span><span class="o">=</span>
+<span class="nv">POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR</span><span class="o">=</span><span class="s1">' '</span>
+<span class="nv">POWERLEVEL9K_RIGHT_SEGMENT_END_SEPARATOR</span><span class="o">=</span>
+<span class="nv">POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR</span><span class="o">=</span>
+<span class="nv">POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR</span><span class="o">=</span>
+<span class="nv">POWERLEVEL9K_WHITESPACE_BETWEEN_LEFT_SEGMENTS</span><span class="o">=</span>
+
+<span class="nv">POWERLEVEL9K_SHORTEN_DIR_LENGTH</span><span class="o">=</span>2
+<span class="nv">POWERLEVEL9K_SHORTEN_STRATEGY</span><span class="o">=</span><span class="s2">"truncate_middle"</span>
+
+<span class="nv">POWERLEVEL9K_DIR_SHOW_WRITABLE</span><span class="o">=</span><span class="nb">true
+
+</span><span class="nv">POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND</span><span class="o">=</span>magenta
+<span class="nv">POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND</span><span class="o">=</span>red
+<span class="nv">POWERLEVEL9K_TIME_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_TIME_FOREGROUND</span><span class="o">=</span>white
+
+<span class="nv">POWERLEVEL9K_DIR_HOME_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_DIR_ETC_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_DIR_DEFAULT_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_DIR_NOT_WRITABLE_BACKGROUND</span><span class="o">=</span>none
+
+<span class="nv">POWERLEVEL9K_DIR_HOME_FOREGROUND</span><span class="o">=</span>blue
+<span class="nv">POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND</span><span class="o">=</span>blue
+<span class="nv">POWERLEVEL9K_DIR_ETC_FOREGROUND</span><span class="o">=</span>blue
+<span class="nv">POWERLEVEL9K_DIR_DEFAULT_FOREGROUND</span><span class="o">=</span>blue
+<span class="nv">POWERLEVEL9K_DIR_NOT_WRITABLE_FOREGROUND</span><span class="o">=</span>red
+
+<span class="nv">POWERLEVEL9K_OS_ICON_BACKGROUND</span><span class="o">=</span><span class="s2">"white"</span>
+<span class="nv">POWERLEVEL9K_OS_ICON_FOREGROUND</span><span class="o">=</span><span class="s2">"blue"</span>
+
+<span class="nv">POWERLEVEL9K_VCS_GIT_ICON</span><span class="o">=</span><span class="s1">'%fon %F{040}\uf1d3 '</span>
+<span class="nv">POWERLEVEL9K_VCS_GIT_GITHUB_ICON</span><span class="o">=</span><span class="s1">'%fon %F{040}\uf09b '</span>
+<span class="nv">POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON</span><span class="o">=</span><span class="s1">'%fon %F{040}\uf171 '</span>
+<span class="nv">POWERLEVEL9K_VCS_GIT_GIT_GITLAB_ICON</span><span class="o">=</span><span class="s1">'%fon %F{040}\uf296 '</span>
+
+<span class="nv">POWERLEVEL9K_VCS_CLEAN_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_VCS_MODIFIED_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_VCS_LOADING_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_VCS_CLEAN_FOREGROUND</span><span class="o">=</span><span class="s2">"040"</span>
+<span class="nv">POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND</span><span class="o">=</span><span class="s2">"red"</span>
+<span class="nv">POWERLEVEL9K_VCS_MODIFIED_FOREGROUND</span><span class="o">=</span><span class="s2">"yellow"</span>
+<span class="nv">POWERLEVEL9K_VCS_LOADING_FOREGROUND</span><span class="o">=</span><span class="s2">"grey"</span>
+
+<span class="nv">POWERLEVEL9K_VCS_UNTRACKED_ICON</span><span class="o">=</span><span class="s1">$'%{</span><span class="se">\b</span><span class="s1">?%}'</span>
+<span class="nv">POWERLEVEL9K_VCS_UNSTAGED_ICON</span><span class="o">=</span><span class="s1">$'%{</span><span class="se">\b</span><span class="s1">!%}'</span>
+<span class="nv">POWERLEVEL9K_VCS_STAGED_ICON</span><span class="o">=</span><span class="s1">$'%{</span><span class="se">\b</span><span class="s1">+%}'</span>
+
+<span class="nv">POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_COLOR</span><span class="o">=</span>red
+<span class="nv">POWERLEVEL9K_LOCK_ICON</span><span class="o">=</span><span class="s1">$'</span><span class="se">\u</span><span class="s1">f023'</span>
+
+<span class="nv">POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX</span><span class="o">=</span><span class="s1">''</span>
+<span class="nb">local </span><span class="nv">p</span><span class="o">=</span><span class="s1">'%F{%(?.green.red)}${${${KEYMAP:-0}:#vicmd}:+❯}${${$((!${#${KEYMAP:-0}:#vicmd})):#0}:+❮}%f '</span>
+<span class="nv">POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX</span><span class="o">=</span><span class="s2">"</span><span class="nv">$p</span><span class="s2">"</span>
+
+<span class="nv">POWERLEVEL9K_NVM_BACKGROUND</span><span class="o">=</span>none
+<span class="nv">POWERLEVEL9K_NVM_FOREGROUND</span><span class="o">=</span>green
+<span class="nv">POWERLEVEL9K_NODE_ICON</span><span class="o">=</span><span class="s1">'%fvia %F{green}⬢'</span>
+
+<span class="c">############ END- POWERLEVEL THEME SETTINGS ##############</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="enable-plugins">Enable plugins</h3>
+
+<p>We can finish off by enabling the plugins and some tweaks</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">plugins</span><span class="o">=(</span>zsh-autosuggestions git docker docker-compose autojump zsh-syntax-highlighting dnf npm<span class="o">)</span>
+
+<span class="nb">source</span> <span class="nv">$ZSH</span>/oh-my-zsh.sh
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And that’s it we are ready. Start a new terminal session and enjoy.</p>
+
+<h3 id="issues--workarounds">Issues &amp; workarounds</h3>
+
+<p>If you use Tilix as your terminal emulator, then this might be required for proper pane splitting. Add this to your <code class="highlighter-rouge">~/.zshrc</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="o">[[</span> <span class="nv">$TILIX_ID</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">source</span> /etc/profile.d/vte.sh
+<span class="k">fi</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you are getting errors from the zsh-completion plugin, you might want to add this to the beginning of your <code class="highlighter-rouge">~/.zshrc</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c"># workaround as per https://superuser.com/questions/1222867/zsh-completion-functions-broken</span>
+<span class="nv">FPATH</span><span class="o">=</span><span class="nv">$HOME</span>/.oh-my-zsh/plugins/git:<span class="nv">$HOME</span>/.oh-my-zsh/functions:<span class="nv">$HOME</span>/.oh-my-zsh/completions:/usr/share/zsh/site-functions:/usr/share/zsh/<span class="nv">$ZSH_VERSION</span>/functions
+
+<span class="nb">export </span>FPATH
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you encounter an error from Oh-My-Zsh saying <code class="highlighter-rouge">[oh-my-zsh] Insecure completion-dependent directories detected</code>, set <code class="highlighter-rouge">ZSH_DISABLE_COMPFIX=true</code> right before the line <code class="highlighter-rouge">source $ZSH/oh-my-zsh.sh</code> in your <code class="highlighter-rouge">~/.zshrc</code> file and restart your session or run <code class="highlighter-rouge">exec zsh</code></p>
+
+<h2 id="dockerized-playground">Dockerized playground.</h2>
+
+<p>If you have Docker installed then you can use the below snippet to try this setup in a sandbox without installing anything or affecting your existing setup.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>docker run <span class="nt">-e</span> <span class="nv">LANG</span><span class="o">=</span>C.UTF-8 <span class="nt">-e</span> <span class="nv">LC_ALL</span><span class="o">=</span>C.UTF-8 <span class="nt">-e</span> <span class="nv">TERM</span><span class="o">=</span><span class="nv">$TERM</span> <span class="nt">-it</span> <span class="nt">--rm</span> ubuntu bash <span class="nt">-uexc</span> <span class="s1">'
+  apt update &amp;&amp; apt install -y git curl zsh autojump &amp;&amp; cd /root
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --skip-chsh --unattended
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+  curl -fsSLO http://bit.ly/Spaceship10kTheme
+  echo "source ~/Spaceship10kTheme" &gt;~/.zshrc
+  exec zsh'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="vscode-tip">VSCode Tip</h2>
+
+<p>If you are using VSCode like me, you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png" alt="" /></p>
+
+<p>Follow these steps</p>
+<ul>
+  <li>Download and install a <a href="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf">patched font</a>.</li>
+  <li>On Linux, run <code class="highlighter-rouge">fc-cache -f -v</code> to refresh font cache.</li>
+  <li>On VSCode, open Preferences → Settings and click on the <code class="highlighter-rouge">{}</code> icon to open JSON mode and set the below
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="w">  </span><span class="s2">"terminal.integrated.shell.linux"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/zsh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.fontFamily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"'SauceCodePro Nerd Font Mono','Source Code Pro'"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.rightClickCopyPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.fontSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.cursorStyle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"underline"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.cursorBlinking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>Replace <code class="highlighter-rouge">linux</code> with <code class="highlighter-rouge">osx</code> if you are on a Mac.</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>I hope you like it. If you have any question or if you think I missed something please add a comment.</p>
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2019-07-15">15 Jul 2019</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#linux,">#linux,</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#oh-my-zsh,">#oh-my-zsh,</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#terminal,">#terminal,</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#zsh">#zsh</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/">Create full Microservice stack using JHipster Domain Language under 30 minutes &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+    
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#linux,">linux, (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal,">terminal, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#oh-my-zsh,">oh-my-zsh, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster,">jhipster, (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java,">java, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices,">microservices, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure,">azure, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes,">kubernetes, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome,">gnome, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora,">fedora, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development,">development, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript,">typescript, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react,">react, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript,">javascript, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go,">go, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming,">programming, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages,">languages, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing,">writing, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium,">medium, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Deepu K Sasidharan 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by 
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> | 
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+</body>
+</html>
