@@ -16,13 +16,14 @@ if [ -z "$(git status --porcelain)" ]; then
     mkdir --parents $TMP_LOC
     mv _site/* $TMP_LOC
 
-    #  CLean directory
+    #  Clean directory
     git checkout master
     sleep 5
     /bin/rm -rf ^*vendor*
     sleep 5
+
     # Move site form temp & publish
-    mv $TMP_LOC/* .
+    mv -f $TMP_LOC/* .
     now=$(date)
     git add --all
     git commit -am "Updated site on $now"
