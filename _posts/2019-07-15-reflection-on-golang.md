@@ -5,6 +5,7 @@ description: After using Go for more than 9 months, here is what I think of it
 tags: go, programming, languages, thepragmaticprogrammer
 image: https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg
+featured: true
 ---
 
 Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not. 
