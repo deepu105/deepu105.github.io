@@ -13,6 +13,7 @@ if [ -z "$(git status --porcelain)" ]; then
     bundle exec jekyll build
 
     # Move to temp
+    /bin/rm -rf $TMP_LOC
     mkdir --parents $TMP_LOC
     mv _site/* $TMP_LOC
 
@@ -23,7 +24,7 @@ if [ -z "$(git status --porcelain)" ]; then
     sleep 5
 
     # Move site form temp & publish
-    mv -f $TMP_LOC/* .
+    mv $TMP_LOC/* .
     now=$(date)
     git add --all
     git commit -am "Updated site on $now"
