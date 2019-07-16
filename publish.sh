@@ -4,7 +4,9 @@ rm -rf _site
 
 if [ -z "$(git status --porcelain)" ]; then
     # Working directory clean
+    setopt extended_glob
     TMP_LOC=/tmp/deepu.github.io
+
     /bin/rm -rf _site
     # Build site
     bundle update listen
@@ -16,7 +18,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
     #  CLean directory
     git checkout master
-    /bin/rm -rf *
+    /bin/rm -rf ^*vendor*
 
     # Move site form temp & publish
     mv $TMP_LOC/* .
