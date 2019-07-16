@@ -14,7 +14,7 @@ author: deepu
           </div>
           <div class="col">
               <p>
-                  I'm a Software Designer by passion & profession. I'm also the co-lead of <a href="https://jhipster.tech" target="_blank">JHipster</a>.<br/> 
+                  I'm a Software Designer by passion & profession. I'm also the co-lead of <a href="https://jhipster.tech" target="_blank">JHipster</a>.<br/>
                   My expertise includes solution ideation, visualization, and prototyping.
                   I code using various Languages like Java, JavaScript, TypeScript, Go, Python and so on.<br/>
                   I'm an open-source software aficionado and a technology advocate by passion.
@@ -51,7 +51,7 @@ author: deepu
     <!-- Projects ================================================= -->
     <section class="featured-posts">
         <div class="section-title">
-            <h2><span>OSS projects I work on</span></h2>
+            <h2><span>OSS projects</span></h2>
         </div>
         <div>
           <div class="row">
@@ -169,43 +169,45 @@ author: deepu
 
   <div class="col-md-4">
     <div class="sticky-top sticky-top-80">
-        <div class="section-title">
-            <h2><span>Follow me on social media</span></h2>
-        </div>
-      <div class="about-social">
-        <a href="https://twitter.com/deepu105">
-            <i class="fab fa-twitter fa-lg"></i>
-        </a>
-        <a href="https://github.com/deepu105">
-            <i class="fab fa-github fa-lg"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/deepu05">
-            <i class="fab fa-linkedin fa-lg"></i>
-        </a>
-        <a href="https://dev.to/deepu105">
-            <i class="fab fa-dev fa-lg"></i>
-        </a>
-        <a href="https://medium.com/@deepu105">
-            <i class="fab fa-medium fa-lg"></i>
-        </a>
-      </div>
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Follow me on social media</span></h2>
+            </div>
+            <div class="about-social">
+                <a href="https://twitter.com/deepu105">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </a>
+                <a href="https://github.com/deepu105">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/deepu05">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+                <a href="https://dev.to/deepu105">
+                    <i class="fab fa-dev fa-lg"></i>
+                </a>
+                <a href="https://medium.com/@deepu105">
+                    <i class="fab fa-medium fa-lg"></i>
+                </a>
+            </div>
+        </section>
       <!-- Featured ================================================= -->
         <section class="featured-posts">
             <div class="section-title">
                 <h2><span>Featured posts</span></h2>
             </div>
             <div class="row">
-        
+
             {% for post in site.posts %}
-        
+
                 {% if post.featured == true %}
                     <div class="col-md-12 mb-30px">
                     {% include featuredbox.html %}
                     </div>
                 {% endif %}
-        
+
             {% endfor %}
-        
+
             </div>
         </section>
     </div>
