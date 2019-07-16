@@ -4,7 +4,6 @@ rm -rf _site
 
 if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
-    setopt extended_glob
     TMP_LOC=/tmp/deepu.github.io
 
     /bin/rm -rf _site
@@ -20,7 +19,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Checkout and clean master"
     git checkout master
-    /bin/rm -rf ^*vendor*
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf
 
     echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* .
