@@ -5,106 +5,291 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Jul 2019 16:07:16 +0200</pubDate>
-    <lastBuildDate>Tue, 16 Jul 2019 16:07:16 +0200</lastBuildDate>
+    <pubDate>Tue, 16 Jul 2019 16:20:41 +0200</pubDate>
+    <lastBuildDate>Tue, 16 Jul 2019 16:20:41 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
-        <title>Why I’m moving away from Medium</title>
-        <description>&lt;p&gt;After much deliberation, I have decided to move my blogs away from &lt;a href=&quot;https://medium.com/@deepu105&quot;&gt;Medium&lt;/a&gt;. I was considering setting up my own blog with &lt;a href=&quot;https://gohugo.io/&quot;&gt;Hugo&lt;/a&gt; but then decided to go with &lt;a href=&quot;https://dev.to/deepu105&quot;&gt;Dev.to&lt;/a&gt;. Below are the reasons why I decided to leave Medium and why I chose Dev.to.&lt;/p&gt;
+        <title>React components done right with TypeScript mapped and conditional types</title>
+        <description>&lt;p&gt;You’ve probably heard about TypeScript, If not you should check it out. You may have heard someone claiming how great type safety is.&lt;/p&gt;
 
-&lt;p&gt;All considerations were purely from a technical writing perspective as I was using Medium for publishing technical content.&lt;/p&gt;
+&lt;p&gt;TypeScript is great. As someone who hates to transpile his code, I would definitely do it with TypeScript if I had to. So much has been said about TypeScript, and there isn’t really anything new that I can add. But I do believe that type safety is not all about making your code ugly with type definitions everywhere. So how can we write type-safe code without having to litter type declarations everywhere?&lt;/p&gt;
 
-&lt;h3 id=&quot;the-love-hate-relationship-with-medium&quot;&gt;The love-hate relationship with Medium&lt;/h3&gt;
+&lt;p&gt;Type inference and advanced features like derived and dynamic types are the answer. Editors and IDEs we use are smart enough to handle code with inferred type gracefully without us having to see the types all the time visually. (Of course, they all usually show you the type when you hover over an inferred type.)&lt;/p&gt;
 
-&lt;p&gt;I loved Medium when I started writing here, reasons being;&lt;/p&gt;
+&lt;p&gt;TypeScript has very good type inference. As a rule of thumb, you can always start without declaring the type for any variable and see if the compiler infers it. With modern editors like VSCode, you can see this immediately. So set your tsconfig to the strict mode. Then start declaring types when the compiler complains.&lt;/p&gt;
+
+&lt;p&gt;Additionally, TypeScript 2.1 and 2.8 introduced a bunch of cool lookup types. Now you can dynamically infer types using different techniques like Intersection types, Union types, Index types, mapped types and conditional types.&lt;/p&gt;
+
+&lt;h2 id=&quot;index-types&quot;&gt;Index types&lt;/h2&gt;
+
+&lt;p&gt;Index types enable us to check properties and types of an interface or type dynamically using the &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; (&lt;strong&gt;index type query operator&lt;/strong&gt;) and &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; (&lt;strong&gt;indexed access operator&lt;/strong&gt;). Let’s take the below interface for example.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; operator gets a union type of all the key names of the type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and hence &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof Person&lt;/code&gt; will give us &lt;code class=&quot;highlighter-rouge&quot;&gt;'name' | 'age' | 'address' | sayHi'&lt;/code&gt; as result.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; operator gets the type for the provided key. &lt;code class=&quot;highlighter-rouge&quot;&gt;Person['name']&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Person[*keyof* Person]&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string | number | ((msg: string) =&amp;gt; string)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;mapped-types&quot;&gt;Mapped types&lt;/h2&gt;
+
+&lt;p&gt;Let us see what mapped types are. Let us say we have the below interface for a Person.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt;, for this.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you hover over the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReadonlyPerson&lt;/code&gt; type you can see the inferred type as below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png&quot; alt=&quot;Inferred type view in VsCode&quot; /&gt;&lt;em&gt;Inferred type view in VsCode&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;That is cool, right? Now we can create types from existing types and don’t have to worry about keeping them in sync. How does it work, what does &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;Person&amp;gt;&lt;/code&gt; do? Let’s take a look at the mapped type.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;in&lt;/code&gt; operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof&lt;/code&gt; operator provides the keys from our type for the mapping. Let us build our own mapped type.&lt;/p&gt;
+
+&lt;p&gt;Let us say we need a read-only Person interface where all the fields are nullable as well. We can build a mapped type as below for that.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And it is inferred as below&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*R24n6ufx4STh96tfldlgJw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s make it generic so that it can be used with any interface.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;TypeScript includes &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Partial&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Pick&amp;lt;T, K extends keyof T&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Record&amp;lt;K extends string, T&amp;gt;&lt;/code&gt; as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonMinimal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;RecordedPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For every other use case, you can build your own mapped types.&lt;/p&gt;
+
+&lt;h2 id=&quot;conditional-types&quot;&gt;Conditional types&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A conditional type selects one of two possible types based on a condition expressed as a type relationship test.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let us look at an example.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt;
+
+    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooBool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in boolean&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in string&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The type dynamically inferred from &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&amp;lt;T, U&amp;gt;&lt;/code&gt; will be either &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; depending on what the first generic is extended from.&lt;/p&gt;
+
+&lt;p&gt;Let us see how we can mix conditional types with mapped types to infer a new type from Person which only includes the non-function properties.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;never&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/* Produces the below type
+    type PersonProps = {
+        name: string;
+        age: number;
+        address: string;
+    }
+    */&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We first get all the non-function property names from the interface. Then use the &lt;strong&gt;Pick&lt;/strong&gt; mapped type to pick those from the interface to form the new interface.&lt;/p&gt;
+
+&lt;p&gt;TypeScript provides the following inbuilt conditional types:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;A simple minimal &amp;amp; clean UI — It still is one of the best&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Exclude&amp;lt;T, U&amp;gt;&lt;/code&gt; – Exclude from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Ease of authoring and publishing&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Extract&amp;lt;T, U&amp;gt;&lt;/code&gt; – Extract from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Community and visibility&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NonNullable&amp;lt;T&amp;gt;&lt;/code&gt; – Exclude &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Publications&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the return type of a function type.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Ease of customization&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the instance type of a constructor function type.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;But there were also things I didn’t like much which slowly become quite annoying&lt;/p&gt;
+&lt;h2 id=&quot;let-us-put-it-into-use&quot;&gt;Let us put it into use&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;The weird commenting mechanism(Every comment is a post, and they literally mess up your stories listing page)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;These advanced types become even more powerful when you combine them together. Let’s see some practical uses of this in React.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2302/1*nnAeUa07rTwcFw-iMBe1vQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-es6&quot;&gt;React component and Redux reducer in ES6&lt;/h3&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Medium had a weird WYSIWYG editor interface which is great for normal content creation but not so great for technical content creation. It had some markdown like shortcuts, but it could never match the ease of using proper markdown editors.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Export only in HTML (Duh!!)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Let see a simple React component with a reducer written in ES6. Take a look at &lt;strong&gt;&lt;em&gt;index.jsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
 
-&lt;p&gt;But these annoyances were not the main reason I decided to switch platforms. Below are the main reasons why I decided Medium isn’t a good fit for me.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;40n3y52qlx runonclick=1 &quot;&gt;40n3y52qlx runonclick=1 &lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Medium has been aggressively pushing for content to be put behind a paywall and they have made it clear that content not opting in will not get any push inside the platform. This means the community and visibility part is applicable only if you opt-in for the paywall. I understand why Medium does and I think its a great monetary source for established authors but it doesn’t work for mere mortals like me.&lt;/p&gt;
+&lt;p&gt;As you can see, we use the prop-types library to define the component props. It is not the most efficient way, as it includes considerable overhead during development. It doesn’t provide full type safety anyway.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*yq7VjalsUx_ujXWeEKpAag.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript&quot;&gt;React component and Redux reducer in TypeScript&lt;/h3&gt;
 
-&lt;p&gt;As a result of the above, the traffic you get from Medium itself is very low compared to external sources. See one of my stories below for an example. For newer stories, it is even lower.&lt;/p&gt;
+&lt;p&gt;Now let us convert this simple example to TypeScript so that it is type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*buR4q7oynmBkYmHGLx_jtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;znv36k09op runonclick=1 &quot;&gt;znv36k09op runonclick=1 &lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;So writing in Medium seems to have no benefit over other platforms as I could get similar views from external sources and might get better writing experience elsewhere.&lt;/p&gt;
+&lt;p&gt;As you can see, the code is more type-safe now. It is also much more verbose even without PropTypes library and all the type inference.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;
-So after a week of moving to the Dev community below are my stats and its incredible, I have ~50k views, ~1k reactions and ~300 followers and one of my post was &lt;a href=&quot;https://dev.to/devteam/the-7-most-popular-dev-posts-from-the-past-week-5ahf&quot;&gt;featured in top 7&lt;/a&gt; of the week and all this in just 1 week. I didn’t get anything remotely close to this from Medium in a year.&lt;/p&gt;
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript-with-advanced-types&quot;&gt;React component and Redux reducer in TypeScript with advanced types&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/g5y8ud1w4re7xysb3g99.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
 
-&lt;h3 id=&quot;enter-devto&quot;&gt;Enter Dev.to&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;zq7w69p57x runonclick=1 &quot;&gt;zq7w69p57x runonclick=1 &lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;When I was trying to find a different platform, some of the most important aspects I considered were below&lt;/p&gt;
+&lt;p&gt;As you can see, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&lt;/code&gt; mapping along with some other type inference techniques to write a more type-safe but less verbose version of the component.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Community&lt;/strong&gt;: A community without paywall and a community were your blogs get visibility and get traffic.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Ease of authoring&lt;/strong&gt;: Authoring experience was important, hence at minimum Markdown support was a must. This way I can author posts in my favorite IDE(VsCode in this case) and doesn’t have to be restricted with the platform’s capability. Also, this ensures that I can easily move my posts to another platform in the future if needed.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;Dev.to satisfied these needs and provided a nice and clean UI and descent publishing experience on top.&lt;/p&gt;
+&lt;p&gt;If you are using React with TypeScript, then these are some of the techniques you must apply. If you are considering a type system for React, then look no further than TypeScript. It has great features, great tooling, excellent IDE/Editor support and an awesome community.&lt;/p&gt;
 
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slides if you like here.&lt;/p&gt;
 
-&lt;p&gt;I think Medium is still perfect for normal blogging and for content creators who have subscribers willing to pay even if they put articles behind a paywall. But for technical content creators who do not want their content behind a paywall, there are better platforms. I might still crosspost between Dev.to and Medium from time to time but Dev.to will be my primary blogging platform.&lt;/p&gt;
+&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
+&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 
-&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/@deepu105/why-im-moving-away-from-medium-f9153a01247e&quot;&gt;Medium&lt;/a&gt; on June 13, 2019&lt;/p&gt;
+&lt;p&gt;
+            &amp;lt;script async=&quot;async&quot; class=&quot;speakerdeck-embed&quot; data-id=ffe22480dbfd4c1f83f66c380bba2283  data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&amp;gt; &amp;lt;/script&amp;gt;
+            &lt;noscript&gt;
+                &lt;a href=&quot;//speakerdeck.com/player/ffe22480dbfd4c1f83f66c380bba2283&quot;&gt;
+                &lt;img alt=&quot;Folien bei Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg&quot; /&gt;
+                &lt;/a&gt;
+            &lt;/noscript&gt;
+          &lt;/p&gt;
 
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@milkovi?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;MILKOVÍ&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/search/photos/writing?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt; if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.&lt;/p&gt;
+
+&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please like or comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79&quot;&gt;Medium&lt;/a&gt; on November 19, 2018&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
-        <link>/why-im-moving-away-from-medium/</link>
-        <guid isPermaLink="true">/why-im-moving-away-from-medium/</guid>
+        <pubDate>Sat, 13 Jul 2019 00:00:00 +0200</pubDate>
+        <link>/react-done-right-with-typescript/</link>
+        <guid isPermaLink="true">/react-done-right-with-typescript/</guid>
         
-        <category>writing,</category>
+        <category>typescript,</category>
         
-        <category>medium,</category>
+        <category>react,</category>
         
-        <category>development,</category>
+        <category>javascript,</category>
         
-        <category>tech</category>
+        <category>webdev</category>
         
         
       </item>
@@ -414,7 +599,7 @@ These problems are similar to the issues with dependency range in Node package m
 
 &lt;p&gt;Cover image credit: Unknown. Found &lt;a href=&quot;https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 12 Jul 2019 00:00:00 +0200</pubDate>
         <link>/reflection-on-golang/</link>
         <guid isPermaLink="true">/reflection-on-golang/</guid>
         
@@ -430,164 +615,145 @@ These problems are similar to the issues with dependency range in Node package m
       </item>
     
       <item>
-        <title>React components done right with TypeScript mapped and conditional types</title>
-        <description>&lt;p&gt;You’ve probably heard about TypeScript, If not you should check it out. You may have heard someone claiming how great type safety is.&lt;/p&gt;
+        <title>Configure a beautiful terminal on Unix with Zsh</title>
+        <description>&lt;p&gt;I was a long time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I’m not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup &lt;a href=&quot;https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;TypeScript is great. As someone who hates to transpile his code, I would definitely do it with TypeScript if I had to. So much has been said about TypeScript, and there isn’t really anything new that I can add. But I do believe that type safety is not all about making your code ugly with type definitions everywhere. So how can we write type-safe code without having to litter type declarations everywhere?&lt;/p&gt;
+&lt;p&gt;As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.&lt;/p&gt;
 
-&lt;p&gt;Type inference and advanced features like derived and dynamic types are the answer. Editors and IDEs we use are smart enough to handle code with inferred type gracefully without us having to see the types all the time visually. (Of course, they all usually show you the type when you hover over an inferred type.)&lt;/p&gt;
+&lt;p&gt;Let’s see how to configure a powerful and productive terminal experience. The setup is based on what I have configured on my Fedora machine. The same setup can be recreated on any other Linux distribution, BSD or Mac as well. You just need to use the installation instruction from the tools for the given platform.&lt;/p&gt;
 
-&lt;p&gt;TypeScript has very good type inference. As a rule of thumb, you can always start without declaring the type for any variable and see if the compiler infers it. With modern editors like VSCode, you can see this immediately. So set your tsconfig to the strict mode. Then start declaring types when the compiler complains.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/fhwstp9251al105hp899.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Additionally, TypeScript 2.1 and 2.8 introduced a bunch of cool lookup types. Now you can dynamically infer types using different techniques like Intersection types, Union types, Index types, mapped types and conditional types.&lt;/p&gt;
+&lt;p&gt;Below are the tools we would need for this.&lt;/p&gt;
 
-&lt;h2 id=&quot;index-types&quot;&gt;Index types&lt;/h2&gt;
+&lt;h2 id=&quot;zsh&quot;&gt;Zsh&lt;/h2&gt;
 
-&lt;p&gt;Index types enable us to check properties and types of an interface or type dynamically using the &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; (&lt;strong&gt;index type query operator&lt;/strong&gt;) and &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; (&lt;strong&gt;indexed access operator&lt;/strong&gt;). Let’s take the below interface for example.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zsh.org/&quot;&gt;Zsh&lt;/a&gt; is one of the most feature-rich shells for Unix. It works on Linux, Mac, &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/about&quot;&gt;WSL&lt;/a&gt;, and BSD. There are alternatives like &lt;a href=&quot;https://fishshell.com/&quot;&gt;Fish&lt;/a&gt; which also offers similar features but I personally like Zsh.&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;
+  &lt;li&gt;Check if Zsh is already installed by running &lt;code class=&quot;highlighter-rouge&quot;&gt;zsh --version&lt;/code&gt; on your terminal. If not found, install it using your package manager.
+    &lt;ul&gt;
+      &lt;li&gt;Fedora: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dnf install zsh&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Mac: &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install zsh zsh-completions&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;RHEL/CentOS: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo yum update &amp;amp;&amp;amp; sudo yum -y install zsh&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Ubuntu/Debian: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt install zsh&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;For other platform refer &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH#how-to-install-zsh-in-many-platforms&quot;&gt;this&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Now make Zsh your default shell by running &lt;code class=&quot;highlighter-rouge&quot;&gt;chsh -s $(which zsh)&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Log out and log in back again to use your new default shell.&lt;/li&gt;
+  &lt;li&gt;Test that it worked with echo &lt;code class=&quot;highlighter-rouge&quot;&gt;$SHELL&lt;/code&gt;. Expected result: &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/zsh&lt;/code&gt; or similar.&lt;/li&gt;
+  &lt;li&gt;Test with &lt;code class=&quot;highlighter-rouge&quot;&gt;$SHELL --version&lt;/code&gt;. Expected result: &lt;code class=&quot;highlighter-rouge&quot;&gt;zsh 5.6.2&lt;/code&gt; or similar&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; operator gets a union type of all the key names of the type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and hence &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof Person&lt;/code&gt; will give us &lt;code class=&quot;highlighter-rouge&quot;&gt;'name' | 'age' | 'address' | sayHi'&lt;/code&gt; as result.&lt;/p&gt;
+&lt;p&gt;Note: If you have installed Zsh for the first time and launch the shell it would prompt you to configure some settings. You can choose to ignore that by hitting &lt;code class=&quot;highlighter-rouge&quot;&gt;q&lt;/code&gt; as we will configure it later on.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; operator gets the type for the provided key. &lt;code class=&quot;highlighter-rouge&quot;&gt;Person['name']&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Person[*keyof* Person]&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string | number | ((msg: string) =&amp;gt; string)&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;oh-my-zsh&quot;&gt;Oh-My-Zsh&lt;/h2&gt;
 
-&lt;h2 id=&quot;mapped-types&quot;&gt;Mapped types&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh-My-Zsh&lt;/a&gt; gives the Zsh shell superpowers. Its a framework to manage Zsh configuration. It has plugins and themes for Zsh(A lot of them).&lt;/p&gt;
 
-&lt;p&gt;Let us see what mapped types are. Let us say we have the below interface for a Person.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt;, for this.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you hover over the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReadonlyPerson&lt;/code&gt; type you can see the inferred type as below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png&quot; alt=&quot;Inferred type view in VsCode&quot; /&gt;&lt;em&gt;Inferred type view in VsCode&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;That is cool, right? Now we can create types from existing types and don’t have to worry about keeping them in sync. How does it work, what does &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;Person&amp;gt;&lt;/code&gt; do? Let’s take a look at the mapped type.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;in&lt;/code&gt; operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof&lt;/code&gt; operator provides the keys from our type for the mapping. Let us build our own mapped type.&lt;/p&gt;
-
-&lt;p&gt;Let us say we need a read-only Person interface where all the fields are nullable as well. We can build a mapped type as below for that.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And it is inferred as below&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*R24n6ufx4STh96tfldlgJw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s make it generic so that it can be used with any interface.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;TypeScript includes &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Partial&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Pick&amp;lt;T, K extends keyof T&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Record&amp;lt;K extends string, T&amp;gt;&lt;/code&gt; as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonMinimal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;RecordedPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For every other use case, you can build your own mapped types.&lt;/p&gt;
-
-&lt;h2 id=&quot;conditional-types&quot;&gt;Conditional types&lt;/h2&gt;
+&lt;p&gt;From their Github page:&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;A conditional type selects one of two possible types based on a condition expressed as a type relationship test.&lt;/p&gt;
+  &lt;p&gt;Once installed, your terminal shell will become the talk of the town or your money back! With each keystroke in your command prompt, you’ll take advantage of the hundreds of powerful plugins and beautiful themes. Strangers will come up to you in cafés and ask you, “that is amazing! are you some sort of genius?”&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Let us look at an example.&lt;/p&gt;
+&lt;p&gt;Just install it. You need it :)&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;terminal-emulatormultiplexer&quot;&gt;Terminal emulator/multiplexer&lt;/h2&gt;
+
+&lt;p&gt;Optionally you can use a Terminal emulator that can manage windows and panes for you.&lt;/p&gt;
+
+&lt;p&gt;For Linux I would recommend using &lt;a href=&quot;https://gnunn1.github.io/tilix-web/&quot;&gt;Tilix&lt;/a&gt;, I have been using it for 3 years and its just amazing.&lt;/p&gt;
+
+&lt;p&gt;For Mac, you can use &lt;a href=&quot;https://iterm2.com/index.html&quot;&gt;iTerm2&lt;/a&gt; which is very popular.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can also use &lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;tmux&lt;/a&gt; if you want something lighter on your existing Terminal app on Linux, BSD or Mac.&lt;/p&gt;
+
+&lt;h2 id=&quot;configuring-zsh&quot;&gt;Configuring Zsh&lt;/h2&gt;
+
+&lt;p&gt;This is the fun part. Let us make the terminal awesome.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-plugins&quot;&gt;Install plugins&lt;/h3&gt;
+&lt;p&gt;First, let us install some additional plugins that are not bundled with Oh-My-Zsh.&lt;/p&gt;
+
+&lt;h4 id=&quot;zsh-autosuggestions&quot;&gt;&lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Provides auto completion for shell commands.&lt;/p&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions&lt;/code&gt; to install&lt;/p&gt;
+&lt;h4 id=&quot;zsh-syntax-highlighting&quot;&gt;&lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Provides syntax highlighting on the shell.&lt;/p&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting&lt;/code&gt; to install&lt;/p&gt;
+
+&lt;h4 id=&quot;autojump&quot;&gt;&lt;a href=&quot;https://github.com/wting/autojump&quot;&gt;autojump&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Provides a smarter directory navigation system.
+Install autojump for your OS following instructions &lt;a href=&quot;https://github.com/wting/autojump#automatic&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now let us configure the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file with some settings. &lt;a href=&quot;https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a&quot;&gt;Here&lt;/a&gt; is my full &lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt; file. Your mileage may vary.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-exports&quot;&gt;Add exports&lt;/h3&gt;
+&lt;p&gt;We will start with some exports.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
 5
 6
 7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt;
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xterm-256color&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# This sets up colors properly&lt;/span&gt;
 
-    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# set shell&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/bin/zsh
 
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooBool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in boolean&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in string&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# If you come from bash you might have to change your $PATH.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NODE_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NODE_PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.npm-global/lib/node_modules
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/java/latest
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$JAVA_HOME&lt;/span&gt;/bin:~/.npm-global/bin:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/bin:/usr/local/bin:&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Add exports from your profile&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.profile
+&lt;span class=&quot;c&quot;&gt;# Path to your oh-my-zsh installation.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ZSH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The type dynamically inferred from &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&amp;lt;T, U&amp;gt;&lt;/code&gt; will be either &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; depending on what the first generic is extended from.&lt;/p&gt;
+&lt;h3 id=&quot;zsh-settings&quot;&gt;Zsh settings&lt;/h3&gt;
 
-&lt;p&gt;Let us see how we can mix conditional types with mapped types to infer a new type from Person which only includes the non-function properties.&lt;/p&gt;
+&lt;p&gt;Now we can configure some Zsh specific settings&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;DISABLE_MAGIC_FUNCTIONS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ZSH_AUTOSUGGEST_MANUAL_REBIND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+&lt;span class=&quot;nv&quot;&gt;COMPLETION_WAITING_DOTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DISABLE_UNTRACKED_FILES_DIRTY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;zsh-theme&quot;&gt;Zsh theme&lt;/h3&gt;
+
+&lt;p&gt;Now, Let’s set up a nice theme. I’m using &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;&lt;strong&gt;powerlevel10k&lt;/strong&gt;&lt;/a&gt; as my current theme and it’s fast and looks great. You can use the default or you can choose any theme you like from the list &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Themes&quot;&gt;here&lt;/a&gt;. If you like my theme then follow these instructions. Thanks to &lt;a href=&quot;https://github.com/romkatv&quot;&gt;Roman Perepelitsa&lt;/a&gt; for some &lt;a href=&quot;https://github.com/romkatv/powerlevel10k/issues/90#issuecomment-503599702&quot;&gt;cool tips&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k&lt;/code&gt; to install the theme.&lt;/p&gt;
+
+&lt;p&gt;Install a &lt;a href=&quot;https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font&quot;&gt;Powerline font&lt;/a&gt;. I use &lt;a href=&quot;https://github.com/adobe-fonts/source-code-pro&quot;&gt;Adobe Source Code Pro&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Add the below configuration to the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -602,261 +768,269 @@ These problems are similar to the issues with dependency range in Node package m
 13
 14
 15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;never&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Set name of the theme to load. Optionally, if you set this to &quot;random&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# it'll load a random theme each time that oh-my-zsh is loaded.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ZSH_THEME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;powerlevel10k/powerlevel10k&quot;&lt;/span&gt;
 
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;############ POWERLEVEL THEME SETTINGS ##############&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MODE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'awesome-fontconfig'&lt;/span&gt;
 
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dir &lt;/span&gt;vcs nvm&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;disk_usage &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 
-    &lt;span class=&quot;cm&quot;&gt;/* Produces the below type
-    type PersonProps = {
-        name: string;
-        age: number;
-        address: string;
-    }
-    */&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_PROMPT_ADD_NEWLINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_PROMPT_ON_NEWLINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHOW_RULER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_CHAR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'─'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;237
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SEGMENT_END_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;' '&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SEGMENT_END_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_WHITESPACE_BETWEEN_LEFT_SEGMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHORTEN_DIR_LENGTH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHORTEN_STRATEGY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;truncate_middle&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_SHOW_WRITABLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
+
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;magenta
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_TIME_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_TIME_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;white
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_ETC_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_DEFAULT_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_ETC_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_DEFAULT_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_OS_ICON_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;white&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_OS_ICON_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf1d3 '&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_GITHUB_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf09b '&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf171 '&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_GIT_GITLAB_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf296 '&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_CLEAN_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_MODIFIED_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_LOADING_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_CLEAN_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;040&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_MODIFIED_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yellow&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_LOADING_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;grey&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;?%}'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNSTAGED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;!%}'&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_STAGED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;+%}'&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_COLOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LOCK_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;f023'&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%F{%(?.green.red)}${${${KEYMAP:-0}:#vicmd}:+❯}${${$((!${#${KEYMAP:-0}:#vicmd})):#0}:+❮}%f '&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NVM_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NVM_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;green
+&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NODE_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fvia %F{green}⬢'&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;############ END- POWERLEVEL THEME SETTINGS ##############&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We first get all the non-function property names from the interface. Then use the &lt;strong&gt;Pick&lt;/strong&gt; mapped type to pick those from the interface to form the new interface.&lt;/p&gt;
+&lt;h3 id=&quot;enable-plugins&quot;&gt;Enable plugins&lt;/h3&gt;
 
-&lt;p&gt;TypeScript provides the following inbuilt conditional types:&lt;/p&gt;
+&lt;p&gt;We can finish off by enabling the plugins and some tweaks&lt;/p&gt;
 
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;zsh-autosuggestions git docker docker-compose autojump zsh-syntax-highlighting dnf npm&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ZSH&lt;/span&gt;/oh-my-zsh.sh
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And that’s it we are ready. Start a new terminal session and enjoy.&lt;/p&gt;
+
+&lt;h3 id=&quot;issues--workarounds&quot;&gt;Issues &amp;amp; workarounds&lt;/h3&gt;
+
+&lt;p&gt;If you use Tilix as your terminal emulator, then this might be required for proper pane splitting. Add this to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TILIX_ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /etc/profile.d/vte.sh
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you are getting errors from the zsh-completion plugin, you might want to add this to the beginning of your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# workaround as per https://superuser.com/questions/1222867/zsh-completion-functions-broken&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;FPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/plugins/git:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/functions:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/completions:/usr/share/zsh/site-functions:/usr/share/zsh/&lt;span class=&quot;nv&quot;&gt;$ZSH_VERSION&lt;/span&gt;/functions
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;FPATH
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you encounter an error from Oh-My-Zsh saying &lt;code class=&quot;highlighter-rouge&quot;&gt;[oh-my-zsh] Insecure completion-dependent directories detected&lt;/code&gt;, set &lt;code class=&quot;highlighter-rouge&quot;&gt;ZSH_DISABLE_COMPFIX=true&lt;/code&gt; right before the line &lt;code class=&quot;highlighter-rouge&quot;&gt;source $ZSH/oh-my-zsh.sh&lt;/code&gt; in your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file and restart your session or run &lt;code class=&quot;highlighter-rouge&quot;&gt;exec zsh&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;dockerized-playground&quot;&gt;Dockerized playground.&lt;/h2&gt;
+
+&lt;p&gt;If you have Docker installed then you can use the below snippet to try this setup in a sandbox without installing anything or affecting your existing setup.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;docker run &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;C.UTF-8 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;C.UTF-8 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TERM&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; ubuntu bash &lt;span class=&quot;nt&quot;&gt;-uexc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'
+  apt update &amp;amp;&amp;amp; apt install -y git curl zsh autojump &amp;amp;&amp;amp; cd /root
+  sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; --skip-chsh --unattended
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+  curl -fsSLO http://bit.ly/Spaceship10kTheme
+  echo &quot;source ~/Spaceship10kTheme&quot; &amp;gt;~/.zshrc
+  exec zsh'&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vscode-tip&quot;&gt;VSCode Tip&lt;/h2&gt;
+
+&lt;p&gt;If you are using VSCode like me, you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow these steps&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Exclude&amp;lt;T, U&amp;gt;&lt;/code&gt; – Exclude from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Extract&amp;lt;T, U&amp;gt;&lt;/code&gt; – Extract from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NonNullable&amp;lt;T&amp;gt;&lt;/code&gt; – Exclude &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the return type of a function type.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the instance type of a constructor function type.&lt;/p&gt;
+  &lt;li&gt;Download and install a &lt;a href=&quot;https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf&quot;&gt;patched font&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;On Linux, run &lt;code class=&quot;highlighter-rouge&quot;&gt;fc-cache -f -v&lt;/code&gt; to refresh font cache.&lt;/li&gt;
+  &lt;li&gt;On VSCode, open Preferences → Settings and click on the &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; icon to open JSON mode and set the below
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.shell.linux&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/bin/zsh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontFamily&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;'SauceCodePro Nerd Font Mono','Source Code Pro'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.rightClickCopyPaste&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontSize&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorStyle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;underline&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorBlinking&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;linux&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;osx&lt;/code&gt; if you are on a Mac.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&quot;let-us-put-it-into-use&quot;&gt;Let us put it into use&lt;/h2&gt;
-
-&lt;p&gt;These advanced types become even more powerful when you combine them together. Let’s see some practical uses of this in React.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-es6&quot;&gt;React component and Redux reducer in ES6&lt;/h3&gt;
-
-&lt;p&gt;Let see a simple React component with a reducer written in ES6. Take a look at &lt;strong&gt;&lt;em&gt;index.jsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;40n3y52qlx runonclick=1 &quot;&gt;40n3y52qlx runonclick=1 &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, we use the prop-types library to define the component props. It is not the most efficient way, as it includes considerable overhead during development. It doesn’t provide full type safety anyway.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript&quot;&gt;React component and Redux reducer in TypeScript&lt;/h3&gt;
-
-&lt;p&gt;Now let us convert this simple example to TypeScript so that it is type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;znv36k09op runonclick=1 &quot;&gt;znv36k09op runonclick=1 &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, the code is more type-safe now. It is also much more verbose even without PropTypes library and all the type inference.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript-with-advanced-types&quot;&gt;React component and Redux reducer in TypeScript with advanced types&lt;/h3&gt;
-
-&lt;p&gt;Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;zq7w69p57x runonclick=1 &quot;&gt;zq7w69p57x runonclick=1 &lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&lt;/code&gt; mapping along with some other type inference techniques to write a more type-safe but less verbose version of the component.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;If you are using React with TypeScript, then these are some of the techniques you must apply. If you are considering a type system for React, then look no further than TypeScript. It has great features, great tooling, excellent IDE/Editor support and an awesome community.&lt;/p&gt;
-
-&lt;p&gt;I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slides if you like here.&lt;/p&gt;
-
-&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;
-&lt;div class=&quot;embed-container&quot;&gt;    &lt;iframe title=&quot;YouTube video player&quot; width=&quot;640&quot; height=&quot;390&quot; src=&quot;//www.youtube.com/embed/&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-&lt;p&gt;
-            &amp;lt;script async=&quot;async&quot; class=&quot;speakerdeck-embed&quot; data-id=ffe22480dbfd4c1f83f66c380bba2283  data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&amp;gt; &amp;lt;/script&amp;gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/ffe22480dbfd4c1f83f66c380bba2283&quot;&gt;
-                &lt;img alt=&quot;Folien bei Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;Check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt; if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.&lt;/p&gt;
-
-&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please like or comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79&quot;&gt;Medium&lt;/a&gt; on November 19, 2018&lt;/p&gt;
-</description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
-        <link>/react-done-right-with-typescript/</link>
-        <guid isPermaLink="true">/react-done-right-with-typescript/</guid>
-        
-        <category>typescript,</category>
-        
-        <category>react,</category>
-        
-        <category>javascript,</category>
-        
-        <category>webdev</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>My beautiful Linux development environment</title>
-        <description>&lt;p&gt;One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂&lt;/p&gt;
-
-&lt;p&gt;Not that I’m complaining, I love my desktop setup. I love it so much that I was afraid of getting a new PC when I was due for one. I was afraid that I would mess things up(I have done that many times in the past, I think Linux users can relate to me)&lt;/p&gt;
-
-&lt;p&gt;So I decided to capture the most important aspects of my distro for anyone interested in using Linux as their primary OS for development.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/3zajm5va5xplo9mg7804.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is not just my work laptop, it’s my primary machine which I use for all of the below&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Java, JS, TS, Go, Python &amp;amp; web development&lt;/li&gt;
-  &lt;li&gt;JHipster development&lt;/li&gt;
-  &lt;li&gt;Running multiple web applications locally&lt;/li&gt;
-  &lt;li&gt;Running Docker containers&lt;/li&gt;
-  &lt;li&gt;VirtualBox for Windows testing &amp;amp; other VM stuff&lt;/li&gt;
-  &lt;li&gt;Kubernetes, Terraform, CloudFormation development and deployments&lt;/li&gt;
-  &lt;li&gt;Azure, AWS &amp;amp; GCP deployments using required CLI tools&lt;/li&gt;
-  &lt;li&gt;Heavy browser usage&lt;/li&gt;
-  &lt;li&gt;Email, chat &amp;amp; video conferencing&lt;/li&gt;
-  &lt;li&gt;Plex media server&lt;/li&gt;
-  &lt;li&gt;Blogging&lt;/li&gt;
-  &lt;li&gt;Youtube &amp;amp; Social media&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;machine-configuration&quot;&gt;Machine configuration&lt;/h2&gt;
-
-&lt;p&gt;The configuration of the machine is also quite important for any development setup. So my laptop is a Dell Precision 5530 Mobile Workstation. I had the exact same setup with my old Dell 5510 as well, which is quite a similar configuration to 5530. I still have it as a backup Laptop, its 2 years old now but can still give most of the top end laptops today a run for its money.&lt;/p&gt;
-
-&lt;p&gt;I used the &lt;a href=&quot;https://www.dell.com/nl-nl/work/shop/isv-gecertificeerd-en-geoptimaliseerd-workstation/precision-5530/spd/precision-15-5530-laptop/xctop5530emea?selectionState=eyJGUHJpY2UiOjMwODcuNDUsIklVUHJpY2UiOjMwODcuNDUsIk9DIjoieGN0b3A1NTMwZW1lYSIsIlF0eSI6MSwiUHJTdCI6IiIsIk1vZHMiOlt7IklkIjoxNDYsIk9wdHMiOlt7IklkIjoiR0NCV1pVMiJ9XX0seyJJZCI6MTEsIk9wdHMiOlt7IklkIjoiR1JFUEZVMiJ9XX0seyJJZCI6MTQ5LCJPcHRzIjpbeyJJZCI6Ikc1R0FJQzgifV19LHsiSWQiOjYsIk9wdHMiOlt7IklkIjoiRzBTTVk1OSJ9XX0seyJJZCI6MywiT3B0cyI6W3siSWQiOiJHSk1TVDRLIn1dfSx7IklkIjo4LCJPcHRzIjpbeyJJZCI6IkdSMlNHSkgifV19LHsiSWQiOjM3MiwiT3B0cyI6W3siSWQiOiJHM1c1QzZIIn1dfSx7IklkIjoxMDAyLCJPcHRzIjpbeyJJZCI6IkdFODBUOVcifV19LHsiSWQiOjc0OSwiT3B0cyI6W3siSWQiOiJHOEJYV1lJIn1dfSx7IklkIjo1NSwiT3B0cyI6W3siSWQiOiJHSkVWUDNYIn1dfSx7IklkIjoxMTIsIk9wdHMiOlt7IklkIjoiR1c5SUs3RiJ9XX0seyJJZCI6MTAwMywiT3B0cyI6W3siSWQiOiJHNlE1WFo0In1dfSx7IklkIjoyMDAwNzYsIk9wdHMiOlt7IklkIjoiR1cyRVNBNyJ9XX0seyJJZCI6MzAsIk9wdHMiOlt7IklkIjoiODI3ODc1In1dfV19&amp;amp;cartItemId=c4d9c6f5-9956-4c6f-87ac-d0472018ad78&quot;&gt;custom configuration&lt;/a&gt; option from Dell to get the best possible setup at that time. it’s not cheap but my company, &lt;a href=&quot;https://xebialabs.com/&quot;&gt;XebiaLabs&lt;/a&gt;, provided a handsome budget and I think it is worth every penny. This, in my opinion, is one of the best Laptop for developers. So here is what I have.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel® Core™ i9-8950HK CPU @ 2.90GHz × 12&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Memory&lt;/strong&gt;: 32GB, DDR4-2666MHz SDRAM, 2 DIMMS, Non-ECC&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;HDD&lt;/strong&gt;: M.2 1TB NVMe PCIe SED class 40 SSD&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt;: NVIDIA Quadro P2000 with 4 GB GDDR5 memory &amp;amp; Intel® UHD Graphics 630 (Coffeelake 3x8 GT2)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Wireless&lt;/strong&gt;: Intel Wifi Link 9260 2x2 802.11AC + BT 4.2 vPro wireless card&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt;: English QWERTY US, backlit&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Display&lt;/strong&gt;: 15.6” FHD 1920x1080 Anti-Glare LED-backlit Non-touch IPS UltraSharp™&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Battery&lt;/strong&gt;: 6-cell (97Wh) Lithium Ion battery with ExpressCharge™&lt;/p&gt;
-
-&lt;h2 id=&quot;operating-system-and-desktop-environment&quot;&gt;Operating system and desktop environment&lt;/h2&gt;
-
-&lt;p&gt;The most important of course is the operating system, I’m running &lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora 30&lt;/a&gt; at the moment with &lt;a href=&quot;https://www.gnome.org/&quot;&gt;GNOME 3.32.2&lt;/a&gt; as the Desktop and I’m very happy with it. I find Fedora more suitable for development machines than other distros as it has a short release cycle and is fairly stable so you get latest &amp;amp; stable software all the time.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/it61sd8sldm00nipfiy4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;What good is a desktop without a nice theme right? GNOME is great when it comes to themes and I went with &lt;a href=&quot;https://github.com/andreisergiu98/arc-flatabulous-theme&quot;&gt;Arc-Flatabulous&lt;/a&gt; theme and never looked back. For icons, I use &lt;a href=&quot;https://github.com/snwh/paper-icon-theme&quot;&gt;Paper&lt;/a&gt; as I like the material icon theme.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/h6w1qmxd2mvs88bl0ki7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Of course, it won’t be complete without some nice GNOME plugins. Below are the plugins that I use.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/307/dash-to-dock/&quot;&gt;Dash to Dock&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/503/always-zoom-workspaces/&quot;&gt;Always Zoom Workspaces&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/16/auto-move-windows/&quot;&gt;Auto Move Windows&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/18/native-window-placement/&quot;&gt;Native Window Placement&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/600/launch-new-instance/&quot;&gt;Launch new instance&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/234/steal-my-focus/&quot;&gt;Steal My Focus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/15/alternatetab/&quot;&gt;AlternateTab&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/602/window-list/&quot;&gt;Window List&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/6/applications-menu/&quot;&gt;Applications Menu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/517/caffeine/&quot;&gt;Caffeine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/779/clipboard-indicator/&quot;&gt;Clipboard Indicator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/917/gistnotes/&quot;&gt;Gistnotes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/750/openweather/&quot;&gt;OpenWeather&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/8/places-status-indicator/&quot;&gt;Places Status Indicator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/120/system-monitor/&quot;&gt;System-monitor&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/570/todotxt/&quot;&gt;Todo.txt&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/1031/topicons/&quot;&gt;TopIcons Plus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/19/user-themes/&quot;&gt;User Themes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;development-tools&quot;&gt;Development tools&lt;/h2&gt;
-
-&lt;p&gt;Now, these are mostly objective choices and really doesn’t matter as long as you are comfortable with the tools you choose. Below are my choices for some of the important categories for development. I’m not including obvious things like Vim, Git, NodeJS, Docker, Kubernetes, etc.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;: This is one of the most important for a developer. I use &lt;a href=&quot;https://www.zsh.org/&quot;&gt;ZSH&lt;/a&gt; along with the awesome &lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh My ZSH&lt;/a&gt; as my shell. Now, this won’t be complete without some nice plugins and theme. I use &lt;a href=&quot;https://github.com/bhilburn/powerlevel9k&quot;&gt;powerlevel9k&lt;/a&gt; theme with some customizations. I also use &lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt;, git, docker, docker-compose, autojump, &lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt;, dnf, and npm plugins for Oh My ZSH. Here is my &lt;a href=&quot;https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt;&lt;/a&gt; with all the customizations. &lt;strong&gt;Update&lt;/strong&gt;: A &lt;a href=&quot;https://dev.to/java4africa/comment/c319&quot;&gt;comment&lt;/a&gt; on this post suggested &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;powerlevel10k&lt;/a&gt; as an alternative theme and I tried it and turns out it is really way faster than &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel9k&lt;/code&gt;. So I think I’m gonna use &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel10k&lt;/code&gt; as my shell theme.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Terminal&lt;/strong&gt;: What good is a nice shell without a good terminal. Fortunately, we have &lt;a href=&quot;https://gnunn1.github.io/tilix-web/&quot;&gt;Tilix&lt;/a&gt; one of the best terminal application out there. It has workspaces, tabs, split windows, Quake mode and so on.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/flq8pew1hr6l1hwj6egw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Integrated development environment(IDE)&lt;/strong&gt;: &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA ultimate&lt;/a&gt; - I use this only for Java &amp;amp; other JVM language Development&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Code Editors&lt;/strong&gt;: &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; - My go-to editor. I love it. I use VSCode for web development, Go, Python, JS development, DevOps and everything other than JVM languages. A VSCode setup is never complete without some good plugins. &lt;a href=&quot;https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537&quot;&gt;Here&lt;/a&gt; are the plugins that I’m using. You can run the script to install those.&lt;/p&gt;
-
-&lt;p&gt;Other notable development tools I use are &lt;a href=&quot;https://www.gitkraken.com/&quot;&gt;GitKraken&lt;/a&gt; for Git repo management, &lt;a href=&quot;https://www.scootersoftware.com&quot;&gt;Beyond Compare&lt;/a&gt; for code comparisons, &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;VirtualBox&lt;/a&gt;, &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;NVM&lt;/a&gt; for NodeJS version management and &lt;a href=&quot;https://sdkman.io&quot;&gt;SDKMan&lt;/a&gt; for JDK version management.&lt;/p&gt;
-
-&lt;h2 id=&quot;productivity-tools&quot;&gt;Productivity tools&lt;/h2&gt;
-
-&lt;p&gt;Productivity tools are also quite important and below are my choices.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Browser&lt;/strong&gt;: Google Chrome is my primary browser. I also use Firefox &amp;amp; Opera sometimes. I do love Opera in terms of its UX, I would love to use it as my primary browser but I miss everything I have synchronized with my Google account in Chrome.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: I use &lt;a href=&quot;https://getmailspring.com/&quot;&gt;Mailspring&lt;/a&gt; as my e-mail client. Its a fairly decent mail client with nice themes and a simple UI.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Office suite&lt;/strong&gt;: I mostly use Google Docs &amp;amp; Microsoft office online but when I have to work on something on my Desktop I use &lt;a href=&quot;https://www.libreoffice.org/&quot;&gt;LibreOffice&lt;/a&gt; which is a good office suite and even handles Microsoft Office &amp;amp; Keynote formats.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Of course I use &lt;a href=&quot;https://slack.com&quot;&gt;Slack&lt;/a&gt; and for video conference I use &lt;a href=&quot;https://www.bluejeans.com/&quot;&gt;BlueJeans&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Screen capture&lt;/strong&gt;: I use this nifty tool called &lt;a href=&quot;https://github.com/phw/peek&quot;&gt;Peek&lt;/a&gt; for screen recording and &lt;a href=&quot;https://launchpad.net/shutter&quot;&gt;Shutter&lt;/a&gt; for screenshots.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;There are many other small and nifty utilities that I use, most are command line utilities. There are some notable mentions like &lt;a href=&quot;https://github.com/teejee2008/timeshift&quot;&gt;Timeshift&lt;/a&gt; which is nice for backing up your machine.&lt;/p&gt;
-
-&lt;p&gt;Of course, not everything is perfect in the Linux world, but it is the same with every OS. I was a long time Windows user before switching to Linux. So like every Linux users I have from time to time messed things up(With great power comes great responsibility, Peter). There are many quirks in the Linux world but there is nothing that bothers me much. Some of the most annoying issues I had in the past are below and for now, I don’t have any noticeable issues.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Scroll position jumping when switching apps - Fixed after upgrading to Fedora 30&lt;/li&gt;
-  &lt;li&gt;Hibernation was broken - Fixed after upgrading to Fedora 30&lt;/li&gt;
-  &lt;li&gt;Audio output selection was broken when plugging in headphones- Fixed after Fedora 28 for me&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;This has been a good day, upgraded to &lt;a href=&quot;https://twitter.com/hashtag/Fedora?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Fedora&lt;/a&gt; 30 and hibernate started to work again. Sweet. I was putting off tinkering that for a long time. &lt;a href=&quot;https://twitter.com/hashtag/Linux?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Linux&lt;/a&gt;&lt;/p&gt;&amp;mdash; 𝔻𝕖𝕖𝕡𝕦 𝕂 𝕊𝕒𝕤𝕚𝕕𝕙𝕒𝕣𝕒𝕟 (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1139602081935966210?ref_src=twsrc%5Etfw&quot;&gt;June 14, 2019&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;I hope you find this useful. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
+&lt;p&gt;I hope you like it. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
 
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
-        <link>/my-beautiful-linux-development-environment/</link>
-        <guid isPermaLink="true">/my-beautiful-linux-development-environment/</guid>
+        <pubDate>Mon, 01 Jul 2019 00:00:00 +0200</pubDate>
+        <link>/configure-a-beautiful-terminal-on-unix/</link>
+        <guid isPermaLink="true">/configure-a-beautiful-terminal-on-unix/</guid>
         
         <category>linux,</category>
         
-        <category>fedora,</category>
+        <category>terminal,</category>
         
-        <category>development,</category>
+        <category>oh-my-zsh,</category>
         
-        <category>gnome</category>
+        <category>zsh</category>
         
         
       </item>
@@ -926,7 +1100,7 @@ These problems are similar to the issues with dependency range in Node package m
 
 &lt;p&gt;Cover image photo by &lt;a href=&quot;https://unsplash.com/@brisch27?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Brigitta Schneiter&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/search/photos/gnome?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
+        <pubDate>Mon, 24 Jun 2019 00:00:00 +0200</pubDate>
         <link>/must-have-gnome-plugins/</link>
         <guid isPermaLink="true">/must-have-gnome-plugins/</guid>
         
@@ -1576,7 +1750,7 @@ store-mysql-779d66685d-tmkqd          1/1    Running  2h
 
 &lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba&quot;&gt;Medium&lt;/a&gt; on Oct 01, 2018&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
+        <pubDate>Sun, 23 Jun 2019 00:00:00 +0200</pubDate>
         <link>/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</link>
         <guid isPermaLink="true">/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</guid>
         
@@ -1587,6 +1761,253 @@ store-mysql-779d66685d-tmkqd          1/1    Running  2h
         <category>jhipster,</category>
         
         <category>microservices</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>My beautiful Linux development environment</title>
+        <description>&lt;p&gt;One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂&lt;/p&gt;
+
+&lt;p&gt;Not that I’m complaining, I love my desktop setup. I love it so much that I was afraid of getting a new PC when I was due for one. I was afraid that I would mess things up(I have done that many times in the past, I think Linux users can relate to me)&lt;/p&gt;
+
+&lt;p&gt;So I decided to capture the most important aspects of my distro for anyone interested in using Linux as their primary OS for development.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/3zajm5va5xplo9mg7804.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is not just my work laptop, it’s my primary machine which I use for all of the below&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Java, JS, TS, Go, Python &amp;amp; web development&lt;/li&gt;
+  &lt;li&gt;JHipster development&lt;/li&gt;
+  &lt;li&gt;Running multiple web applications locally&lt;/li&gt;
+  &lt;li&gt;Running Docker containers&lt;/li&gt;
+  &lt;li&gt;VirtualBox for Windows testing &amp;amp; other VM stuff&lt;/li&gt;
+  &lt;li&gt;Kubernetes, Terraform, CloudFormation development and deployments&lt;/li&gt;
+  &lt;li&gt;Azure, AWS &amp;amp; GCP deployments using required CLI tools&lt;/li&gt;
+  &lt;li&gt;Heavy browser usage&lt;/li&gt;
+  &lt;li&gt;Email, chat &amp;amp; video conferencing&lt;/li&gt;
+  &lt;li&gt;Plex media server&lt;/li&gt;
+  &lt;li&gt;Blogging&lt;/li&gt;
+  &lt;li&gt;Youtube &amp;amp; Social media&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;machine-configuration&quot;&gt;Machine configuration&lt;/h2&gt;
+
+&lt;p&gt;The configuration of the machine is also quite important for any development setup. So my laptop is a Dell Precision 5530 Mobile Workstation. I had the exact same setup with my old Dell 5510 as well, which is quite a similar configuration to 5530. I still have it as a backup Laptop, its 2 years old now but can still give most of the top end laptops today a run for its money.&lt;/p&gt;
+
+&lt;p&gt;I used the &lt;a href=&quot;https://www.dell.com/nl-nl/work/shop/isv-gecertificeerd-en-geoptimaliseerd-workstation/precision-5530/spd/precision-15-5530-laptop/xctop5530emea?selectionState=eyJGUHJpY2UiOjMwODcuNDUsIklVUHJpY2UiOjMwODcuNDUsIk9DIjoieGN0b3A1NTMwZW1lYSIsIlF0eSI6MSwiUHJTdCI6IiIsIk1vZHMiOlt7IklkIjoxNDYsIk9wdHMiOlt7IklkIjoiR0NCV1pVMiJ9XX0seyJJZCI6MTEsIk9wdHMiOlt7IklkIjoiR1JFUEZVMiJ9XX0seyJJZCI6MTQ5LCJPcHRzIjpbeyJJZCI6Ikc1R0FJQzgifV19LHsiSWQiOjYsIk9wdHMiOlt7IklkIjoiRzBTTVk1OSJ9XX0seyJJZCI6MywiT3B0cyI6W3siSWQiOiJHSk1TVDRLIn1dfSx7IklkIjo4LCJPcHRzIjpbeyJJZCI6IkdSMlNHSkgifV19LHsiSWQiOjM3MiwiT3B0cyI6W3siSWQiOiJHM1c1QzZIIn1dfSx7IklkIjoxMDAyLCJPcHRzIjpbeyJJZCI6IkdFODBUOVcifV19LHsiSWQiOjc0OSwiT3B0cyI6W3siSWQiOiJHOEJYV1lJIn1dfSx7IklkIjo1NSwiT3B0cyI6W3siSWQiOiJHSkVWUDNYIn1dfSx7IklkIjoxMTIsIk9wdHMiOlt7IklkIjoiR1c5SUs3RiJ9XX0seyJJZCI6MTAwMywiT3B0cyI6W3siSWQiOiJHNlE1WFo0In1dfSx7IklkIjoyMDAwNzYsIk9wdHMiOlt7IklkIjoiR1cyRVNBNyJ9XX0seyJJZCI6MzAsIk9wdHMiOlt7IklkIjoiODI3ODc1In1dfV19&amp;amp;cartItemId=c4d9c6f5-9956-4c6f-87ac-d0472018ad78&quot;&gt;custom configuration&lt;/a&gt; option from Dell to get the best possible setup at that time. it’s not cheap but my company, &lt;a href=&quot;https://xebialabs.com/&quot;&gt;XebiaLabs&lt;/a&gt;, provided a handsome budget and I think it is worth every penny. This, in my opinion, is one of the best Laptop for developers. So here is what I have.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel® Core™ i9-8950HK CPU @ 2.90GHz × 12&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Memory&lt;/strong&gt;: 32GB, DDR4-2666MHz SDRAM, 2 DIMMS, Non-ECC&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HDD&lt;/strong&gt;: M.2 1TB NVMe PCIe SED class 40 SSD&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt;: NVIDIA Quadro P2000 with 4 GB GDDR5 memory &amp;amp; Intel® UHD Graphics 630 (Coffeelake 3x8 GT2)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Wireless&lt;/strong&gt;: Intel Wifi Link 9260 2x2 802.11AC + BT 4.2 vPro wireless card&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt;: English QWERTY US, backlit&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Display&lt;/strong&gt;: 15.6” FHD 1920x1080 Anti-Glare LED-backlit Non-touch IPS UltraSharp™&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Battery&lt;/strong&gt;: 6-cell (97Wh) Lithium Ion battery with ExpressCharge™&lt;/p&gt;
+
+&lt;h2 id=&quot;operating-system-and-desktop-environment&quot;&gt;Operating system and desktop environment&lt;/h2&gt;
+
+&lt;p&gt;The most important of course is the operating system, I’m running &lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora 30&lt;/a&gt; at the moment with &lt;a href=&quot;https://www.gnome.org/&quot;&gt;GNOME 3.32.2&lt;/a&gt; as the Desktop and I’m very happy with it. I find Fedora more suitable for development machines than other distros as it has a short release cycle and is fairly stable so you get latest &amp;amp; stable software all the time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/it61sd8sldm00nipfiy4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What good is a desktop without a nice theme right? GNOME is great when it comes to themes and I went with &lt;a href=&quot;https://github.com/andreisergiu98/arc-flatabulous-theme&quot;&gt;Arc-Flatabulous&lt;/a&gt; theme and never looked back. For icons, I use &lt;a href=&quot;https://github.com/snwh/paper-icon-theme&quot;&gt;Paper&lt;/a&gt; as I like the material icon theme.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/h6w1qmxd2mvs88bl0ki7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course, it won’t be complete without some nice GNOME plugins. Below are the plugins that I use.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/307/dash-to-dock/&quot;&gt;Dash to Dock&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/503/always-zoom-workspaces/&quot;&gt;Always Zoom Workspaces&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/16/auto-move-windows/&quot;&gt;Auto Move Windows&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/18/native-window-placement/&quot;&gt;Native Window Placement&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/600/launch-new-instance/&quot;&gt;Launch new instance&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/234/steal-my-focus/&quot;&gt;Steal My Focus&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/15/alternatetab/&quot;&gt;AlternateTab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/602/window-list/&quot;&gt;Window List&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/6/applications-menu/&quot;&gt;Applications Menu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/517/caffeine/&quot;&gt;Caffeine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/779/clipboard-indicator/&quot;&gt;Clipboard Indicator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/917/gistnotes/&quot;&gt;Gistnotes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/750/openweather/&quot;&gt;OpenWeather&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/8/places-status-indicator/&quot;&gt;Places Status Indicator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/120/system-monitor/&quot;&gt;System-monitor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/570/todotxt/&quot;&gt;Todo.txt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/1031/topicons/&quot;&gt;TopIcons Plus&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/19/user-themes/&quot;&gt;User Themes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;development-tools&quot;&gt;Development tools&lt;/h2&gt;
+
+&lt;p&gt;Now, these are mostly objective choices and really doesn’t matter as long as you are comfortable with the tools you choose. Below are my choices for some of the important categories for development. I’m not including obvious things like Vim, Git, NodeJS, Docker, Kubernetes, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;: This is one of the most important for a developer. I use &lt;a href=&quot;https://www.zsh.org/&quot;&gt;ZSH&lt;/a&gt; along with the awesome &lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh My ZSH&lt;/a&gt; as my shell. Now, this won’t be complete without some nice plugins and theme. I use &lt;a href=&quot;https://github.com/bhilburn/powerlevel9k&quot;&gt;powerlevel9k&lt;/a&gt; theme with some customizations. I also use &lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt;, git, docker, docker-compose, autojump, &lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt;, dnf, and npm plugins for Oh My ZSH. Here is my &lt;a href=&quot;https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt;&lt;/a&gt; with all the customizations. &lt;strong&gt;Update&lt;/strong&gt;: A &lt;a href=&quot;https://dev.to/java4africa/comment/c319&quot;&gt;comment&lt;/a&gt; on this post suggested &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;powerlevel10k&lt;/a&gt; as an alternative theme and I tried it and turns out it is really way faster than &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel9k&lt;/code&gt;. So I think I’m gonna use &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel10k&lt;/code&gt; as my shell theme.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Terminal&lt;/strong&gt;: What good is a nice shell without a good terminal. Fortunately, we have &lt;a href=&quot;https://gnunn1.github.io/tilix-web/&quot;&gt;Tilix&lt;/a&gt; one of the best terminal application out there. It has workspaces, tabs, split windows, Quake mode and so on.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/flq8pew1hr6l1hwj6egw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Integrated development environment(IDE)&lt;/strong&gt;: &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA ultimate&lt;/a&gt; - I use this only for Java &amp;amp; other JVM language Development&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Code Editors&lt;/strong&gt;: &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; - My go-to editor. I love it. I use VSCode for web development, Go, Python, JS development, DevOps and everything other than JVM languages. A VSCode setup is never complete without some good plugins. &lt;a href=&quot;https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537&quot;&gt;Here&lt;/a&gt; are the plugins that I’m using. You can run the script to install those.&lt;/p&gt;
+
+&lt;p&gt;Other notable development tools I use are &lt;a href=&quot;https://www.gitkraken.com/&quot;&gt;GitKraken&lt;/a&gt; for Git repo management, &lt;a href=&quot;https://www.scootersoftware.com&quot;&gt;Beyond Compare&lt;/a&gt; for code comparisons, &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;VirtualBox&lt;/a&gt;, &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;NVM&lt;/a&gt; for NodeJS version management and &lt;a href=&quot;https://sdkman.io&quot;&gt;SDKMan&lt;/a&gt; for JDK version management.&lt;/p&gt;
+
+&lt;h2 id=&quot;productivity-tools&quot;&gt;Productivity tools&lt;/h2&gt;
+
+&lt;p&gt;Productivity tools are also quite important and below are my choices.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Browser&lt;/strong&gt;: Google Chrome is my primary browser. I also use Firefox &amp;amp; Opera sometimes. I do love Opera in terms of its UX, I would love to use it as my primary browser but I miss everything I have synchronized with my Google account in Chrome.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: I use &lt;a href=&quot;https://getmailspring.com/&quot;&gt;Mailspring&lt;/a&gt; as my e-mail client. Its a fairly decent mail client with nice themes and a simple UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Office suite&lt;/strong&gt;: I mostly use Google Docs &amp;amp; Microsoft office online but when I have to work on something on my Desktop I use &lt;a href=&quot;https://www.libreoffice.org/&quot;&gt;LibreOffice&lt;/a&gt; which is a good office suite and even handles Microsoft Office &amp;amp; Keynote formats.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Of course I use &lt;a href=&quot;https://slack.com&quot;&gt;Slack&lt;/a&gt; and for video conference I use &lt;a href=&quot;https://www.bluejeans.com/&quot;&gt;BlueJeans&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Screen capture&lt;/strong&gt;: I use this nifty tool called &lt;a href=&quot;https://github.com/phw/peek&quot;&gt;Peek&lt;/a&gt; for screen recording and &lt;a href=&quot;https://launchpad.net/shutter&quot;&gt;Shutter&lt;/a&gt; for screenshots.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;There are many other small and nifty utilities that I use, most are command line utilities. There are some notable mentions like &lt;a href=&quot;https://github.com/teejee2008/timeshift&quot;&gt;Timeshift&lt;/a&gt; which is nice for backing up your machine.&lt;/p&gt;
+
+&lt;p&gt;Of course, not everything is perfect in the Linux world, but it is the same with every OS. I was a long time Windows user before switching to Linux. So like every Linux users I have from time to time messed things up(With great power comes great responsibility, Peter). There are many quirks in the Linux world but there is nothing that bothers me much. Some of the most annoying issues I had in the past are below and for now, I don’t have any noticeable issues.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scroll position jumping when switching apps - Fixed after upgrading to Fedora 30&lt;/li&gt;
+  &lt;li&gt;Hibernation was broken - Fixed after upgrading to Fedora 30&lt;/li&gt;
+  &lt;li&gt;Audio output selection was broken when plugging in headphones- Fixed after Fedora 28 for me&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;This has been a good day, upgraded to &lt;a href=&quot;https://twitter.com/hashtag/Fedora?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Fedora&lt;/a&gt; 30 and hibernate started to work again. Sweet. I was putting off tinkering that for a long time. &lt;a href=&quot;https://twitter.com/hashtag/Linux?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Linux&lt;/a&gt;&lt;/p&gt;&amp;mdash; 𝔻𝕖𝕖𝕡𝕦 𝕂 𝕊𝕒𝕤𝕚𝕕𝕙𝕒𝕣𝕒𝕟 (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1139602081935966210?ref_src=twsrc%5Etfw&quot;&gt;June 14, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I hope you find this useful. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 16 Jun 2019 00:00:00 +0200</pubDate>
+        <link>/my-beautiful-linux-development-environment/</link>
+        <guid isPermaLink="true">/my-beautiful-linux-development-environment/</guid>
+        
+        <category>linux,</category>
+        
+        <category>fedora,</category>
+        
+        <category>development,</category>
+        
+        <category>gnome</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Why I’m moving away from Medium</title>
+        <description>&lt;p&gt;After much deliberation, I have decided to move my blogs away from &lt;a href=&quot;https://medium.com/@deepu105&quot;&gt;Medium&lt;/a&gt;. I was considering setting up my own blog with &lt;a href=&quot;https://gohugo.io/&quot;&gt;Hugo&lt;/a&gt; but then decided to go with &lt;a href=&quot;https://dev.to/deepu105&quot;&gt;Dev.to&lt;/a&gt;. Below are the reasons why I decided to leave Medium and why I chose Dev.to.&lt;/p&gt;
+
+&lt;p&gt;All considerations were purely from a technical writing perspective as I was using Medium for publishing technical content.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-love-hate-relationship-with-medium&quot;&gt;The love-hate relationship with Medium&lt;/h3&gt;
+
+&lt;p&gt;I loved Medium when I started writing here, reasons being;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;A simple minimal &amp;amp; clean UI — It still is one of the best&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ease of authoring and publishing&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Community and visibility&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Publications&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ease of customization&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But there were also things I didn’t like much which slowly become quite annoying&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The weird commenting mechanism(Every comment is a post, and they literally mess up your stories listing page)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2302/1*nnAeUa07rTwcFw-iMBe1vQ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Medium had a weird WYSIWYG editor interface which is great for normal content creation but not so great for technical content creation. It had some markdown like shortcuts, but it could never match the ease of using proper markdown editors.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Export only in HTML (Duh!!)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But these annoyances were not the main reason I decided to switch platforms. Below are the main reasons why I decided Medium isn’t a good fit for me.&lt;/p&gt;
+
+&lt;p&gt;Medium has been aggressively pushing for content to be put behind a paywall and they have made it clear that content not opting in will not get any push inside the platform. This means the community and visibility part is applicable only if you opt-in for the paywall. I understand why Medium does and I think its a great monetary source for established authors but it doesn’t work for mere mortals like me.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*yq7VjalsUx_ujXWeEKpAag.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As a result of the above, the traffic you get from Medium itself is very low compared to external sources. See one of my stories below for an example. For newer stories, it is even lower.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*buR4q7oynmBkYmHGLx_jtw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So writing in Medium seems to have no benefit over other platforms as I could get similar views from external sources and might get better writing experience elsewhere.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;
+So after a week of moving to the Dev community below are my stats and its incredible, I have ~50k views, ~1k reactions and ~300 followers and one of my post was &lt;a href=&quot;https://dev.to/devteam/the-7-most-popular-dev-posts-from-the-past-week-5ahf&quot;&gt;featured in top 7&lt;/a&gt; of the week and all this in just 1 week. I didn’t get anything remotely close to this from Medium in a year.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/g5y8ud1w4re7xysb3g99.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;enter-devto&quot;&gt;Enter Dev.to&lt;/h3&gt;
+
+&lt;p&gt;When I was trying to find a different platform, some of the most important aspects I considered were below&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Community&lt;/strong&gt;: A community without paywall and a community were your blogs get visibility and get traffic.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Ease of authoring&lt;/strong&gt;: Authoring experience was important, hence at minimum Markdown support was a must. This way I can author posts in my favorite IDE(VsCode in this case) and doesn’t have to be restricted with the platform’s capability. Also, this ensures that I can easily move my posts to another platform in the future if needed.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dev.to satisfied these needs and provided a nice and clean UI and descent publishing experience on top.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;I think Medium is still perfect for normal blogging and for content creators who have subscribers willing to pay even if they put articles behind a paywall. But for technical content creators who do not want their content behind a paywall, there are better platforms. I might still crosspost between Dev.to and Medium from time to time but Dev.to will be my primary blogging platform.&lt;/p&gt;
+
+&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/@deepu105/why-im-moving-away-from-medium-f9153a01247e&quot;&gt;Medium&lt;/a&gt; on June 13, 2019&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@milkovi?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;MILKOVÍ&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/search/photos/writing?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 13 Jun 2019 00:00:00 +0200</pubDate>
+        <link>/why-im-moving-away-from-medium/</link>
+        <guid isPermaLink="true">/why-im-moving-away-from-medium/</guid>
+        
+        <category>writing,</category>
+        
+        <category>medium,</category>
+        
+        <category>development,</category>
+        
+        <category>tech</category>
         
         
       </item>
@@ -1975,7 +2396,7 @@ store-mysql-779d66685d-tmkqd          1/1    Running  2h
   &lt;li&gt;&lt;a href=&quot;https://medium.com/xebialabs/continuous-delivery-of-microservices-with-xebialabs-a-k-a-devops-as-code-b5f0c3b2b1c8&quot;&gt;Continuous delivery of Microservices with XebiaLabs — a.k.a DevOps as Code&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
+        <pubDate>Wed, 12 Jun 2019 00:00:00 +0200</pubDate>
         <link>/deploy-a-web-app-to-azure-app-service-using-terraform/</link>
         <guid isPermaLink="true">/deploy-a-web-app-to-azure-app-service-using-terraform/</guid>
         
@@ -3102,7 +3523,7 @@ To generate the missing Docker image(s), please run:
 
 &lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/jhipster/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77&quot;&gt;Medium&lt;/a&gt; on Sep 22, 2018&lt;/p&gt;
 </description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
+        <pubDate>Wed, 12 Jun 2019 00:00:00 +0200</pubDate>
         <link>/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/</link>
         <guid isPermaLink="true">/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/</guid>
         
@@ -3113,427 +3534,6 @@ To generate the missing Docker image(s), please run:
         <category>microservices,</category>
         
         <category>docker</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Configure a beautiful terminal on Unix with Zsh</title>
-        <description>&lt;p&gt;I was a long time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I’m not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup &lt;a href=&quot;https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.&lt;/p&gt;
-
-&lt;p&gt;Let’s see how to configure a powerful and productive terminal experience. The setup is based on what I have configured on my Fedora machine. The same setup can be recreated on any other Linux distribution, BSD or Mac as well. You just need to use the installation instruction from the tools for the given platform.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/fhwstp9251al105hp899.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Below are the tools we would need for this.&lt;/p&gt;
-
-&lt;h2 id=&quot;zsh&quot;&gt;Zsh&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.zsh.org/&quot;&gt;Zsh&lt;/a&gt; is one of the most feature-rich shells for Unix. It works on Linux, Mac, &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/about&quot;&gt;WSL&lt;/a&gt;, and BSD. There are alternatives like &lt;a href=&quot;https://fishshell.com/&quot;&gt;Fish&lt;/a&gt; which also offers similar features but I personally like Zsh.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Check if Zsh is already installed by running &lt;code class=&quot;highlighter-rouge&quot;&gt;zsh --version&lt;/code&gt; on your terminal. If not found, install it using your package manager.
-    &lt;ul&gt;
-      &lt;li&gt;Fedora: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dnf install zsh&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Mac: &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install zsh zsh-completions&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;RHEL/CentOS: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo yum update &amp;amp;&amp;amp; sudo yum -y install zsh&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Ubuntu/Debian: &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt install zsh&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;For other platform refer &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH#how-to-install-zsh-in-many-platforms&quot;&gt;this&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Now make Zsh your default shell by running &lt;code class=&quot;highlighter-rouge&quot;&gt;chsh -s $(which zsh)&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Log out and log in back again to use your new default shell.&lt;/li&gt;
-  &lt;li&gt;Test that it worked with echo &lt;code class=&quot;highlighter-rouge&quot;&gt;$SHELL&lt;/code&gt;. Expected result: &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/zsh&lt;/code&gt; or similar.&lt;/li&gt;
-  &lt;li&gt;Test with &lt;code class=&quot;highlighter-rouge&quot;&gt;$SHELL --version&lt;/code&gt;. Expected result: &lt;code class=&quot;highlighter-rouge&quot;&gt;zsh 5.6.2&lt;/code&gt; or similar&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Note: If you have installed Zsh for the first time and launch the shell it would prompt you to configure some settings. You can choose to ignore that by hitting &lt;code class=&quot;highlighter-rouge&quot;&gt;q&lt;/code&gt; as we will configure it later on.&lt;/p&gt;
-
-&lt;h2 id=&quot;oh-my-zsh&quot;&gt;Oh-My-Zsh&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh-My-Zsh&lt;/a&gt; gives the Zsh shell superpowers. Its a framework to manage Zsh configuration. It has plugins and themes for Zsh(A lot of them).&lt;/p&gt;
-
-&lt;p&gt;From their Github page:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Once installed, your terminal shell will become the talk of the town or your money back! With each keystroke in your command prompt, you’ll take advantage of the hundreds of powerful plugins and beautiful themes. Strangers will come up to you in cafés and ask you, “that is amazing! are you some sort of genius?”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Just install it. You need it :)&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;terminal-emulatormultiplexer&quot;&gt;Terminal emulator/multiplexer&lt;/h2&gt;
-
-&lt;p&gt;Optionally you can use a Terminal emulator that can manage windows and panes for you.&lt;/p&gt;
-
-&lt;p&gt;For Linux I would recommend using &lt;a href=&quot;https://gnunn1.github.io/tilix-web/&quot;&gt;Tilix&lt;/a&gt;, I have been using it for 3 years and its just amazing.&lt;/p&gt;
-
-&lt;p&gt;For Mac, you can use &lt;a href=&quot;https://iterm2.com/index.html&quot;&gt;iTerm2&lt;/a&gt; which is very popular.&lt;/p&gt;
-
-&lt;p&gt;Alternatively, you can also use &lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;tmux&lt;/a&gt; if you want something lighter on your existing Terminal app on Linux, BSD or Mac.&lt;/p&gt;
-
-&lt;h2 id=&quot;configuring-zsh&quot;&gt;Configuring Zsh&lt;/h2&gt;
-
-&lt;p&gt;This is the fun part. Let us make the terminal awesome.&lt;/p&gt;
-
-&lt;h3 id=&quot;install-plugins&quot;&gt;Install plugins&lt;/h3&gt;
-&lt;p&gt;First, let us install some additional plugins that are not bundled with Oh-My-Zsh.&lt;/p&gt;
-
-&lt;h4 id=&quot;zsh-autosuggestions&quot;&gt;&lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;Provides auto completion for shell commands.&lt;/p&gt;
-
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions&lt;/code&gt; to install&lt;/p&gt;
-&lt;h4 id=&quot;zsh-syntax-highlighting&quot;&gt;&lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;Provides syntax highlighting on the shell.&lt;/p&gt;
-
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting&lt;/code&gt; to install&lt;/p&gt;
-
-&lt;h4 id=&quot;autojump&quot;&gt;&lt;a href=&quot;https://github.com/wting/autojump&quot;&gt;autojump&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;Provides a smarter directory navigation system.
-Install autojump for your OS following instructions &lt;a href=&quot;https://github.com/wting/autojump#automatic&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Now let us configure the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file with some settings. &lt;a href=&quot;https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a&quot;&gt;Here&lt;/a&gt; is my full &lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt; file. Your mileage may vary.&lt;/p&gt;
-
-&lt;h3 id=&quot;add-exports&quot;&gt;Add exports&lt;/h3&gt;
-&lt;p&gt;We will start with some exports.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xterm-256color&quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# This sets up colors properly&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# set shell&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/bin/zsh
-
-&lt;span class=&quot;c&quot;&gt;# If you come from bash you might have to change your $PATH.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;NODE_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$NODE_PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.npm-global/lib/node_modules
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/java/latest
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$JAVA_HOME&lt;/span&gt;/bin:~/.npm-global/bin:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/bin:/usr/local/bin:&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Add exports from your profile&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.profile
-&lt;span class=&quot;c&quot;&gt;# Path to your oh-my-zsh installation.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ZSH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;zsh-settings&quot;&gt;Zsh settings&lt;/h3&gt;
-
-&lt;p&gt;Now we can configure some Zsh specific settings&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;DISABLE_MAGIC_FUNCTIONS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ZSH_AUTOSUGGEST_MANUAL_REBIND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-&lt;span class=&quot;nv&quot;&gt;COMPLETION_WAITING_DOTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DISABLE_UNTRACKED_FILES_DIRTY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;zsh-theme&quot;&gt;Zsh theme&lt;/h3&gt;
-
-&lt;p&gt;Now, Let’s set up a nice theme. I’m using &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;&lt;strong&gt;powerlevel10k&lt;/strong&gt;&lt;/a&gt; as my current theme and it’s fast and looks great. You can use the default or you can choose any theme you like from the list &lt;a href=&quot;https://github.com/robbyrussell/oh-my-zsh/wiki/Themes&quot;&gt;here&lt;/a&gt;. If you like my theme then follow these instructions. Thanks to &lt;a href=&quot;https://github.com/romkatv&quot;&gt;Roman Perepelitsa&lt;/a&gt; for some &lt;a href=&quot;https://github.com/romkatv/powerlevel10k/issues/90#issuecomment-503599702&quot;&gt;cool tips&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k&lt;/code&gt; to install the theme.&lt;/p&gt;
-
-&lt;p&gt;Install a &lt;a href=&quot;https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font&quot;&gt;Powerline font&lt;/a&gt;. I use &lt;a href=&quot;https://github.com/adobe-fonts/source-code-pro&quot;&gt;Adobe Source Code Pro&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Add the below configuration to the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Set name of the theme to load. Optionally, if you set this to &quot;random&quot;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# it'll load a random theme each time that oh-my-zsh is loaded.&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;ZSH_THEME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;powerlevel10k/powerlevel10k&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;############ POWERLEVEL THEME SETTINGS ##############&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MODE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'awesome-fontconfig'&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_PROMPT_ELEMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dir &lt;/span&gt;vcs nvm&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;disk_usage &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_PROMPT_ADD_NEWLINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_PROMPT_ON_NEWLINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHOW_RULER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_CHAR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'─'&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RULER_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;237
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SEGMENT_END_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;' '&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SEGMENT_END_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_WHITESPACE_BETWEEN_LEFT_SEGMENTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHORTEN_DIR_LENGTH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_SHORTEN_STRATEGY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;truncate_middle&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_SHOW_WRITABLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;magenta
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_TIME_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_TIME_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;white
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_ETC_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_DEFAULT_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_ETC_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_DEFAULT_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;blue
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_OS_ICON_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;white&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_OS_ICON_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf1d3 '&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_GITHUB_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf09b '&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf171 '&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_GIT_GIT_GITLAB_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fon %F{040}\uf296 '&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_CLEAN_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_MODIFIED_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_LOADING_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_CLEAN_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;040&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_MODIFIED_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yellow&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_LOADING_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;grey&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNTRACKED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;?%}'&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_UNSTAGED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;!%}'&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_VCS_STAGED_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'%{&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\b&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;+%}'&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_COLOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;red
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_LOCK_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;f023'&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%F{%(?.green.red)}${${${KEYMAP:-0}:#vicmd}:+❯}${${$((!${#${KEYMAP:-0}:#vicmd})):#0}:+❮}%f '&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NVM_BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NVM_FOREGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;green
-&lt;span class=&quot;nv&quot;&gt;POWERLEVEL9K_NODE_ICON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%fvia %F{green}⬢'&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;############ END- POWERLEVEL THEME SETTINGS ##############&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;enable-plugins&quot;&gt;Enable plugins&lt;/h3&gt;
-
-&lt;p&gt;We can finish off by enabling the plugins and some tweaks&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;zsh-autosuggestions git docker docker-compose autojump zsh-syntax-highlighting dnf npm&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ZSH&lt;/span&gt;/oh-my-zsh.sh
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And that’s it we are ready. Start a new terminal session and enjoy.&lt;/p&gt;
-
-&lt;h3 id=&quot;issues--workarounds&quot;&gt;Issues &amp;amp; workarounds&lt;/h3&gt;
-
-&lt;p&gt;If you use Tilix as your terminal emulator, then this might be required for proper pane splitting. Add this to your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TILIX_ID&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
-        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /etc/profile.d/vte.sh
-&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you are getting errors from the zsh-completion plugin, you might want to add this to the beginning of your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# workaround as per https://superuser.com/questions/1222867/zsh-completion-functions-broken&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;FPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/plugins/git:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/functions:&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt;/.oh-my-zsh/completions:/usr/share/zsh/site-functions:/usr/share/zsh/&lt;span class=&quot;nv&quot;&gt;$ZSH_VERSION&lt;/span&gt;/functions
-
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;FPATH
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you encounter an error from Oh-My-Zsh saying &lt;code class=&quot;highlighter-rouge&quot;&gt;[oh-my-zsh] Insecure completion-dependent directories detected&lt;/code&gt;, set &lt;code class=&quot;highlighter-rouge&quot;&gt;ZSH_DISABLE_COMPFIX=true&lt;/code&gt; right before the line &lt;code class=&quot;highlighter-rouge&quot;&gt;source $ZSH/oh-my-zsh.sh&lt;/code&gt; in your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt; file and restart your session or run &lt;code class=&quot;highlighter-rouge&quot;&gt;exec zsh&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;dockerized-playground&quot;&gt;Dockerized playground.&lt;/h2&gt;
-
-&lt;p&gt;If you have Docker installed then you can use the below snippet to try this setup in a sandbox without installing anything or affecting your existing setup.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;docker run &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;C.UTF-8 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;LC_ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;C.UTF-8 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$TERM&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; ubuntu bash &lt;span class=&quot;nt&quot;&gt;-uexc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'
-  apt update &amp;amp;&amp;amp; apt install -y git curl zsh autojump &amp;amp;&amp;amp; cd /root
-  sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot; --skip-chsh --unattended
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-  git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
-  curl -fsSLO http://bit.ly/Spaceship10kTheme
-  echo &quot;source ~/Spaceship10kTheme&quot; &amp;gt;~/.zshrc
-  exec zsh'&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;vscode-tip&quot;&gt;VSCode Tip&lt;/h2&gt;
-
-&lt;p&gt;If you are using VSCode like me, you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Follow these steps&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Download and install a &lt;a href=&quot;https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf&quot;&gt;patched font&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;On Linux, run &lt;code class=&quot;highlighter-rouge&quot;&gt;fc-cache -f -v&lt;/code&gt; to refresh font cache.&lt;/li&gt;
-  &lt;li&gt;On VSCode, open Preferences → Settings and click on the &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; icon to open JSON mode and set the below
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.shell.linux&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/bin/zsh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontFamily&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;'SauceCodePro Nerd Font Mono','Source Code Pro'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.rightClickCopyPaste&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontSize&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorStyle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;underline&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorBlinking&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;linux&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;osx&lt;/code&gt; if you are on a Mac.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I hope you like it. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 15 Jul 2019 00:00:00 +0200</pubDate>
-        <link>/configure-a-beautiful-terminal-on-unix/</link>
-        <guid isPermaLink="true">/configure-a-beautiful-terminal-on-unix/</guid>
-        
-        <category>linux,</category>
-        
-        <category>terminal,</category>
-        
-        <category>oh-my-zsh,</category>
-        
-        <category>zsh</category>
         
         
       </item>
