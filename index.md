@@ -1,8 +1,7 @@
 ---
-layout: page
-title: Mediumish Template for Jekyll
-permalink: /about
-comments: true
+layout: default
+title: Deepu K
+comments: false
 ---
 
 <div class="row justify-content-between">

@@ -5,7 +5,7 @@ description: "Technorage, where I rage about technology"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 google_analytics: 'UA-74370272-1'
-# disqus: 'demowebsite'
+disqus: 'deepu-tech'
 # mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
 include: ["_pages"]
 permalink: /:title/
@@ -15,7 +15,7 @@ authors:
   deepu:
     name: Deepu
     display_name: Deepu K Sasidharan
-    gravatar: d4udts
+    gravatar: 7f408bc67dc9ae3b288ee92d16d3c4c2 # md5 hash of d4udts@gmail.com
     email: deepu.k.sasidharan@gmail.com
     web: https://www.deepu.tech
     twitter: https://twitter.com/deepu105
@@ -23,7 +23,7 @@ authors:
 
 # Plugins
 plugins:
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-seo-tag
@@ -53,9 +53,15 @@ jekyll-archives:
   permalinks:
     category: '/category/:name/'
     
-# Pagination 
-paginate: 6
-paginate_path: /page:num/
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 6
+  permalink: '/page/:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
     
 # Other
 markdown: kramdown
@@ -73,7 +79,7 @@ adsense: "disabled"
 # adsense-data-ad-slot: "1363087678"
 
 # Lazy Images ("enabled" or "disabled")
-lazyimages: "disabled"
+lazyimages: "enabled"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
