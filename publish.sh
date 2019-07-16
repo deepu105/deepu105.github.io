@@ -2,7 +2,7 @@
 
 rm -rf _site
 
-if [ -z "$(git status --porcelain)" ]; then
+# if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     setopt extended_glob
     TMP_LOC=/tmp/deepu.github.io
@@ -23,7 +23,7 @@ if [ -z "$(git status --porcelain)" ]; then
     /bin/rm -rf ^*vendor*
 
     echo ">> Move site form temp & publish to GitHub"
-    mv $TMP_LOC/* .
+    mv -f $TMP_LOC/* .
     now=$(date)
     git add --all
     git commit -am "Updated site on $now"
@@ -32,7 +32,7 @@ if [ -z "$(git status --porcelain)" ]; then
     echo "$now: Published changes to GitHub"
 
     git checkout site_src
-else
-    echo "Working directory is not clean. Commit changes!"
-    exit
-fi
+# else
+#     echo "Working directory is not clean. Commit changes!"
+#     exit
+# fi
