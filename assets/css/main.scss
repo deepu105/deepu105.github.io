@@ -23,3 +23,13 @@
     font-size: 200%;
     margin-right: 5px;
 }
+
+.embed-video-container {
+    margin: 1em 0;
+    width: 100%;
+    position: relative;
+    iframe {
+        margin: 0;
+        border: 0;
+    }
+}

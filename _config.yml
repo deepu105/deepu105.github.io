@@ -29,7 +29,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-archives
   - jekyll-gist
-  - jekyll-youtube
 
 defaults:
   -
