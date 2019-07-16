@@ -20,7 +20,7 @@ This nifty tool lets you tweak/configure a lot of GNOME configuration and should
 
 ## Gnome extensions
 
-You can install below extensions by visiting the link in the title of extension below and by clicking on the **on** switch on the top right corner. On Chrome, you would need the [GNOME Shell integration](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) plugin to enable the switch. On Firefox, it will prompt you to install the plugin if it doesn't exist.
+You can install below extensions by visiting the link in the title of the extension below and by clicking on the **on** switch on the top right corner. On Chrome, you would need the [GNOME Shell integration](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep) plugin to enable the switch. On Firefox, it will prompt you to install the plugin if it doesn't exist.
 
 #### [Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)
 GNOME without this plugin almost feels annoying. IMO this plugin also should be the default GNOME setting. This one moves your GNOME dash into a highly configurable dock which can be placed on the sides or top/bottom of the screen. I find it perfect on the left side of the screen in GNOME. It can be a floating dock or fixed to look like those on Mint or KDE.
@@ -36,7 +36,7 @@ By default, the GNOME launcher does not show the workspaces, you have to hover o
 This is another default in GNOME that is annoying. When something needs focus these plugins brings the window up instead of the default notification. You can use any one of the plugins as both do the same thing.
 
 #### [AlternateTab](https://extensions.gnome.org/extension/15/alternatetab/)
-This replaces the default Alt+Tab with a more classical window based switcher which IMO is more user-friendly as the default requires more keyboard navigation using the arrow keys.
+This replaces the default Alt+Tab with a more classical window-based switcher which IMO is more user-friendly as the default requires more keyboard navigation using the arrow keys.
 
 ![](https://thepracticaldev.s3.amazonaws.com/i/bjt36nvje3640e3h92dq.png)
 
@@ -44,7 +44,7 @@ This replaces the default Alt+Tab with a more classical window based switcher wh
 This is a classic plugin that adds the window list to the bottom of the screen and is a must if you use multiple monitors as the windows are grouped and placed in the right monitor screen.
 
 #### [Caffeine](https://extensions.gnome.org/extension/517/caffeine/)
-This one adds the ability to temporarily disable screensaver/auto-suspend and automatically activates when you go full-screen. A must have if you are using your computer for watching videos, presentations, screencast and so on.
+This one adds the ability to temporarily disable screensaver/auto-suspend and automatically activates when you go full-screen. A must-have if you are using your computer for watching videos, presentations, screencast and so on.
 
 #### [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 This is one my favorite. It adds a nifty clipboard manager to the top bar and provides shortcuts to cycle through clipboard entries. A real time saver.

@@ -106,7 +106,7 @@ As mentioned earlier Go provides standard tooling for formatting, linting and so
 
 ### Doesn't need a runtime
 
-Go doesn't need a runtime like JVM or NodeJS, Go applications can be compiled into an executable cross-platform binary using the [standard Go tooling](https://golang.org/pkg/go/build/). This makes Go applications portable and platform independent.
+Go doesn't need a runtime like JVM or NodeJS, Go applications can be compiled into an executable cross-platform binary using the [standard Go tooling](https://golang.org/pkg/go/build/). This makes Go applications portable and platform-independent.
 
 
 ## What I don't like about Go
@@ -129,7 +129,7 @@ These problems are similar to the issues with dependency range in Node package m
 
 ### Source code in GOPATH
 
-Go recommends you to create your Go projects under the GOPATH. Maybe it is just me, but I hate this as I would normally like to organize my code. For example, I have a `~/workspace/` folder where I organize my projects by the organization. If I follow the Go recommendation I have to put the project under `/home/deepu/go/src` along with all the library source code that is downloaded. If you don't follow this then most of the Go tooling just doesn't work. Currently, I have a specific Gradle task that copies over all vendor libs to my local Gopath inside `~/workspace/XL/<project>` to workaround this.
+Go recommends you to create your Go projects under the GOPATH. Maybe it is just me, but I hate this as I would normally like to organize my code. For example, I have a `~/workspace/` folder where I organize my projects by the organization. If I follow the Go recommendation I have to put the project under `/home/deepu/go/src` along with all the library source code that is downloaded. If you don't follow this then most of the Go tooling just doesn't work. Currently, I have a specific Gradle task that copies over all the vendor libs to my local Gopath inside `~/workspace/XL/<project>` to workaround this.
 
 ### Confusing pointer behaviors
 
@@ -202,7 +202,7 @@ Having worked with many major languages I can't just use Go for every use case b
 
 ### So where would I use Go?
 
-- I would definitely use Go when the use case requires a lot of parallel processing and/or concurrency(both are not the same thing but are closer to each other) as you can make use of Goroutines for this and is much simpler and efficient than managing threads like in a Java application or working around it in JavaScript using callback hell since JS is actually single threaded. [Here](http://tleyden.github.io/blog/2014/10/30/goroutines-vs-threads/) is a nice article explaining the advantage of Goroutines.
+- I would definitely use Go when the use case requires a lot of parallel processing and/or concurrency(both are not the same thing but are closer to each other) as you can make use of Goroutines for this and is much simpler and efficient than managing threads like in a Java application or working around it in JavaScript using callback hell since JS is actually single-threaded. [Here](http://tleyden.github.io/blog/2014/10/30/goroutines-vs-threads/) is a nice article explaining the advantage of Goroutines.
 - Simple microservices where boilerplate is not a concern
 - Networking applications or web servers, especially with async workloads, can greatly benefit from Go. But to be fair you can do these in Java, Python, JS, etc as well but Go in the end will provide better efficiency and would be easier to implement.
 - System programming. While Rust or C is a much better choice for this but if those are not in your arsenal then Go is the next best thing. With decent support for pointers and its standard library its easier for system programs than other mainstream languages. Many popular system tools like Docker, Kubernetes, etc are indeed written in Go.
@@ -213,7 +213,7 @@ Having worked with many major languages I can't just use Go for every use case b
 - Complex web application: I would choose Java with a framework like [Spring](https://spring.io/) or [Micronaut](https://micronaut.io/) as its much more maintainable and battle-tested and you would focus more on business logic than writing boilerplate infrastructure code. One [common argument](https://medium.com/@norwood.john.m/hashbash-a-comparison-of-cpu-and-io-bound-applications-in-go-and-java-across-multiple-metrics-d358df6e03b1) against this stack is its memory footprint but it is possible to get lower memory footprint with Spring and frameworks like Micronaut and [Quarkus](https://quarkus.io/) actually promises that OOB.
 - After writing a high-level CLI tool in Go, I hate the experience, I kept thinking that doing it in JavaScript would have been 10 times more productive and a nicer experience. SO I would choose JavaScript or TypeScript running on NodeJS for CLI tool any day. Mainly due to the ecosystem and the sheer joy and speed of getting things done without spending all your time writing boilerplate code. But this wouldn't be applicable if the CLI in question a system tool or a networking tool, in those cases Go could be a good option.
 
-I do hope Go evolves into a general purpose language over time and many of these concerns are solved. In the meantime, I'll try to follow this mantra.
+I do hope Go evolves into a general-purpose language over time and many of these concerns are solved. In the meantime, I'll try to follow this mantra.
 
 {% twitter 1146138541765906432 %}
 

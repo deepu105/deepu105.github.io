@@ -123,6 +123,7 @@ Run `git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-
 Install a [Powerline font](https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font). I use [Adobe Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 
 Add the below configuration to the `~/.zshrc` file.
+
 {% raw %}
 ```bash
 # Set name of the theme to load. Optionally, if you set this to "random"
