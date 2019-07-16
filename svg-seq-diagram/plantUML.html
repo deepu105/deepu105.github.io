@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>PLANT UML</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        ng-cloak {
+            display: none;
+        }
+        html,
+        body {
+            height: 100%;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .definition {
+            vertical-align: top;
+            height: 100%;
+        }
+        textarea.form-control {
+            width: 100%;
+            height: 75%;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+            /*border: 1px solid black;*/
+            box-sizing: border-box;
+        }
+        svg .user {
+            stroke: steelBlue;
+        }
+        svg .line {
+            stroke: steelBlue;
+        }
+        svg .arrow {
+            stroke: steelBlue;
+        }
+        .fullH {
+            height: 100%;
+        }
+        .split-panes {
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            position: absolute;
+        }
+        .split-panes > .split-handler {
+            background: #716c6c;
+            position: absolute;
+            z-index: 999;
+        }
+        /* Horizontal */
+        .split-panes.horizontal > .split-handler {
+            width: 4px;
+            top: 0px;
+            left: 30%;
+            bottom: 0px;
+            cursor: ew-resize;
+        }
+        .split-panes.horizontal > .split-pane1,
+        .split-panes.horizontal > .split-pane2 {
+            position: absolute;
+            height: 100%;
+        }
+        .split-panes.horizontal > .split-pane1 {
+            width: 30%;
+        }
+        .split-panes.horizontal > .split-pane2 {
+            left: 30%;
+            right: 0px;
+            border-left: 1px solid #aaa;
+        }
+        /* Vertical */
+        .split-panes.vertical > .split-handler {
+            height: 4px;
+            top: 50%;
+            left: 0px;
+            right: 0px;
+            cursor: ns-resize;
+        }
+        .split-panes.vertical > .split-pane1,
+        .split-panes.vertical > .split-pane2 {
+            position: absolute;
+            width: 100%;
+        }
+        .split-panes.vertical > .split-pane1 {
+            height: 50%;
+        }
+        .split-panes.vertical > .split-pane2 {
+            top: 50%;
+            bottom: 0px;
+            border-top: 1px solid #aaa;
+        }
+    </style>
+
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="AppControllerPlant">
+        <bg-splitter orientation="horizontal" class="row">
+            <bg-pane min-size="100" class="col-md-4">
+                <div class="definition fullH">
+                    <h3 style="margin:5px" class="badge bg-success">Enter your definition:</h3>
+                    <textarea ng-model="$parent.$parent.definition" ng-blur="compress()" class="form-control"></textarea>
+                    <button class="btn btn-primary" style="width:100%" type="button" ng-click="compress()">Render</button>
+                    <hr>Download diagram as
+                    <!--<select ng-options="s for s in pageSizes" ng-model="$parent.$parent.pageSize"></select>-->Image.
+                    <a class="btn btn-primary" href="http://www.plantuml.com/plantuml/img/{{umlImg}}" target="_blank">Download</a>
+                    <a class="btn btn-warning" href="Reference_Guide.pdf" target="_blank">Reference Guide</a>
+                    <a class="btn btn-default" href="index.html">Simple Sequence Diagram</a>
+                </div>
+            </bg-pane>
+            <bg-pane min-size="300" class="col-md-8">
+                <div ng-cloak>
+                    <img ng-src="http://www.plantuml.com/plantuml/img/{{umlImg}}" alt="rendered UML" />
+                </div>
+            </bg-pane>
+        </bg-splitter>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+    <script type="text/javascript" src="splitter.js"></script>
+    <script src="rawdeflate.js"></script>
+    <script type="text/javascript">
+        angular.module('myApp', ['bgDirectives'])
+    </script>
+    <script type="text/javascript" src="directives.js"></script>
+    <script type="text/javascript" src="services.js"></script>
+    <script type="text/javascript" src="controllers.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-74370272-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>
