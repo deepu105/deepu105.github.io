@@ -5,6 +5,7 @@ rm -rf _site
 if [ -z "$(git status --porcelain)" ]; then
     # Working directory clean
     TMP_LOC=/tmp/deepu.github.io
+    /bin/rm -rf _site
     # Build site
     bundle update listen
     bundle exec jekyll build
