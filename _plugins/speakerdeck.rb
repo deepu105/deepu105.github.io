@@ -1,5 +1,5 @@
 module Jekyll
-    class Speakerdeck < Liquid::Tag
+    class SpeakerdeckTag < Liquid::Tag
       @@width = 640
       @@height = 510
 
@@ -22,4 +22,4 @@ module Jekyll
     end
   end
 
-  Liquid::Template.register_tag('speakerdeck', Jekyll::Speakerdeck)
+  Liquid::Template.register_tag('speakerdeck', Jekyll::SpeakerdeckTag)

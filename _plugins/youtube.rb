@@ -1,5 +1,5 @@
 module Jekyll
-    class Youtube < Liquid::Tag
+    class YoutubeTag < Liquid::Tag
 
       def initialize(name, id, tokens)
         super
@@ -16,4 +16,4 @@ module Jekyll
     end
   end
 
-  Liquid::Template.register_tag('youtube', Jekyll::Youtube)
+  Liquid::Template.register_tag('youtube', Jekyll::YoutubeTag)

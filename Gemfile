@@ -25,7 +25,7 @@ group :jekyll_plugins do
     gem 'jekyll-paginate-v2'
     gem 'jekyll-seo-tag'
     gem 'jekyll-archives'
-    gem 'jekyll-gist'
     gem 'kramdown'
     gem 'rouge'
+    gem 'octokit', '~> 4.2'
 end
