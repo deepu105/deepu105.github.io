@@ -8,12 +8,12 @@ if [ -z "$(git status --porcelain)" ]; then
     TMP_LOC=/tmp/deepu.github.io
 
     /bin/rm -rf _site
+    /bin/rm -rf $TMP_LOC
     # Build site
     bundle update listen
     bundle exec jekyll build
 
     # Move to temp
-    /bin/rm -rf $TMP_LOC
     mkdir --parents $TMP_LOC
     mv _site/* $TMP_LOC
 
