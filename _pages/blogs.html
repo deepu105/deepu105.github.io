@@ -6,7 +6,14 @@ pagination:
   enabled: true
 comments: false
 ---
-
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">{{ site.name }}</h1>
+    <p class="lead">
+        {{ site.description }}
+    </p>
+</div>
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">
@@ -18,9 +25,9 @@ comments: false
     {% for post in site.posts %}
 
         {% if post.featured == true %}
-
+            <div class="col-md-6 mb-30px">
             {% include featuredbox.html %}
-
+            </div>
         {% endif %}
 
     {% endfor %}
