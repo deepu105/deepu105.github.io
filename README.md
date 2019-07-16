@@ -1,2 +1,2 @@
 # deepu105.github.io
-my github page content
+My personal website and Blog at https://deepu.tech
