@@ -5,15 +5,11 @@
 
 /* We need to add display:inline in order to align the '>>' of the 'read more' link */
 .post-excerpt p {
-	display:inline;
+    display: inline;
 }
 
 // Import partials from `sass_dir` (defaults to `_sass`)
-@import
-	"syntax",
-    "starsnonscss"
-;
-
+@import "syntax", "starsnonscss";
 
 .profile-pic {
     border-radius: 50%;
@@ -31,5 +27,40 @@
     iframe {
         margin: 0;
         border: 0;
+    }
+}
+
+.container .series-wrapper {
+    text-align: center;
+    > .article-collection {
+        display: inline-block;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 16px;
+        overflow: hidden;
+        width: 92%;
+        max-width: 718px;
+        margin-bottom: 1.1vw;
+        position: relative;
+        z-index: 8;
+        > a {
+            color: #0a0a0a;
+            padding: calc(0.3vw + 14px);
+            background: #d8d8de;
+            display: inline-block;
+            position: relative;
+            z-index: 4;
+            max-width: 260px;
+            margin: 0.2vw;
+            border-radius: 100px;
+            &:hover {
+                background: lighten(#00ab6b, 20%)
+            }
+            &.current-article {
+                background: #00ab6b;
+            }
+        }
     }
 }

@@ -60,14 +60,34 @@ post_class: post-template
             <!-- Post Featured Image -->
             {% if page.cover_image %}
 
-            {% if site.lazyimages == "enabled" %}
-            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" alt="{{ page.title }}">
-            {% else %}
-            <img class="featured-image img-fluid" src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" alt="{{ page.title }}">
-            {% endif %}
+                {% if site.lazyimages == "enabled" %}
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" alt="{{ page.title }}">
+                {% else %}
+                    <img class="featured-image img-fluid" src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" alt="{{ page.title }}">
+                {% endif %}
 
             {% endif %}
             <!-- End Featured Image -->
+
+            <!-- Post series -->
+            {% if page.series %}
+            <div class="panel series-wrapper">
+                <p>
+                    <strong>Part of "{{page.series}}" series</strong>
+                </p>
+                <div class="article-collection">
+                {% assign count = '0' %}
+                {% for post in site.posts reversed %}
+                {% if post.series == page.series %}
+                    {% capture count %}{{ count | plus: '1' }}{% endcapture %}
+                    <a href="{{post.url}}" title="Part {{count}}: {{post.title}}" {% if page.url == post.url %}class="current-article"{% endif %}></a>
+                    </a>
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <!-- End series -->
 
             <!-- Post Content -->
             <div class="article-post">
