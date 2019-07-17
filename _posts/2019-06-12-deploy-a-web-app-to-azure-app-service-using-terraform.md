@@ -3,7 +3,6 @@ title: Deploy a web app to Azure App Service using Terraform
 description: Deploy a web app to Azure App Service using Terraform
 tags: java, jhipster, azure, terraform
 published: true
-image: https://thepracticaldev.s3.amazonaws.com/i/8mb4tyleqthxsvl1yxy6.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8mb4tyleqthxsvl1yxy6.png
 canonical_url: https://deepu.js.org/reflection-on-golang/deploy-a-web-app-to-azure-app-service-using-terraform
 ---

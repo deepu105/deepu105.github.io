@@ -3,7 +3,6 @@ title: My beautiful Linux development environment
 description: My Linux development machine explained
 published: true
 tags: linux, fedora, development, gnome
-image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 series: Linux environment for developers
 featured: true

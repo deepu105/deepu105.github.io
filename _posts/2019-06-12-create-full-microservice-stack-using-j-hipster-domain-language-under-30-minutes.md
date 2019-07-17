@@ -3,7 +3,6 @@ title: Create full Microservice stack using JHipster Domain Language under 30 mi
 description: Create full Microservice stack using JHipster Domain Language under 30 minutes
 tags: jhipster, java, microservices, docker
 published: true
-image: https://cdn-images-1.medium.com/max/1000/1*b4krMVZ-mqjxAIh_EM1jhQ.png
 cover_image: https://cdn-images-1.medium.com/max/1000/1*b4krMVZ-mqjxAIh_EM1jhQ.png
 canonical_url: https://medium.com/jhipster/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77
 series: Microservices with JHipster
