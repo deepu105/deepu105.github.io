@@ -96,7 +96,7 @@ The Java support indeed is getting better and better, so I hope one day I can co
 
 #### [Dark++ Italic](https://marketplace.visualstudio.com/items?itemName=idbartosz.darkpp-italic)
 
-My default theme. Similar to VS Code default dark theme but has support for [FiraCode](https://github.com/tonsky/FiraCode) and [Operator Mono](https://www.typography.com/fonts/operator/styles) fonts
+My default theme. Similar to VS Code default dark theme but has support for [FiraCode](https://github.com/tonsky/FiraCode) and [Operator Mono](https://www.typography.com/fonts/operator/styles) fonts. I personally use FiraCode.
 > `code --install-extension idbartosz.darkpp-italic`
 
 #### [Material icon theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
