@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>My VS Code setup - Making the most out of VS Code | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My VS Code setup - Making the most out of VS Code | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="My VS Code setup - Making the most out of VS Code" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How I have configured VS Code to make the most out of it for development." />
+<meta property="og:description" content="How I have configured VS Code to make the most out of it for development." />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-17T00:00:00+02:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"How I have configured VS Code to make the most out of it for development.","headline":"My VS Code setup - Making the most out of VS Code","dateModified":"2019-07-17T00:00:00+02:00","datePublished":"2019-07-17T00:00:00+02:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.js.org/make-the-most-out-of-vscode"},"url":"https://deepu.js.org/make-the-most-out-of-vscode","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+            
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.packtpub.com/eu/application-development/full-stack-development-jhipster"><i class="fas fa-book"></i> Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=My VS Code setup - Making the most out of VS Code&url=https://deepu.js.org//make-the-most-out-of-vscode/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.js.org//make-the-most-out-of-vscode/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.js.org//make-the-most-out-of-vscode/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">My VS Code setup - Making the most out of VS Code</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+                
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/zkv3883der29keb7qkrr.png" alt="My VS Code setup - Making the most out of VS Code">
+                
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post series -->
+            
+            <div class="panel series-wrapper">
+                <p>
+                    <strong>Part of "Linux environment for developers" series</strong>
+                </p>
+                <div class="article-collection">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    <a href="/my-beautiful-linux-development-environment/" title="Part 1: My beautiful Linux development environment" ></a>
+                    </a>
+                
+                
+                
+                
+                
+                    
+                    <a href="/must-have-gnome-plugins/" title="Part 2: Must have GNOME extensions" ></a>
+                    </a>
+                
+                
+                
+                    
+                    <a href="/configure-a-beautiful-terminal-on-unix/" title="Part 3: Configure a beautiful terminal on Unix with Zsh" ></a>
+                    </a>
+                
+                
+                
+                
+                
+                
+                
+                    
+                    <a href="/make-the-most-out-of-vscode/" title="Part 4: My VS Code setup - Making the most out of VS Code" class="current-article"></a>
+                    </a>
+                
+                
+                </div>
+            </div>
+            
+            <!-- End series -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p><a href="https://code.visualstudio.com/">Visual Studio Code</a>(I like the sound of VS Code better), I just love it. It is my primary IDE.</p>
+
+<p>I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and <a href="https://notepad-plus-plus.org/">Notepad++</a> with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came <a href="http://brackets.io/">Brackets</a> from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came <a href="https://atom.io/">Atom</a> which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became <a href="https://electronjs.org/">Electron</a>. So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development.</p>
+
+<p>So Electron paved the way for VS Code and though at first, I was skeptical dues to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for Java which I was using IntelliJ by now. Fast forward now below are the editor/IDE I use for development.</p>
+
+<ul>
+  <li><strong>VS Code</strong>: JavaScript, TypeScript, EJS, HTML, CSS, Golang, Python, Ruby, Shell, Docker, Kubernetes, Terraform and everything in between including writing this blog post.</li>
+  <li><strong>IntelliJ Idea</strong>: Java, Scala, Kotlin (Though I use VS Code for minor edits and to read the code, etc)</li>
+  <li><strong>VIM</strong>: For quick edits from the command line.</li>
+</ul>
+
+<h1 id="plugins">Plugins</h1>
+
+<p>Of course VS Code makes all this possible by allowing the use of plugins and there is a lot to choose from. Here are the plugins that I personally use to work on the above-said languages. You can use the <code class="highlighter-rouge">code --install-extension</code> command to install them from the terminal.</p>
+
+<h2 id="language-support">Language support</h2>
+
+<p>Based on the Languages you work with you can add syntax, utility and language support plugins for those. I use the below</p>
+
+<h3 id="javascripttypescriptweb">JavaScript/TypeScript/Web</h3>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=DigitalBrainstem.javascript-ejs-support">EJS language support</a> - Adds <a href="https://ejs.co/">EJS</a> template support.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension DigitalBrainstem.javascript-ejs-support</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=Compulim.compulim-vscode-closetag">Close HTML/XML tag</a> - Auto close HTML/XML tags.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension Compulim.compulim-vscode-closetag</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> - Adds support for <a href="https://eslint.org/">ESLint</a> rules.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension dbaeumer.vscode-eslint</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin">TSLint</a> - Adds support for <a href="https://github.com/palantir/tslint">TSLint</a> rules.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension dbaeumer.vscode-eslint</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier</a> - Adds support for <a href="https://github.com/prettier/prettier">Prettier</a> formatter.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension esbenp.prettier-vscode</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=dai-shi.vscode-es-beautifier">es-beautifier</a> - Formats JS according to Eslint rules.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension dai-shi.vscode-es-beautifier</code></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="go">Go</h3>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.Go">Go</a> - Adds rich language support for Golang.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension ms-vscode.Go</code></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="jvm">JVM</h3>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java</a> - Adds Java language support.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension redhat.java</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug">Debugger for Java</a> - Adds lightweight Java debugging support.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension vscjava.vscode-java-debug</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=jhipster-ide.jdl">JHipster JDL</a> - Adds syntax support for JHipster JDL files.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension jhipster-ide.jdl</code></p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>The Java support indeed is getting better and better, so I hope one day I can completely switch to VS Code.</p>
+
+<div class="jekyll-twitter-plugin"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Announcing the Visual Studio Code Installer for <a href="https://twitter.com/hashtag/Java?src=hash&amp;ref_src=twsrc%5Etfw">#Java</a>  <a href="https://t.co/u6lyKW0xFS">https://t.co/u6lyKW0xFS</a></p>&mdash; Markus Eisele (@myfear) <a href="https://twitter.com/myfear/status/1140281883059740672?ref_src=twsrc%5Etfw">June 16, 2019</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<h3 id="python">Python</h3>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Language Support for Python</a> - Adds Python language support, linting and debugging support.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension ms-python.python</code></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="cloud-container--others">Cloud, Container &amp; others</h3>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/64sf9ht3f35lsipzafmu.png" alt="" /></p>
+
+<ul>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker</a> - Adds Docker support(view and manage containers) and support for Docker, docker-compose files.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension vscjava.vscode-java-debug</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=secanis.jenkinsfile-support">Jenkinsfile Support</a> - Adds syntax highlighting support for Jenkinsfile’s.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension secanis.jenkinsfile-support</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=mauve.terraform">Terraform</a> - Adds support for Terraform files.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension mauve.terraform</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown all in one</a> - Full markdown support with live preview, keyboard shortcuts, etc.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension yzhang.markdown-all-in-one</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml">PlantUML</a> - Rich <a href="http://plantuml.com/">PlantUML</a> support with live preview.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension jebbs.plantuml</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode">Visual Studio IntelliCode</a> - Adds AI assisted intellisense support for multiple languages.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension VisualStudioExptTeam.vscodeintellicode</code></p>
+    </blockquote>
+  </li>
+  <li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml">YAML</a> - Adds YAML support.
+    <blockquote>
+      <p><code class="highlighter-rouge">code --install-extension redhat.vscode-yaml</code></p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="theme">Theme</h2>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/8xsddvbrq5e1mco28vsc.png" alt="" /></p>
+
+<h4 id="dark-italic"><a href="https://marketplace.visualstudio.com/items?itemName=idbartosz.darkpp-italic">Dark++ Italic</a></h4>
+
+<p>My default theme. Similar to VS Code default dark theme but has support for <a href="https://github.com/tonsky/FiraCode">FiraCode</a> and <a href="https://www.typography.com/fonts/operator/styles">Operator Mono</a> fonts</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension idbartosz.darkpp-italic</code></p>
+</blockquote>
+
+<h4 id="material-icon-theme"><a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material icon theme</a></h4>
+
+<p>A nice icon theme based on material icons.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension PKief.material-icon-theme</code></p>
+</blockquote>
+
+<h4 id="peacock"><a href="https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock">Peacock</a></h4>
+
+<p>Subtly changes the workspace color of your workspace. Helpful to identify when you have many windows open.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension johnpapa.vscode-peacock</code></p>
+</blockquote>
+
+<h2 id="tools">Tools</h2>
+
+<h4 id="auto-rename-tag"><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag">Auto rename tag</a></h4>
+
+<p>Automatically rename paired HTML/XML tags</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension formulahendry.auto-rename-tag</code></p>
+</blockquote>
+
+<h4 id="bracket-pair-colorizer-2"><a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2">Bracket pair colorizer 2</a></h4>
+
+<p>Marks matching bracket pairs with unique colors. This really makes reading code nicer</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension CoenraadS.bracket-pair-colorizer-2</code></p>
+</blockquote>
+
+<h4 id="change-case"><a href="https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case">Change case</a></h4>
+
+<p>Convert between different case. Trust me this is so handy</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension wmaurer.change-case</code></p>
+</blockquote>
+
+<h4 id="code-spell-checker"><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code spell checker</a></h4>
+
+<p>Fairly useful for spell checking within code. Takes cameCase etc into account</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension streetsidesoftware.code-spell-checker</code></p>
+</blockquote>
+
+<h4 id="easy-snippet-maker"><a href="https://marketplace.visualstudio.com/items?itemName=tariky.easy-snippet-maker">Easy snippet maker</a></h4>
+
+<p>Useful to store re usable snippets.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension tariky.easy-snippet-maker</code></p>
+</blockquote>
+
+<h4 id="editorconfig-for-vs-code"><a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">EditorConfig for VS Code</a></h4>
+
+<p>Add support for <a href="https://editorconfig.org/">EditorConfig</a>.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension EditorConfig.EditorConfig</code></p>
+</blockquote>
+
+<h4 id="git-history"><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">Git History</a></h4>
+
+<p>Enable viewing Git history within VS Code.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension donjayamanne.githistory</code></p>
+</blockquote>
+
+<h4 id="gitignore"><a href="https://marketplace.visualstudio.com/items?itemName=codezombiech.gitignore">Gitignore</a></h4>
+
+<p>Makes it easy to work with <code class="highlighter-rouge">.gitignore</code> files.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension codezombiech.gitignore</code></p>
+</blockquote>
+
+<h4 id="hide-gitignored"><a href="https://marketplace.visualstudio.com/items?itemName=npxms.hide-gitignored">Hide gitignored</a></h4>
+
+<p>Hides patterns defined in <code class="highlighter-rouge">.gitignore</code> from the editors explorer.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension npxms.hide-gitignored</code></p>
+</blockquote>
+
+<h4 id="mark-as-excluded"><a href="https://marketplace.visualstudio.com/items?itemName=jcmordan.mark-as-excluded">Mark as excluded</a></h4>
+
+<p>Exclude stuff right from the explorer tree.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension jcmordan.mark-as-excluded</code></p>
+</blockquote>
+
+<h4 id="toggle-excluded-files"><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.toggle-excluded-files">Toggle Excluded Files</a></h4>
+
+<p>Easily toggle between showing and hiding excluded files/folders.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension eamodio.toggle-excluded-files</code></p>
+</blockquote>
+
+<h4 id="intellij-idea-keybindings"><a href="https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings">IntelliJ IDEA Keybindings</a></h4>
+
+<p>I have bad muscle memory so wanted to use the same keyboard shortcuts as IntelliJ. There are mappings available for Sublime, Atom and so on.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension k--kato.intellij-idea-keybindings</code></p>
+</blockquote>
+
+<h4 id="sort-json"><a href="https://marketplace.visualstudio.com/items?itemName=richie5um2.vscode-sort-json">Sort JSON</a></h4>
+
+<p>Sorts JSON object keys.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension richie5um2.vscode-sort-json</code></p>
+</blockquote>
+
+<h4 id="test-explorer-ui"><a href="https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer">Test Explorer UI</a></h4>
+
+<p>Adds an explorer panel for running tests. Supports multiple languages and testing frameworks.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension hbenl.vscode-test-explorer</code></p>
+</blockquote>
+
+<h4 id="todo-tree"><a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">Todo Tree</a></h4>
+
+<p>Aggregate TODO, FIXME, etc in a tree view in explorer.</p>
+<blockquote>
+  <p><code class="highlighter-rouge">code --install-extension Gruntfuggly.todo-tree</code></p>
+</blockquote>
+
+<h1 id="terminal-setup">Terminal setup</h1>
+
+<p>If you are using Zsh shell with Oh-my-zsh like me as explained <a href="https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-zsh-4mcb">here</a>, you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png" alt="" /></p>
+
+<p>Follow these steps</p>
+<ul>
+  <li>Download and install a <a href="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf">patched font</a>.</li>
+  <li>On Linux, run <code class="highlighter-rouge">fc-cache -f -v</code> to refresh font cache.</li>
+  <li>On VSCode, open Preferences → Settings and click on the <code class="highlighter-rouge">{}</code> icon to open JSON mode and set the below
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="w">  </span><span class="s2">"terminal.integrated.shell.linux"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/bin/zsh"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.fontFamily"</span><span class="p">:</span><span class="w"> </span><span class="s2">"'SauceCodePro Nerd Font Mono','Source Code Pro'"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.rightClickCopyPaste"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.fontSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.cursorStyle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"underline"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"terminal.integrated.cursorBlinking"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>Replace <code class="highlighter-rouge">linux</code> with <code class="highlighter-rouge">osx</code> if you are on a Mac.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This might seem like too many plugins but on <a href="https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc">my configuration</a> VS Code is lightning fast and loads up immediately and is faster then IntelliJ to load and work with. The beauty of VS Code is that you don’t need all the plugin all the time, you can disable the ones not required per workspace to make it even faster.</p>
+
+<p>Many people <a href="https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/">ask</a> me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc.</p>
+
+<p>As a regular user of both IntelliJ and VS Code, I prefer VS Code as much as possible. The user experience is much nicer for my taste. In fact, I like the developer experience in VS Code better for JavaScript, TypeScript, Web, Python, and Golang. Also switching between them for JVM projects and others don’t feel weird for me as I have same keyboard mappings for both. The only time I fire up IntelliJ these days are when I want to do full-fledged Java development. For everything else, I use VS Code.</p>
+
+<hr />
+
+<p>I hope you find this useful. If you have any question or if you think I missed something please add a comment.</p>
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2019-07-17">17 Jul 2019</time></span>
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#development,">#development,</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#ide,">#ide,</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#opensource">#opensource</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#vscode,">#vscode,</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/react-done-right-with-typescript/"> &laquo; React components done right with TypeScript mapped and conditional types</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+
+</div>
+
+
+    
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster,">jhipster, (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java,">java, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices,">microservices, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure,">azure, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing,">writing, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium,">medium, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development,">development, (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux,">linux, (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora,">fedora, (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes,">kubernetes, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome,">gnome, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal,">terminal, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#oh-my-zsh,">oh-my-zsh, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go,">go, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming,">programming, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages,">languages, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript,">typescript, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react,">react, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript,">javascript, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#vscode,">vscode, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ide,">ide, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Deepu K Sasidharan 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by 
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> | 
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+</body>
+</html>

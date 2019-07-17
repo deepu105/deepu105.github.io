@@ -5,9 +5,347 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Jul 2019 18:29:10 +0200</pubDate>
-    <lastBuildDate>Wed, 17 Jul 2019 18:29:10 +0200</lastBuildDate>
+    <pubDate>Wed, 17 Jul 2019 23:37:19 +0200</pubDate>
+    <lastBuildDate>Wed, 17 Jul 2019 23:37:19 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
+    
+      <item>
+        <title>My VS Code setup - Making the most out of VS Code</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt;(I like the sound of VS Code better), I just love it. It is my primary IDE.&lt;/p&gt;
+
+&lt;p&gt;I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and &lt;a href=&quot;https://notepad-plus-plus.org/&quot;&gt;Notepad++&lt;/a&gt; with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came &lt;a href=&quot;http://brackets.io/&quot;&gt;Brackets&lt;/a&gt; from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came &lt;a href=&quot;https://atom.io/&quot;&gt;Atom&lt;/a&gt; which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became &lt;a href=&quot;https://electronjs.org/&quot;&gt;Electron&lt;/a&gt;. So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development.&lt;/p&gt;
+
+&lt;p&gt;So Electron paved the way for VS Code and though at first, I was skeptical dues to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for Java which I was using IntelliJ by now. Fast forward now below are the editor/IDE I use for development.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;VS Code&lt;/strong&gt;: JavaScript, TypeScript, EJS, HTML, CSS, Golang, Python, Ruby, Shell, Docker, Kubernetes, Terraform and everything in between including writing this blog post.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;IntelliJ Idea&lt;/strong&gt;: Java, Scala, Kotlin (Though I use VS Code for minor edits and to read the code, etc)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;VIM&lt;/strong&gt;: For quick edits from the command line.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;plugins&quot;&gt;Plugins&lt;/h1&gt;
+
+&lt;p&gt;Of course VS Code makes all this possible by allowing the use of plugins and there is a lot to choose from. Here are the plugins that I personally use to work on the above-said languages. You can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension&lt;/code&gt; command to install them from the terminal.&lt;/p&gt;
+
+&lt;h2 id=&quot;language-support&quot;&gt;Language support&lt;/h2&gt;
+
+&lt;p&gt;Based on the Languages you work with you can add syntax, utility and language support plugins for those. I use the below&lt;/p&gt;
+
+&lt;h3 id=&quot;javascripttypescriptweb&quot;&gt;JavaScript/TypeScript/Web&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=DigitalBrainstem.javascript-ejs-support&quot;&gt;EJS language support&lt;/a&gt; - Adds &lt;a href=&quot;https://ejs.co/&quot;&gt;EJS&lt;/a&gt; template support.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension DigitalBrainstem.javascript-ejs-support&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=Compulim.compulim-vscode-closetag&quot;&gt;Close HTML/XML tag&lt;/a&gt; - Auto close HTML/XML tags.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension Compulim.compulim-vscode-closetag&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint&quot;&gt;ESLint&lt;/a&gt; - Adds support for &lt;a href=&quot;https://eslint.org/&quot;&gt;ESLint&lt;/a&gt; rules.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension dbaeumer.vscode-eslint&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin&quot;&gt;TSLint&lt;/a&gt; - Adds support for &lt;a href=&quot;https://github.com/palantir/tslint&quot;&gt;TSLint&lt;/a&gt; rules.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension dbaeumer.vscode-eslint&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode&quot;&gt;Prettier&lt;/a&gt; - Adds support for &lt;a href=&quot;https://github.com/prettier/prettier&quot;&gt;Prettier&lt;/a&gt; formatter.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension esbenp.prettier-vscode&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=dai-shi.vscode-es-beautifier&quot;&gt;es-beautifier&lt;/a&gt; - Formats JS according to Eslint rules.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension dai-shi.vscode-es-beautifier&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;go&quot;&gt;Go&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ms-vscode.Go&quot;&gt;Go&lt;/a&gt; - Adds rich language support for Golang.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension ms-vscode.Go&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;jvm&quot;&gt;JVM&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=redhat.java&quot;&gt;Language Support for Java&lt;/a&gt; - Adds Java language support.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension redhat.java&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug&quot;&gt;Debugger for Java&lt;/a&gt; - Adds lightweight Java debugging support.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension vscjava.vscode-java-debug&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=jhipster-ide.jdl&quot;&gt;JHipster JDL&lt;/a&gt; - Adds syntax support for JHipster JDL files.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension jhipster-ide.jdl&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Java support indeed is getting better and better, so I hope one day I can completely switch to VS Code.&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Announcing the Visual Studio Code Installer for &lt;a href=&quot;https://twitter.com/hashtag/Java?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Java&lt;/a&gt;  &lt;a href=&quot;https://t.co/u6lyKW0xFS&quot;&gt;https://t.co/u6lyKW0xFS&lt;/a&gt;&lt;/p&gt;&amp;mdash; Markus Eisele (@myfear) &lt;a href=&quot;https://twitter.com/myfear/status/1140281883059740672?ref_src=twsrc%5Etfw&quot;&gt;June 16, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ms-python.python&quot;&gt;Language Support for Python&lt;/a&gt; - Adds Python language support, linting and debugging support.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension ms-python.python&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cloud-container--others&quot;&gt;Cloud, Container &amp;amp; others&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/64sf9ht3f35lsipzafmu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker&quot;&gt;Docker&lt;/a&gt; - Adds Docker support(view and manage containers) and support for Docker, docker-compose files.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension vscjava.vscode-java-debug&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=secanis.jenkinsfile-support&quot;&gt;Jenkinsfile Support&lt;/a&gt; - Adds syntax highlighting support for Jenkinsfile’s.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension secanis.jenkinsfile-support&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=mauve.terraform&quot;&gt;Terraform&lt;/a&gt; - Adds support for Terraform files.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension mauve.terraform&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one&quot;&gt;Markdown all in one&lt;/a&gt; - Full markdown support with live preview, keyboard shortcuts, etc.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension yzhang.markdown-all-in-one&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml&quot;&gt;PlantUML&lt;/a&gt; - Rich &lt;a href=&quot;http://plantuml.com/&quot;&gt;PlantUML&lt;/a&gt; support with live preview.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension jebbs.plantuml&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode&quot;&gt;Visual Studio IntelliCode&lt;/a&gt; - Adds AI assisted intellisense support for multiple languages.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension VisualStudioExptTeam.vscodeintellicode&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml&quot;&gt;YAML&lt;/a&gt; - Adds YAML support.
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension redhat.vscode-yaml&lt;/code&gt;&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;theme&quot;&gt;Theme&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/8xsddvbrq5e1mco28vsc.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;dark-italic&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=idbartosz.darkpp-italic&quot;&gt;Dark++ Italic&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;My default theme. Similar to VS Code default dark theme but has support for &lt;a href=&quot;https://github.com/tonsky/FiraCode&quot;&gt;FiraCode&lt;/a&gt; and &lt;a href=&quot;https://www.typography.com/fonts/operator/styles&quot;&gt;Operator Mono&lt;/a&gt; fonts&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension idbartosz.darkpp-italic&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;material-icon-theme&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme&quot;&gt;Material icon theme&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;A nice icon theme based on material icons.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension PKief.material-icon-theme&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;peacock&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock&quot;&gt;Peacock&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Subtly changes the workspace color of your workspace. Helpful to identify when you have many windows open.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension johnpapa.vscode-peacock&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;tools&quot;&gt;Tools&lt;/h2&gt;
+
+&lt;h4 id=&quot;auto-rename-tag&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag&quot;&gt;Auto rename tag&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Automatically rename paired HTML/XML tags&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension formulahendry.auto-rename-tag&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;bracket-pair-colorizer-2&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2&quot;&gt;Bracket pair colorizer 2&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Marks matching bracket pairs with unique colors. This really makes reading code nicer&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension CoenraadS.bracket-pair-colorizer-2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;change-case&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case&quot;&gt;Change case&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Convert between different case. Trust me this is so handy&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension wmaurer.change-case&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;code-spell-checker&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker&quot;&gt;Code spell checker&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Fairly useful for spell checking within code. Takes cameCase etc into account&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension streetsidesoftware.code-spell-checker&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;easy-snippet-maker&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=tariky.easy-snippet-maker&quot;&gt;Easy snippet maker&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Useful to store re usable snippets.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension tariky.easy-snippet-maker&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;editorconfig-for-vs-code&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig&quot;&gt;EditorConfig for VS Code&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Add support for &lt;a href=&quot;https://editorconfig.org/&quot;&gt;EditorConfig&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension EditorConfig.EditorConfig&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;git-history&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory&quot;&gt;Git History&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Enable viewing Git history within VS Code.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension donjayamanne.githistory&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;gitignore&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=codezombiech.gitignore&quot;&gt;Gitignore&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Makes it easy to work with &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; files.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension codezombiech.gitignore&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;hide-gitignored&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=npxms.hide-gitignored&quot;&gt;Hide gitignored&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Hides patterns defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; from the editors explorer.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension npxms.hide-gitignored&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;mark-as-excluded&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=jcmordan.mark-as-excluded&quot;&gt;Mark as excluded&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Exclude stuff right from the explorer tree.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension jcmordan.mark-as-excluded&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;toggle-excluded-files&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=eamodio.toggle-excluded-files&quot;&gt;Toggle Excluded Files&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Easily toggle between showing and hiding excluded files/folders.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension eamodio.toggle-excluded-files&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;intellij-idea-keybindings&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings&quot;&gt;IntelliJ IDEA Keybindings&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;I have bad muscle memory so wanted to use the same keyboard shortcuts as IntelliJ. There are mappings available for Sublime, Atom and so on.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension k--kato.intellij-idea-keybindings&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;sort-json&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=richie5um2.vscode-sort-json&quot;&gt;Sort JSON&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Sorts JSON object keys.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension richie5um2.vscode-sort-json&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;test-explorer-ui&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer&quot;&gt;Test Explorer UI&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Adds an explorer panel for running tests. Supports multiple languages and testing frameworks.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension hbenl.vscode-test-explorer&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;todo-tree&quot;&gt;&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree&quot;&gt;Todo Tree&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Aggregate TODO, FIXME, etc in a tree view in explorer.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;code --install-extension Gruntfuggly.todo-tree&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;terminal-setup&quot;&gt;Terminal setup&lt;/h1&gt;
+
+&lt;p&gt;If you are using Zsh shell with Oh-my-zsh like me as explained &lt;a href=&quot;https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-zsh-4mcb&quot;&gt;here&lt;/a&gt;, you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow these steps&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Download and install a &lt;a href=&quot;https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf&quot;&gt;patched font&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;On Linux, run &lt;code class=&quot;highlighter-rouge&quot;&gt;fc-cache -f -v&lt;/code&gt; to refresh font cache.&lt;/li&gt;
+  &lt;li&gt;On VSCode, open Preferences → Settings and click on the &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; icon to open JSON mode and set the below
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.shell.linux&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/bin/zsh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontFamily&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;'SauceCodePro Nerd Font Mono','Source Code Pro'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.rightClickCopyPaste&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.fontSize&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorStyle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;underline&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terminal.integrated.cursorBlinking&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;linux&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;osx&lt;/code&gt; if you are on a Mac.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;This might seem like too many plugins but on &lt;a href=&quot;https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc&quot;&gt;my configuration&lt;/a&gt; VS Code is lightning fast and loads up immediately and is faster then IntelliJ to load and work with. The beauty of VS Code is that you don’t need all the plugin all the time, you can disable the ones not required per workspace to make it even faster.&lt;/p&gt;
+
+&lt;p&gt;Many people &lt;a href=&quot;https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/&quot;&gt;ask&lt;/a&gt; me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc.&lt;/p&gt;
+
+&lt;p&gt;As a regular user of both IntelliJ and VS Code, I prefer VS Code as much as possible. The user experience is much nicer for my taste. In fact, I like the developer experience in VS Code better for JavaScript, TypeScript, Web, Python, and Golang. Also switching between them for JVM projects and others don’t feel weird for me as I have same keyboard mappings for both. The only time I fire up IntelliJ these days are when I want to do full-fledged Java development. For everything else, I use VS Code.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I hope you find this useful. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jul 2019 00:00:00 +0200</pubDate>
+        <link>/make-the-most-out-of-vscode/</link>
+        <guid isPermaLink="true">/make-the-most-out-of-vscode/</guid>
+        
+        <category>vscode,</category>
+        
+        <category>development,</category>
+        
+        <category>ide,</category>
+        
+        <category>opensource</category>
+        
+        
+      </item>
     
       <item>
         <title>React components done right with TypeScript mapped and conditional types</title>
