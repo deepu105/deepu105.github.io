@@ -1,4 +1,3 @@
-# Read this in "about 4 minutes"
 # Usage: Read this in {{ page.content | reading_time }}
 
 WORD_PER_MINUTE = 180

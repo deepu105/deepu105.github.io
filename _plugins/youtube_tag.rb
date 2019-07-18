@@ -1,4 +1,5 @@
 module Jekyll
+     # A simple stub for the Dev.to youtube tag
     class YoutubeTag < Liquid::Tag
 
       def initialize(name, id, tokens)
