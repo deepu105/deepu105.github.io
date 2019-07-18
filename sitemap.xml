@@ -2,7 +2,15 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/</loc>
-<lastmod>2019-06-12T00:00:00+02:00</lastmod>
+<lastmod>2018-09-22T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</loc>
+<lastmod>2018-10-01T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>/react-done-right-with-typescript/</loc>
+<lastmod>2018-11-19T00:00:00+01:00</lastmod>
 </url>
 <url>
 <loc>/deploy-a-web-app-to-azure-app-service-using-terraform/</loc>
@@ -17,10 +25,6 @@
 <lastmod>2019-06-16T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</loc>
-<lastmod>2019-06-23T00:00:00+02:00</lastmod>
-</url>
-<url>
 <loc>/must-have-gnome-plugins/</loc>
 <lastmod>2019-06-24T00:00:00+02:00</lastmod>
 </url>
@@ -31,10 +35,6 @@
 <url>
 <loc>/reflection-on-golang/</loc>
 <lastmod>2019-07-12T00:00:00+02:00</lastmod>
-</url>
-<url>
-<loc>/react-done-right-with-typescript/</loc>
-<lastmod>2019-07-13T00:00:00+02:00</lastmod>
 </url>
 <url>
 <loc>/make-the-most-out-of-vscode/</loc>

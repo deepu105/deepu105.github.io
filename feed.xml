@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Jul 2019 09:33:43 +0200</pubDate>
-    <lastBuildDate>Thu, 18 Jul 2019 09:33:43 +0200</lastBuildDate>
+    <pubDate>Thu, 18 Jul 2019 10:22:17 +0200</pubDate>
+    <lastBuildDate>Thu, 18 Jul 2019 10:22:17 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -343,306 +343,6 @@
         <category>ide,</category>
         
         <category>opensource</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>React components done right with TypeScript mapped and conditional types</title>
-        <description>&lt;p&gt;You’ve probably heard about TypeScript, If not you should check it out. You may have heard someone claiming how great type safety is.&lt;/p&gt;
-
-&lt;p&gt;TypeScript is great. As someone who hates to transpile his code, I would definitely do it with TypeScript if I had to. So much has been said about TypeScript, and there isn’t really anything new that I can add. But I do believe that type safety is not all about making your code ugly with type definitions everywhere. So how can we write type-safe code without having to litter type declarations everywhere?&lt;/p&gt;
-
-&lt;p&gt;Type inference and advanced features like derived and dynamic types are the answer. Editors and IDEs we use are smart enough to handle code with inferred type gracefully without us having to see the types all the time visually. (Of course, they all usually show you the type when you hover over an inferred type.)&lt;/p&gt;
-
-&lt;p&gt;TypeScript has very good type inference. As a rule of thumb, you can always start without declaring the type for any variable and see if the compiler infers it. With modern editors like VSCode, you can see this immediately. So set your tsconfig to the strict mode. Then start declaring types when the compiler complains.&lt;/p&gt;
-
-&lt;p&gt;Additionally, TypeScript 2.1 and 2.8 introduced a bunch of cool lookup types. Now you can dynamically infer types using different techniques like Intersection types, Union types, Index types, mapped types and conditional types.&lt;/p&gt;
-
-&lt;h2 id=&quot;index-types&quot;&gt;Index types&lt;/h2&gt;
-
-&lt;p&gt;Index types enable us to check properties and types of an interface or type dynamically using the &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; (&lt;strong&gt;index type query operator&lt;/strong&gt;) and &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; (&lt;strong&gt;indexed access operator&lt;/strong&gt;). Let’s take the below interface for example.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; operator gets a union type of all the key names of the type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and hence &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof Person&lt;/code&gt; will give us &lt;code class=&quot;highlighter-rouge&quot;&gt;'name' | 'age' | 'address' | sayHi'&lt;/code&gt; as result.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; operator gets the type for the provided key. &lt;code class=&quot;highlighter-rouge&quot;&gt;Person['name']&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Person[*keyof* Person]&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string | number | ((msg: string) =&amp;gt; string)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;mapped-types&quot;&gt;Mapped types&lt;/h2&gt;
-
-&lt;p&gt;Let us see what mapped types are. Let us say we have the below interface for a Person.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt;, for this.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you hover over the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReadonlyPerson&lt;/code&gt; type you can see the inferred type as below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png&quot; alt=&quot;Inferred type view in VsCode&quot; /&gt;&lt;em&gt;Inferred type view in VsCode&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;That is cool, right? Now we can create types from existing types and don’t have to worry about keeping them in sync. How does it work, what does &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;Person&amp;gt;&lt;/code&gt; do? Let’s take a look at the mapped type.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;in&lt;/code&gt; operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof&lt;/code&gt; operator provides the keys from our type for the mapping. Let us build our own mapped type.&lt;/p&gt;
-
-&lt;p&gt;Let us say we need a read-only Person interface where all the fields are nullable as well. We can build a mapped type as below for that.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And it is inferred as below&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*R24n6ufx4STh96tfldlgJw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s make it generic so that it can be used with any interface.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;TypeScript includes &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Partial&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Pick&amp;lt;T, K extends keyof T&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Record&amp;lt;K extends string, T&amp;gt;&lt;/code&gt; as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonMinimal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;RecordedPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For every other use case, you can build your own mapped types.&lt;/p&gt;
-
-&lt;h2 id=&quot;conditional-types&quot;&gt;Conditional types&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A conditional type selects one of two possible types based on a condition expressed as a type relationship test.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Let us look at an example.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt;
-
-    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooBool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in boolean&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in string&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The type dynamically inferred from &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&amp;lt;T, U&amp;gt;&lt;/code&gt; will be either &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; depending on what the first generic is extended from.&lt;/p&gt;
-
-&lt;p&gt;Let us see how we can mix conditional types with mapped types to infer a new type from Person which only includes the non-function properties.&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;never&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/* Produces the below type
-    type PersonProps = {
-        name: string;
-        age: number;
-        address: string;
-    }
-    */&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We first get all the non-function property names from the interface. Then use the &lt;strong&gt;Pick&lt;/strong&gt; mapped type to pick those from the interface to form the new interface.&lt;/p&gt;
-
-&lt;p&gt;TypeScript provides the following inbuilt conditional types:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Exclude&amp;lt;T, U&amp;gt;&lt;/code&gt; – Exclude from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Extract&amp;lt;T, U&amp;gt;&lt;/code&gt; – Extract from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NonNullable&amp;lt;T&amp;gt;&lt;/code&gt; – Exclude &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the return type of a function type.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the instance type of a constructor function type.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;let-us-put-it-into-use&quot;&gt;Let us put it into use&lt;/h2&gt;
-
-&lt;p&gt;These advanced types become even more powerful when you combine them together. Let’s see some practical uses of this in React.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-es6&quot;&gt;React component and Redux reducer in ES6&lt;/h3&gt;
-
-&lt;p&gt;Let see a simple React component with a reducer written in ES6. Take a look at &lt;strong&gt;&lt;em&gt;index.jsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe src=&quot;https://codesandbox.io/embed/40n3y52qlx?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
-            &lt;/div&gt;
-        &lt;/p&gt;
-
-&lt;p&gt;As you can see, we use the prop-types library to define the component props. It is not the most efficient way, as it includes considerable overhead during development. It doesn’t provide full type safety anyway.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript&quot;&gt;React component and Redux reducer in TypeScript&lt;/h3&gt;
-
-&lt;p&gt;Now let us convert this simple example to TypeScript so that it is type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe src=&quot;https://codesandbox.io/embed/znv36k09op?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
-            &lt;/div&gt;
-        &lt;/p&gt;
-
-&lt;p&gt;As you can see, the code is more type-safe now. It is also much more verbose even without PropTypes library and all the type inference.&lt;/p&gt;
-
-&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript-with-advanced-types&quot;&gt;React component and Redux reducer in TypeScript with advanced types&lt;/h3&gt;
-
-&lt;p&gt;Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe src=&quot;https://codesandbox.io/embed/zq7w69p57x?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
-            &lt;/div&gt;
-        &lt;/p&gt;
-
-&lt;p&gt;As you can see, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&lt;/code&gt; mapping along with some other type inference techniques to write a more type-safe but less verbose version of the component.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;If you are using React with TypeScript, then these are some of the techniques you must apply. If you are considering a type system for React, then look no further than TypeScript. It has great features, great tooling, excellent IDE/Editor support and an awesome community.&lt;/p&gt;
-
-&lt;p&gt;I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slides if you like here.&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;http://www.youtube.com/embed/SBwGH4kbkms &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-            &lt;/div&gt;
-        &lt;/p&gt;
-
-&lt;p&gt;
-            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;ffe22480dbfd4c1f83f66c380bba2283&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/ffe22480dbfd4c1f83f66c380bba2283&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt; if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.&lt;/p&gt;
-
-&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please like or comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79&quot;&gt;Medium&lt;/a&gt; on November 19, 2018&lt;/p&gt;
-</description>
-        <pubDate>Sat, 13 Jul 2019 00:00:00 +0200</pubDate>
-        <link>/react-done-right-with-typescript/</link>
-        <guid isPermaLink="true">/react-done-right-with-typescript/</guid>
-        
-        <category>typescript,</category>
-        
-        <category>react,</category>
-        
-        <category>javascript,</category>
-        
-        <category>webdev</category>
         
         
       </item>
@@ -1469,489 +1169,6 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
       </item>
     
       <item>
-        <title>Deploying JHipster Microservices on Azure Kubernetes Service (AKS)</title>
-        <description>&lt;p&gt;If you are developing and deploying applications to production, especially cloud, you would have heard about &lt;a href=&quot;https://kubernetes.io/&quot;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;. Kubernetes(&lt;strong&gt;k8s&lt;/strong&gt;) is a container orchestration platform originally developed by Google and makes deploying containerized/dockerized applications to production more manageable and scalable.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/&quot;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt; has been crowned as the undeniable champion of container orchestration for a while now and every other &lt;strong&gt;K*S&lt;/strong&gt; offering that we see sprouting up are testimonials for that. The &lt;strong&gt;K&lt;/strong&gt; obviously stands for Kubernetes and &lt;strong&gt;S/E&lt;/strong&gt; stands for Service/Engine and the first letter stands for the product offering it. So far we have &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/&quot;&gt;&lt;strong&gt;AKS&lt;/strong&gt;&lt;/a&gt;(Azure), &lt;a href=&quot;https://cloud.google.com/kubernetes-engine/&quot;&gt;&lt;strong&gt;GKE&lt;/strong&gt;&lt;/a&gt;(Google), and &lt;a href=&quot;https://aws.amazon.com/eks/&quot;&gt;&lt;strong&gt;EKS&lt;/strong&gt;&lt;/a&gt;(Amazon ECS) and &lt;a href=&quot;https://content.pivotal.io/pivotal-container-service-pks&quot;&gt;&lt;strong&gt;PKS&lt;/strong&gt;&lt;/a&gt;(Pivotal) and also some flavors from &lt;a href=&quot;https://cloud.oracle.com/en_US/containers/kubernetes-engine#&quot;&gt;Oracle&lt;/a&gt; and RedHat(read &lt;a href=&quot;https://www.redhat.com/en/technologies/cloud-computing/openshift&quot;&gt;Openshift&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;One of my colleagues have written a &lt;a href=&quot;https://blog.xebialabs.com/2017/12/12/future-container-solutions-will-k-shaped/&quot;&gt;nice article&lt;/a&gt; about it, I highly recommend you read it as well.&lt;/p&gt;
-
-&lt;p&gt;In this article, we will see how we can deploy a microservice architecture created by JHipster to Azure Kubernetes Service.&lt;/p&gt;
-
-&lt;p&gt;Azure Kubernetes Service(AKS) is the managed Kubernetes platform offering from Microsoft to host your containerized applications.&lt;/p&gt;
-
-&lt;h3 id=&quot;creating-the-microservice-application&quot;&gt;Creating the microservice application&lt;/h3&gt;
-
-&lt;p&gt;In one of my &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;previous posts&lt;/a&gt;, I showcased how to create a full stack microservice architecture using &lt;strong&gt;JHipster&lt;/strong&gt; and &lt;strong&gt;JDL&lt;/strong&gt;, read the post &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;here&lt;/a&gt; if you want to learn more details about it. For this exercise, we will use the same application.&lt;/p&gt;
-
-&lt;p&gt;Let us recap the steps required.&lt;/p&gt;
-
-&lt;p&gt;Create a JDL file, let’s say app.jdl, and copy the below content into it.&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/127b220d0c7a3bbf06386cef8128d2f5.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;Now create a directory called &lt;strong&gt;ecommerce&lt;/strong&gt; and navigate into it. Run the JHipster import-jdl command. It could take a few minutes, especially the NPM install step.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ mkdir ecommerce &amp;amp;&amp;amp; cd ecommerce
-$ jhipster import-jdl app.jdl
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Once the JHipster process is complete, you will see that we have our store gateway, invoice service and notification service created and ready for us. The process until this is explained in more detail in my previous post &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;here&lt;/a&gt; and you can deploy the application locally using Docker as explained in that post. If you haven’t done that before I strongly suggest that step so that you get an idea of the application and you also can make sure it works locally on your machine.&lt;/p&gt;
-
-&lt;h3 id=&quot;generating-the-kubernetes-configuration&quot;&gt;Generating the Kubernetes configuration&lt;/h3&gt;
-
-&lt;p&gt;Now that our application is ready, let us create the required configurations for Kubernetes using JHipster. This can also be done using JDL by adding below snippet to the JDL file we used earlier.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;deployment {
-  deploymentType kubernetes
-  appsFolders [store, invoice, notification]
-  serviceDiscoveryType eureka
-  dockerRepositoryName &quot;deepu105&quot; // use your own docker repo username here
-  kubernetesNamespace jhipster
-  kubernetesServiceType LoadBalancer
-  monitoring no
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For now, let us use the JHipster CLI to do this. In the ecommerce folder, we created earlier, create a new directory, let’s call in k8s so that we get the below structure.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;├── app.jdl
-├── invoice
-├── kubernetes
-├── notification
-└── store
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Create the kubernetes directory and navigate to it. Now run the JHipster Kubernetes command there.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ mkdir kubernetes &amp;amp;&amp;amp; cd kubernetes
-$ jhipster kubernetes
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The generator will ask you a few questions and choose the answers as highlighted below, as you can see the questions are very similar to the ones asked by jhipster docker-compose command. For the “base Docker repository name” provide your own docker hub account id(For example, my Docker Hub id is &lt;a href=&quot;https://hub.docker.com/u/deepu105/&quot;&gt;deepu105&lt;/a&gt;). For real-world use cases, you could also use a private image repository like the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&quot;&gt;Azure Container Registry&lt;/a&gt; and in that case, you would have to provide the ACR login server name here. For now, let us keep it simple.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;⎈ Welcome to the JHipster Kubernetes Generator ⎈
-Files will be generated in folder: /home/deepu/workspace/temp/ecommerce/kubernetes
-✔ Docker is installed
-
-? Which *type* of application would you like to deploy? Microservice application
-
-? Enter the root directory where your gateway(s) and microservices are located ../
-
-3 applications found at /home/deepu/workspace/temp/ecommerce/
-? Which applications do you want to include in your configuration? invoice, notification, store
-
-? Do you want to setup monitoring for your applications ? No
-
-? Which applications do you want to use with clustered databases (only available with MongoDB and Couchbase)? 
-
-JHipster registry detected as the service discovery and configuration provider used by your apps
-
-? Enter the admin password used to secure the JHipster Registry admin
-
-? What should we use for the Kubernetes namespace? jhipster
-
-? What should we use for the base Docker repository name? &amp;lt;your Docker hub account id&amp;gt;
-
-? What command should we use for push Docker image to repository? docker push
-
-? Do you want to enable Istio? No
-
-? Choose the kubernetes service type for your edge services LoadBalancer - Let a kubernetes cloud provider automatically assign an IP
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The generator will go to work with this and will create the following files and output.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;   create invoice/invoice-deployment.yml
-   create invoice/invoice-service.yml
-   create invoice/invoice-mysql.yml
-   create notification/notification-deployment.yml
-   create notification/notification-service.yml
-   create notification/notification-mongodb.yml
-   create store/store-deployment.yml
-   create store/store-service.yml
-   create store/store-mysql.yml
-   create README.md
-   create registry/jhipster-registry.yml
-   create registry/application-configmap.yml
-   create kubectl-apply.sh
-
-WARNING! Kubernetes configuration generated with missing images!
-
-To generate the missing Docker image(s), please run:
-
-  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/invoice
-
-  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/notification
-
-  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/store
-
-WARNING! You will need to push your image to a registry. If you have not done so, use the following commands to tag and push the images:
-
-  docker image tag invoice deepu105/invoice
-  docker push deepu105/invoice
-
-  docker image tag notification deepu105/notification
-  docker push deepu105/notification
-
-  docker image tag store deepu105/store
-  docker push deepu105/store
-
-You can deploy all your apps by running the following script:
-  ./kubectl-apply.sh
-
-Use these commands to find your application's IP addresses:
-  kubectl get svc store
-
-Congratulations, JHipster execution is complete!
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see the generator creates all the required Kubernetes configuration files and prints out useful information to proceed further (Note that the docker hub id you provided will be in the instructions in place of &lt;strong&gt;deepu105&lt;/strong&gt; here). Go through the generated k8s files and familiarize yourself.&lt;/p&gt;
-
-&lt;p&gt;Now we are ready.&lt;/p&gt;
-
-&lt;p&gt;Let us build and push the docker images for our application. Follow the instructions above and build docker images in each of the application folders and then tag and push the images to your Docker hub account.&lt;/p&gt;
-
-&lt;h3 id=&quot;preparing-aks-cluster&quot;&gt;Preparing AKS Cluster&lt;/h3&gt;
-
-&lt;p&gt;Now that our applications are built and pushed its time for us to deploy them to AKS. But before that let’s make sure we have all the prerequisites ready. You will need the below tools.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-kubectl/&quot;&gt;kubectl&lt;/a&gt;: The command line tool to interact with Kubernetes. Install and configure it.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&quot;&gt;Azure CLI&lt;/a&gt;: The command line tool to interact with Azure. Install and log in with your Azure account(You can create a &lt;a href=&quot;https://azure.microsoft.com/en-us/free/&quot;&gt;free account&lt;/a&gt; if you don’t have one already).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Once the tools are ready let us prepare our Kubernetes cluster.&lt;/p&gt;
-
-&lt;p&gt;First, let us create a resource group. Run the below command. This will create a resource group named &lt;strong&gt;eCommerceCluster&lt;/strong&gt; in US east location(You can use other &lt;a href=&quot;https://azure.microsoft.com/en-us/global-infrastructure/regions/&quot;&gt;Azure regions&lt;/a&gt; as well).&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az group create --name eCommerceCluster --location eastus
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now let us create an AKS cluster on the resource group we just created. Run the below command to create a cluster named eCommerceCluster with two nodes(We would need some room to run all those containers). It also enables the Azure monitor on the cluster through the add-on specified.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az aks create --resource-group eCommerceCluster \
---name eCommerceCluster --node-count 2 \
---enable-addons monitoring --generate-ssh-keys
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This would take several minutes to complete hence be patient and have a coffee :)&lt;/p&gt;
-
-&lt;p&gt;Did I emphasize on &lt;strong&gt;several minutes&lt;/strong&gt;?&lt;/p&gt;
-
-&lt;p&gt;Once it’s done you should see the cluster information printed out as JSON.&lt;/p&gt;
-
-&lt;p&gt;Now, let us configure &lt;strong&gt;kubectl&lt;/strong&gt; to connect to the AKS cluster we just created. This can be done automatically using the Azure CLI by running the below handy command.&lt;/p&gt;
-
-&lt;p&gt;Note: Some Azure CLI commands might take a while to execute, especially if you are on a slow network, sometimes if the below commands seem stalled or if it is timed out, kill it and retry again.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az aks get-credentials --resource-group eCommerceCluster --name eCommerceCluster
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Verify that we are able to connect to the cluster by running kubectl get nodes&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get nodes
-NAME                       STATUS    ROLES     AGE       VERSION
-aks-nodepool1-34429729-0   Ready     agent     22m       v1.9.9
-aks-nodepool1-34429729-1   Ready     agent     22m       v1.9.9
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;deploying-the-application-to-aks&quot;&gt;Deploying the application to AKS&lt;/h3&gt;
-
-&lt;p&gt;Now that our cluster is ready, let us deploy our microservice stack to this cluster.&lt;/p&gt;
-
-&lt;p&gt;We can deploy our application using the kubectl apply command for this we have to navigate to the k8s folder we created earlier and run the below commands in the same order&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl apply -f registry
-
-$ kubectl apply -f invoice
-
-$ kubectl apply -f notification
-
-$ kubectl apply -f store
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Or you could also just run the handy &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl-apply.sh&lt;/code&gt; script generated which runs the above.&lt;/p&gt;
-
-&lt;p&gt;So we are deploying the JHipster Registry first as it is required for other services, followed by the microservices and finally our gateway(store).&lt;/p&gt;
-
-&lt;p&gt;If you get a timeout during any of these, as I did, just try the command again.&lt;/p&gt;
-
-&lt;p&gt;Though the services get created fast, the actual applications might not be up and running yet, give the entire thing a minute or two to start.&lt;/p&gt;
-
-&lt;p&gt;Now run kubectl get pods to see the status of our containers.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get pods -w
-
-NAME                                    READY  STATUS 
-invoice-5ffb46d944-h8x42                1/1    Running
-invoice-mysql-66bc4b7874-p7ghk          1/1    Running
-jhipster-registry-0                     1/1    Running
-jhipster-registry-1                     1/1    Running
-notification-76847b7667-d7xjb           1/1    Running
-notification-mongodb-6db986b556-8bw8z   1/1    Running
-store-8dc5cd6f7-s2dpx                   1/1    Running
-store-mysql-779d66685d-tmkqd            1/1    Running
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Note: I have removed some info for brevity in the above output.&lt;/p&gt;
-
-&lt;p&gt;Wait until all the containers are in &lt;strong&gt;Running&lt;/strong&gt; status. Once the containers are running we can run the kubectl get service command to get the external IP for the application.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get service store
-
-NAME   TYPE         CLUSTER-IP    EXTERNAL-IP    PORT(S)         AGE
-store  LoadBalancer 10.0.189.145  40.117.140.228 8080:30143/TCP  18m
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this case, the external IP for our gateway application is &lt;strong&gt;40.117.140.228&lt;/strong&gt; running on port &lt;strong&gt;8080&lt;/strong&gt;. Let us open it up in a web browser.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2624/1*OQSuDw4u-CHGdkl0VR_DIw.png&quot; alt=&quot;The Gateway application login page&quot; /&gt;&lt;em&gt;The Gateway application login page&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The JHipster registry is deployed as a headless service by default. If we need to access the registry we need to create a secondary service with a Load Balancer. Run the below command to expose the second service.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl expose service jhipster-registry --type=LoadBalancer --name=exposed-registry
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now run the kubectl get service command to get the IP.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get service exposed-registry
-
-NAME             TYPE         CLUSTER-IP   EXTERNAL-IP    PORT(S)
-exposed-registry LoadBalancer 10.0.107.121 104.211.15.142 8761:32628/TCP
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Visit the URL in a browser to see the registry in action&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2978/1*tWbLvvpXCF9kHPmEadyMKQ.png&quot; alt=&quot;JHipster Registry home page&quot; /&gt;&lt;em&gt;JHipster Registry home page&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;We can now scale any of our services by simply running kubectl scale command. For example, let us scale our Invoice service.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl scale --replicas=2 deployment/invoice
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now we can visit the &lt;strong&gt;Eureka -&amp;gt; Instances&lt;/strong&gt; on our Registry and see that the Invoice service has two instances.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2596/1*YGhPu44fNsApmKZYXQAaqQ.png&quot; alt=&quot;JHipster Registry instances page&quot; /&gt;&lt;em&gt;JHipster Registry instances page&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Running kubectl get pods will also show you the new instance.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get pods
- 
-NAME                                  READY  STATUS   AGE
-invoice-5ffb46d944-g8j6j              1/1    Running  4m
-invoice-5ffb46d944-h8x42              1/1    Running  2h
-invoice-mysql-66bc4b7874-p7ghk        1/1    Running  2h
-jhipster-registry-0                   1/1    Running  2h
-jhipster-registry-1                   1/1    Running  2h
-notification-76847b7667-d7xjb         1/1    Running  2h
-notification-mongodb-6db986b556-8bw8z 1/1    Running  2h
-store-8dc5cd6f7-s2dpx                 1/1    Running  2h
-store-mysql-779d66685d-tmkqd          1/1    Running  2h
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That is it, we have successfully got our application deployed to AKS and scaled our service on demand.&lt;/p&gt;
-
-&lt;h3 id=&quot;cleanup&quot;&gt;Cleanup&lt;/h3&gt;
-
-&lt;p&gt;Once you are done its always a good idea to clean up especially since we don’t want to keep unnecessary resources that might eat up our free credits on Azure.&lt;/p&gt;
-
-&lt;p&gt;Let us delete the cluster from AKS and related resources created by deleting the entire resource group.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az group delete --name eCommerceCluster --yes --no-wait
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Cluster related activities like creation/update/deletion could take several minutes on AKS so we have to be patient again here.&lt;/p&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-
-&lt;p&gt;Kubernetes is definitely the best way to deploy microservice applications to production but creating and managing Kubernetes clusters itself is not an easy task, but Kubernetes services like &lt;strong&gt;GKE&lt;/strong&gt; and &lt;strong&gt;AKS&lt;/strong&gt; makes it a cakewalk. In my personal experience, the Kubernetes service from Google(GKE) and Azure(AKS) are by far the best in terms of ease of use and available tooling. These services provide very handy command line tools which work nicely together with &lt;strong&gt;kubectl&lt;/strong&gt; to provide a very nice experience. They also have nice UI portals if you are not a fan of the CLI.&lt;/p&gt;
-
-&lt;p&gt;JHipster provides a great Kubernetes setup to start with which you can further tweak as per your needs and platform.&lt;/p&gt;
-
-&lt;p&gt;In upcoming posts, we will look at more services like GKE(Google), EKS(Amazon) and Openshift(RedHat)&lt;/p&gt;
-
-&lt;p&gt;To learn more about JHipster, check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;My other related posts:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;Create full Microservice stack using JHipster Domain Language under 30 minutes&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://medium.com/@deepu105/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3&quot;&gt;JHipster microservices with Istio service mesh on Kubernetes&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba&quot;&gt;Medium&lt;/a&gt; on Oct 01, 2018&lt;/p&gt;
-</description>
-        <pubDate>Sun, 23 Jun 2019 00:00:00 +0200</pubDate>
-        <link>/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</link>
-        <guid isPermaLink="true">/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</guid>
-        
-        <category>azure,</category>
-        
-        <category>kubernetes,</category>
-        
-        <category>jhipster,</category>
-        
-        <category>microservices</category>
-        
-        
-      </item>
-    
-      <item>
         <title>My beautiful Linux development environment</title>
         <description>&lt;p&gt;One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂&lt;/p&gt;
 
@@ -2593,6 +1810,789 @@ So after a week of moving to the Dev community below are my stats and its incred
         <category>azure,</category>
         
         <category>terraform</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>React components done right with TypeScript mapped and conditional types</title>
+        <description>&lt;p&gt;You’ve probably heard about TypeScript, If not you should check it out. You may have heard someone claiming how great type safety is.&lt;/p&gt;
+
+&lt;p&gt;TypeScript is great. As someone who hates to transpile his code, I would definitely do it with TypeScript if I had to. So much has been said about TypeScript, and there isn’t really anything new that I can add. But I do believe that type safety is not all about making your code ugly with type definitions everywhere. So how can we write type-safe code without having to litter type declarations everywhere?&lt;/p&gt;
+
+&lt;p&gt;Type inference and advanced features like derived and dynamic types are the answer. Editors and IDEs we use are smart enough to handle code with inferred type gracefully without us having to see the types all the time visually. (Of course, they all usually show you the type when you hover over an inferred type.)&lt;/p&gt;
+
+&lt;p&gt;TypeScript has very good type inference. As a rule of thumb, you can always start without declaring the type for any variable and see if the compiler infers it. With modern editors like VSCode, you can see this immediately. So set your tsconfig to the strict mode. Then start declaring types when the compiler complains.&lt;/p&gt;
+
+&lt;p&gt;Additionally, TypeScript 2.1 and 2.8 introduced a bunch of cool lookup types. Now you can dynamically infer types using different techniques like Intersection types, Union types, Index types, mapped types and conditional types.&lt;/p&gt;
+
+&lt;h2 id=&quot;index-types&quot;&gt;Index types&lt;/h2&gt;
+
+&lt;p&gt;Index types enable us to check properties and types of an interface or type dynamically using the &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; (&lt;strong&gt;index type query operator&lt;/strong&gt;) and &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; (&lt;strong&gt;indexed access operator&lt;/strong&gt;). Let’s take the below interface for example.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof T&lt;/code&gt; operator gets a union type of all the key names of the type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and hence &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof Person&lt;/code&gt; will give us &lt;code class=&quot;highlighter-rouge&quot;&gt;'name' | 'age' | 'address' | sayHi'&lt;/code&gt; as result.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;T[K]&lt;/code&gt; operator gets the type for the provided key. &lt;code class=&quot;highlighter-rouge&quot;&gt;Person['name']&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Person[*keyof* Person]&lt;/code&gt; will result in &lt;code class=&quot;highlighter-rouge&quot;&gt;string | number | ((msg: string) =&amp;gt; string)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;mapped-types&quot;&gt;Mapped types&lt;/h2&gt;
+
+&lt;p&gt;Let us see what mapped types are. Let us say we have the below interface for a Person.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sayHi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt;, for this.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyPerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you hover over the &lt;code class=&quot;highlighter-rouge&quot;&gt;ReadonlyPerson&lt;/code&gt; type you can see the inferred type as below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png&quot; alt=&quot;Inferred type view in VsCode&quot; /&gt;&lt;em&gt;Inferred type view in VsCode&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;That is cool, right? Now we can create types from existing types and don’t have to worry about keeping them in sync. How does it work, what does &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;Person&amp;gt;&lt;/code&gt; do? Let’s take a look at the mapped type.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Readonly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;in&lt;/code&gt; operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The &lt;code class=&quot;highlighter-rouge&quot;&gt;keyof&lt;/code&gt; operator provides the keys from our type for the mapping. Let us build our own mapped type.&lt;/p&gt;
+
+&lt;p&gt;Let us say we need a read-only Person interface where all the fields are nullable as well. We can build a mapped type as below for that.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And it is inferred as below&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2000/1*R24n6ufx4STh96tfldlgJw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s make it generic so that it can be used with any interface.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullablePerson&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ReadonlyNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;TypeScript includes &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Partial&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Pick&amp;lt;T, K extends keyof T&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Record&amp;lt;K extends string, T&amp;gt;&lt;/code&gt; as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonMinimal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;RecordedPerson&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Record&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For every other use case, you can build your own mapped types.&lt;/p&gt;
+
+&lt;h2 id=&quot;conditional-types&quot;&gt;Conditional types&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A conditional type selects one of two possible types based on a condition expressed as a type relationship test.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let us look at an example.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;boolean&lt;/span&gt;
+
+    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;kr&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooBool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Me&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in boolean&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;You&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// will result in string&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The type dynamically inferred from &lt;code class=&quot;highlighter-rouge&quot;&gt;Foo&amp;lt;T, U&amp;gt;&lt;/code&gt; will be either &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;boolean&lt;/code&gt; depending on what the first generic is extended from.&lt;/p&gt;
+
+&lt;p&gt;Let us see how we can mix conditional types with mapped types to infer a new type from Person which only includes the non-function properties.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;never&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;K&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;keyof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Pick&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionPropNames&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PersonProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NonFunctionProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/* Produces the below type
+    type PersonProps = {
+        name: string;
+        age: number;
+        address: string;
+    }
+    */&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We first get all the non-function property names from the interface. Then use the &lt;strong&gt;Pick&lt;/strong&gt; mapped type to pick those from the interface to form the new interface.&lt;/p&gt;
+
+&lt;p&gt;TypeScript provides the following inbuilt conditional types:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Exclude&amp;lt;T, U&amp;gt;&lt;/code&gt; – Exclude from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Extract&amp;lt;T, U&amp;gt;&lt;/code&gt; – Extract from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; those types that are assignable to &lt;code class=&quot;highlighter-rouge&quot;&gt;U&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NonNullable&amp;lt;T&amp;gt;&lt;/code&gt; – Exclude &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the return type of a function type.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceType&amp;lt;T&amp;gt;&lt;/code&gt; – Obtain the instance type of a constructor function type.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;let-us-put-it-into-use&quot;&gt;Let us put it into use&lt;/h2&gt;
+
+&lt;p&gt;These advanced types become even more powerful when you combine them together. Let’s see some practical uses of this in React.&lt;/p&gt;
+
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-es6&quot;&gt;React component and Redux reducer in ES6&lt;/h3&gt;
+
+&lt;p&gt;Let see a simple React component with a reducer written in ES6. Take a look at &lt;strong&gt;&lt;em&gt;index.jsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
+
+&lt;p&gt;
+            &lt;div class=&quot;embed-video-container&quot;&gt;
+                &lt;iframe src=&quot;https://codesandbox.io/embed/40n3y52qlx?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/p&gt;
+
+&lt;p&gt;As you can see, we use the prop-types library to define the component props. It is not the most efficient way, as it includes considerable overhead during development. It doesn’t provide full type safety anyway.&lt;/p&gt;
+
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript&quot;&gt;React component and Redux reducer in TypeScript&lt;/h3&gt;
+
+&lt;p&gt;Now let us convert this simple example to TypeScript so that it is type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
+
+&lt;p&gt;
+            &lt;div class=&quot;embed-video-container&quot;&gt;
+                &lt;iframe src=&quot;https://codesandbox.io/embed/znv36k09op?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/p&gt;
+
+&lt;p&gt;As you can see, the code is more type-safe now. It is also much more verbose even without PropTypes library and all the type inference.&lt;/p&gt;
+
+&lt;h3 id=&quot;react-component-and-redux-reducer-in-typescript-with-advanced-types&quot;&gt;React component and Redux reducer in TypeScript with advanced types&lt;/h3&gt;
+
+&lt;p&gt;Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at &lt;strong&gt;&lt;em&gt;index.tsx&lt;/em&gt;&lt;/strong&gt; in the below code sandbox:&lt;/p&gt;
+
+&lt;p&gt;
+            &lt;div class=&quot;embed-video-container&quot;&gt;
+                &lt;iframe src=&quot;https://codesandbox.io/embed/zq7w69p57x?fontsize=14&quot; style=&quot;width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;&quot; sandbox=&quot;allow-modals allow-forms allow-popups allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/p&gt;
+
+&lt;p&gt;As you can see, we used &lt;code class=&quot;highlighter-rouge&quot;&gt;Readonly&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ReturnType&lt;/code&gt; mapping along with some other type inference techniques to write a more type-safe but less verbose version of the component.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;If you are using React with TypeScript, then these are some of the techniques you must apply. If you are considering a type system for React, then look no further than TypeScript. It has great features, great tooling, excellent IDE/Editor support and an awesome community.&lt;/p&gt;
+
+&lt;p&gt;I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slides if you like here.&lt;/p&gt;
+
+&lt;p&gt;
+            &lt;div class=&quot;embed-video-container&quot;&gt;
+                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;http://www.youtube.com/embed/SBwGH4kbkms &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/p&gt;
+
+&lt;p&gt;
+            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;ffe22480dbfd4c1f83f66c380bba2283&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
+            &lt;noscript&gt;
+                &lt;a href=&quot;//speakerdeck.com/player/ffe22480dbfd4c1f83f66c380bba2283&quot;&gt;
+                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/ffe22480dbfd4c1f83f66c380bba2283/slide_0.jpg&quot; /&gt;
+                &lt;/a&gt;
+            &lt;/noscript&gt;
+          &lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt; if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.&lt;/p&gt;
+
+&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please like or comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79&quot;&gt;Medium&lt;/a&gt; on November 19, 2018&lt;/p&gt;
+</description>
+        <pubDate>Mon, 19 Nov 2018 00:00:00 +0100</pubDate>
+        <link>/react-done-right-with-typescript/</link>
+        <guid isPermaLink="true">/react-done-right-with-typescript/</guid>
+        
+        <category>typescript,</category>
+        
+        <category>react,</category>
+        
+        <category>javascript,</category>
+        
+        <category>webdev</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Deploying JHipster Microservices on Azure Kubernetes Service (AKS)</title>
+        <description>&lt;p&gt;If you are developing and deploying applications to production, especially cloud, you would have heard about &lt;a href=&quot;https://kubernetes.io/&quot;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt;. Kubernetes(&lt;strong&gt;k8s&lt;/strong&gt;) is a container orchestration platform originally developed by Google and makes deploying containerized/dockerized applications to production more manageable and scalable.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/&quot;&gt;&lt;strong&gt;Kubernetes&lt;/strong&gt;&lt;/a&gt; has been crowned as the undeniable champion of container orchestration for a while now and every other &lt;strong&gt;K*S&lt;/strong&gt; offering that we see sprouting up are testimonials for that. The &lt;strong&gt;K&lt;/strong&gt; obviously stands for Kubernetes and &lt;strong&gt;S/E&lt;/strong&gt; stands for Service/Engine and the first letter stands for the product offering it. So far we have &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/&quot;&gt;&lt;strong&gt;AKS&lt;/strong&gt;&lt;/a&gt;(Azure), &lt;a href=&quot;https://cloud.google.com/kubernetes-engine/&quot;&gt;&lt;strong&gt;GKE&lt;/strong&gt;&lt;/a&gt;(Google), and &lt;a href=&quot;https://aws.amazon.com/eks/&quot;&gt;&lt;strong&gt;EKS&lt;/strong&gt;&lt;/a&gt;(Amazon ECS) and &lt;a href=&quot;https://content.pivotal.io/pivotal-container-service-pks&quot;&gt;&lt;strong&gt;PKS&lt;/strong&gt;&lt;/a&gt;(Pivotal) and also some flavors from &lt;a href=&quot;https://cloud.oracle.com/en_US/containers/kubernetes-engine#&quot;&gt;Oracle&lt;/a&gt; and RedHat(read &lt;a href=&quot;https://www.redhat.com/en/technologies/cloud-computing/openshift&quot;&gt;Openshift&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;One of my colleagues have written a &lt;a href=&quot;https://blog.xebialabs.com/2017/12/12/future-container-solutions-will-k-shaped/&quot;&gt;nice article&lt;/a&gt; about it, I highly recommend you read it as well.&lt;/p&gt;
+
+&lt;p&gt;In this article, we will see how we can deploy a microservice architecture created by JHipster to Azure Kubernetes Service.&lt;/p&gt;
+
+&lt;p&gt;Azure Kubernetes Service(AKS) is the managed Kubernetes platform offering from Microsoft to host your containerized applications.&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-the-microservice-application&quot;&gt;Creating the microservice application&lt;/h3&gt;
+
+&lt;p&gt;In one of my &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;previous posts&lt;/a&gt;, I showcased how to create a full stack microservice architecture using &lt;strong&gt;JHipster&lt;/strong&gt; and &lt;strong&gt;JDL&lt;/strong&gt;, read the post &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;here&lt;/a&gt; if you want to learn more details about it. For this exercise, we will use the same application.&lt;/p&gt;
+
+&lt;p&gt;Let us recap the steps required.&lt;/p&gt;
+
+&lt;p&gt;Create a JDL file, let’s say app.jdl, and copy the below content into it.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/127b220d0c7a3bbf06386cef8128d2f5.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;Now create a directory called &lt;strong&gt;ecommerce&lt;/strong&gt; and navigate into it. Run the JHipster import-jdl command. It could take a few minutes, especially the NPM install step.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ mkdir ecommerce &amp;amp;&amp;amp; cd ecommerce
+$ jhipster import-jdl app.jdl
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the JHipster process is complete, you will see that we have our store gateway, invoice service and notification service created and ready for us. The process until this is explained in more detail in my previous post &lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;here&lt;/a&gt; and you can deploy the application locally using Docker as explained in that post. If you haven’t done that before I strongly suggest that step so that you get an idea of the application and you also can make sure it works locally on your machine.&lt;/p&gt;
+
+&lt;h3 id=&quot;generating-the-kubernetes-configuration&quot;&gt;Generating the Kubernetes configuration&lt;/h3&gt;
+
+&lt;p&gt;Now that our application is ready, let us create the required configurations for Kubernetes using JHipster. This can also be done using JDL by adding below snippet to the JDL file we used earlier.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;deployment {
+  deploymentType kubernetes
+  appsFolders [store, invoice, notification]
+  serviceDiscoveryType eureka
+  dockerRepositoryName &quot;deepu105&quot; // use your own docker repo username here
+  kubernetesNamespace jhipster
+  kubernetesServiceType LoadBalancer
+  monitoring no
+}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For now, let us use the JHipster CLI to do this. In the ecommerce folder, we created earlier, create a new directory, let’s call in k8s so that we get the below structure.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;├── app.jdl
+├── invoice
+├── kubernetes
+├── notification
+└── store
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Create the kubernetes directory and navigate to it. Now run the JHipster Kubernetes command there.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ mkdir kubernetes &amp;amp;&amp;amp; cd kubernetes
+$ jhipster kubernetes
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The generator will ask you a few questions and choose the answers as highlighted below, as you can see the questions are very similar to the ones asked by jhipster docker-compose command. For the “base Docker repository name” provide your own docker hub account id(For example, my Docker Hub id is &lt;a href=&quot;https://hub.docker.com/u/deepu105/&quot;&gt;deepu105&lt;/a&gt;). For real-world use cases, you could also use a private image repository like the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr&quot;&gt;Azure Container Registry&lt;/a&gt; and in that case, you would have to provide the ACR login server name here. For now, let us keep it simple.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;⎈ Welcome to the JHipster Kubernetes Generator ⎈
+Files will be generated in folder: /home/deepu/workspace/temp/ecommerce/kubernetes
+✔ Docker is installed
+
+? Which *type* of application would you like to deploy? Microservice application
+
+? Enter the root directory where your gateway(s) and microservices are located ../
+
+3 applications found at /home/deepu/workspace/temp/ecommerce/
+? Which applications do you want to include in your configuration? invoice, notification, store
+
+? Do you want to setup monitoring for your applications ? No
+
+? Which applications do you want to use with clustered databases (only available with MongoDB and Couchbase)? 
+
+JHipster registry detected as the service discovery and configuration provider used by your apps
+
+? Enter the admin password used to secure the JHipster Registry admin
+
+? What should we use for the Kubernetes namespace? jhipster
+
+? What should we use for the base Docker repository name? &amp;lt;your Docker hub account id&amp;gt;
+
+? What command should we use for push Docker image to repository? docker push
+
+? Do you want to enable Istio? No
+
+? Choose the kubernetes service type for your edge services LoadBalancer - Let a kubernetes cloud provider automatically assign an IP
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The generator will go to work with this and will create the following files and output.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;   create invoice/invoice-deployment.yml
+   create invoice/invoice-service.yml
+   create invoice/invoice-mysql.yml
+   create notification/notification-deployment.yml
+   create notification/notification-service.yml
+   create notification/notification-mongodb.yml
+   create store/store-deployment.yml
+   create store/store-service.yml
+   create store/store-mysql.yml
+   create README.md
+   create registry/jhipster-registry.yml
+   create registry/application-configmap.yml
+   create kubectl-apply.sh
+
+WARNING! Kubernetes configuration generated with missing images!
+
+To generate the missing Docker image(s), please run:
+
+  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/invoice
+
+  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/notification
+
+  ./gradlew -Pprod bootWar jibDockerBuild in /home/deepu/workspace/temp/ecommerce/store
+
+WARNING! You will need to push your image to a registry. If you have not done so, use the following commands to tag and push the images:
+
+  docker image tag invoice deepu105/invoice
+  docker push deepu105/invoice
+
+  docker image tag notification deepu105/notification
+  docker push deepu105/notification
+
+  docker image tag store deepu105/store
+  docker push deepu105/store
+
+You can deploy all your apps by running the following script:
+  ./kubectl-apply.sh
+
+Use these commands to find your application's IP addresses:
+  kubectl get svc store
+
+Congratulations, JHipster execution is complete!
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see the generator creates all the required Kubernetes configuration files and prints out useful information to proceed further (Note that the docker hub id you provided will be in the instructions in place of &lt;strong&gt;deepu105&lt;/strong&gt; here). Go through the generated k8s files and familiarize yourself.&lt;/p&gt;
+
+&lt;p&gt;Now we are ready.&lt;/p&gt;
+
+&lt;p&gt;Let us build and push the docker images for our application. Follow the instructions above and build docker images in each of the application folders and then tag and push the images to your Docker hub account.&lt;/p&gt;
+
+&lt;h3 id=&quot;preparing-aks-cluster&quot;&gt;Preparing AKS Cluster&lt;/h3&gt;
+
+&lt;p&gt;Now that our applications are built and pushed its time for us to deploy them to AKS. But before that let’s make sure we have all the prerequisites ready. You will need the below tools.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-kubectl/&quot;&gt;kubectl&lt;/a&gt;: The command line tool to interact with Kubernetes. Install and configure it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&quot;&gt;Azure CLI&lt;/a&gt;: The command line tool to interact with Azure. Install and log in with your Azure account(You can create a &lt;a href=&quot;https://azure.microsoft.com/en-us/free/&quot;&gt;free account&lt;/a&gt; if you don’t have one already).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once the tools are ready let us prepare our Kubernetes cluster.&lt;/p&gt;
+
+&lt;p&gt;First, let us create a resource group. Run the below command. This will create a resource group named &lt;strong&gt;eCommerceCluster&lt;/strong&gt; in US east location(You can use other &lt;a href=&quot;https://azure.microsoft.com/en-us/global-infrastructure/regions/&quot;&gt;Azure regions&lt;/a&gt; as well).&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az group create --name eCommerceCluster --location eastus
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now let us create an AKS cluster on the resource group we just created. Run the below command to create a cluster named eCommerceCluster with two nodes(We would need some room to run all those containers). It also enables the Azure monitor on the cluster through the add-on specified.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az aks create --resource-group eCommerceCluster \
+--name eCommerceCluster --node-count 2 \
+--enable-addons monitoring --generate-ssh-keys
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This would take several minutes to complete hence be patient and have a coffee :)&lt;/p&gt;
+
+&lt;p&gt;Did I emphasize on &lt;strong&gt;several minutes&lt;/strong&gt;?&lt;/p&gt;
+
+&lt;p&gt;Once it’s done you should see the cluster information printed out as JSON.&lt;/p&gt;
+
+&lt;p&gt;Now, let us configure &lt;strong&gt;kubectl&lt;/strong&gt; to connect to the AKS cluster we just created. This can be done automatically using the Azure CLI by running the below handy command.&lt;/p&gt;
+
+&lt;p&gt;Note: Some Azure CLI commands might take a while to execute, especially if you are on a slow network, sometimes if the below commands seem stalled or if it is timed out, kill it and retry again.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az aks get-credentials --resource-group eCommerceCluster --name eCommerceCluster
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Verify that we are able to connect to the cluster by running kubectl get nodes&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get nodes
+NAME                       STATUS    ROLES     AGE       VERSION
+aks-nodepool1-34429729-0   Ready     agent     22m       v1.9.9
+aks-nodepool1-34429729-1   Ready     agent     22m       v1.9.9
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;deploying-the-application-to-aks&quot;&gt;Deploying the application to AKS&lt;/h3&gt;
+
+&lt;p&gt;Now that our cluster is ready, let us deploy our microservice stack to this cluster.&lt;/p&gt;
+
+&lt;p&gt;We can deploy our application using the kubectl apply command for this we have to navigate to the k8s folder we created earlier and run the below commands in the same order&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl apply -f registry
+
+$ kubectl apply -f invoice
+
+$ kubectl apply -f notification
+
+$ kubectl apply -f store
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you could also just run the handy &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl-apply.sh&lt;/code&gt; script generated which runs the above.&lt;/p&gt;
+
+&lt;p&gt;So we are deploying the JHipster Registry first as it is required for other services, followed by the microservices and finally our gateway(store).&lt;/p&gt;
+
+&lt;p&gt;If you get a timeout during any of these, as I did, just try the command again.&lt;/p&gt;
+
+&lt;p&gt;Though the services get created fast, the actual applications might not be up and running yet, give the entire thing a minute or two to start.&lt;/p&gt;
+
+&lt;p&gt;Now run kubectl get pods to see the status of our containers.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get pods -w
+
+NAME                                    READY  STATUS 
+invoice-5ffb46d944-h8x42                1/1    Running
+invoice-mysql-66bc4b7874-p7ghk          1/1    Running
+jhipster-registry-0                     1/1    Running
+jhipster-registry-1                     1/1    Running
+notification-76847b7667-d7xjb           1/1    Running
+notification-mongodb-6db986b556-8bw8z   1/1    Running
+store-8dc5cd6f7-s2dpx                   1/1    Running
+store-mysql-779d66685d-tmkqd            1/1    Running
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: I have removed some info for brevity in the above output.&lt;/p&gt;
+
+&lt;p&gt;Wait until all the containers are in &lt;strong&gt;Running&lt;/strong&gt; status. Once the containers are running we can run the kubectl get service command to get the external IP for the application.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get service store
+
+NAME   TYPE         CLUSTER-IP    EXTERNAL-IP    PORT(S)         AGE
+store  LoadBalancer 10.0.189.145  40.117.140.228 8080:30143/TCP  18m
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case, the external IP for our gateway application is &lt;strong&gt;40.117.140.228&lt;/strong&gt; running on port &lt;strong&gt;8080&lt;/strong&gt;. Let us open it up in a web browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2624/1*OQSuDw4u-CHGdkl0VR_DIw.png&quot; alt=&quot;The Gateway application login page&quot; /&gt;&lt;em&gt;The Gateway application login page&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The JHipster registry is deployed as a headless service by default. If we need to access the registry we need to create a secondary service with a Load Balancer. Run the below command to expose the second service.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl expose service jhipster-registry --type=LoadBalancer --name=exposed-registry
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now run the kubectl get service command to get the IP.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get service exposed-registry
+
+NAME             TYPE         CLUSTER-IP   EXTERNAL-IP    PORT(S)
+exposed-registry LoadBalancer 10.0.107.121 104.211.15.142 8761:32628/TCP
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Visit the URL in a browser to see the registry in action&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2978/1*tWbLvvpXCF9kHPmEadyMKQ.png&quot; alt=&quot;JHipster Registry home page&quot; /&gt;&lt;em&gt;JHipster Registry home page&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We can now scale any of our services by simply running kubectl scale command. For example, let us scale our Invoice service.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl scale --replicas=2 deployment/invoice
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we can visit the &lt;strong&gt;Eureka -&amp;gt; Instances&lt;/strong&gt; on our Registry and see that the Invoice service has two instances.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/2596/1*YGhPu44fNsApmKZYXQAaqQ.png&quot; alt=&quot;JHipster Registry instances page&quot; /&gt;&lt;em&gt;JHipster Registry instances page&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Running kubectl get pods will also show you the new instance.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ kubectl get pods
+ 
+NAME                                  READY  STATUS   AGE
+invoice-5ffb46d944-g8j6j              1/1    Running  4m
+invoice-5ffb46d944-h8x42              1/1    Running  2h
+invoice-mysql-66bc4b7874-p7ghk        1/1    Running  2h
+jhipster-registry-0                   1/1    Running  2h
+jhipster-registry-1                   1/1    Running  2h
+notification-76847b7667-d7xjb         1/1    Running  2h
+notification-mongodb-6db986b556-8bw8z 1/1    Running  2h
+store-8dc5cd6f7-s2dpx                 1/1    Running  2h
+store-mysql-779d66685d-tmkqd          1/1    Running  2h
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That is it, we have successfully got our application deployed to AKS and scaled our service on demand.&lt;/p&gt;
+
+&lt;h3 id=&quot;cleanup&quot;&gt;Cleanup&lt;/h3&gt;
+
+&lt;p&gt;Once you are done its always a good idea to clean up especially since we don’t want to keep unnecessary resources that might eat up our free credits on Azure.&lt;/p&gt;
+
+&lt;p&gt;Let us delete the cluster from AKS and related resources created by deleting the entire resource group.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ az group delete --name eCommerceCluster --yes --no-wait
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Cluster related activities like creation/update/deletion could take several minutes on AKS so we have to be patient again here.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Kubernetes is definitely the best way to deploy microservice applications to production but creating and managing Kubernetes clusters itself is not an easy task, but Kubernetes services like &lt;strong&gt;GKE&lt;/strong&gt; and &lt;strong&gt;AKS&lt;/strong&gt; makes it a cakewalk. In my personal experience, the Kubernetes service from Google(GKE) and Azure(AKS) are by far the best in terms of ease of use and available tooling. These services provide very handy command line tools which work nicely together with &lt;strong&gt;kubectl&lt;/strong&gt; to provide a very nice experience. They also have nice UI portals if you are not a fan of the CLI.&lt;/p&gt;
+
+&lt;p&gt;JHipster provides a great Kubernetes setup to start with which you can further tweak as per your needs and platform.&lt;/p&gt;
+
+&lt;p&gt;In upcoming posts, we will look at more services like GKE(Google), EKS(Amazon) and Openshift(RedHat)&lt;/p&gt;
+
+&lt;p&gt;To learn more about JHipster, check out my book “&lt;em&gt;Full Stack Development with JHipster&lt;/em&gt;” on &lt;a href=&quot;https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X&quot;&gt;Amazon&lt;/a&gt; and &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;Packt&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you like JHipster don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My other related posts:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;Create full Microservice stack using JHipster Domain Language under 30 minutes&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://medium.com/@deepu105/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3&quot;&gt;JHipster microservices with Istio service mesh on Kubernetes&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba&quot;&gt;Medium&lt;/a&gt; on Oct 01, 2018&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Oct 2018 00:00:00 +0200</pubDate>
+        <link>/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</link>
+        <guid isPermaLink="true">/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/</guid>
+        
+        <category>azure,</category>
+        
+        <category>kubernetes,</category>
+        
+        <category>jhipster,</category>
+        
+        <category>microservices</category>
         
         
       </item>
@@ -3709,7 +3709,7 @@ To generate the missing Docker image(s), please run:
 
 &lt;p&gt;Originally published in &lt;a href=&quot;https://medium.com/jhipster/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77&quot;&gt;Medium&lt;/a&gt; on Sep 22, 2018&lt;/p&gt;
 </description>
-        <pubDate>Wed, 12 Jun 2019 00:00:00 +0200</pubDate>
+        <pubDate>Sat, 22 Sep 2018 00:00:00 +0200</pubDate>
         <link>/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/</link>
         <guid isPermaLink="true">/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/</guid>
         
