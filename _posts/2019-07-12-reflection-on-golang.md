@@ -226,4 +226,4 @@ If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
-Cover image credit: Unknown. Found [here](https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg)
+Cover image credit: Image from [Gophercises](https://gophercises.com/) created by @joncalhoun, Marcus Olsson (@marcusolsson), and Jon Calhoun.

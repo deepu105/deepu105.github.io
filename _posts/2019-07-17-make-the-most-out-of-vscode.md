@@ -35,7 +35,7 @@ Based on the Languages you work with you can add syntax, utility and language su
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Adds support for [ESLint](https://eslint.org/) rules.
   > `code --install-extension dbaeumer.vscode-eslint`
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin) - Adds support for [TSLint](https://github.com/palantir/tslint) rules.
-  > `code --install-extension dbaeumer.vscode-eslint`
+  > `code --install-extension ms-vscode.vscode-typescript-tslint-plugin`
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Adds support for [Prettier](https://github.com/prettier/prettier) formatter.
   > `code --install-extension esbenp.prettier-vscode`
 - [es-beautifier](https://marketplace.visualstudio.com/items?itemName=dai-shi.vscode-es-beautifier) - Formats JS according to Eslint rules.
@@ -69,7 +69,7 @@ The Java support indeed is getting better and better, so I hope one day I can co
 ![](https://thepracticaldev.s3.amazonaws.com/i/64sf9ht3f35lsipzafmu.png)
 
 - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) - Adds Docker support(view and manage containers) and support for Docker, docker-compose files.
-  > `code --install-extension vscjava.vscode-java-debug`
+  > `code --install-extension ms-azuretools.vscode-docker`
 
 - [Jenkinsfile Support](https://marketplace.visualstudio.com/items?itemName=secanis.jenkinsfile-support) - Adds syntax highlighting support for Jenkinsfile's.
   > `code --install-extension secanis.jenkinsfile-support`
