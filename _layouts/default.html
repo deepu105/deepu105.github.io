@@ -11,7 +11,7 @@
     {% seo %}
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        
+
     <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
 
     <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet">
@@ -70,7 +70,7 @@
                 {% endif %}
                     <a class="nav-link" href="{{ site.baseurl }}/">About</a>
                 </li>
-            
+
                 {% if page.url contains "/blogs/" or page.layout == "post" %}
                 <li class="nav-item active">
                 {% else %}
@@ -129,7 +129,7 @@
 	</div>
 </div>
 {% endif %}
-    
+
 </div>
 
 <!-- Categories Jumbotron
@@ -142,17 +142,17 @@
             </div>
 		</div>
 		<div class="col-md-8 p-5 align-self-center text-center">
-            {% assign categories_list = site.tags %}
-            {% if categories_list.first[0] == null %}
-                {% for category in categories_list %}
-                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ category | url_escape | strip | replace: ' ', '-' }}">{{ category | camelcase }} ({{ site.tags[category].size }})</a>
+            {% assign tags_list = site.tags %}
+            {% if tags_list.first[0] == null %}
+                {% for tag in tags_list %}
+                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag | url_escape | strip | replace: ' ', '-' }}">{{ tag | camelcase }} ({{ site.tags[tag].size }})</a>
                 {% endfor %}
             {% else %}
-                {% for category in categories_list %}
-                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">{{ category[0] | camelcase }} ({{ category[1].size }})</a>
+                {% for tag in tags_list %}
+                    <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag[0] | url_escape | strip | replace: ' ', '-' }}">{{ tag[0] | camelcase }} ({{ tag[1].size }})</a>
                 {% endfor %}
             {% endif %}
-            {% assign categories_list = nil %}
+            {% assign tags_list = nil %}
 		</div>
 	</div>
 </div>
@@ -163,14 +163,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 text-center text-lg-left">
-                Copyright © {{ site.time | date: "%Y" }} Deepu K Sasidharan 
+                Copyright © {{ site.time | date: "%Y" }} Deepu K Sasidharan
             </div>
-            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
                 <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
-                Domain by 
+                Domain by
                 <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
                     <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
-                </a> | 
+                </a> |
                 Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
             </div>
         </div>
@@ -194,7 +194,7 @@
 <script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 {% endif %}
 
-<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script> 
+<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 {% if page.layout == 'post' %}
 <script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>

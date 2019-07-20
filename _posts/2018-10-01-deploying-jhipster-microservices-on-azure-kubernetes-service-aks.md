@@ -1,7 +1,7 @@
 ---
 title: Deploying JHipster Microservices on Azure Kubernetes Service (AKS)
 description: Deploying JHipster Microservices on Azure Kubernetes Service (AKS)
-tags: azure, kubernetes, jhipster, microservices
+tags: [azure, kubernetes, jhipster, microservices]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zvmxe2mqyft5qa6vajgd.png
 canonical_url: https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba

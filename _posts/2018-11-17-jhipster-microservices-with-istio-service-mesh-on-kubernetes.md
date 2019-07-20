@@ -1,7 +1,7 @@
 ---
 title: How to set up Java microservices with Istio service mesh on Kubernetes
 description: How to set up JHipster microservices with Istio service mesh on Kubernetes and deploy to AKS or GKE
-tags: microservices, java, kubernetes, istio, jhipster
+tags: [microservices, java, kubernetes, istio, jhipster]
 published: true
 cover_image: https://miro.medium.com/max/1000/1*sed7vszGYvi40oa1F7iVzg.png
 canonical_url: https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3

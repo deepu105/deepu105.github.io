@@ -2,7 +2,7 @@
 title: Must have GNOME extensions
 published: true
 description: A list of awesome extensions you must have on GNOME Desktop
-tags: linux, gnome, fedora, desktop
+tags: [linux, gnome, fedora, desktop]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/r9qqpkk8iljl7hsskd6s.jpg
 series: Linux environment for developers
 canonical_url: https://deepu.js.org/must-have-gnome-plugins/

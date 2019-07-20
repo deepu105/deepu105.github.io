@@ -2,7 +2,7 @@
 title: React components done right with TypeScript mapped and conditional types
 published: true
 description: Learn how to write efficient and concise react components using TypeScript.
-tags: typescript, react, javascript, webdev
+tags: [typescript, react, javascript, webdev]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/4eaahfl09brz9ozacdg1.jpeg
 canonical_url: https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79
 ---
