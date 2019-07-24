@@ -18,9 +18,9 @@
 <meta property="og:description" content="How to set up JHipster microservices with Istio service mesh on Kubernetes and deploy to AKS or GKE" />
 <meta property="og:site_name" content="Technorage" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-11-17T00:00:00+05:30" />
+<meta property="article:published_time" content="2019-07-23T00:00:00+05:30" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"How to set up JHipster microservices with Istio service mesh on Kubernetes and deploy to AKS or GKE","@type":"BlogPosting","headline":"How to set up Java microservices with Istio service mesh on Kubernetes","dateModified":"2018-11-17T00:00:00+05:30","datePublished":"2018-11-17T00:00:00+05:30","url":"https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3","mainEntityOfPage":{"@type":"WebPage","@id":"https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"How to set up JHipster microservices with Istio service mesh on Kubernetes and deploy to AKS or GKE","@type":"BlogPosting","headline":"How to set up Java microservices with Istio service mesh on Kubernetes","dateModified":"2019-07-23T00:00:00+05:30","datePublished":"2019-07-23T00:00:00+05:30","url":"https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3","mainEntityOfPage":{"@type":"WebPage","@id":"https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -204,10 +204,10 @@
                         <!-- Post Date -->
                         <span class="author-description">
                             <small>
-                                <time class="post-date" datetime="2018-11-17">17 Nov 2018</time>
+                                <time class="post-date" datetime="2019-07-23">23 Jul 2019</time>
                                 
                             </small> |
-                            <small>18 mins read</small>
+                            <small>20 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
             
 
                 
-                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://miro.medium.com/max/1000/1*sed7vszGYvi40oa1F7iVzg.png" alt="How to set up Java microservices with Istio service mesh on Kubernetes">
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/lb5p4gnuof61zxyi6byx.jpg" alt="How to set up Java microservices with Istio service mesh on Kubernetes">
                 
 
             
@@ -254,25 +254,25 @@
                 
                 
                 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                     
                     <a href="/jhipster-microservices-with-istio-service-mesh-on-kubernetes/" title="Part 3: How to set up Java microservices with Istio service mesh on Kubernetes" class="current-article"></a>
                     </a>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 
                 
                 </div>
@@ -285,7 +285,11 @@
                 <!-- Toc if any -->
                 
                 <!-- End Toc -->
-                <p>Istio is the coolest kid on the DevOps and Cloud block now. For those of you who aren’t following close enough — <a href="https://istio.io/docs/concepts/what-is-istio/">Istio</a> is a service mesh for distributed application architectures, especially the ones that you run on the cloud with Kubernetes. Istio plays extremely nice with Kubernetes, so nice that you might think that it’s part of the Kubernetes platform.</p>
+                <p>Originally published at <a href="https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3">Medium</a> on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster and Istio.</p>
+
+<hr />
+
+<p>Istio is the coolest kid on the DevOps and Cloud block now. For those of you who aren’t following close enough — <a href="https://istio.io/docs/concepts/what-is-istio/">Istio</a> is a service mesh for distributed application architectures, especially the ones that you run on the cloud with Kubernetes. Istio plays extremely nice with Kubernetes, so nice that you might think that it’s part of the Kubernetes platform.</p>
 
 <p>If you are still wondering, what the heck is a service mesh or Istio? then let’s have an overview of Istio.</p>
 
@@ -324,13 +328,448 @@
 
 <p><strong>Control plane</strong>: It uses Pilot to manages and configure the proxies to route traffic. It also configures Mixer to enforce policies and to collect telemetry. It also has other components like Citadel, to manage security, and Galley, to manage configurations.</p>
 
-<p>Istio also configures an instance of <a href="https://grafana.com/">Grafana</a>, <a href="https://prometheus.io/">Prometheus</a> and <a href="https://www.jaegertracing.io/">Jaeger</a> for Monitoring and Observability. You can use this or use your existing monitoring stack as well.</p>
+<p>Istio can also configure an instance of <a href="https://grafana.com/">Grafana</a>, <a href="https://prometheus.io/">Prometheus</a>, <a href="https://www.jaegertracing.io/">Jaeger</a>, and <a href="https://www.kiali.io/">Kiali</a> for Monitoring and Observability. You can use this or use your existing monitoring stack as well if you wish to do so.</p>
 
 <p>I hope this provides an overview of Istio, now let’s focus on the goal of this article.</p>
 
+<h2 id="preparing-the-kubernetes-cluster">Preparing the Kubernetes cluster</h2>
+
+<p>First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for anyone of the platforms you prefer.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>We will be using <a href="https://helm.sh/">Helm</a> to install Istio on the Kubernetes cluster and <a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a> for deploying the applications.</p>
+
+<p><a href="https://github.com/helm/helm"><strong>Helm</strong></a>: The Kubernetes package manager. <a href="https://github.com/helm/helm#install">Install</a> it.</p>
+
+<p><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/"><strong>kubectl</strong></a>: The command-line tool to interact with Kubernetes. <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Install</a> and configure it.</p>
+
+<h3 id="create-a-cluster-on-azure-kubernetes-serviceaks">Create a cluster on Azure Kubernetes Service(AKS)</h3>
+
+<p>If you are going to use Azure, then install <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest"><strong>Azure CLI</strong></a> to interact with Azure. Install and login with your Azure account (you can create a <a href="https://azure.microsoft.com/en-us/free/">free account</a> if you don’t have one already). If not skip this section.</p>
+
+<p>First, let us create a resource group. You can use any region you like here instead of East-US.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>az group create <span class="nt">--name</span> eCommerceCluster <span class="nt">--location</span> eastus
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Create the Kubernetes cluster:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>az aks create <span class="se">\</span>
+  <span class="nt">--resource-group</span> eCommerceCluster <span class="se">\</span>
+  <span class="nt">--name</span> eCommerceCluster <span class="se">\</span>
+  <span class="nt">--node-count</span> 4 <span class="se">\</span>
+  <span class="nt">--kubernetes-version</span> 1.13.7 <span class="se">\</span>
+  <span class="nt">--enable-addons</span> monitoring <span class="se">\</span>
+  <span class="nt">--generate-ssh-keys</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">node-count</code> flag is important as the setup requires at least four nodes with the default CPU to run everything. You can try to use a higher <code class="highlighter-rouge">kubernetes-version</code> if it is supported, else stick to 1.13</p>
+
+<p>The cluster creation could take while so sit back and relax. 🍹</p>
+
+<p>Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under <strong><em>~/.kube/config</em></strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>az aks get-credentials <span class="se">\</span>
+  <span class="nt">--resource-group</span> eCommerceCluster <span class="se">\</span>
+  <span class="nt">--name</span> eCommerceCluster
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can view the created cluster in the Azure portal:</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/3284/1*yfLnHHc_N7VCkEY9vjNciQ.png" alt="Kubernetes cluster in AKS" /><em>Kubernetes cluster in AKS</em></p>
+
+<p>Run <code class="highlighter-rouge">kubectl get nodes</code> to see it in the command line and to verify that kubectl can connect to your cluster.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*k8xsRqQsvnquUhGPAh9TsA.png" alt="Cluster Nodes" /><em>Cluster Nodes</em></p>
+
+<p>Proceed to the <strong><a href="#install-and-setup-istio">Install and setup Istio</a></strong> section.</p>
+
+<h3 id="create-a-cluster-on-google-kubernetes-enginegke">Create a cluster on Google Kubernetes Engine(GKE)</h3>
+
+<p>If you are going to use Google Cloud Platform(GCP) then install <a href="https://cloud.google.com/sdk/docs/"><strong>Gcloud CLI</strong></a> to interact with GCP. Install and login with your GCP account (you can create a <a href="https://console.cloud.google.com/freetrial">free account</a> if you don’t have one already).</p>
+
+<p>You can set a region and zone using below commands or you can pass the zone option while executing each command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcloud config <span class="nb">set </span>compute/region europe-west1
+<span class="nv">$ </span>gcloud config <span class="nb">set </span>compute/zone europe-west1-b
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>First, we need a GCP project, you can either use an existing project that you have or create a new one using GCloud CLI with below command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcloud projects create jhipster-demo-deepu
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Set the project you want to use as the default project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcloud config <span class="nb">set </span>project jhipster-demo-deepu
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now let us create a cluster for our application with the below command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcloud container clusters create hello-hipster <span class="se">\</span>
+    <span class="nt">--cluster-version</span> 1.13 <span class="se">\</span>
+    <span class="nt">--num-nodes</span> 4 <span class="se">\</span>
+    <span class="nt">--machine-type</span> n1-standard-2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">num-nodes</code> and <code class="highlighter-rouge">machine-type</code> flags are important as the setup requires at least four nodes with a bigger CPU to run everything. You can try to use a higher <code class="highlighter-rouge">cluster-version</code> if it is supported, else stick to 1.13.</p>
+
+<p>The cluster creation could take while so sit back and relax. 🍹</p>
+
+<p>Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under <strong><em>~/.kube/config</em></strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcloud container clusters get-credentials hello-hipster
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can view the created cluster in the GCP GUI.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ZxNbIG4vqWJymTLweJpPyQ.png" alt="Kubernetes cluster on GKE" /><em>Kubernetes cluster on GKE</em></p>
+
+<p>Run <code class="highlighter-rouge">kubectl get nodes</code> to see it in the command line and to verify that kubectl can connect to your cluster.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*F5Qcd_GS_GSuA1PsJE7gvA.png" alt="Cluster Nodes" /><em>Cluster Nodes</em></p>
+
+<h2 id="install-and-setup-istio">Install and setup Istio</h2>
+
+<p>Install Istio on your local machine by following these steps:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/
+
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">ISTIO_VERSION</span><span class="o">=</span>1.2.2
+
+<span class="nv">$ </span>curl <span class="nt">-L</span> https://git.io/getLatestIstio | sh -
+
+<span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-sf</span> istio-<span class="nv">$ISTIO_VERSION</span> istio
+
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/istio/bin:<span class="nv">$PATH</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>First, create a role binding on the Kubernetes cluster for Istio.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>kubectl create clusterrolebinding cluster-admin-binding <span class="se">\</span>
+  <span class="nt">--clusterrole</span><span class="o">=</span>cluster-admin <span class="se">\</span>
+  <span class="nt">--user</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>gcloud config get-value core/account<span class="si">)</span><span class="s2">"</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Let us create a namespace for Istio.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>kubectl create namespace istio-system
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now let us install Istio on our Kubernetes cluster using the provided helm charts from Istio.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c"># Install the Istio CRDs</span>
+<span class="nv">$ </span>helm template <span class="nb">install</span>/kubernetes/helm/istio-init <span class="nt">--name</span> istio-init <span class="nt">--namespace</span> istio-system | kubectl apply <span class="nt">-f</span> -
+
+<span class="c"># Run this to verify all CRDs are installed. It should output 23 for this version of Istio.</span>
+<span class="nv">$ </span>kubectl get crds | <span class="nb">grep</span> <span class="s1">'istio.io\|certmanager.k8s.io'</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+
+<span class="c"># Install the Istio demo set up so that we get Grafana, Jaeger &amp; Kiali set up as well.</span>
+<span class="c"># For production, use the Istio default setup. Refer https://istio.io/docs/setup/kubernetes/install/helm/</span>
+<span class="nv">$ </span>helm template <span class="nb">install</span>/kubernetes/helm/istio <span class="nt">--name</span> istio <span class="nt">--namespace</span> istio-system <span class="se">\</span>
+    <span class="nt">--values</span> <span class="nb">install</span>/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply <span class="nt">-f</span> -
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Wait for the pods to run, these will be deployed to the <code class="highlighter-rouge">istio-system</code> namespace.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>watch kubectl get pods <span class="nt">-n</span> istio-system
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Once the pods are in running status, exit the watch loop and run the below to get the Ingress gateway service details. This is the only service that is exposed to an external IP.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>kubectl get svc istio-ingressgateway <span class="nt">-n</span> istio-system
+
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP
+istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If the <code class="highlighter-rouge">istio-ingressgateway</code> shows external IP as <pending>, wait a few minutes until an IP address has been assigned.</pending></p>
+
+<p>The external IP is very important here, let us save this to an environment variable so that we can use it in further commands.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">export</span> <span class="se">\</span>
+  <span class="nv">INGRESS_IP</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get svc <span class="se">\</span>
+  istio-ingressgateway <span class="se">\</span>
+  <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.loadBalancer.ingress[0].ip}'</span><span class="si">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now our Kubernetes cluster is ready for Istio. 🎉</p>
+
+<p><em>For advanced Istio setup options refer to <a href="https://istio.io/docs/setup/kubernetes/">https://istio.io/docs/setup/kubernetes/</a></em></p>
+
+<h2 id="creating-the-microservice-application-stack">Creating the microservice application stack</h2>
+
+<p>In one of my <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">previous posts</a>, I showcased how to create a full-stack microservice architecture using <strong>JHipster</strong> and <strong>JDL</strong>. You can read the post <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a> if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.</p>
+
+<h3 id="architecture">Architecture</h3>
+
+<p>Here is the architecture of the microservice that we are going to create and deploy today.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2162/1*UmNJ-Ue362-OltPOxt-OFQ.png" alt="Microservice architecture with Istio" /><em>Microservice architecture with Istio</em></p>
+
+<p>It has a gateway application and three microservice applications. Each of them has its own database. You can see that each application has an Envoy proxy attached to the pod as a sidecar. Istio control plane components are also deployed to the same cluster along with Prometheus, Grafana, and Jaeger.</p>
+
+<p>The Ingress gateway from Istio is the only entry point for traffic and it routes traffic to all microservices accordingly. Telemetry is collected from all the containers running in the cluster, including the applications, databases, and Istio components.</p>
+
+<p>Compared to the architecture of the original application <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a>, you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2162/1*H-6_dz1-aYXQ-fzWEuJcRw.png" alt="Microservice architecture with Netflix OSS" /><em>Microservice architecture with Netflix OSS</em></p>
+
+<h3 id="application-jdl">Application JDL</h3>
+
+<p>Let’s take a look at the modified JDL declaration. You can see that we have declared <code class="highlighter-rouge">serviceDiscoveryType no</code> here since we will be using Istio for that.</p>
+
+<noscript><pre>400: Invalid request
+</pre></noscript>
+<script src="https://gist.github.com/8e568eb7b5b5e3c00af0fdf3d2cf71ba.js"> </script>
+
+<h3 id="deployment-jdl">Deployment JDL</h3>
+
+<p>JHipster version 5.7.0 introduced support for deployment declaration straight in the JDL</p>
+
+<div class="jekyll-twitter-plugin"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Towards the future of <a href="https://twitter.com/hashtag/JHipster?src=hash&amp;ref_src=twsrc%5Etfw">#JHipster</a>, <a href="https://twitter.com/hashtag/ScaffoldingAsCode?src=hash&amp;ref_src=twsrc%5Etfw">#ScaffoldingAsCode</a><br />Check this out. Soon you will be able to define apps, entities and deployment options with a single JDL file and generate everything with a single command. Hopefully, we can demo this for <a href="https://twitter.com/Devoxx?ref_src=twsrc%5Etfw">@Devoxx</a> <a href="https://t.co/u28cwaymfc">https://t.co/u28cwaymfc</a></p>&mdash; 𝔻𝕖𝕖𝕡𝕦 𝕂 𝕊𝕒𝕤𝕚𝕕𝕙𝕒𝕣𝕒𝕟 (@deepu105) <a href="https://twitter.com/deepu105/status/1056588722769195018?ref_src=twsrc%5Etfw">October 28, 2018</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>We have the below in our JDL which declares our Kubernetes deployment:</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="n">deployment</span> <span class="o">{</span>
+  <span class="n">deploymentType</span> <span class="n">kubernetes</span>
+  <span class="n">appsFolders</span> <span class="o">[</span><span class="n">store</span><span class="o">,</span> <span class="n">invoice</span><span class="o">,</span> <span class="n">notification</span><span class="o">,</span> <span class="n">product</span><span class="o">]</span>
+  <span class="n">dockerRepositoryName</span> <span class="s2">"deepu105"</span>
+  <span class="n">serviceDiscoveryType</span> <span class="n">no</span>
+  <span class="n">istio</span> <span class="kc">true</span>
+  <span class="n">kubernetesServiceType</span> <span class="n">Ingress</span>
+  <span class="n">kubernetesNamespace</span> <span class="n">jhipster</span>
+  <span class="n">ingressDomain</span> <span class="s2">"35.195.81.130.nip.io"</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">serviceDiscoveryType</code> is disabled and we have enabled <code class="highlighter-rouge">Istio</code> support — the Envoy sidecars are injected automatically for the selected applications. Istio routes are also generated for the applications automatically.</p>
+
+<p>The <code class="highlighter-rouge">kubernetesServiceType</code> is set as <code class="highlighter-rouge">Ingress</code>, which is very important as Istio can only work with an Ingress controller service type. For Ingress, we need to set the domain DNS and this is where the Istio ingress gateway IP is needed. Now we need a DNS for our IP. For real use-cases, you should map a DNS for the IP, but for testing and demo purposes we can use a wildcard DNS service like <a href="http://nip.io"><strong>nip.io</strong></a> to resolve our IP. Just append nip.io to our IP and use that as the <code class="highlighter-rouge">ingressDomain</code>.</p>
+
+<p><strong>Note:</strong> I was switching between multiple clusters while writing this article as I didn’t want to keep them running and hence my istio-ingressgateway IP might be different between samples and screenshots. Use the IP based on your own setup if you are running these samples.</p>
+
+<h3 id="generate-the-applications-and-deployment-manifests">Generate the applications and deployment manifests</h3>
+
+<p>Now that our JDL is ready, let us scaffold our applications and Kubernetes manifests. Create a new directory and save the above JDL in the directory. Let us name it <strong><em>app-istio.jdl</em></strong> and then run the import-jdl command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">mkdir </span>istio-demo <span class="o">&amp;&amp;</span> <span class="nb">cd </span>istio-demo
+<span class="nv">$ </span>jhipster import-jdl app-istio.jdl
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This will generate all the applications and install the required NPM dependencies in each of them. Once the applications are generated the deployment manifests will be generated and some useful instruction will be printed to the console.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/2776/0*ROg2XrRkHVHA4Xib" alt="Generation output" /><em>Generation output</em></p>
+
+<p>Open the generated code in your favorite IDE/Editor and explore the code.</p>
+
+<h3 id="interim-issues-with-generated-code">Interim issues with generated code</h3>
+
+<p>There is a <a href="https://github.com/jhipster/generator-jhipster/issues/10135">bug</a> in the latest JHipster version which creates some incorrect URLs for Istio, let us correct those here until <a href="https://github.com/jhipster/generator-jhipster/pull/10138">my PR</a> for the issue is merged. Replace <code class="highlighter-rouge">INGRESS_IP</code> with the EXTERNAL-IP obtained earlier from <code class="highlighter-rouge">kubectl get svc istio-ingressgateway -n istio-system</code> in below commands.</p>
+
+<ol>
+  <li>In <em>kubernetes/store/store-gateway.yml</em>,
+    <ol>
+      <li>Change all occurrence of the URL <code class="highlighter-rouge">store.jhipster&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">store.jhipster&lt;INGRESS_IP&gt;.nip.io</code>.</li>
+      <li>Change <code class="highlighter-rouge">prefix: /invoice/</code> to <code class="highlighter-rouge">prefix: /services/invoice/</code></li>
+      <li>Change <code class="highlighter-rouge">prefix: /product/</code> to <code class="highlighter-rouge">prefix: /services/product/</code></li>
+      <li>Change <code class="highlighter-rouge">prefix: /notification/</code> to <code class="highlighter-rouge">prefix: /services/notification/</code></li>
+    </ol>
+  </li>
+  <li>In <em>kubernetes/invoice/invoice-deployment.yml</em>, <em>kubernetes/product/product-deployment.yml</em>, and <em>kubernetes/notification/notification-deployment.yml</em>, change the <code class="highlighter-rouge">readinessProbe</code> and <code class="highlighter-rouge">livenessProbe</code> URLs from <code class="highlighter-rouge">/&lt;microservice name&gt;/management/health</code> to <code class="highlighter-rouge">/services/&lt;microservice name&gt;/management/health</code>. Replace <code class="highlighter-rouge">&lt;microservice name&gt;</code> with <code class="highlighter-rouge">invoice</code>, <code class="highlighter-rouge">product</code> and <code class="highlighter-rouge">notification</code> respectively.</li>
+  <li>In <em>kubernetes/istio/gateway/grafana-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">grafana.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">grafana.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
+  <li>In <em>kubernetes/istio/gateway/jaeger-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">jaeger.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">jaeger.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
+  <li>In <em>kubernetes/istio/gateway/kiali-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">kiali.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">kiali.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
+  <li>Update the URLs in <code class="highlighter-rouge">logSummary</code> function in <em>kubernetes/kubectl-apply.sh</em> to reflect the above.</li>
+</ol>
+
+<p>That is it. This won’t be required after the next release of jhipster.</p>
+
+<h2 id="deploy-to-kubernetes-cluster-using-kubectl">Deploy to Kubernetes cluster using Kubectl</h2>
+
+<p>Now let us build and deploy our applications. Run the <code class="highlighter-rouge">./gradlew bootJar -Pprod jibDockerBuild</code> command in the store, product, invoice, and notification folders to build the docker images. Once the images are built, push them to your docker repo with these commands. Note to change the Docker hub id from <code class="highlighter-rouge">deepu105</code> to your id.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>docker image tag store deepu105/store
+<span class="nv">$ </span>docker push deepu105/store
+
+<span class="nv">$ </span>docker image tag invoice deepu105/invoice
+<span class="nv">$ </span>docker push deepu105/invoice
+
+<span class="nv">$ </span>docker image tag notification deepu105/notification
+<span class="nv">$ </span>docker push deepu105/notification
+
+<span class="nv">$ </span>docker image tag product deepu105/product
+<span class="nv">$ </span>docker push deepu105/product
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Once the images are pushed, navigate into the generated Kubernetes directory and run the provided startup script. (If you are on windows you can run the steps in <strong><em>kubectl-apply.sh</em></strong> manually one by one.)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd </span>kubernetes
+<span class="nv">$ </span>./kubectl-apply.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Run <code class="highlighter-rouge">watch kubectl get pods -n jhipster</code> to monitor the status.</p>
+
+<h2 id="deployed-applications">Deployed applications</h2>
+
+<p>Once all the pods are in running status we can explore the deployed applications</p>
+
+<h3 id="application-gateway">Application gateway</h3>
+
+<p>The store gateway application is the entry point for our microservices. Get the URL for the store app by running <code class="highlighter-rouge">echo store.$INGRESS_IP.nip.io</code>, we already stored the <code class="highlighter-rouge">INGRESS_IP</code> to environment variables while creating the Istio setup. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/cyd7foljtf7qkm6amgjj.png" alt="Store gateway application" /><em>Store gateway application</em></p>
+
+<h3 id="monitoring">Monitoring</h3>
+
+<p>Istio setup includes Grafana and Prometheus configured to collect and show metrics from our containers. Let’s take a look.</p>
+
+<p>Let us look at Grafana by visiting the provided URL. Get it by running <code class="highlighter-rouge">echo grafana.$INGRESS_IP.nip.io</code>:</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/x7ck1zidvch5m75tqimp.png" alt="Grafana dashboard for the Store application" /><em>Grafana dashboard for the Store application</em></p>
+
+<p>Grafana uses the metrics scraped by Prometheus. By default, only Grafana is exposed to external IP and hence we will use kubectl port forwarding to set up a secure tunnel to Prometheus available on <a href="localhost:9090">localhost:9090</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>kubectl <span class="nt">-n</span> istio-system <span class="se">\</span>
+    port-forward <span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get pod <span class="nt">-l</span> <span class="se">\</span>
+    <span class="nv">app</span><span class="o">=</span>prometheus <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> 9090:9090
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="https://cdn-images-1.medium.com/max/2554/0*W4obHNne_wQJfAuU" alt="Prometheus dashboard" /><em>Prometheus dashboard</em></p>
+
+<h3 id="observability">Observability</h3>
+
+<p>Istio configures Jaeger for distributed tracing and Kiali for service observability. Let us take a look at them.</p>
+
+<p>Get the Jaeger URL by running <code class="highlighter-rouge">echo jaeger.$INGRESS_IP.nip.io</code>:</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png" alt="Jaeger tracing dashboard" /><em>Jaeger tracing dashboard</em></p>
+
+<p>You can make some requests in the application and find it in the tracing dashboard by querying for the service. Click on any request to see tracing details.</p>
+
+<p>Let us now look at Kiali. Get the URL by running <code class="highlighter-rouge">echo kiali.$INGRESS_IP.nip.io</code>, use the credentials user: <em>admin</em>, password: <em>admin</em> to log in:</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/w9r30s3q4rmctjzejdwp.png" alt="Kiali service graph" /><em>Kiali service graph</em></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Istio provides building blocks to build distributed microservices in a more Kubernetes-native way and takes the complexity and responsibility of maintaining those blocks away from you. This means you do not have to worry about maintaining the code or deployments for service discovery, tracing and so on.</p>
+
+<p>Istio documentation says</p>
+<blockquote>
+  <p>Deploying a microservice-based application in an Istio service mesh allows one to externally control service monitoring and tracing, request (version) routing, resiliency testing, security and policy enforcement, etc., in a consistent way across the services, for the application as a whole.</p>
+</blockquote>
+
+<p>Werner Vogels (CTO of AWS) quoted at AWS Re:Invent</p>
+<blockquote>
+  <p>“In the future, all the code you ever write will be business logic.”</p>
+</blockquote>
+
+<p>Istio Service mesh helps to make that reality closer. This lets you worry only about the applications that you are developing and with JHipster that future is truly here and you just need to worry about writing your business logic.</p>
+
+<p>While this is great, it is not a silver bullet. Keep in mind that Istio is fairly new compared to other stable and battle-tested solutions like JHipster Registry (Eureka) or Consul and overall such architectures are suitable only for complex distributed applications.</p>
+
+<p>Also, another thing to keep in mind is the resource requirements. The same microservices with JHipster Registry or Consul can be deployed to a 2 node cluster with 1 vCPU and 3.75 GB of memory per node in GCP while you need a 4 node cluster with 2 vCPUs and 7.5 GB of memory per node for Istio enabled deployments. The demo profile from Istio, we used, doesn’t apply any request limits for resources, and by adding and tuning those, the minimum requirement could be reduced. But still, I don’t think you can get it as low as that is needed for the JHipster registry option.</p>
+
+<p>In a real-world use case, the advantages of not having to maintain the complex parts of your infra vs having to pay for more resources might be a decision that has to be taken based on your priorities and goals.</p>
+
+<p>A huge shout out to <a href="https://twitter.com/saturnism">Ray Tsang</a> for helping me figure out an optimal cluster size for this application originally. Also a huge thank you from myself and the community to both Ray and <a href="https://twitter.com/humourmind">Srinivasa Vasu</a> for adding the Istio support to JHipster.</p>
+
+<p>JHipster provides a great Kubernetes setup to start with which you can further tweak as per your needs and platform. The Istio support will <a href="https://github.com/jhipster/generator-jhipster/issues/7708">improve</a> further over time, but it’s still a great starting point especially to learn.</p>
+
+<p>To learn more about JHipster and Full stack development, check out my book “<em>Full Stack Development with JHipster</em>” on <a href="https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X">Amazon</a> and <a href="https://www.packtpub.com/application-development/full-stack-development-jhipster">Packt</a>.</p>
+
+<p>There is a great Istio tutorial from Ray Tsang <a href="https://docs.google.com/document/d/1Qo8o5C4UpGwMF7Mg02kLTaU4-xCSfJjLcnIFNveMEEA">here</a>.</p>
+
+<hr />
+
 <h2 id="devoxx-2018">Devoxx 2018</h2>
 
-<p>I did a talk at <a href="https://dvbe18.confinabox.com/talk/XCM-6395/JHipster_5_-_What's_new_and_noteworthy">Devoxx 2018</a> along with <a href="https://www.julien-dubois.com/">Julien Dubois</a> doing the same demo and promised that I’d write a detailed blog about it.</p>
+<p>I did a talk at <a href="https://dvbe18.confinabox.com/talk/XCM-6395/JHipster_5_-_What's_new_and_noteworthy">Devoxx 2018</a> along with <a href="https://www.julien-dubois.com/">Julien Dubois</a> doing the same demo and promised that I’d write a detailed blog about it. This blog was originally based on that.</p>
 
 <div class="jekyll-twitter-plugin"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Had a wonderful time at <a href="https://twitter.com/hashtag/devoxx2018?src=hash&amp;ref_src=twsrc%5Etfw">#devoxx2018</a>, sad that I had to leave early due to work commitments.<br />Had 3 talks and 1 of them with my friend and the real hipster <a href="https://twitter.com/juliendubois?ref_src=twsrc%5Etfw">@juliendubois</a>, all the talks were well received and I&#39;m grateful for all the positive feedback. Will write blogs about it soon</p>&mdash; 𝔻𝕖𝕖𝕡𝕦 𝕂 𝕊𝕒𝕤𝕚𝕕𝕙𝕒𝕣𝕒𝕟 (@deepu105) <a href="https://twitter.com/deepu105/status/1063010906777497600?ref_src=twsrc%5Etfw">November 15, 2018</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -355,410 +794,11 @@
             </noscript>
           </p>
 
-<h2 id="preparing-the-kubernetes-cluster">Preparing the Kubernetes cluster</h2>
-
-<p>First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for any one of the platforms you prefer.</p>
-
-<h3 id="prerequisites">Prerequisites</h3>
-
-<p><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/"><strong>kubectl</strong></a>: The command line tool to interact with Kubernetes. <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Install</a> and configure it.</p>
-
-<h3 id="create-a-cluster-on-azure-kubernetes-serviceaks">Create a cluster on Azure Kubernetes Service(AKS)</h3>
-
-<p>If you are going to use Azure, then install <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest"><strong>Azure CLI</strong></a> to interact with Azure. Install and log in with your Azure account (you can create a <a href="https://azure.microsoft.com/en-us/free/">free account</a> if you don’t have one already). If not skip this section.</p>
-
-<p>First let us create a resource group. You can use any region you like here instead of East US.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>az group create <span class="nt">--name</span> eCommerceCluster <span class="nt">--location</span> eastus
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>Create the Kubernetes cluster:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>az aks create <span class="se">\</span>
-    <span class="nt">--resource-group</span> eCommerceCluster <span class="se">\</span>
-    <span class="nt">--name</span> eCommerceCluster <span class="se">\</span>
-    <span class="nt">--node-count</span> 4 <span class="se">\</span>
-    <span class="nt">--kubernetes-version</span> 1.11.4 <span class="se">\</span>
-    <span class="nt">--enable-addons</span> monitoring <span class="se">\</span>
-    <span class="nt">--generate-ssh-keys</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">node-count</code> flag is important as the setup requires at least four nodes with the default CPU to run everything. You can try to use a higher <code class="highlighter-rouge">kubernetes-version</code> if it is supported, else stick to 1.11.4</p>
-
-<p>The cluster creation could take while so sit back and relax. 🍹</p>
-
-<p>Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under <strong><em>~/.kube/config</em></strong></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>az aks get-credentials <span class="se">\</span>
-    <span class="nt">--resource-group</span> eCommerceCluster <span class="se">\</span>
-    <span class="nt">--name</span> eCommerceCluster
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>You can view the created cluster in the Azure portal:</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/3284/1*yfLnHHc_N7VCkEY9vjNciQ.png" alt="Kubernetes cluster in AKS" /><em>Kubernetes cluster in AKS</em></p>
-
-<p>Run <code class="highlighter-rouge">kubectl get nodes</code> to see it in the command line and to verify that kubectl can connect to your cluster.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*k8xsRqQsvnquUhGPAh9TsA.png" alt="Cluster Nodes" /><em>Cluster Nodes</em></p>
-
-<p>Proceed to the <strong>Install and setup Istio</strong> section.</p>
-
-<h3 id="create-a-cluster-on-google-kubernetes-enginegke">Create a cluster on Google Kubernetes Engine(GKE)</h3>
-
-<p>If you are going to use Google Cloud Platform(GCP) then install <a href="https://cloud.google.com/sdk/docs/"><strong>Gcloud CLI</strong></a> to interact with GCP. Install and log in with your GCP account (you can create a <a href="https://console.cloud.google.com/freetrial">free account</a> if you don’t have one already).</p>
-
-<p>First, we need a GCP project, you can either use an existing project that you have or create a new one using GCloud CLI with below command:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>gcloud projects create jhipster-demo-deepu
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Set the project you want to use as the default project:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>gcloud config <span class="nb">set </span>project jhipster-demo-deepu
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Now let us create a cluster for our application with the below command:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>gcloud container clusters create hello-hipster <span class="se">\</span>
-       <span class="nt">--cluster-version</span> 1.10 <span class="se">\</span>
-       <span class="nt">--num-nodes</span> 4 <span class="se">\</span>
-       <span class="nt">--machine-type</span> n1-standard-2
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">num-nodes</code> and <code class="highlighter-rouge">machine-type</code> flags are important as the setup requires at least four nodes with a bigger CPU to run everything. You can try to use a higher <code class="highlighter-rouge">cluster-version</code> if it is supported, else stick to 1.10.</p>
-
-<p>The cluster creation could take while so sit back and relax. 🍹</p>
-
-<p>Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under <strong><em>~/.kube/config</em></strong></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>gcloud container clusters get-credentials hello-hipster
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>You can view the created cluster in the GCP GUI.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*ZxNbIG4vqWJymTLweJpPyQ.png" alt="Kubernetes cluster on GKE" /><em>Kubernetes cluster on GKE</em></p>
-
-<p>Run <code class="highlighter-rouge">kubectl get nodes</code> to see it in the command line and to verify that kubectl can connect to your cluster.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*F5Qcd_GS_GSuA1PsJE7gvA.png" alt="Cluster Nodes" /><em>Cluster Nodes</em></p>
-
-<h2 id="install-and-setup-istio">Install and setup Istio</h2>
-
-<p>Install Istio on your local machine by following these steps:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span><span class="nb">cd</span> ~/
-
-    <span class="nv">$ </span><span class="nb">export </span><span class="nv">ISTIO_VERSION</span><span class="o">=</span>1.0.2
-
-    <span class="nv">$ </span>curl <span class="nt">-L</span> https://git.io/getLatestIstio | sh -
-
-    <span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-sf</span> istio-<span class="nv">$ISTIO_VERSION</span> istio
-
-    <span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/istio/bin:<span class="nv">$PATH</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>I used version <strong>1.0.2</strong> since the latest version seems to have issues connecting to the MySQL database containers at the time of writing this.</p>
-
-<p>Now let us install Istio on our Kubernetes cluster by applying the provided Kubernetes manifests and helm charts from Istio.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ~/istio/install/kubernetes/helm/istio/templates/crds.yaml
-    <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ~/istio/install/kubernetes/istio-demo.yaml <span class="se">\</span>
-        <span class="nt">--as</span><span class="o">=</span>admin <span class="nt">--as-group</span><span class="o">=</span>system:masters
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Wait for the pods to run, these will be deployed to the <code class="highlighter-rouge">istio-system</code> namespace.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>watch kubectl get pods <span class="nt">-n</span> istio-system
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Once the pods are in running status, exit the watch loop and run the below to get the Ingress gateway service details. This is the only service that is exposed to an external IP.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl get svc istio-ingressgateway <span class="nt">-n</span> istio-system
-
-    NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP
-    istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The external IP is very important here, let us save this to an environment variable so that we can use it in further commands.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span><span class="nb">export</span> <span class="se">\</span>
-      <span class="nv">INGRESS_IP</span><span class="o">=</span><span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get svc <span class="se">\</span>
-      istio-ingressgateway <span class="se">\</span>
-      <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.loadBalancer.ingress[0].ip}'</span><span class="si">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Now our Kubernetes cluster is ready for Istio. 🎉</p>
-
-<p><em>For advanced Istio setup options refer to <a href="https://istio.io/docs/setup/kubernetes/">https://istio.io/docs/setup/kubernetes/</a></em></p>
-
-<h2 id="creating-the-microservice-application-stack">Creating the microservice application stack</h2>
-
-<p>In one of my <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">previous posts</a>, I showcased how to create a full stack microservice architecture using <strong>JHipster</strong> and <strong>JDL</strong>. You can read the post <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a> if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.</p>
-
-<h3 id="architecture">Architecture</h3>
-
-<p>Here is the architecture of the microservice that we are going to create and deploy today.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2162/1*UmNJ-Ue362-OltPOxt-OFQ.png" alt="Microservice architecture with Istio" /><em>Microservice architecture with Istio</em></p>
-
-<p>It has a gateway application and three microservice applications. Each of them has its own database. You can see that each application has an Envoy proxy attached to the pod as a sidecar. Istio control plane components are also deployed to the same cluster along with Prometheus, Grafana, and Jaeger.</p>
-
-<p>The Ingress gateway from Istio is the only entry point for traffic and it routes traffic to all microservices accordingly. Telemetry is collected from all the containers running in the cluster, including the applications, databases, and Istio components.</p>
-
-<p>Compared to the architecture of the original application <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a>, you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2162/1*H-6_dz1-aYXQ-fzWEuJcRw.png" alt="Microservice architecture with Netflix OSS" /><em>Microservice architecture with Netflix OSS</em></p>
-
-<h3 id="application-jdl">Application JDL</h3>
-
-<p>Let’s take a look at the modified JDL declaration. You can see that we have declared serviceDiscoveryType no here since we will be using Istio for that.</p>
-
-<p>&lt;iframe src=”https://medium.com/media/4a02b6329b1450e784592209bb4888ff” frameborder=0&gt;&lt;/iframe&gt;</p>
-
-<h3 id="deployment-jdl">Deployment JDL</h3>
-
-<p>JHipster version 5.7.0 introduced support for deployment declaration straight in the JDL</p>
-
-<noscript><pre>400: Invalid request
-</pre></noscript>
-<script src="https://gist.github.com/8e568eb7b5b5e3c00af0fdf3d2cf71ba.js"> </script>
-
-<p>We have the below in our JDL which declares our Kubernetes deployment:</p>
-
-<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre>    <span class="n">deployment</span> <span class="o">{</span>
-      <span class="n">deploymentType</span> <span class="n">kubernetes</span>
-      <span class="n">appsFolders</span> <span class="o">[</span><span class="n">store</span><span class="o">,</span> <span class="n">invoice</span><span class="o">,</span> <span class="n">notification</span><span class="o">,</span> <span class="n">product</span><span class="o">]</span>
-      <span class="n">dockerRepositoryName</span> <span class="s2">"deepu105"</span>
-      <span class="n">serviceDiscoveryType</span> <span class="n">no</span>
-      <span class="n">istio</span> <span class="kc">true</span>
-      <span class="n">kubernetesServiceType</span> <span class="n">Ingress</span>
-      <span class="n">kubernetesNamespace</span> <span class="n">jhipster</span>
-      <span class="n">ingressDomain</span> <span class="s2">"35.195.81.130.nip.io"</span>
-    <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The <code class="highlighter-rouge">serviceDiscoveryType</code> is disabled and we have enabled <code class="highlighter-rouge">Istio</code> support — the Envoy sidecars are injected automatically for the selected applications. Istio routes are also generated for the applications automatically.</p>
-
-<p>The <code class="highlighter-rouge">kubernetesServiceType</code> is set as <code class="highlighter-rouge">Ingress</code>, which is very important as Istio can only work with an Ingress controller service type. For Ingress, we need to set the domain DNS and this is where the Istio ingress gateway IP is needed. Now we need a DNS for our IP. For real usecases, you should map a DNS for the IP, but for testing and demo purposes we can use a wildcard DNS service like <a href="http://nip.io"><strong>nip.io</strong></a> to resolve our IP. Just append nip.io to our IP and use that as the <code class="highlighter-rouge">ingressDomain</code>.</p>
-
-<h3 id="generate-the-applications-and-deployment-manifests">Generate the applications and deployment manifests</h3>
-
-<p>Now that our JDL is ready, let us scaffold our applications and Kubernetes manifests. Create a new directory and save the above JDL in the directory. Let us name it <strong><em>app-istio.jdl</em></strong> and then run the import-jdl command.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span><span class="nb">mkdir </span>istio-demo <span class="o">&amp;&amp;</span> <span class="nb">cd </span>istio-demo
-    <span class="nv">$ </span>jhipster import-jdl app-istio.jdl
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>This will generate all the applications and install the required NPM dependencies in each of them. Once the applications are generated the deployment manifests will be generated and some useful instruction will be printed to the console.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2776/0*ROg2XrRkHVHA4Xib" alt="Generation output" /><em>Generation output</em></p>
-
-<p>Open the generated code in your favorite IDE/Editor and explore the code.</p>
-
-<h2 id="deploy-to-kubernetes-cluster-using-kubectl">Deploy to Kubernetes cluster using Kubectl</h2>
-
-<p>Now let us build and deploy our applications. Run the <code class="highlighter-rouge">./gradlew bootWar -Pprod jibDockerBuild</code> command in the store, product, invoice, and notification folders to build the docker images. Once the images are built, push them to your docker repo with these commands. Note to change the Docker hub id to your id.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>docker image tag store deepu105/store
-
-    <span class="nv">$ </span>docker push deepu105/store
-
-    <span class="nv">$ </span>docker image tag invoice deepu105/invoice
-
-    <span class="nv">$ </span>docker push deepu105/invoice
-
-    <span class="nv">$ </span>docker image tag notification deepu105/notification
-
-    <span class="nv">$ </span>docker push deepu105/notification
-
-    <span class="nv">$ </span>docker image tag product deepu105/product
-
-    <span class="nv">$ </span>docker push deepu105/product
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Once the images are pushed, navigate into the generated Kubernetes directory and run the provided startup script. (If you are on windows you can run the steps in <strong><em>kubectl-apply.sh</em></strong> manually one by one.)</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span><span class="nb">cd </span>kubernetes
-    <span class="nv">$ </span>./kubectl-apply.sh
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Run <code class="highlighter-rouge">watch kubectl get pods -n jhipster</code> to monitor the status.</p>
-
-<h2 id="deployed-applications">Deployed applications</h2>
-
-<p>Once all the pods are in running status we can explore the deployed applications</p>
-
-<h3 id="application-gateway">Application gateway</h3>
-
-<p>The store gateway application is the entry point for our microservices. Get the URL for the store app by running <code class="highlighter-rouge">echo store.$INGRESS_IP.nip.io</code>, we already stored the <code class="highlighter-rouge">INGRESS_IP</code> to environment variables while creating the Istio setup. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2554/0*Qd6y_H-ObCeorQkg" alt="Store gateway application" /><em>Store gateway application</em></p>
-
-<h3 id="monitoring">Monitoring</h3>
-
-<p>Istio setup includes Grafana and Prometheus configured to collect and show metrics from our containers. Let’s take a look.</p>
-
-<p>By default, only the Ingress gateway is exposed to external IP and hence we will use kubectl port forwarding to set up a secure tunnel to the required services</p>
-
-<p>Let us create a tunnel for Grafana:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl <span class="nt">-n</span> istio-system <span class="se">\</span>
-    port-forward <span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get pod <span class="se">\</span>
-    <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>grafana <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> 3000:3000
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Open <a href="localhost:3000">localhost:3000</a> to view the Grafana dashboard.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/2554/0*zaX0S8relpT4q__T" alt="Grafana dashboard for the Store application" /><em>Grafana dashboard for the Store application</em></p>
-
-<p>Grafana uses the metrics scrapped by Prometheus. We can look at Prometheus directly by creating a tunnel for it and opening <a href="localhost:9090">localhost:9090</a>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl <span class="nt">-n</span> istio-system <span class="se">\</span>
-    port-forward <span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get pod <span class="nt">-l</span> <span class="se">\</span>
-    <span class="nv">app</span><span class="o">=</span>prometheus <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> 9090:9090
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p><img src="https://cdn-images-1.medium.com/max/2554/0*W4obHNne_wQJfAuU" alt="Prometheus dashboard" /><em>Prometheus dashboard</em></p>
-
-<h3 id="observability">Observability</h3>
-
-<p>Istio configures Jaeger for distributed tracing and service graph for service observability. Let us take a look at them.</p>
-
-<p>Create a tunnel for Jaeger and open <a href="localhost:16686">localhost:16686</a></p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl <span class="nt">-n</span> istio-system <span class="se">\</span>
-    port-forward <span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get pod <span class="nt">-l</span> <span class="se">\</span>
-    <span class="nv">app</span><span class="o">=</span>jaeger <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> 16686:16686
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p><img src="https://cdn-images-1.medium.com/max/2554/0*cyhS1_B0LFO54e48" alt="Jaeger tracing dashboard" /><em>Jaeger tracing dashboard</em></p>
-
-<p>You can make some requests in the application and find it in the tracing dashboard by querying for the service. Click on the request to see tracing details:</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/3734/1*X4XtKtIeMapPEyt_nfvftA.png" alt="Tracing for product category listing request" /><em>Tracing for product category listing request</em></p>
-
-<p>Let us now create a tunnel for the service graph and open it in <a href="localhost:8080/force/forcegraph.html">localhost:8080/force/forcegraph.html</a>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>    <span class="nv">$ </span>kubectl <span class="nt">-n</span> istio-system <span class="se">\</span>
-    port-forward <span class="si">$(</span>kubectl <span class="nt">-n</span> istio-system get pod <span class="nt">-l</span> <span class="se">\</span>
-    <span class="nv">app</span><span class="o">=</span>servicegraph <span class="nt">-o</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.items[0].metadata.name}'</span><span class="si">)</span> 8088:8088
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p><img src="https://cdn-images-1.medium.com/max/2554/0*4nQUsagF6TVupK-5" alt="Istio service graph" /><em>Istio service graph</em></p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Istio provides building blocks to build distributed microservices in a more Kubernetes-native way and takes the complexity and responsibility of maintaining those blocks away from you. This means you do not have to worry about maintaining the code or deployments for service discovery, tracing and so on.</p>
-
-<p>Istio documentation says</p>
-<blockquote>
-  <p>Deploying a microservice-based application in an Istio service mesh allows one to externally control service monitoring and tracing, request (version) routing, resiliency testing, security and policy enforcement, etc., in a consistent way across the services, for the application as a whole.</p>
-</blockquote>
-
-<p>Werner Vogels (CTO of AWS) quoted at AWS Re:Invent</p>
-<blockquote>
-  <p>“In the future, all the code you ever write will be business logic.”</p>
-</blockquote>
-
-<p>Istio Service mesh helps with that statement. This lets you worry only about the applications that you are developing and with JHipster that future is truly here and you just need to worry about writing your business logic.</p>
-
-<p>While this is great, it is not a silver bullet. Keep in mind that Istio is fairly new compared to other stable and battle-tested solutions like JHipster Registry (Eureka) or Consul.</p>
-
-<p>Also, another thing to keep in mind is the resource requirements. The same microservices with JHipster Registry or Consul can be deployed to a 2 node cluster with 1 vCPU and 3.75 GB of memory per node in GCP while you need a 4 node cluster with 2 vCPUs and 7.5 GB of memory per node for Istio enabled deployments. The default Kubernetes manifest from Istio doesn’t apply any request limits for resources, and by adding and tuning those, the minimum requirement could be reduced. But still I don’t think you can get it as low as that is needed for the JHipster registry option.</p>
-
-<p>In a real-world use case, the advantages of not having to maintain the complex parts of your infra vs having to pay for more resources might be a decision that has to be taken based on your priorities and goals.</p>
-
-<p>A huge shout out to <a href="https://twitter.com/saturnism">Ray Tsang</a> for helping me figure out an optimal cluster size for this application. Also a huge thank you from myself and the community to both Ray and <a href="https://twitter.com/humourmind">Srinivasa Vasu</a> for adding the Istio support to JHipster.</p>
-
-<p>JHipster provides a great Kubernetes setup to start with which you can further tweak as per your needs and platform. The Istio support will improve further over time, but it’s still a great starting point especially to learn.</p>
-
-<p>To learn more about JHipster and Full stack development, check out my book “<em>Full Stack Development with JHipster</em>” on <a href="https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X">Amazon</a> and <a href="https://www.packtpub.com/application-development/full-stack-development-jhipster">Packt</a>.</p>
-
-<p>There is a great Istio tutorial from Ray Tsang <a href="https://docs.google.com/document/d/1Qo8o5C4UpGwMF7Mg02kLTaU4-xCSfJjLcnIFNveMEEA">here</a>.</p>
+<hr />
 
 <p>If you like JHipster don’t forget to give it a star on <a href="https://github.com/jhipster/generator-jhipster">Github</a>.</p>
 
-<p>If you like this article, please leave likes/comments. I hope to write more about Istio in the near future.</p>
+<p>If you like this article, please leave likes/comments. I hope to write more about Istio soon.</p>
 
 <p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
 
@@ -791,10 +831,6 @@
                     </li>
                     
                     <li>
-                        <a class="smoothscroll" href="/tags#jhipster">#jhipster</a>
-                    </li>
-                    
-                    <li>
                         <a class="smoothscroll" href="/tags#kubernetes">#kubernetes</a>
                     </li>
                     
@@ -809,10 +845,8 @@
             <!-- Prev/Next -->
             <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
             
-            <a class="prev d-block col-md-6" href="/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/"> &laquo; Deploying JHipster Microservices on Azure Kubernetes Service (AKS)</a>
+            <a class="prev d-block col-md-6" href="/make-the-most-out-of-vscode/"> &laquo; My VS Code setup - Making the most out of VS Code</a>
             
-            
-            <a class="next d-block col-md-6 text-lg-right" href="/react-done-right-with-typescript/">React components done right with TypeScript mapped and conditional types &raquo; </a>
             
             <div class="clearfix"></div>
             </div>
@@ -878,7 +912,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
             
             
                 
-                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (4)</a>
+                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#java">java (3)</a>
                 
@@ -889,8 +923,6 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#typescript">typescript (1)</a>
                 
@@ -937,6 +969,8 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
                 
             
             
