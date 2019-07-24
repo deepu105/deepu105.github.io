@@ -92,4 +92,5 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - mediumish-theme-jekyll
+  - mediumish-theme-jekyll/
+  - temp/

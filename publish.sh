@@ -19,7 +19,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Checkout and clean master"
     git checkout master
-    find -mindepth 1 -depth -print0 | grep -vEzZ '(vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf
 
     echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* .
