@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>Functional programming in Java - A primer | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Functional programming in Java - A primer | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="Functional programming in Java - A primer" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Functional programming concepts in Java for beginners." />
+<meta property="og:description" content="Functional programming concepts in Java for beginners." />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-30T00:00:00+05:30" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"Functional programming concepts in Java for beginners.","@type":"BlogPosting","headline":"Functional programming in Java - A primer","dateModified":"2019-07-30T00:00:00+05:30","datePublished":"2019-07-30T00:00:00+05:30","url":"https://deepu.js.org/functional-programming-in-java-for-beginners/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.js.org/functional-programming-in-java-for-beginners/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.packtpub.com/eu/application-development/full-stack-development-jhipster"><i class="fas fa-book"></i> Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Functional programming in Java - A primer&url=https://deepu.js.org//functional-programming-in-java-for-beginners/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.js.org//functional-programming-in-java-for-beginners/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.js.org//functional-programming-in-java-for-beginners/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                        <!-- Post Date -->
+                        <span class="author-description">
+                            <small>
+                                <time class="post-date" datetime="2019-07-30">30 Jul 2019</time>
+                                
+                            </small> |
+                            <small>23 mins read</small>
+                        </span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Functional programming in Java - A primer</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+                
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/wmv0r6f6lkmkjfqx6a7i.png" alt="Functional programming in Java - A primer">
+                
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post series -->
+            
+            <!-- End series -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>There is a lot of hype around functional programming(FP) and a lot of cool kids are doing it but it is not a silver bullet. Like other programming paradigms/styles, functional programming also has its pros and cons and one may prefer one paradigm over the other. If you are a Java developer and wants to venture into functional programming, do not worry, you don’t have to learn functional programming oriented languages like Haskell or Clojure(or even Scala or JavaScript though they are not pure functional programming languages) since Java has you covered and this post is for you.</p>
+
+<p>I’m not gonna dive into all functional programming concepts in detail, instead, I’m gonna focus on things that you can do in Java which are in line with functional programming concepts. I’m also not gonna discuss the pros and cons of functional programming in general.</p>
+
+<hr />
+
+<h2 id="what-is-functional-programming">What is functional programming?</h2>
+
+<p>As per Wikipedia,</p>
+
+<blockquote>
+  <p>Functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.</p>
+</blockquote>
+
+<p>Hence in functional programming, there are two very important rules</p>
+<ul>
+  <li><strong>No Data mutations</strong>: It means a data object should not be changed after it is created.</li>
+  <li><strong>No implicit state</strong>: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit</li>
+</ul>
+
+<p>This means:</p>
+<ul>
+  <li><strong>No side effects</strong>: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.</li>
+  <li><strong>Pure functions only</strong>: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on global state. Such functions always produce the same result for the same arguments.</li>
+</ul>
+
+<p>Apart from these there are functional programming concepts below that can be applied in Java, we will touch upon these further down.</p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Higher-order_function">Higher-order-functions</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">Closures</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Currying">Currying</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Evaluation_strategy">Lazy evaluations</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Referential_transparency">Referential transparency</a></li>
+</ul>
+
+<p>Using functional programming doesn’t mean its all or nothing, you can always use functional programming concepts to complement Object-oriented concepts, especially in Java. The benefits of functional programming can be utilized whenever possible regardless of the paradigm or language you use. And that is exactly what we are going to see.</p>
+
+<hr />
+
+<h2 id="functional-programming-in-java">Functional programming in Java</h2>
+
+<p>So let us see how we can apply some of the functional programming concepts above in Java. We will be using Java 11 as it is the LTS version currently.</p>
+
+<h3 id="first-class-and-higher-order-functions">First-class and higher-order functions</h3>
+
+<p>First-class functions(function as a first-class citizen) means you can assign functions to variables, pass a function as an argument to another function or return a function from another. Unfortunately, Java doesn’t support this and hence makes concepts like closures, currying and higher-order-functions less convenient to write.</p>
+
+<p>The closest to first-class functions in Java is <a href="https://www.geeksforgeeks.org/lambda-expressions-java-8/">Lambda expressions</a>. There are also some built-in functional interfaces like <code class="highlighter-rouge">Function</code>, <code class="highlighter-rouge">Consumer</code>, <code class="highlighter-rouge">Predicate</code>, <code class="highlighter-rouge">Supplier</code> and so on under the <code class="highlighter-rouge">java.util.function</code> package which can be used for functional programming.</p>
+
+<p>A function can be considered as a higher-order-function only if it takes one or more functions as parameters or if it returns another function as a result. The closest to higher-order-functions we can get in Java is using Lambda expressions and built-in Functional interfaces.</p>
+
+<p>This is not the nicest looking way of doing higher-order-functions, but this is how it is in Java and its not that bad IMO.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HocSample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">var</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Orange"</span><span class="o">,</span> <span class="s">"Apple"</span><span class="o">,</span> <span class="s">"Banana"</span><span class="o">,</span> <span class="s">"Grape"</span><span class="o">);</span>
+
+        <span class="c1">// we are passing an array and an anonymous inner class instance of FnFactory as arguments to mapForEach method.</span>
+        <span class="kt">var</span> <span class="n">out</span> <span class="o">=</span> <span class="n">mapForEach</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="k">new</span> <span class="nc">FnFactory</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">execute</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">it</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">out</span><span class="o">);</span> <span class="c1">// [6, 5, 6, 5]</span>
+    <span class="o">}</span>
+
+    <span class="c1">// The method takes an array and an instance of FnFactory as arguments</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">S</span><span class="o">&gt;</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">S</span><span class="o">&gt;</span> <span class="nf">mapForEach</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">arr</span><span class="o">,</span> <span class="nc">FnFactory</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">S</span><span class="o">&gt;</span> <span class="n">fn</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">var</span> <span class="n">newArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">S</span><span class="o">&gt;();</span>
+        <span class="c1">// We are executing the method from the FnFactory instance</span>
+        <span class="n">arr</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">newArray</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">fn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t</span><span class="o">)));</span>
+        <span class="k">return</span> <span class="n">newArray</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@FunctionalInterface</span> <span class="c1">// this doesn't do anything it is just informative.</span>
+    <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">FnFactory</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">S</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="c1">// The interface defines the contract for the anonymous class</span>
+        <span class="no">S</span> <span class="nf">execute</span><span class="o">(</span><span class="no">T</span> <span class="n">it</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Fortunately, can actually simplify the above example further using the built-in <code class="highlighter-rouge">Function</code> interface and using the lambda expression syntax.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HocSample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">var</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Orange"</span><span class="o">,</span> <span class="s">"Apple"</span><span class="o">,</span> <span class="s">"Banana"</span><span class="o">,</span> <span class="s">"Grape"</span><span class="o">);</span>
+        <span class="c1">// we are passing the array and a lambda expression as arguments to mapForEach method.</span>
+        <span class="kt">var</span> <span class="n">out</span> <span class="o">=</span> <span class="n">mapForEach</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">it</span> <span class="o">-&gt;</span> <span class="n">it</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> 
+        <span class="c1">// This can be further simplified to "mapForEach(list, String::length);", I'm writing the expanded version for readability</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">out</span><span class="o">);</span> <span class="c1">// [6, 5, 6, 5]</span>
+    <span class="o">}</span>
+
+    <span class="c1">// The method takes an array and an instance of Function as arguments (we have replaced the custom interface with the built-in one)</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">S</span><span class="o">&gt;</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">S</span><span class="o">&gt;</span> <span class="nf">mapForEach</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">arr</span><span class="o">,</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">S</span><span class="o">&gt;</span> <span class="n">fn</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">var</span> <span class="n">newArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">S</span><span class="o">&gt;();</span>
+        <span class="c1">// We are executing the method from the Function instance</span>
+        <span class="n">arr</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">newArray</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">fn</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">t</span><span class="o">)));</span>
+        <span class="k">return</span> <span class="n">newArray</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Using these concepts along with lambda expressions we can write closures and currying like below</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClosureSample</span> <span class="o">{</span>
+    <span class="c1">// this is a higher-order-function that returns an instance of Function interface</span>
+    <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">add</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// this is a closure, i.e, a variable holding an anonymous inner class instance of the Function interface</span>
+        <span class="c1">// which uses variables from the outer scope</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">partial</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">apply</span><span class="o">(</span><span class="nc">Integer</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// variable x is obtained from the outer scope of this method which is declared as final</span>
+                <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+        <span class="c1">// The closure function instance is returned here</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ClosureSample</span> <span class="n">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClosureSample</span><span class="o">();</span>
+
+        <span class="c1">// we are currying the add method to create more variations</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add10</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add20</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add30</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add10</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span> <span class="c1">// 15</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add20</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span> <span class="c1">// 25</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add30</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span> <span class="c1">// 35</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can simplify this further with lambda expressions like below</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClosureSample</span> <span class="o">{</span>
+    <span class="c1">// this is a higher-order-function that returns an instance of Function interface</span>
+    <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">add</span><span class="o">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// The lambda expression is returned here as closure</span>
+        <span class="c1">// variable x is obtained from the outer scope of this method which is declared as final</span>
+        <span class="k">return</span> <span class="n">y</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ClosureSample</span> <span class="n">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClosureSample</span><span class="o">();</span>
+
+        <span class="c1">// we are currying the add method to create more variations</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add10</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add20</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">20</span><span class="o">);</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add30</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add10</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add20</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">add30</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>There are also many built-in higher-order-functions in Java for example here is the sort method from <code class="highlighter-rouge">java.util.Collections</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Apple"</span><span class="o">,</span> <span class="s">"Orange"</span><span class="o">,</span> <span class="s">"Banana"</span><span class="o">,</span> <span class="s">"Grape"</span><span class="o">);</span>
+
+<span class="c1">// This can be simplified as "Collections.sort(list, Comparator.naturalOrder());", I'm writing the expanded version for readability</span>
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="o">(</span><span class="nc">String</span> <span class="n">a</span><span class="o">,</span> <span class="nc">String</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+<span class="o">});</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span> <span class="c1">// [Apple, Banana, Grape, Orange]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The Java stream API also provides many interesting higher-order-functions like forEach, map and so on.</p>
+
+<h3 id="pure-functions">Pure functions</h3>
+
+<p>As we saw already a pure function should return values only based on the arguments passed and should not affect or depend on global state. It is possible to do this in Java except for some cases when there are checked exceptions involved.</p>
+
+<p>This is quite simple, take the below this is a pure function. It will always return the same output for the given input and its behavior is highly predictable. We can safely cache the method if needed.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If we add an extra line in this function, the behavior becomes unpredictable as it now has a side effect that affects an external state.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">static</span> <span class="nc">Map</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;();</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">sum</span><span class="o">(</span><span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">var</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="s">"+"</span> <span class="o">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So try to keep your functions pure and simple.</p>
+
+<h3 id="recursion">Recursion</h3>
+
+<p>Functional programming favors recursion over looping. In Java, this can be achieved either by using the stream API or by writing recursive functions. Let us see an example for calculating the factorial of a number.</p>
+
+<p>I also ran a benchmark on these using <a href="http://tutorials.jenkov.com/java-performance/jmh.html">JMH</a> and mentioned the nanoseconds/operation below</p>
+
+<p>In traditional iterative approach:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialSample</span> <span class="o">{</span>
+    <span class="c1">// benchmark 9.645 ns/op</span>
+    <span class="kd">static</span> <span class="kt">long</span> <span class="nf">factorial</span><span class="o">(</span><span class="kt">long</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(;</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">;</span> <span class="n">num</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">*=</span> <span class="n">num</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">factorial</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span> <span class="c1">// 2432902008176640000</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The same can be done using recursion as below which is favored in functional programming.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialSample</span> <span class="o">{</span>
+    <span class="c1">// benchmark 19.567 ns/op</span>
+    <span class="kd">static</span> <span class="kt">long</span> <span class="nf">factorialRec</span><span class="o">(</span><span class="kt">long</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">num</span> <span class="o">*</span> <span class="n">factorialRec</span><span class="o">(</span><span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">factorialRec</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span> <span class="c1">// 2432902008176640000</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The downside of the recursive approach is that it will be slower compared to an iterative approach most of the times(The advantage we are aiming for is code simplicity and readability) and might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame is not saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. Java compiler, unfortunately, does not do this optimization :(</p>
+
+<p>Now using tail recursion the same function can be written as below, but Java doesn’t optimize this, though there are <a href="https://blog.knoldus.com/tail-recursion-in-java-8/">workarounds</a>, still it performed better in benchmarks.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialSample</span> <span class="o">{</span>
+    <span class="c1">// benchmark 16.701 ns/op</span>
+    <span class="kd">static</span> <span class="kt">long</span> <span class="nf">factorialTailRec</span><span class="o">(</span><span class="kt">long</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">factorial</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">num</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">long</span> <span class="nf">factorial</span><span class="o">(</span><span class="kt">long</span> <span class="n">accumulator</span><span class="o">,</span> <span class="kt">long</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">val</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="n">accumulator</span> <span class="o">:</span> <span class="n">factorial</span><span class="o">(</span><span class="n">accumulator</span> <span class="o">*</span> <span class="n">val</span><span class="o">,</span> <span class="n">val</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">factorialTailRec</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span> <span class="c1">// 2432902008176640000</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can also use the Java stream library for recursion but its slower than normal recursion at the moment.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactorialSample</span> <span class="o">{</span>
+    <span class="c1">// benchmark 59.565 ns/op</span>
+    <span class="kd">static</span> <span class="kt">long</span> <span class="nf">factorialStream</span><span class="o">(</span><span class="kt">long</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">LongStream</span><span class="o">.</span><span class="na">rangeClosed</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">num</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">n2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">factorialStream</span><span class="o">(</span><span class="mi">20</span><span class="o">));</span> <span class="c1">// 2432902008176640000</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Consider using stream API or recursion when writing Java code for readability and immutability, but if performance is critical or if the number of iterations will be huge use standard loops.</p>
+
+<h3 id="lazy-evaluation">Lazy evaluation</h3>
+
+<p>Lazy evaluation or non-strict evaluation is the process of delaying evaluation of an expression until it is needed. In general, Java does strict evaluation but for operands like <code class="highlighter-rouge">&amp;&amp;</code>, <code class="highlighter-rouge">||</code> and <code class="highlighter-rouge">?:</code> it does a lazy evaluation. We can utilize this to do lazy evaluations when writing java code.</p>
+
+<p>Take this example where Java eagerly evaluates everything.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EagerSample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">addOrMultiply</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="mi">4</span><span class="o">),</span> <span class="n">multiply</span><span class="o">(</span><span class="mi">4</span><span class="o">)));</span> <span class="c1">// 8</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">addOrMultiply</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">add</span><span class="o">(</span><span class="mi">4</span><span class="o">),</span> <span class="n">multiply</span><span class="o">(</span><span class="mi">4</span><span class="o">)));</span> <span class="c1">// 16</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"executing add"</span><span class="o">);</span> <span class="c1">// this is printed since the functions are evaluated first</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">multiply</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"executing multiply"</span><span class="o">);</span> <span class="c1">// this is printed since the functions are evaluated first</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">addOrMultiply</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">add</span><span class="o">,</span> <span class="kt">int</span> <span class="n">onAdd</span><span class="o">,</span> <span class="kt">int</span> <span class="n">onMultiply</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">add</span><span class="o">)</span> <span class="o">?</span> <span class="n">onAdd</span> <span class="o">:</span> <span class="n">onMultiply</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This will produce the below output and we can see that both functions are executed always</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>executing add
+executing multiply
+8
+executing add
+executing multiply
+16
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can use lambda expressions and higher-order-functions to rewrite this into a lazily evaluated version</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LazySample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This is a lambda expression behaving as a closure</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">add</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"executing add"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">t</span> <span class="o">+</span> <span class="n">t</span><span class="o">;</span>
+        <span class="o">};</span>
+        <span class="c1">// This is a lambda expression behaving as a closure</span>
+        <span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">multiply</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"executing multiply"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="o">;</span>
+        <span class="o">};</span>
+        <span class="c1">// Lambda closures are passed instead of plain functions</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">addOrMultiply</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">add</span><span class="o">,</span> <span class="n">multiply</span><span class="o">,</span> <span class="mi">4</span><span class="o">));</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">addOrMultiply</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">add</span><span class="o">,</span> <span class="n">multiply</span><span class="o">,</span> <span class="mi">4</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="c1">// This is a higher-order-function</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="no">R</span> <span class="nf">addOrMultiply</span><span class="o">(</span>
+            <span class="kt">boolean</span> <span class="n">add</span><span class="o">,</span> <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="n">onAdd</span><span class="o">,</span>
+            <span class="nc">Function</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="n">onMultiply</span><span class="o">,</span> <span class="no">T</span> <span class="n">t</span>
+    <span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Java evaluates expressions on ?: lazily hence only the required method is executed</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">add</span> <span class="o">?</span> <span class="n">onAdd</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">onMultiply</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">t</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This outputs the below and we can see that only required functions were executed</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>executing add
+8
+executing multiply
+64
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="type-system">Type system</h3>
+
+<p>Java has a strong type system and with the introduction of the <code class="highlighter-rouge">var</code> keyword it now also has pretty decent type inference. The only thing missing compared to other functional programming languages are case classes. There are proposals for <a href="http://cr.openjdk.java.net/~jrose/values/values-0.html">value classes</a> and case classes for future Java versions. Let’s hope they make it.</p>
+
+<h3 id="referential-transparency">Referential transparency</h3>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p>Functional programs do not have assignment statements, that is, the value of a variable in a functional program never changes once defined. This eliminates any chances of side effects because any variable can be replaced with its actual value at any point of execution. So, functional programs are referentially transparent.</p>
+</blockquote>
+
+<p>Unfortunately, there are not many ways to limit data mutation in Java, however by using pure functions and by explicitly avoiding data mutations and reassignment using other concepts we saw earlier this can be achieved. For variables, we can use the <a href="https://www.geeksforgeeks.org/final-keyword-java/"><code class="highlighter-rouge">final</code></a> keyword which is a non-access modifier to avoid mutations by reassignments.</p>
+
+<p>For example, the below will produce an error at compilation</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">final</span> <span class="kt">var</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Apple"</span><span class="o">,</span> <span class="s">"Orange"</span><span class="o">,</span> <span class="s">"Banana"</span><span class="o">,</span> <span class="s">"Grape"</span><span class="o">);</span>
+
+<span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Earth"</span><span class="o">,</span> <span class="s">"Saturn"</span><span class="o">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>But this will not help when variables are holding references to other objects, for example, the below mutation will work irrespective of the final keyword.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">final</span> <span class="kt">var</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Test"</span><span class="o">);</span>
+<span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Test 2"</span><span class="o">);</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">final</code> keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective <code class="highlighter-rouge">final</code> keyword is useful only for constants and to catch reassignments.</p>
+
+<h3 id="data-structures"><a href="https://en.wikipedia.org/wiki/Purely_functional_data_structure">Data structures</a></h3>
+
+<p>When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues. 
+Hence maps are better than arrays or hash sets in functional programming as data stores.</p>
+
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything.</p>
+
+<p>This video from <a href="https://twitter.com/venkat_s">Venkat Subramaniam</a> is a great resource to dive deep into functional programming in Java</p>
+
+<p>
+            <div class="embed-video-container">
+                <iframe width="710" height="399" src="http://www.youtube.com/embed/15X0qFtBqiQ " allowfullscreen=""></iframe>
+            </div>
+        </p>
+
+<hr />
+
+<p>I hope you find this useful. If you have any question or if you think I missed something please add a comment.</p>
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#beginners">#beginners</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#functional">#functional</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#java">#java</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#programming">#programming</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/jhipster-microservices-with-istio-service-mesh-on-kubernetes/"> &laquo; How to set up Java microservices with Istio service mesh on Kubernetes</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java">java (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript">typescript (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#oh-my-zsh">oh-my-zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go">go (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages">languages (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#functional">functional (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Deepu K Sasidharan
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> |
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+</body>
+</html>
