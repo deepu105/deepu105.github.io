@@ -3,7 +3,7 @@ title: Functional programming in Java - A primer
 published: true
 description: Functional programming concepts in Java for beginners.
 tags: [java, functional, beginners, programming]
-cover_image: https://thepracticaldev.s3.amazonaws.com/i/wmv0r6f6lkmkjfqx6a7i.png
+cover_image: https://thepracticaldev.s3.amazonaws.com/i/zf8mvgix8icaz64mgj89.png
 canonical_url: https://deepu.js.org/functional-programming-in-java-for-beginners/
 ---
 
