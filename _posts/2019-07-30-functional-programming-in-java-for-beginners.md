@@ -1,5 +1,5 @@
 ---
-title: Functional programming in Java - A primer
+title: 7 Functional programming techniques in Java - A primer
 published: true
 description: Functional programming concepts in Java for beginners.
 tags: [java, functional, beginners, programming]
