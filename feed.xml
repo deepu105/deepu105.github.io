@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 31 Jul 2019 09:33:24 +0530</pubDate>
-    <lastBuildDate>Wed, 31 Jul 2019 09:33:24 +0530</lastBuildDate>
+    <pubDate>Wed, 31 Jul 2019 23:56:51 +0530</pubDate>
+    <lastBuildDate>Wed, 31 Jul 2019 23:56:51 +0530</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -631,7 +631,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;
             &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;http://www.youtube.com/embed/15X0qFtBqiQ &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;https://www.youtube.com/embed/15X0qFtBqiQ &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
             &lt;/div&gt;
         &lt;/p&gt;
 
@@ -1154,7 +1154,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;p&gt;
             &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;http://www.youtube.com/embed/NPToZd0PxbI &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;https://www.youtube.com/embed/NPToZd0PxbI &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
             &lt;/div&gt;
         &lt;/p&gt;
 
@@ -3257,7 +3257,7 @@ So after a week of moving to the Dev community below are my stats and its incred
 
 &lt;p&gt;
             &lt;div class=&quot;embed-video-container&quot;&gt;
-                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;http://www.youtube.com/embed/SBwGH4kbkms &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+                &lt;iframe width=&quot;710&quot; height=&quot;399&quot; src=&quot;https://www.youtube.com/embed/SBwGH4kbkms &quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
             &lt;/div&gt;
         &lt;/p&gt;
 
