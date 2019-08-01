@@ -20,7 +20,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-08-01T00:00:00+05:30" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"Static Site Generators comparison - How I set up my own blog with Jekyll &amp; custom Tags to cross-post with Dev.to","@type":"BlogPosting","headline":"Static Site Generators rundown - How I set up my own blog with Jekyll","dateModified":"2019-08-01T00:00:00+05:30","datePublished":"2019-08-01T00:00:00+05:30","url":"https://deepu.js.org/setting-up-a-blog-with-jekyll/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.js.org/setting-up-a-blog-with-jekyll/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"Static Site Generators comparison - How I set up my own blog with Jekyll &amp; custom Tags to cross-post with Dev.to","@type":"BlogPosting","headline":"Static Site Generators rundown - How I set up my own blog with Jekyll","dateModified":"2019-08-01T00:00:00+05:30","datePublished":"2019-08-01T00:00:00+05:30","url":"https://deepu.js.org/static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.js.org/static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -207,7 +207,7 @@
                                 <time class="post-date" datetime="2019-08-01">01 Aug 2019</time>
                                 
                             </small> |
-                            <small>10 mins read</small>
+                            <small>11 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -406,6 +406,52 @@
 <p>In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a <a href="https://github.com/thepracticaldev/dev.to/issues/3491">ticket</a> asking for it as well.</p>
 
 <p>So decided to write my own Liquid tags in Ruby. I reused available OSS Liquid tags and customized them to work like the Dev.to ones in syntax and feature. I ended up creating the <code class="highlighter-rouge">codesandbox</code>, <code class="highlighter-rouge">twitter</code>, <code class="highlighter-rouge">gist</code>, <code class="highlighter-rouge">link</code>, <code class="highlighter-rouge">speakerdeck</code> and <code class="highlighter-rouge">youtube</code> tags. You can find them <a href="https://github.com/deepu105/deepu105.github.io/tree/site_src/_plugins">here</a>. Probably will add more as I use them. This is not scalable and I would love to see the Dev.to tags published as Ruby gems.</p>
+
+<p>For example, here is simple stub for the <code class="highlighter-rouge">youtube</code> tag.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="k">module</span> <span class="nn">Jekyll</span>
+     <span class="c1"># A simple stub for the Dev.to youtube tag</span>
+    <span class="k">class</span> <span class="nc">YoutubeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+
+      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+        <span class="k">super</span>
+        <span class="vi">@id</span> <span class="o">=</span> <span class="nb">id</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="sx">%(&lt;p&gt;
+            &lt;div class="embed-video-container"&gt;
+                &lt;iframe width="710" height="399" src="https://www.youtube.com/embed/#{@id}" allowfullscreen&gt;&lt;/iframe&gt;
+            &lt;/div&gt;
+        &lt;/p&gt;)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'youtube'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">YoutubeTag</span><span class="p">)</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="publishing-to-github">Publishing to GitHub</h3>
 
