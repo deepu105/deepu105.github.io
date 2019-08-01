@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>Static Site Generators rundown - How I set up my own blog with Jekyll | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Static Site Generators rundown - How I set up my own blog with Jekyll | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="Static Site Generators rundown - How I set up my own blog with Jekyll" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Static Site Generators comparison - How I set up my own blog with Jekyll &amp; custom Tags to cross-post with Dev.to" />
+<meta property="og:description" content="Static Site Generators comparison - How I set up my own blog with Jekyll &amp; custom Tags to cross-post with Dev.to" />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-01T00:00:00+05:30" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"Static Site Generators comparison - How I set up my own blog with Jekyll &amp; custom Tags to cross-post with Dev.to","@type":"BlogPosting","headline":"Static Site Generators rundown - How I set up my own blog with Jekyll","dateModified":"2019-08-01T00:00:00+05:30","datePublished":"2019-08-01T00:00:00+05:30","url":"https://deepu.js.org/setting-up-a-blog-with-jekyll/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.js.org/setting-up-a-blog-with-jekyll/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.packtpub.com/eu/application-development/full-stack-development-jhipster"><i class="fas fa-book"></i> Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Static Site Generators rundown - How I set up my own blog with Jekyll&url=https://deepu.js.org//static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.js.org//static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.js.org//static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                        <!-- Post Date -->
+                        <span class="author-description">
+                            <small>
+                                <time class="post-date" datetime="2019-08-01">01 Aug 2019</time>
+                                
+                            </small> |
+                            <small>10 mins read</small>
+                        </span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Static Site Generators rundown - How I set up my own blog with Jekyll</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+                
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/qctnwfe63xb8xxp9e6pu.jpg" alt="Static Site Generators rundown - How I set up my own blog with Jekyll">
+                
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post series -->
+            
+            <!-- End series -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>Last month I decided to move my blogs from <a href="https://medium.com/@deepu105">Medium</a> to <a href="https://dev.to/deepu105">Dev.to</a>, I have detailed the reasons in the below post.</p>
+
+<p><a href="https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki ">https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki </a></p>
+
+<p>A lot of people suggested in the comments to set up my own blog and cross-post to Dev.to instead of relying only on one platform and I completely agree with them. I was procrastinating setting up my own blog for quite some time now. Finally, I decided to do it and set up my own blog at <a href="https://deepu.js.org/blogs/">https://deepu.js.org/blogs/</a> in the process I also updated my personal website to use the same platform.</p>
+
+<p>So when I decided to do this finally I had to choose a blogging platform and there were few requirements I was keen about which influenced my decision.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<ol>
+  <li>The platform should support writing posts using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> with code syntax highlights</li>
+  <li>I love the Dev community and hence wanted to cross-post everything to <a href="https://dev.to/deepu105">Dev.to</a> as well without having to make any changes to the post. Means I would author once and publish to both my blog and Dev. This means some constraints/requirements
+    <ol>
+      <li>It should support customizable <a href="https://jekyllrb.com/docs/front-matter/">front matter</a> so that I can align it with Dev</li>
+      <li>It should support the <a href="https://dev.to/new#liquidtags">custom liquid tags</a> used by Dev or I should be able to easily add those</li>
+    </ol>
+  </li>
+  <li>I should be able to have custom pages for my personal website</li>
+  <li>Should be open source and have a good stable community</li>
+  <li>Should be theme-able, have plugins for SEO, search and so on</li>
+  <li>Should be statically generated and reasonably fast</li>
+  <li>Should be able to host using GitHub pages - This was an optional requirement</li>
+</ol>
+
+<h2 id="the-options-rundown">The options rundown</h2>
+
+<p>With these in mind, I started evaluating some of the popular options below.</p>
+
+<h3 id="jekyll"><a href="https://jekyllrb.com/">Jekyll</a></h3>
+
+<p><strong>Pros</strong>:</p>
+<ul>
+  <li>I have experience with Jekyll since I built the new <a href="https://www.jhipster.tech/">JHipster website</a> using it</li>
+  <li>Supports Markdown, Liquid tags and Front Matter</li>
+  <li>Supports custom pages, themes, plugins and is statically generated</li>
+  <li>Is OSS and has a vibrant community</li>
+  <li>Can be hosted on GitHub</li>
+</ul>
+
+<p><strong>Cons</strong>:</p>
+<ul>
+  <li>I would have to build or find replacements for the custom Liquid tags used by Dev</li>
+  <li>I don’t have much experience with Ruby and I’m not very familiar with the Ruby ecosystem</li>
+  <li>Not the fastest among the options. Becomes slower as site size increases</li>
+</ul>
+
+<h3 id="hugo"><a href="https://gohugo.io/">Hugo</a></h3>
+
+<p><strong>Pros</strong>:</p>
+<ul>
+  <li>Is very fast</li>
+  <li>I have extensive experience with Go and Go templates which would be helpful</li>
+  <li>Supports Markdown and Front Matter</li>
+  <li>Supports custom pages, themes and is statically generated</li>
+  <li>Is OSS and has a vibrant community</li>
+  <li>Can be hosted on GitHub</li>
+</ul>
+
+<p><strong>Cons</strong>:</p>
+<ul>
+  <li>Doesn’t support Liquid tags</li>
+  <li>Doesn’t have plugins. The built-in options are enough for my requirements at the moment though</li>
+</ul>
+
+<h3 id="vuepress"><a href="https://vuepress.vuejs.org/">VuePress</a></h3>
+
+<p><strong>Pros</strong>:</p>
+<ul>
+  <li>Built with VueJS and me have good experience with JavaScript and quite familiar with Vue</li>
+  <li>Supports Markdown and Front Matter</li>
+  <li>Supports custom pages, themes, SEO, search and is statically generated</li>
+  <li>Is OSS and has a vibrant community</li>
+  <li>Can be hosted on GitHub</li>
+</ul>
+
+<p><strong>Cons</strong>:</p>
+<ul>
+  <li>Doesn’t support Liquid tags</li>
+  <li>Doesn’t have plugins. The built-in options are enough for my requirements at the moment though</li>
+  <li>Not geared towards blogging, but it’s possible to do it easily with some hacking</li>
+</ul>
+
+<h3 id="gatsby"><a href="https://www.gatsbyjs.org">Gatsby</a></h3>
+
+<p>Pros:</p>
+<ul>
+  <li>Built with React and I have good experience with React</li>
+  <li>Supports Markdown and Front Matter</li>
+  <li>Supports custom pages, themes, plugins and is statically generated</li>
+  <li>Is OSS and has a vibrant community</li>
+  <li>Can be hosted on GitHub</li>
+</ul>
+
+<p><strong>Cons</strong>:</p>
+<ul>
+  <li>Doesn’t support Liquid tags</li>
+</ul>
+
+<h3 id="wordpress"><a href="https://wordpress.org/">WordPress</a></h3>
+
+<p><strong>Pros</strong>:</p>
+<ul>
+  <li>Have used it in the past and is a battle-tested solution</li>
+  <li>Supports Markdown using plugins</li>
+  <li>Supports custom pages, themes, plugins and can be statically generated using plugins</li>
+  <li>Is OSS and has a vibrant community</li>
+  <li>Can be hosted on GitHub with some workarounds</li>
+</ul>
+
+<p><strong>Cons</strong>:</p>
+<ul>
+  <li>Doesn’t support Front Matter and Liquid tags</li>
+  <li>Since most of my core requirements can only be achieved using plugins and workarounds it feels too clumsy</li>
+</ul>
+
+<p>Though I personally liked Hugo because of its speed, based on the above the most logical choice for me was <strong>Jekyll</strong>.</p>
+
+<h2 id="building-a-personal-website-and-blog-with-jekyll">Building a personal website and blog with Jekyll</h2>
+
+<h3 id="getting-started">Getting started</h3>
+
+<p>Setting up Jekyll is super easy, I followed the official guide and had a site up and running in minutes. The steps in order were as below</p>
+
+<ol>
+  <li>Install a full <a href="https://jekyllrb.com/docs/installation/">Ruby development environment</a></li>
+  <li>Install Jekyll and bundler gems for my user - <code class="highlighter-rouge">gem install jekyll bundler --user-install</code></li>
+  <li>Create a new site - <code class="highlighter-rouge">jekyll new DeepuKSasidharan --skip-bundle</code>, skipped the bundle install as I want to install to a vendor folder</li>
+  <li>Cd into the folder <code class="highlighter-rouge">DeepuKSasidharan</code> and install gems to a vendor folder - <code class="highlighter-rouge">bundle install --path vendor/bundle --full-index</code></li>
+  <li>Start server - <code class="highlighter-rouge">bundle exec jekyll serve</code> and go to <a href="http://localhost:4000">http://localhost:4000</a></li>
+</ol>
+
+<h3 id="using-a-theme">Using a Theme</h3>
+
+<p>Up next was setting up a custom theme, since I really like the minimal design of Medium, I decided to use <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish Jekyll Theme </a> so I did the below steps to switch to this. Steps 3-5 above can be skipped and instead step 2 from the below can be done directly as well.</p>
+
+<ol>
+  <li>Delete the folder <code class="highlighter-rouge">DeepuKSasidharan</code> we created above</li>
+  <li>Clone the theme to this folder - <code class="highlighter-rouge">git clone https://github.com/wowthemesnet/mediumish-theme-jekyll.git DeepuKSasidharan</code></li>
+  <li>Cd into the folder <code class="highlighter-rouge">DeepuKSasidharan</code> and install gems to a vendor folder - <code class="highlighter-rouge">bundle install --path vendor/bundle --full-index</code></li>
+  <li>Customize the <code class="highlighter-rouge">_config.yaml</code> file with my own user details, Google Analytics, Disqus ID and so on
+    <ol>
+      <li>I had to update the <code class="highlighter-rouge">exclude</code> section to add <code class="highlighter-rouge">vendor/</code> to it and to <code class="highlighter-rouge">.gitignore</code> as well</li>
+      <li>Updated the <code class="highlighter-rouge">jekyll-paginate</code> plugin to <code class="highlighter-rouge">jekyll-paginate-v2</code> in the <code class="highlighter-rouge">plugins</code> section</li>
+      <li>Commented out the <code class="highlighter-rouge">baseurl</code> section</li>
+    </ol>
+  </li>
+  <li>Start server - <code class="highlighter-rouge">bundle exec jekyll serve</code> and go to <a href="http://localhost:4000">http://localhost:4000</a></li>
+</ol>
+
+<h3 id="customizations">Customizations</h3>
+
+<p>So now I had a good looking website with an about page and blog up and running. I customized the look and feel a bit and <a href="https://github.com/deepu105/deepu105.github.io/commit/9c6cb31f9b0c5643f350f3d9e685f37e3a3eed6d">changed</a> the default page from <strong>blogs</strong> to <strong>about</strong>. You can check the source code at <a href="https://github.com/deepu105/deepu105.github.io">deepu105/deepu105.github.io</a></p>
+
+<p>Now the next challenge was to make sure I can author once and post to both my blog and Dev.to, this means I have to make sure the front matter supported by Dev.to also works on my blog and any custom Liquid tags from Dev I use in the blog needs to work on my site as well.</p>
+
+<p>The first part was easy, I just had to customize my sites includes and layouts to use <code class="highlighter-rouge">cover_image</code> instead of <code class="highlighter-rouge">image</code> and use the <code class="highlighter-rouge">tag: []</code> syntax for tags.</p>
+
+<p>I also added support for Dev.to like <a href="https://github.com/deepu105/deepu105.github.io/commit/1afe488da43e8588b2b8c02648229a08f8e93e0e">series</a> and <a href="https://github.com/deepu105/deepu105.github.io/commit/4e06234c30b61569b0e859d0136f92437eca49c4">read time</a> with a custom ruby plugin.</p>
+
+<h3 id="adding-custom-liquid-tags">Adding custom liquid tags</h3>
+
+<p>In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a <a href="https://github.com/thepracticaldev/dev.to/issues/3491">ticket</a> asking for it as well.</p>
+
+<p>So decided to write my own Liquid tags in Ruby. I reused available OSS Liquid tags and customized them to work like the Dev.to ones in syntax and feature. I ended up creating the <code class="highlighter-rouge">codesandbox</code>, <code class="highlighter-rouge">twitter</code>, <code class="highlighter-rouge">gist</code>, <code class="highlighter-rouge">link</code>, <code class="highlighter-rouge">speakerdeck</code> and <code class="highlighter-rouge">youtube</code> tags. You can find them <a href="https://github.com/deepu105/deepu105.github.io/tree/site_src/_plugins">here</a>. Probably will add more as I use them. This is not scalable and I would love to see the Dev.to tags published as Ruby gems.</p>
+
+<h3 id="publishing-to-github">Publishing to GitHub</h3>
+
+<p>Now that I have a site up and running with markdown posts that work in both my blog and Dev.to without having to make any adjustments, I decided to publish this to my Github accounts Github pages.</p>
+
+<p>But there was an issue here. Github doesn’t allow running any custom Ruby code on GitHub pages, so I can’t just push to GitHub and get the site built and published so I decided to write a simple script to do the site generation on my machine from the source branch and push it to the master branch on GitHub.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nb">rm</span> <span class="nt">-rf</span> _site
+
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="si">$(</span>git status <span class="nt">--porcelain</span><span class="si">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"&gt;&gt;&gt; Working directory clean"</span>
+    <span class="nv">TMP_LOC</span><span class="o">=</span>/tmp/deepu.github.io
+
+    /bin/rm <span class="nt">-rf</span> _site
+    /bin/rm <span class="nt">-rf</span> <span class="nv">$TMP_LOC</span>
+
+    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Building site"</span>
+    bundle update listen
+    bundle <span class="nb">exec </span>jekyll build
+
+    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Move site to temp folder"</span>
+    <span class="nb">mkdir</span> <span class="nt">--parents</span> <span class="nv">$TMP_LOC</span>
+    <span class="nb">mv </span>_site/<span class="k">*</span> <span class="nv">$TMP_LOC</span>
+
+    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Checkout and clean master"</span>
+    git checkout master
+    find <span class="nt">-mindepth</span> 1 <span class="nt">-depth</span> <span class="nt">-print0</span> | <span class="nb">grep</span> <span class="nt">-vEzZ</span> <span class="s1">'(temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)'</span> | xargs <span class="nt">-0</span> <span class="nb">rm</span> <span class="nt">-rvf</span>
+
+    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Move site form temp &amp; publish to GitHub"</span>
+    <span class="nb">mv</span> <span class="nv">$TMP_LOC</span>/<span class="k">*</span> <span class="nb">.</span>
+    <span class="nv">now</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+    git add <span class="nt">--all</span>
+    git commit <span class="nt">-am</span> <span class="s2">"Updated site on </span><span class="nv">$now</span><span class="s2">"</span>
+    git push origin master <span class="nt">--force</span>
+
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$now</span><span class="s2">: Published changes to GitHub"</span>
+
+    git checkout site_src
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"Working directory is not clean. Commit changes!"</span>
+    <span class="nb">exit
+</span><span class="k">fi</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="my-current-workflow">My current workflow</h2>
+
+<p>So now that I have things in place, I author posts as markdown with a full front matter like below and publish on my blog first. Then I publish the same to Dev.to</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>---
+title: "Static Site Generators rundown - How I set up my own blog with Jekyll"
+published: false
+description: Static Site Generators comparison
+tags: [showdev, ruby, Jekyll, blogging]
+cover_image:
+canonical_url: https://deepu.js.org/setting-up-a-blog-with-jekyll/
+---
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I’m not using the RSS import option in Dev as it uses the rendered blog and hence might need adjustments. I also set the <code class="highlighter-rouge">canonical_url</code> to my blog site.</p>
+
+<h2 id="future-plans">Future plans</h2>
+
+<p>There are some things that can be improved.</p>
+
+<ol>
+  <li>Use the Dev.to API to publish this direct from my publish script when I author a new post or make updates to an existing one.</li>
+  <li>Improve the link tag and add some more tags for GitHub.</li>
+  <li>Use local assets image for my own blog and generate the image URL for Dev.to when publishing.</li>
+  <li>Currently, all links point to Dev.to, make the link tag smart enough to point to my blog when published to my site(I don’t want my readers to switch between sites). This might be a bit hard since Dev.to links have a random suffix.</li>
+</ol>
+
+<hr />
+
+<p>So what do you think? If you have any suggestions on improvements or questions leave a comment.</p>
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+<hr />
+
+<p>Cover image credit: Photo by <a href="https://unsplash.com/@patrickian4?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Patrick Fore</a> on <a href="https://unsplash.com/search/photos/typewriter?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Jekyll">#Jekyll</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#blogging">#blogging</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#ruby">#ruby</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#showdev">#showdev</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/functional-programming-in-java-for-beginners/"> &laquo; 7 Functional programming techniques in Java - A primer</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java">java (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript">typescript (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#oh-my-zsh">oh-my-zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go">go (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages">languages (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#functional">functional (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#showdev">showdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Deepu K Sasidharan
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> |
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+</body>
+</html>
